@@ -246,31 +246,39 @@ footer{
   </div>
 </section>
 
-<section class="levels" id="niveaux">
-  <h2>Choisis ton niveau 🚀</h2>
+.level-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height:230px;
+  border-radius:32px;
+  text-decoration:none;
+  color:white;
+  box-shadow:0 20px 40px rgba(0,0,0,.18);
+  transition:.3s;
+  padding:25px;
+}
 
-  <div class="cards">
-    <div class="card">
-      <div class="card-top six">6e</div>
-      <a href="#">Entrer</a>
-    </div>
+.level-card:hover{
+  transform:translateY(-12px) scale(1.04);
+  box-shadow:0 28px 55px rgba(0,0,0,.24);
+}
 
-    <div class="card">
-      <div class="card-top five">5e</div>
-      <a href="#">Entrer</a>
-    </div>
+.level-card .emoji{
+  font-size:48px;
+  margin-bottom:12px;
+}
 
-    <div class="card">
-      <div class="card-top four">4e</div>
-      <a href="#">Entrer</a>
-    </div>
+.level-card strong{
+  font-size:58px;
+}
 
-    <div class="card">
-      <div class="card-top three">3e</div>
-      <a href="#">Entrer</a>
-    </div>
-  </div>
-</section>
+.level-card small{
+  font-size:18px;
+  font-weight:800;
+  margin-top:8px;
+}
 
 <footer>
   © Maths avec Cécile
