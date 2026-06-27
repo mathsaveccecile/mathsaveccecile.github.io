@@ -99,46 +99,6 @@ nav a{
   50%{transform:translateY(-12px)}
 }
 
-.speech{
-  position:absolute;
-  top:-35px;
-  right:-35px;
-  width:300px;
-  background:white;
-  border-radius:28px;
-  padding:18px;
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
-  text-align:left;
-  animation:apparition .8s ease;
-}
-
-.speech::before{
-  content:"";
-  position:absolute;
-  left:-22px;
-  top:85px;
-  border-width:15px;
-  border-style:solid;
-  border-color:transparent white transparent transparent;
-}
-
-.speech h3{
-  margin:0 0 10px;
-  color:#2634c8;
-  font-size:24px;
-}
-
-.speech p{
-  margin:7px 0;
-  font-size:15px;
-  line-height:1.35;
-}
-
-@keyframes apparition{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
 .welcome{
   background:rgba(255,255,255,.95);
   border-radius:34px;
@@ -165,23 +125,11 @@ nav a{
 }
 
 .goal{
-  display:flex;
-  gap:14px;
-  align-items:flex-start;
   margin-top:15px;
-}
-
-.heart{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#ff5ca8,#ff8bbf);
-  color:white;
-  font-size:25px;
-  flex-shrink:0;
+  padding:18px 20px;
+  border-radius:22px;
+  background:#f7f4ff;
+  border:1px solid rgba(120,90,255,.18);
 }
 
 .btn{
@@ -211,31 +159,31 @@ nav a{
   background:linear-gradient(180deg,#ffffff,#f7f1ff);
   border:1px solid rgba(120,90,255,.18);
   border-radius:26px;
-  padding:24px 18px;
+  padding:26px 18px;
   text-align:center;
   box-shadow:0 15px 35px rgba(90,80,200,.12);
 }
 
-.gift{
-  font-size:40px;
-  display:block;
-  margin-bottom:8px;
+.free-box .mini-title{
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:#64748b;
+  font-weight:900;
+  margin-bottom:12px;
 }
 
 .free-box h3{
-  margin:8px 0;
-  font-size:24px;
-  color:#10175c;
-}
-
-.free-box strong{
+  margin:0 0 22px;
+  font-size:38px;
   color:#8b2cff;
-  font-size:30px;
+  line-height:1.05;
+  font-weight:900;
 }
 
 .free-box p{
   font-size:15px;
-  line-height:1.45;
+  line-height:1.5;
 }
 
 .levels{
@@ -316,16 +264,6 @@ footer{
 }
 
 @media(max-width:1100px){
-  .speech{
-    position:relative;
-    top:auto;
-    right:auto;
-    width:auto;
-    margin:18px auto 0;
-  }
-
-  .speech::before{display:none}
-
   .welcome{
     grid-template-columns:1fr;
   }
@@ -398,14 +336,6 @@ footer{
 
   <div class="avatar-zone">
     <img src="avatar-cecile.png" alt="Cécile">
-
-    <div class="speech">
-      <h3>👋 Bienvenue !</h3>
-      <p>Je suis <strong style="color:#8b2cff;">Cécile</strong> 😊</p>
-      <p>Je serai ravie de t'accompagner tout au long de ton apprentissage.</p>
-      <p>Ici, tu peux apprendre à ton rythme, sans stress et autant de fois que tu le souhaites.</p>
-      <p><strong>🌸 Toutes les capsules sont gratuites !</strong></p>
-    </div>
   </div>
 
   <div class="welcome">
@@ -414,10 +344,9 @@ footer{
     <div class="welcome-text">
       <p><strong>Bonjour !</strong></p>
       <p>Je suis <strong style="color:#8b2cff">Cécile</strong>, professeure de mathématiques.</p>
-      <p>Sur ce site, je t'accompagnerai pas à pas dans ton apprentissage. Chaque capsule a été conçue pour t'aider à comprendre les notions progressivement, sans stress et à ton rythme.</p>
+      <p>Sur ce site, je t'accompagnerai pas à pas dans ton apprentissage. Chaque capsule est conçue pour t'accompagner pas à pas et t'aider à comprendre les notions, sans stress et à ton rythme.</p>
 
       <div class="goal">
-        <div class="heart">♥</div>
         <p><strong>L'objectif n'est pas d'aller vite,</strong> mais de comprendre et de prendre confiance en toi.</p>
       </div>
 
@@ -426,10 +355,14 @@ footer{
 
     <div class="free-card">
       <div class="free-box">
-        <span class="gift">🎁</span>
-        <h3>Tout est<br><strong>100% gratuit !</strong></h3>
-        <p>Aucun abonnement,<br>aucun frais,<br>juste l'envie d'apprendre<br>et de progresser !</p>
-        <div style="font-size:26px;color:#8b2cff">💜</div>
+        <p class="mini-title">Toutes les capsules sont</p>
+        <h3>100 %<br>gratuites</h3>
+        <p>
+          Aucun abonnement,<br>
+          aucun frais,<br>
+          juste l'envie d'apprendre<br>
+          et de progresser.
+        </p>
       </div>
     </div>
   </div>
@@ -473,8 +406,8 @@ footer{
 
 <footer>
   <span>© Maths avec Cécile</span>
-  <span>💜 Apprendre avec plaisir, progresser avec confiance !</span>
-  <span>🎁 100% gratuit</span>
+  <span>Apprendre avec plaisir, progresser avec confiance.</span>
+  <span>100 % gratuit</span>
 </footer>
 
 </body>
