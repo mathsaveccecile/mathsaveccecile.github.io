@@ -5,7 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📚 Maths avec Cécile | Capsules de maths pour les collégiens</title>
 <link rel="icon" type="image/png" href="avatar-cecile.png">
+/* ===== Bulle de bienvenue ===== */
 
+.avatar-zone{
+    position:relative;
+}
+
+.speech{
+    position:absolute;
+    top:40px;
+    right:-80px;
+    width:320px;
+    background:white;
+    border-radius:28px;
+    padding:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+    animation:apparition 1s ease;
+}
+
+.speech::before{
+    content:"";
+    position:absolute;
+    left:-22px;
+    top:90px;
+    border-width:15px;
+    border-style:solid;
+    border-color:transparent white transparent transparent;
+}
+
+.speech h3{
+    margin:0 0 12px;
+    color:#3240d2;
+    font-size:28px;
+}
+
+.speech p{
+    margin:8px 0;
+    font-size:17px;
+    line-height:1.5;
+}
+
+@keyframes apparition{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 <style>
 *{box-sizing:border-box}
 
@@ -353,9 +402,34 @@ footer{
   <div class="math-shape pi">π</div>
   <div class="math-shape divide">÷</div>
 
-  <div class="avatar-zone">
+ <div class="avatar-zone">
+
     <img src="avatar-cecile.png" alt="Cécile">
-  </div>
+
+    <div class="speech">
+
+        <h3>👋 Bienvenue !</h3>
+
+        <p>
+            Je suis <strong style="color:#8b2cff;">Cécile</strong> 😊
+        </p>
+
+        <p>
+            Je serai ravie de t'accompagner tout au long de ton apprentissage.
+        </p>
+
+        <p>
+            Ici, tu peux apprendre à ton rythme,
+            sans stress et autant de fois que tu le souhaites.
+        </p>
+
+        <p>
+            <strong>🌸 Toutes les capsules sont entièrement gratuites !</strong>
+        </p>
+
+    </div>
+
+</div>
 
   <div class="welcome">
     <h1>Bienvenue sur Maths avec Cécile ✨</h1>
