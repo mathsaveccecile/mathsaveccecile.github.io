@@ -121,7 +121,7 @@ function renderContent(){
       <div style="margin-top:25px;">
         ${
           step.loginRequired && !userIsConnected
-          ? `<button class="locked" onclick="login()">🔒 Connecte-toi pour télécharger le PDF</button>`
+          ? `<button class="locked" onclick="openLoginModal()">🔒 Connecte-toi pour télécharger le PDF</button>`
           : `<a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>`
         }
       </div>
