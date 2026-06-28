@@ -108,16 +108,25 @@ function renderContent(){
   }
 
   if(step.type==="pdf"){
-    if(step.loginRequired && !userIsConnected){
-      content.innerHTML = `
-        <h2>🔒 Fiche réservée</h2>
-        <p>Connecte-toi pour télécharger cette fiche.</p>
-        <button class="locked">Connecte-toi pour télécharger</button>
-      `;
-    } else {
-      content.innerHTML = `<a class="pdf-btn" href="${step.src}" download>📄 Télécharger la fiche</a>`;
-    }
-  }
+  content.innerHTML = `
+    <div>
+      <iframe 
+        src="${step.src}" 
+        width="100%" 
+        height="500px" 
+        style="border:none;border-radius:18px;background:white;">
+      </iframe>
+
+      <div style="margin-top:25px;">
+        ${
+          step.loginRequired && !userIsConnected
+          ? `<button class="locked">🔒 Connecte-toi pour télécharger le PDF</button>`
+          : `<a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>`
+        }
+      </div>
+    </div>
+  `;
+}
 
   if(step.type==="quiz"){
     content.innerHTML = `
