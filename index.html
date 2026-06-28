@@ -9,16 +9,21 @@
 <style>
 *{box-sizing:border-box}
 
-body{
+html,body{
   margin:0;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
   font-family:Arial,sans-serif;
   color:#10172a;
+}
+
+body{
   background:
     radial-gradient(circle at 8% 20%,rgba(255,92,180,.28),transparent 24%),
     radial-gradient(circle at 85% 18%,rgba(95,170,255,.25),transparent 25%),
     radial-gradient(circle at 80% 75%,rgba(77,230,185,.22),transparent 30%),
     linear-gradient(135deg,#ffe2f4,#f0ddff,#dff6ff,#e4ffe9);
-  overflow-x:hidden;
 }
 
 header{
@@ -64,8 +69,6 @@ nav a{
   gap:45px;
   align-items:center;
   padding:55px 6% 30px;
-  max-width:100%;
-  overflow:hidden;
 }
 
 .math-shape{
@@ -81,10 +84,7 @@ nav a{
 .pi{left:3%;bottom:15%}
 .divide{right:5%;top:38%;color:#00b7c7}
 
-.avatar-zone{
-  position:relative;
-  text-align:center;
-}
+.avatar-zone{text-align:center}
 
 .avatar-zone img{
   width:330px;
@@ -113,12 +113,11 @@ nav a{
 }
 
 .welcome h1{
-  grid-column:1 / 3;
+  grid-column:1/3;
   margin:0 0 18px;
   color:#2634c8;
   font-size:40px;
   line-height:1.15;
-  white-space:normal;
 }
 
 .welcome-text p{
@@ -141,7 +140,7 @@ nav a{
   margin-top:22px;
   width:480px;
   max-width:100%;
-  height:82px;
+  height:70px;
   border-radius:999px;
   color:white;
   text-decoration:none;
@@ -194,7 +193,7 @@ nav a{
 
 .levels{
   text-align:center;
-  padding:25px 6% 45px;
+  padding:25px 4% 45px;
 }
 
 .levels h2{
@@ -206,50 +205,41 @@ nav a{
 .cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:24px;
+  gap:18px;
 }
 
 .level-card{
-  min-height:230px;
-  border-radius:28px;
-  padding:24px;
+  min-height:190px;
+  border-radius:26px;
+  padding:18px;
   color:white;
   text-decoration:none;
   box-shadow:0 20px 40px rgba(0,0,0,.18);
   transition:.3s;
-  position:relative;
-  overflow:hidden;
 }
 
 .level-card:hover{
-  transform:translateY(-12px) scale(1.03);
+  transform:translateY(-10px) scale(1.02);
 }
 
 .icon{
   display:block;
-  font-size:58px;
+  font-size:44px;
   margin-bottom:8px;
 }
 
 .level-card strong{
   display:block;
-  font-size:72px;
-}
-
-.level-card small{
-  display:block;
-  font-size:18px;
-  font-weight:900;
-  margin:8px 0 18px;
+  font-size:58px;
 }
 
 .enter{
   display:inline-block;
   background:white;
   color:#2634c8;
-  padding:12px 34px;
+  padding:10px 28px;
   border-radius:999px;
-  font-size:20px;
+  font-size:18px;
   font-weight:900;
 }
 
@@ -266,25 +256,17 @@ footer{
   color:#475569;
 }
 
-html, body{
-  width:100%;
-  max-width:100%;
-  overflow-x:hidden;
-}
-
-@media(max-width:850px){
+@media(max-width:700px){
   header{
     position:relative;
     height:auto;
     padding:14px 16px;
   }
 
-  nav{
-    display:none;
-  }
+  nav{display:none}
 
   .logo{
-    font-size:24px;
+    font-size:22px;
   }
 
   .logo img{
@@ -295,7 +277,6 @@ html, body{
   .hero{
     display:block;
     padding:25px 16px;
-    overflow:hidden;
   }
 
   .avatar-zone img{
@@ -303,8 +284,6 @@ html, body{
   }
 
   .welcome{
-    width:100%;
-    max-width:100%;
     display:block;
     padding:26px 20px;
     margin-top:25px;
@@ -358,6 +337,10 @@ html, body{
     font-size:15px;
     padding:9px 18px;
   }
+
+  footer{
+    font-size:13px;
+  }
 }
 </style>
 </head>
@@ -402,7 +385,7 @@ html, body{
         <p><strong>L'objectif n'est pas d'aller vite,</strong> mais de comprendre et de prendre confiance en toi.</p>
       </div>
 
-      <a class="btn" href="#niveaux">Commencer l'aventure </a>
+      <a class="btn" href="#niveaux">Commencer l'aventure</a>
     </div>
 
     <div class="free-card">
@@ -421,7 +404,7 @@ html, body{
 </section>
 
 <section class="levels" id="niveaux">
-  <h2>Choisis ton niveau </h2>
+  <h2>Choisis ton niveau</h2>
 
   <div class="cards">
     <a class="level-card six" href="#">
@@ -454,7 +437,6 @@ html, body{
 
 <footer>
   <span>© Maths avec Cécile</span>
-
 </footer>
 
 </body>
