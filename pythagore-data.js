@@ -7,31 +7,33 @@ const capsuleData = {
     {
       type: "image",
       title: "Comment fonctionne la capsule ?",
-      image: "pythagore.png"
+      src: "pythagore.png"
     },
 
     {
       type: "video",
       title: "0. Introduction",
-      youtube: ""
+      src: ""
     },
 
     {
+    type:"pdf",
+    title:"Fiche méthode",
+    src:"assets/Pythagore/pdfs/fiche1.pdf",
+    loginRequired:true
+},
+
+    {
       type: "quiz",
-      title: "Quiz 1",
-      question: "Peut-on utiliser le théorème de Pythagore dans n'importe quel triangle ?",
-      options: [
+      quizType: "qcm",
+      title: "QCM",
+      question: "Peut-on utiliser Pythagore dans n'importe quel triangle ?",
+      answers: [
         "Oui, toujours",
         "Non, seulement dans un triangle rectangle",
         "Seulement dans un triangle isocèle"
       ],
-      answer: "Non, seulement dans un triangle rectangle"
-    },
-
-    {
-      type: "fiche",
-      title: "Fiche 1",
-      file: ""
+      correctAnswer: "Non, seulement dans un triangle rectangle"
     }
   ]
 };

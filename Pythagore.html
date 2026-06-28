@@ -2,497 +2,158 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pythagore - Maths avec Cécile</title>
-
+<link rel="stylesheet" href="">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-
-body{
-  background:#120d22;
-  color:white;
-}
-
-header{
-  height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 28px;
-  background:#1d1730;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-.logo{
-  font-size:24px;
-  font-weight:900;
-}
-
-.menu-btn{
-  display:none;
-  font-size:30px;
-  background:none;
-  border:none;
-  color:white;
-}
-
-.layout{
-  display:grid;
-  grid-template-columns:330px 1fr;
-  min-height:calc(100vh - 76px);
-}
-
-.sidebar{
-  background:#191426;
-  padding:24px;
-  overflow-y:auto;
-  border-right:1px solid rgba(255,255,255,.08);
-}
-
-.sidebar h2{
-  font-size:30px;
-  margin-bottom:15px;
-}
-
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-.badge{
-  background:rgba(255,255,255,.16);
-  padding:8px 12px;
-  border-radius:999px;
-  font-weight:700;
-}
-
-.login-info{
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:18px;
-  padding:14px;
-  margin-bottom:18px;
-  font-size:15px;
-  line-height:1.4;
-}
-
-.progress-box{
-  margin-bottom:24px;
-}
-
-.progress-bar{
-  height:12px;
-  background:rgba(255,255,255,.14);
-  border-radius:99px;
-  overflow:hidden;
-  margin-top:8px;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#ff4fa3,#4163ff);
-}
-
-.step{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:16px;
-  margin-bottom:10px;
-  border-radius:16px;
-  background:rgba(255,255,255,.08);
-  cursor:pointer;
-}
-
-.step.active{
-  background:#3d7cff;
-}
-
-.step.done{
-  background:rgba(50,220,120,.22);
-}
-
-.step-number{
-  width:28px;
-  font-weight:900;
-  color:#ffe05c;
-}
-
-.main{
-  padding:40px;
-}
-
-.content-card{
-  max-width:950px;
-  margin:auto;
-  background:#241e35;
-  border-radius:28px;
-  padding:34px;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
-}
-
-.content-card h1{
-  font-size:38px;
-  margin-bottom:20px;
-}
-
-.content-box{
-  background:#302943;
-  border-radius:22px;
-  padding:28px;
-  min-height:340px;
-}
-
-.placeholder{
-  min-height:280px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  border:2px dashed rgba(255,255,255,.25);
-  border-radius:20px;
-  font-size:24px;
-  line-height:1.5;
-}
-
-.video-frame{
-  width:100%;
-  aspect-ratio:16/9;
-  border:0;
-  border-radius:20px;
-}
-
-.content-image{
-  max-width:100%;
-  border-radius:20px;
-  display:block;
-  margin:auto;
-}
-
-.fiche-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px 30px;
-  border-radius:999px;
-  color:white;
-  background:linear-gradient(135deg,#ff4fa3,#3058ff);
-  text-decoration:none;
-  font-weight:900;
-  font-size:20px;
-}
-
-.quiz-box{
-  text-align:left;
-}
-
-.quiz-box h2{
-  margin-bottom:20px;
-}
-
-.quiz-options{
-  display:grid;
-  gap:12px;
-  margin-top:20px;
-}
-
-.quiz-options button{
-  padding:15px;
-  border-radius:14px;
-  border:none;
-  font-size:18px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.nav-buttons{
-  display:flex;
-  justify-content:space-between;
-  margin-top:26px;
-  gap:14px;
-}
-
-.nav-buttons button{
-  padding:15px 28px;
-  border:none;
-  border-radius:999px;
-  font-size:18px;
-  font-weight:900;
-  color:white;
-  background:linear-gradient(135deg,#ff4fa3,#3058ff);
-  cursor:pointer;
-}
-
-.nav-buttons button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-
-.retour{
-  display:inline-block;
-  margin-bottom:24px;
-  color:white;
-  text-decoration:none;
-  font-weight:700;
-}
-
-@media(max-width:800px){
-  .menu-btn{display:block}
-
-  .layout{
-    display:block;
-  }
-
-  .sidebar{
-    position:fixed;
-    top:76px;
-    right:-100%;
-    width:88%;
-    height:calc(100vh - 76px);
-    z-index:20;
-    transition:.3s;
-  }
-
-  .sidebar.open{
-    right:0;
-  }
-
-  .main{
-    padding:20px;
-  }
-
-  .content-card{
-    padding:22px;
-  }
-
-  .content-card h1{
-    font-size:28px;
-  }
-
-  .content-box{
-    padding:18px;
-  }
-
-  .nav-buttons{
-    flex-direction:column;
-  }
-}
+body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
+header{background:#211933;padding:22px;font-size:28px;font-weight:900}
+.page{display:grid;grid-template-columns:330px 1fr;min-height:100vh}
+.sidebar{background:#171124;padding:25px;border-right:1px solid #33284a}
+.badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:bold}
+.step{background:#2b243b;margin:12px 0;padding:18px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between}
+.step.active{background:#1e5c49}
+.num{color:#ffe45c;font-weight:900;margin-right:12px}
+.main{padding:45px}
+.card{max-width:900px;margin:auto;background:#261e38;border-radius:28px;padding:35px}
+.content{background:#352d49;border-radius:20px;padding:30px;text-align:center;min-height:320px}
+.content img{max-width:90%;max-height:420px;border-radius:20px}
+.btns{display:flex;justify-content:space-between;margin-top:30px}
+button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
+.locked{background:#555;cursor:not-allowed}
+.quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo" id="pageTitle">Pythagore</div>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-</header>
+<header id="topTitle">Pythagore - 4e / 3e</header>
 
-<div class="layout">
+<div class="page">
+  <aside class="sidebar">
+    <h1 id="title">Pythagore</h1>
+    <div class="badges" id="badges"></div>
+    <p>🔐 Connecte-toi pour retrouver ta progression plus tard.</p>
+    <h3 id="progress">Progression : 0 %</h3>
+    <div id="stepsList"></div>
+  </aside>
 
-<aside class="sidebar" id="sidebar">
-  <h2 id="capsuleTitle">Pythagore</h2>
-
-  <div class="badges">
-    <span class="badge" id="durationBadge">⏱️</span>
-    <span class="badge" id="levelsBadge">Niveaux</span>
-    <span class="badge" id="stepsBadge">Étapes</span>
-  </div>
-
-  <div class="login-info">
-    🔐 Connecte-toi pour retrouver ta progression plus tard.
-  </div>
-
-  <div class="progress-box">
-    <strong>Progression : <span id="progressText">0 %</span></strong>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <main class="main">
+    <a href="4e.html" style="color:white;font-weight:bold;text-decoration:none">← Retour au niveau</a>
+    <div class="card">
+      <h1 id="stepTitle"></h1>
+      <div class="content" id="content"></div>
+      <div class="btns">
+        <button onclick="previousStep()">← Précédent</button>
+        <button onclick="nextStep()">Suivant →</button>
+      </div>
     </div>
-  </div>
-
-  <div id="stepsList"></div>
-</aside>
-
-<main class="main">
-  <a class="retour" href="4e.html">← Retour au niveau</a>
-
-  <div class="content-card">
-    <h1 id="stepTitle"></h1>
-
-    <div class="content-box" id="contentBox"></div>
-
-    <div class="nav-buttons">
-      <button onclick="prevStep()" id="prevBtn">← Précédent</button>
-      <button onclick="nextStep()" id="nextBtn">Suivant →</button>
-    </div>
-  </div>
-</main>
-
+  </main>
 </div>
 
 <script src="pythagore-data.js"></script>
 
 <script>
-const steps = capsuleData.steps;
-let current = 0;
-let completed = JSON.parse(localStorage.getItem("pythagoreProgress") || "[]");
+let currentStep = 0;
+const userIsConnected = false;
 
-document.getElementById("pageTitle").textContent = capsuleData.title + " · " + capsuleData.levels;
-document.getElementById("capsuleTitle").textContent = capsuleData.title;
-document.getElementById("durationBadge").textContent = "⏱️ " + capsuleData.duration;
-document.getElementById("levelsBadge").textContent = capsuleData.levels;
-document.getElementById("stepsBadge").textContent = steps.length + " étapes";
-
-function saveProgress(){
-  if(!completed.includes(current)){
-    completed.push(current);
-    localStorage.setItem("pythagoreProgress", JSON.stringify(completed));
-  }
+function icon(type){
+  if(type==="video") return "🎥";
+  if(type==="image") return "🖼️";
+  if(type==="pdf") return "📄";
+  if(type==="quiz") return "❓";
+  return "⭐";
 }
 
-function getIcon(type){
-  if(type === "video") return "🎥";
-  if(type === "quiz") return "❓";
-  if(type === "fiche") return "📄";
-  if(type === "image") return "🖼️";
-  return "•";
+function updateStats(){
+  const videos = capsuleData.steps.filter(s=>s.type==="video").length;
+  const quiz = capsuleData.steps.filter(s=>s.type==="quiz").length;
+  const pdf = capsuleData.steps.filter(s=>s.type==="pdf").length;
+
+  document.getElementById("badges").innerHTML = `
+    <span>⏱️ ${capsuleData.duration}</span>
+    <span>🎥 ${videos} vidéos</span>
+    <span>❓ ${quiz} quiz</span>
+    <span>📄 ${pdf} fiches</span>
+  `;
 }
 
 function renderSteps(){
   const list = document.getElementById("stepsList");
   list.innerHTML = "";
 
-  steps.forEach((step,index)=>{
+  capsuleData.steps.forEach((step,index)=>{
     const div = document.createElement("div");
-    div.className = "step";
-
-    if(index === current) div.classList.add("active");
-    if(completed.includes(index)) div.classList.add("done");
-
-    div.innerHTML = `
-      <span class="step-number">${index+1}</span>
-      <span>${step.title}</span>
-      <span style="margin-left:auto">${getIcon(step.type)}</span>
-    `;
-
-    div.onclick = () => {
-      current = index;
-      render();
-      if(window.innerWidth <= 800) toggleMenu();
-    };
-
+    div.className = "step" + (index===currentStep ? " active" : "");
+    div.onclick = () => {currentStep=index; render();}
+    div.innerHTML = `<div><span class="num">${index+1}</span> ${step.title}</div><div>${icon(step.type)}</div>`;
     list.appendChild(div);
   });
 }
 
 function renderContent(){
-  const step = steps[current];
-  const box = document.getElementById("contentBox");
-
+  const step = capsuleData.steps[currentStep];
   document.getElementById("stepTitle").textContent = step.title;
+  const content = document.getElementById("content");
 
-  if(step.type === "video"){
-    if(step.youtube){
-      box.innerHTML = `
-        <iframe class="video-frame"
-          src="https://www.youtube.com/embed/${step.youtube}"
-          allowfullscreen>
-        </iframe>
+  if(step.type==="image"){
+    content.innerHTML = `<img src="${step.src}" alt="${step.title}">`;
+  }
+
+  if(step.type==="video"){
+    if(step.src){
+      content.innerHTML = `<iframe width="100%" height="420" src="${step.src}" frameborder="0" allowfullscreen></iframe>`;
+    } else {
+      content.innerHTML = "🎥 Emplacement de la vidéo";
+    }
+  }
+
+  if(step.type==="pdf"){
+    if(step.loginRequired && !userIsConnected){
+      content.innerHTML = `
+        <h2>🔒 Fiche réservée</h2>
+        <p>Connecte-toi pour télécharger cette fiche.</p>
+        <button class="locked">Connecte-toi pour télécharger</button>
       `;
     } else {
-      box.innerHTML = `<div class="placeholder">🎥<br>Vidéo à ajouter</div>`;
+      content.innerHTML = `<a class="pdf-btn" href="${step.src}" download>📄 Télécharger la fiche</a>`;
     }
   }
 
-  if(step.type === "fiche"){
-    if(step.file){
-      box.innerHTML = `
-        <div class="placeholder">
-          <a class="fiche-link" href="${step.file}" target="_blank">
-            📄 Ouvrir la fiche
-          </a>
-        </div>
-      `;
-    } else {
-      box.innerHTML = `<div class="placeholder">📄<br>Fiche à ajouter</div>`;
-    }
-  }
-
-  if(step.type === "image"){
-    if(step.image){
-      box.innerHTML = `<img class="content-image" src="${step.image}" alt="${step.title}">`;
-    } else {
-      box.innerHTML = `<div class="placeholder">🖼️<br>Image à ajouter</div>`;
-    }
-  }
-
-  if(step.type === "quiz"){
-    box.innerHTML = `
-      <div class="quiz-box">
+  if(step.type==="quiz"){
+    content.innerHTML = `
+      <div class="quiz">
         <h2>${step.question}</h2>
-        <div class="quiz-options">
-          ${step.options.map((opt,i)=>`<button onclick="checkAnswer(${i})">${opt}</button>`).join("")}
-        </div>
-        <p id="feedback" style="margin-top:20px;font-size:20px;font-weight:900"></p>
+        ${step.answers.map(a=>`<button onclick="checkAnswer('${a.replaceAll("'","\\'")}')">${a}</button>`).join("")}
+        <p id="feedback"></p>
       </div>
     `;
   }
 }
 
-function checkAnswer(i){
-  const step = steps[current];
-  const feedback = document.getElementById("feedback");
-
-  if(i === step.answer){
-    feedback.textContent = "✅ Bravo, c'est la bonne réponse !";
-    feedback.style.color = "#65ff9a";
-    saveProgress();
-    updateProgress();
-    renderSteps();
-  } else {
-    feedback.textContent = "❌ Pas encore. Relis bien la question.";
-    feedback.style.color = "#ff6b8a";
-  }
-}
-
-function updateProgress(){
-  const percent = Math.round((completed.length / steps.length) * 100);
-  document.getElementById("progressText").textContent = percent + " %";
-  document.getElementById("progressFill").style.width = percent + "%";
+function checkAnswer(answer){
+  const step = capsuleData.steps[currentStep];
+  document.getElementById("feedback").textContent =
+    answer === step.correctAnswer ? "✅ Bonne réponse !" : "❌ Essaie encore.";
 }
 
 function render(){
-  saveProgress();
   renderSteps();
   renderContent();
-  updateProgress();
-
-  document.getElementById("prevBtn").disabled = current === 0;
-  document.getElementById("nextBtn").disabled = current === steps.length - 1;
+  document.getElementById("progress").textContent =
+    "Progression : " + Math.round(((currentStep+1)/capsuleData.steps.length)*100) + " %";
 }
 
 function nextStep(){
-  if(current < steps.length - 1){
-    current++;
-    render();
-  }
+  if(currentStep < capsuleData.steps.length-1){currentStep++; render();}
 }
 
-function prevStep(){
-  if(current > 0){
-    current--;
-    render();
-  }
+function previousStep(){
+  if(currentStep > 0){currentStep--; render();}
 }
 
-function toggleMenu(){
-  document.getElementById("sidebar").classList.toggle("open");
-}
-
+document.getElementById("title").textContent = capsuleData.title;
+document.getElementById("topTitle").textContent = capsuleData.title + " - " + capsuleData.levels;
+updateStats();
 render();
 </script>
 
