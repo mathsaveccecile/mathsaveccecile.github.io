@@ -6,7 +6,7 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Vidéo YouTube",
-      "src": "https://youtu.be/32KUvlKp31Q?si=qX__6h9B3JCNCvnL"
+      "src": "https://youtube.com/shorts/32KUvlKp31Q"
     },
     {
       "type": "image",
