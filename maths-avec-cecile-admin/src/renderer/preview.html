@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Prévisualisation</title>
+
+  <style>
+    body{
+      background:#1d1730;
+      color:white;
+      font-family:Arial, Helvetica, sans-serif;
+      padding:40px;
+    }
+
+    h1{
+      color:#ffd54f;
+    }
+
+    .card{
+      background:#2b2347;
+      padding:25px;
+      border-radius:18px;
+      max-width:900px;
+      margin:auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>👁️ Prévisualisation de la capsule</h1>
+
+<h2 id="titre"></h2>
+
+<p><strong>Niveau :</strong> <span id="niveau"></span></p>
+
+<p><strong>Durée :</strong> <span id="duree"></span></p>
+
+<hr>
+
+<div id="contenu"></div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const capsule = JSON.parse(decodeURIComponent(params.get("capsule")));
+
+document.getElementById("titre").textContent = capsule.title;
+document.getElementById("niveau").textContent = capsule.level;
+document.getElementById("duree").textContent = capsule.duration;
+
+document.getElementById("contenu").innerHTML =
+`Cette capsule contient ${capsule.steps.length} élément(s).`;
+
+</script>
+
+</body>
+</html>

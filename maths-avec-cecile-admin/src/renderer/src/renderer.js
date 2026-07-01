@@ -55,66 +55,18 @@ function renderVideo(step, index) {
 }
 
 function renderPdf(step, index) {
-  if (step.src && !step.thumbnail) {
-    setTimeout(() => generatePdfThumbnail(index), 100);
-  }
-
   return `
     <div class="step">
       ${buttons(index)}
-
       <h4>📄 PDF</h4>
-
-      <div style="
-        background:#ffffff;
-        color:#222;
-        border-radius:14px;
-        padding:18px;
-        margin-top:12px;
-        max-width:420px;
-      ">
-        ${
-          step.thumbnail
-          ? `<img src="${step.thumbnail}" style="max-width:260px;border-radius:10px;border:1px solid #ddd;">`
-          : `<p>⏳ Génération de l'aperçu...</p>`
-        }
-
+      <div style="background:white;color:#222;border-radius:14px;padding:18px;margin-top:12px;max-width:420px;">
         <p><strong>📄 ${step.name || "Fichier PDF"}</strong></p>
-
-        <p style="margin-bottom:0;">
-          👁️ Visible dans la capsule<br>
-          🔒 Téléchargement réservé aux élèves connectés
-        </p>
+        <p>👁️ Visible dans la capsule<br>🔒 Téléchargement réservé aux élèves connectés</p>
       </div>
     </div>
   `;
 }
 
-async function generatePdfThumbnail(index) {
-  const step = capsule.steps[index];
-
-  if (!step || !step.src) return;
-
-  const pdf = await pdfjsLib.getDocument(step.src).promise;
-  const page = await pdf.getPage(1);
-
-  const viewport = page.getViewport({ scale: 0.6 });
-
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
-
-  await page.render({
-    canvasContext: context,
-    viewport: viewport
-  }).promise;
-
-  step.thumbnail = canvas.toDataURL("image/png");
-
-  renderCapsule();
-}
 function renderQuiz(step, index) {
   return `
     <div class="step">
@@ -126,17 +78,13 @@ function renderQuiz(step, index) {
 
 function moveStepUp(index) {
   if (index === 0) return;
-  const temp = capsule.steps[index];
-  capsule.steps[index] = capsule.steps[index - 1];
-  capsule.steps[index - 1] = temp;
+  [capsule.steps[index - 1], capsule.steps[index]] = [capsule.steps[index], capsule.steps[index - 1]];
   renderCapsule();
 }
 
 function moveStepDown(index) {
   if (index === capsule.steps.length - 1) return;
-  const temp = capsule.steps[index];
-  capsule.steps[index] = capsule.steps[index + 1];
-  capsule.steps[index + 1] = temp;
+  [capsule.steps[index + 1], capsule.steps[index]] = [capsule.steps[index], capsule.steps[index + 1]];
   renderCapsule();
 }
 
@@ -150,15 +98,8 @@ function updateVideo(index, value) {
 }
 
 document.getElementById("newCapsuleBtn").addEventListener("click", () => {
-  capsule = {
-    title: "",
-    level: "",
-    duration: "",
-    steps: []
-  };
-
+  capsule = { title: "", level: "", duration: "", steps: [] };
   renderCapsule();
-  alert("Nouvelle capsule créée !");
 });
 
 document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
@@ -173,24 +114,19 @@ document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
 
   const json = JSON.stringify(capsule, null, 2);
   const filename = capsule.title.replaceAll(" ", "_") + ".json";
-
   download(filename, json);
 });
 
 document.getElementById("openCapsuleBtn").addEventListener("click", async () => {
   const json = await window.api.openCapsule();
-
   if (!json) return;
 
   capsule = JSON.parse(json);
   renderCapsule();
-
-  alert("✅ Capsule chargée !");
 });
 
 document.getElementById("addImageBtn").addEventListener("click", async () => {
   const image = await window.api.chooseImage();
-
   if (!image) return;
 
   capsule.steps.push({
@@ -214,7 +150,6 @@ document.getElementById("addVideoBtn").addEventListener("click", () => {
 
 document.getElementById("addPdfBtn").addEventListener("click", async () => {
   const pdf = await window.api.choosePdf();
-
   if (!pdf) return;
 
   capsule.steps.push({
@@ -237,17 +172,80 @@ document.getElementById("addQuizBtn").addEventListener("click", () => {
   renderCapsule();
 });
 
+document.getElementById("previewCapsuleBtn").addEventListener("click", () => {
+  alert("Prévisualisation à faire après. Pour l’instant, l’éditeur est stable.");
+});
+
+document.getElementById("exportSiteBtn").addEventListener("click", () => {
+  capsule.title = document.getElementById("capsuleTitle").value;
+  capsule.level = document.getElementById("capsuleLevel").value;
+  capsule.duration = document.getElementById("capsuleDuration").value;
+
+  if (!capsule.title) {
+    alert("Il faut donner un nom à la capsule.");
+    return;
+  }
+
+  const siteData = {
+    title: capsule.title,
+    levels: capsule.level,
+    duration: capsule.duration,
+    steps: capsule.steps.map((step) => {
+      if (step.type === "image") {
+        return {
+          type: "image",
+          title: step.name || "Image",
+          src: step.src
+        };
+      }
+
+      if (step.type === "video") {
+        return {
+          type: "video",
+          title: step.title || "Vidéo",
+          src: step.src || ""
+        };
+      }
+
+      if (step.type === "pdf") {
+        return {
+          type: "pdf",
+          title: step.name || "PDF",
+          src: step.src || "",
+          loginRequired: true
+        };
+      }
+
+      if (step.type === "quiz") {
+        return {
+          type: "quiz",
+          quizType: "qcm",
+          title: step.title || "Quiz",
+          question: "Question à compléter",
+          answers: ["Réponse 1", "Réponse 2", "Réponse 3"],
+          correctAnswer: "Réponse 1"
+        };
+      }
+
+      return step;
+    })
+  };
+
+  const jsContent =
+    "const capsuleData = " +
+    JSON.stringify(siteData, null, 2) +
+    ";";
+
+  download("pythagore-data.js", jsContent);
+
+  alert("✅ Fichier pythagore-data.js exporté !");
+});
+
 function download(filename, text) {
   const element = document.createElement("a");
-
-  element.setAttribute(
-    "href",
-    "data:text/json;charset=utf-8," + encodeURIComponent(text)
-  );
-
+  element.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(text));
   element.setAttribute("download", filename);
   element.style.display = "none";
-
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
