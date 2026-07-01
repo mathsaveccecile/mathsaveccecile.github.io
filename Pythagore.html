@@ -175,12 +175,11 @@ function updateStats(){
   const pdf = capsuleData.steps.filter(s=>s.type==="pdf").length;
 
   document.getElementById("badges").innerHTML = `
-    <span>⏱️ ${capsuleData.duration}</span>
-    <span>🎥 ${videos} vidéos</span>
-    <span>❓ ${quiz} quiz</span>
-    <span>📄 ${pdf} fiches</span>
-  `;
-}
+  <span>⏱️ ${capsuleData.duration}</span>
+  <span>🎥 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
+  <span>❓ ${quiz} ${quiz > 1 ? "quiz" : "quiz"}</span>
+  <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
+`;
 
 function renderSteps(){
   const list = document.getElementById("stepsList");
