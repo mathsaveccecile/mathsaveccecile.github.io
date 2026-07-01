@@ -73,7 +73,21 @@ function icon(type){
   if(type==="quiz") return "❓";
   return "⭐";
 }
+function youtubeEmbed(url){
+  if(!url) return "";
 
+  if(url.includes("youtube.com/shorts/")){
+    const id = url.split("/shorts/")[1].split("?")[0];
+    return "https://www.youtube.com/embed/" + id;
+  }
+
+  if(url.includes("watch?v=")){
+    const id = url.split("watch?v=")[1].split("&")[0];
+    return "https://www.youtube.com/embed/" + id;
+  }
+
+  return url;
+}
 function updateStats(){
   const videos = capsuleData.steps.filter(s=>s.type==="video").length;
   const quiz = capsuleData.steps.filter(s=>s.type==="quiz").length;
@@ -110,12 +124,12 @@ function renderContent(){
   }
 
   if(step.type==="video"){
-    if(step.src){
-      content.innerHTML = `<iframe width="100%" height="420" src="${step.src}" frameborder="0" allowfullscreen></iframe>`;
-    } else {
-      content.innerHTML = "🎥 Emplacement de la vidéo";
-    }
+  if(step.src){
+    content.innerHTML = `<iframe width="100%" height="420" src="${youtubeEmbed(step.src)}" frameborder="0" allowfullscreen></iframe>`;
+  } else {
+    content.innerHTML = "🎥 Emplacement de la vidéo";
   }
+}
 
   if(step.type==="pdf"){
   content.innerHTML = `
