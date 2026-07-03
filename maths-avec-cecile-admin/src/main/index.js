@@ -1,8 +1,9 @@
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, basename } from 'path'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, readdirSync } from 'fs'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -135,6 +136,39 @@ app.whenReady().then(() => {
     return true
   })
 
+    ipcMain.handle('save-project', async (_, data) => {
+    const filename = (data.title || 'capsule')
+      .replaceAll(' ', '_')
+      .replaceAll('/', '-')
+      .replaceAll('\\', '-')
+
+    const output = JSON.stringify(data, null, 2)
+
+    writeFileSync(
+      `C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/maths-avec-cecile-admin/capsules/${filename}.json`,
+      output
+    )
+
+    return true
+  })
+    ipcMain.handle('list-capsules', async () => {
+    const folder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/maths-avec-cecile-admin/capsules'
+
+    return readdirSync(folder).filter(file => file.endsWith('.json'))
+  })
+
+  ipcMain.handle('open-project', async (_, filename) => {
+    const folder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/maths-avec-cecile-admin/capsules'
+    const json = readFileSync(`${folder}/${filename}`, 'utf8')
+
+    return json
+  })
+  ipcMain.handle('import-site', async () => {
+  const file =
+    'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/pythagore-data.js'
+
+  return readFileSync(file, 'utf8')
+})
   createWindow()
 
   app.on('activate', function () {

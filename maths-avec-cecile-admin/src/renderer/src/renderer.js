@@ -117,13 +117,45 @@ document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
   download(filename, json);
 });
 
-document.getElementById("openCapsuleBtn").addEventListener("click", async () => {
-  const json = await window.api.openCapsule();
-  if (!json) return;
+document.getElementById("saveProjectBtn").addEventListener("click", async () => {
+  capsule.title = document.getElementById("capsuleTitle").value;
+  capsule.level = document.getElementById("capsuleLevel").value;
+  capsule.duration = document.getElementById("capsuleDuration").value;
 
+  if (!capsule.title) {
+    alert("Il faut donner un nom à la capsule.");
+    return;
+  }
+
+  await window.api.saveProject(capsule);
+
+  alert("✅ Projet enregistré dans le dossier capsules !");
+});
+document.getElementById("openCapsuleBtn").addEventListener("click", async () => {
+  const files = await window.api.listCapsules();
+
+  if (!files.length) {
+    alert("Aucune capsule enregistrée.");
+    return;
+  }
+
+  document.getElementById("stepsList").innerHTML = `
+    <div class="step">
+      <h4>📂 Capsules enregistrées</h4>
+      ${files.map(file => `
+        <button onclick="openSavedCapsule('${file}')">
+          📘 ${file.replace(".json", "")}
+        </button>
+      `).join("<br><br>")}
+    </div>
+  `;
+});
+async function openSavedCapsule(filename) {
+  const json = await window.api.openProject(filename);
   capsule = JSON.parse(json);
   renderCapsule();
-});
+  alert("✅ Capsule ouverte !");
+}
 
 document.getElementById("addImageBtn").addEventListener("click", async () => {
   const image = await window.api.chooseImage();
@@ -245,5 +277,31 @@ function download(filename, text) {
   element.click();
   document.body.removeChild(element);
 }
+document.getElementById("importSiteBtn").addEventListener("click", async () => {
+  try {
+    let text = await window.api.importSite();
 
+    text = text.replace("const capsuleData =", "").trim();
+
+    if (text.endsWith(";")) {
+      text = text.slice(0, -1);
+    }
+
+    const data = JSON.parse(text);
+
+    if (data.levels) {
+      data.level = data.levels;
+      delete data.levels;
+    }
+
+    capsule = data;
+
+    renderCapsule();
+
+    alert("✅ Capsule importée depuis le site !");
+  } catch (e) {
+    console.error(e);
+    alert("❌ Impossible d'importer la capsule.");
+  }
+});
 renderCapsule();

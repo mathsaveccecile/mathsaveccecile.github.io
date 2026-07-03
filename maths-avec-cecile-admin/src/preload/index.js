@@ -7,7 +7,11 @@ const api = {
   chooseVideo: () => ipcRenderer.invoke('choose-video'),
   choosePdf: () => ipcRenderer.invoke('choose-pdf'),
   openCapsule: () => ipcRenderer.invoke('open-capsule'),
-  exportSite: (data) => ipcRenderer.invoke('export-site', data)
+  exportSite: (data) => ipcRenderer.invoke('export-site', data),
+  saveProject: (data) => ipcRenderer.invoke('save-project', data),
+  listCapsules: () => ipcRenderer.invoke('list-capsules'),
+openProject: (filename) => ipcRenderer.invoke('open-project', filename),
+importSite: () => ipcRenderer.invoke('import-site')
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
