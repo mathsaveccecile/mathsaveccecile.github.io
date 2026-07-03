@@ -139,12 +139,13 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
     </div>
   </main>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="pythagore-data.js?v=2"></script>
 <script src="js/quiz-engine.js"></script>
 
 <script>
 let currentStep = 0;
+
 const userIsConnected = isConnected();
 
 function icon(type){
@@ -349,14 +350,20 @@ function previousStep(){
 function toggleMenu(){
   document.querySelector(".sidebar").classList.toggle("open");
 }
+const SUPABASE_URL = "https://czzxbvjtkuzfubnsnfhs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 function openLoginModal(){
   document.body.insertAdjacentHTML("beforeend", `
     <div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;">
       <div style="background:#261e38;padding:35px;border-radius:25px;width:360px;max-width:90%;">
         <h2>Connexion élève</h2>
         <p>Connecte-toi pour garder ta progression et télécharger les fiches.</p>
+
         <input id="loginEmail" placeholder="Adresse e-mail" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
         <input id="loginPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+
         <button onclick="loginStudent()" style="width:100%;margin-top:15px;">Se connecter</button>
         <button onclick="openSignupModal()" style="width:100%;margin-top:12px;">✨ Créer un compte</button>
         <button class="locked" onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
@@ -373,8 +380,10 @@ function openSignupModal(){
       <div style="background:#261e38;padding:35px;border-radius:25px;width:360px;max-width:90%;">
         <h2>Créer un compte élève</h2>
         <p>Crée ton compte pour retrouver ta progression plus tard.</p>
+
         <input id="signupEmail" placeholder="Adresse e-mail" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
         <input id="signupPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+
         <button onclick="signupStudent()" style="width:100%;margin-top:15px;">Créer mon compte</button>
         <button class="locked" onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
       </div>
@@ -387,34 +396,49 @@ function closeLoginModal(){
   if(modal) modal.remove();
 }
 
-function signupStudent(){
-  const email = document.getElementById("signupEmail").value.trim();
-  const pass = document.getElementById("signupPass").value.trim();
+async function signupStudent(){
 
-  if(!email || !pass){
-    alert("Il faut entrer une adresse e-mail et un mot de passe.");
-    return;
-  }
+    const email = document.getElementById("signupEmail").value.trim();
+    const pass = document.getElementById("signupPass").value.trim();
 
-  localStorage.setItem("studentEmail", email);
-  localStorage.setItem("studentPass", pass);
-  localStorage.setItem("studentConnected", "true");
+    if(!email || !pass){
+        alert("Il faut entrer une adresse e-mail et un mot de passe.");
+        return;
+    }
 
-  alert("✅ Compte créé !");
-  location.reload();
+    const { error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: pass
+    });
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    alert("🎉 Compte créé ! Vérifie maintenant tes e-mails puis confirme ton adresse.");
+
+    closeLoginModal();
 }
 
-function loginStudent(){
-  const email = document.getElementById("loginEmail").value.trim();
-  const pass = document.getElementById("loginPass").value.trim();
+async function loginStudent(){
 
-  if(email === localStorage.getItem("studentEmail") && pass === localStorage.getItem("studentPass")){
-    localStorage.setItem("studentConnected", "true");
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPass").value.trim();
+
+    const { error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: pass
+    });
+
+    if(error){
+        alert("Adresse e-mail ou mot de passe incorrect.");
+        return;
+    }
+
     alert("✅ Connecté !");
+
     location.reload();
-  } else {
-    alert("Adresse e-mail ou mot de passe incorrect.");
-  }
 }
 document.getElementById("title").textContent = capsuleData.title;
 document.getElementById("topTitle").textContent = capsuleData.title + " - " + capsuleData.levels;
