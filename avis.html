@@ -125,6 +125,13 @@ capsule: capsule,
 
 loadReviews();
 </script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const capsule = params.get("capsule");
 
+if (capsule) {
+    document.getElementById("capsule").value = decodeURIComponent(capsule);
+}
+</script>
 </body>
 </html>
