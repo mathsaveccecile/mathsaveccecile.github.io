@@ -22,7 +22,10 @@ a{color:white;font-weight:bold}
 <main>
   <a href="index.html">← Retour à l'accueil</a>
 
-  <h1>Donne ton avis</h1>
+ <h1>Avis publiés</h1>
+  <div id="reviewsList">Chargement...</div>
+  
+  <h2>Donne ton avis</h2>
   <p>Ton avis sera publié seulement après validation.</p>
 
   <div id="formAvis">
@@ -41,8 +44,7 @@ a{color:white;font-weight:bold}
     <button onclick="sendReview()">Envoyer mon avis</button>
   </div>
 
-  <h2>Avis publiés</h2>
-  <div id="reviewsList">Chargement...</div>
+  
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
