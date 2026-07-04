@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Admin avis - Maths avec Cécile</title>
+<style>
+body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
+header{background:#211933;padding:22px;font-size:28px;font-weight:900}
+main{max-width:1000px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
+.card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
+button{border:none;border-radius:999px;padding:12px 22px;margin:6px;font-size:16px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
+.danger{background:#666}
+a{color:white;font-weight:bold}
+</style>
+</head>
+
+<body>
+<header>🛠️ Administration des avis</header>
+
+<main>
+<a href="avis.html">← Voir la page avis</a>
+<h1>Avis reçus</h1>
+<div id="reviewsList">Chargement...</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function loadReviews(){
+  const { data, error } = await supabaseClient
+    .from("reviews")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  const list = document.getElementById("reviewsList");
+
+  if(error){
+    list.innerHTML = "Erreur : " + error.message;
+    return;
+  }
+
+  if(!data || data.length === 0){
+    list.innerHTML = "<p>Aucun avis pour le moment.</p>";
+    return;
+  }
+
+  list.innerHTML = data.map(r => `
+    <div class="card">
+      <h2>${"⭐".repeat(r.rating)} ${r.published ? "✅ Publié" : "⏳ En attente"}</h2>
+      <p><strong>Email :</strong> ${r.email || "inconnu"}</p>
+      <p>${r.message}</p>
+
+      ${!r.published ? `<button onclick="publishReview(${r.id})">✅ Publier</button>` : ""}
+      ${r.published ? `<button onclick="unpublishReview(${r.id})">🙈 Masquer</button>` : ""}
+      <button class="danger" onclick="deleteReview(${r.id})">🗑️ Supprimer</button>
+    </div>
+  `).join("");
+}
+
+async function publishReview(id){
+  await supabaseClient.from("reviews").update({ published: true }).eq("id", id);
+  loadReviews();
+}
+
+async function unpublishReview(id){
+  await supabaseClient.from("reviews").update({ published: false }).eq("id", id);
+  loadReviews();
+}
+
+async function deleteReview(id){
+  if(!confirm("Supprimer cet avis ?")) return;
+  await supabaseClient.from("reviews").delete().eq("id", id);
+  loadReviews();
+}
+
+loadReviews();
+</script>
+</body>
+</html>

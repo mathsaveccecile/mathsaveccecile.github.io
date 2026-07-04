@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Avis - Maths avec Cécile</title>
+
+<style>
+body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
+header{background:#211933;padding:22px;font-size:28px;font-weight:900}
+main{max-width:900px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
+input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px}
+button{border:none;border-radius:999px;padding:16px 30px;font-size:18px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
+.card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
+a{color:white;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<header>⭐ Avis - Maths avec Cécile</header>
+
+<main>
+  <a href="index.html">← Retour à l'accueil</a>
+
+  <h1>Donne ton avis</h1>
+  <p>Ton avis sera publié seulement après validation.</p>
+
+  <div id="formAvis">
+    <input id="pseudo" placeholder="Ton pseudo" maxlength="30">
+<input id="capsule" placeholder="Nom de la capsule concernée">
+    <select id="rating">
+      <option value="5">⭐⭐⭐⭐⭐ 5 étoiles</option>
+      <option value="4">⭐⭐⭐⭐ 4 étoiles</option>
+      <option value="3">⭐⭐⭐ 3 étoiles</option>
+      <option value="2">⭐⭐ 2 étoiles</option>
+      <option value="1">⭐ 1 étoile</option>
+    </select>
+
+    <textarea id="message" rows="5" placeholder="Écris ton avis ici..."></textarea>
+
+    <button onclick="sendReview()">Envoyer mon avis</button>
+  </div>
+
+  <h2>Avis publiés</h2>
+  <div id="reviewsList">Chargement...</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
+const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function loadReviews(){
+  const { data, error } = await supabaseClient
+    .from("reviews")
+    .select("rating, message, pseudo, capsule, created_at")
+    .eq("published", true)
+    .order("created_at", { ascending: false });
+
+  const list = document.getElementById("reviewsList");
+
+  if(error){
+    list.innerHTML = "Impossible de charger les avis.";
+    return;
+  }
+
+  if(!data || data.length === 0){
+    list.innerHTML = "<p>Aucun avis publié pour le moment.</p>";
+    return;
+  }
+
+  list.innerHTML = data.map(review => `
+  <div class="card">
+    <h3>${"⭐".repeat(review.rating)}</h3>
+    <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
+    <p><strong>📚 Capsule :</strong> ${review.capsule || "Non précisée"}</p>
+    <p>${review.message}</p>
+  </div>
+`).join("");
+}
+
+async function sendReview(){
+  const pseudo = document.getElementById("pseudo").value.trim();
+const capsule = document.getElementById("capsule").value.trim();
+const rating = Number(document.getElementById("rating").value);
+const message = document.getElementById("message").value.trim();
+
+  if(!message){
+    alert("Écris un avis avant d'envoyer.");
+    return;
+  }
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session){
+    alert("Tu dois être connecté pour laisser un avis.");
+    return;
+  }
+
+  const user = sessionData.session.user;
+
+  const { error } = await supabaseClient
+    .from("reviews")
+    .insert({
+      user_id: user.id,
+      email: user.email,
+      pseudo: pseudo,
+capsule: capsule,
+      rating: rating,
+      message: message,
+      published: false
+    });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("✅ Merci ! Ton avis est envoyé et sera publié après validation.");
+  document.getElementById("message").value = "";
+}
+
+loadReviews();
+</script>
+
+</body>
+</html>

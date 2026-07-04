@@ -128,6 +128,9 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   </aside>
 
   <main class="main">
+    <a href="avis.html" style="color:white;font-weight:bold;text-decoration:none;margin-right:20px;">
+  ⭐ Avis
+</a>
     <a href="4e.html" style="color:white;font-weight:bold;text-decoration:none">← Retour au niveau</a>
     <div class="card">
       <h1 id="stepTitle"></h1>
@@ -146,7 +149,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 <script>
 let currentStep = 0;
 
-const userIsConnected = isConnected();
+let userIsConnected = false;
 
 function icon(type){
   if(type==="video") return "🎥";
@@ -170,13 +173,31 @@ function youtubeEmbed(url){
 
   return url;
 }
+function formatDuration(seconds){
+  const min = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+
+  if(min === 0) return sec + " s";
+  if(sec === 0) return min + " min";
+  return min + " min " + sec + " s";
+}
+
+function getTotalDuration(){
+  return capsuleData.steps.reduce((total, step) => {
+    if(step.type === "pdf") return total;
+    if(step.type === "image") return total + 60;
+    if(step.type === "quiz") return total + 60;
+    if(step.type === "video") return total + Number(step.duration || 0);
+    return total;
+  }, 0);
+}
 function updateStats(){
   const videos = capsuleData.steps.filter(s=>s.type==="video").length;
   const quiz = capsuleData.steps.filter(s=>s.type==="quiz").length;
   const pdf = capsuleData.steps.filter(s=>s.type==="pdf").length;
 
   document.getElementById("badges").innerHTML = `
-  <span>⏱️ ${capsuleData.duration}</span>
+  <span>⏱️ ${formatDuration(getTotalDuration())}</span>
   <span>🎥 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
   <span>❓ ${quiz} ${quiz > 1 ? "quiz" : "quiz"}</span>
   <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
@@ -189,7 +210,11 @@ function renderSteps(){
   capsuleData.steps.forEach((step,index)=>{
     const div = document.createElement("div");
     div.className = "step" + (index===currentStep ? " active" : "");
-    div.onclick = () => {currentStep=index; render();}
+    div.onclick = async () => {
+  currentStep = index;
+  await saveProgress();
+  render();
+}
     div.innerHTML = `<div><span class="num">${index+1}</span> ${step.title}</div><div>${icon(step.type)}</div>`;
     list.appendChild(div);
   });
@@ -333,24 +358,38 @@ function render(){
     "Progression : " + Math.round(((currentStep+1)/capsuleData.steps.length)*100) + " %";
 }
 
-function nextStep(){
+async function nextStep(){
+
   if(currentStep < capsuleData.steps.length-1){
+
     currentStep++;
+
+    await saveProgress();
+
     render();
+
   }
+
 }
 
-function previousStep(){
+async function previousStep(){
+
   if(currentStep > 0){
+
     currentStep--;
+
+    await saveProgress();
+
     render();
+
   }
+
 }
 
 function toggleMenu(){
   document.querySelector(".sidebar").classList.toggle("open");
 }
-const SUPABASE_URL = "https://czzxbvjtkuzfubnsnfhs.supabase.co";
+const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -365,6 +404,9 @@ function openLoginModal(){
         <input id="loginPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
 
         <button onclick="loginStudent()" style="width:100%;margin-top:15px;">Se connecter</button>
+       <button onclick="resetPassword()" style="width:100%;margin-top:12px;">
+  🔑 Mot de passe oublié
+</button>
         <button onclick="openSignupModal()" style="width:100%;margin-top:12px;">✨ Créer un compte</button>
         <button class="locked" onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
       </div>
@@ -426,24 +468,152 @@ async function loginStudent(){
     const email = document.getElementById("loginEmail").value.trim();
     const pass = document.getElementById("loginPass").value.trim();
 
-    const { error } = await supabaseClient.auth.signInWithPassword({
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: email,
         password: pass
     });
 
     if(error){
-        alert("Adresse e-mail ou mot de passe incorrect.");
+        alert(error.message);
         return;
     }
 
-    alert("✅ Connecté !");
+    localStorage.setItem("studentConnected","true");
+
+    alert("✅ Connexion réussie !");
+
+    closeLoginModal();
 
     location.reload();
 }
+
+async function resetPassword(){
+  const email = document.getElementById("loginEmail").value.trim();
+
+  if(!email){
+    alert("Écris d'abord ton adresse e-mail.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://mathsaveccecile.github.io"
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("📩 Un e-mail de réinitialisation vient d'être envoyé.");
+}
 document.getElementById("title").textContent = capsuleData.title;
 document.getElementById("topTitle").textContent = capsuleData.title + " - " + capsuleData.levels;
-updateStats();
-render();
+async function checkConnection(){
+  const { data } = await supabaseClient.auth.getSession();
+
+  if(data.session){
+    userIsConnected = true;
+    await loadProgress();
+  }
+
+  updateLoginDisplay();
+  render();
+}
+function updateLoginDisplay(){
+  const link = document.querySelector(".sidebar p");
+
+  if(userIsConnected){
+    link.innerHTML = `
+      ✅ Élève connecté<br>
+      <a href="#" onclick="logoutStudent(); return false;"
+         style="color:white;text-decoration:underline;font-weight:bold;">
+        🚪 Se déconnecter
+      </a>
+    `;
+  }
+}
+
+(async () => {
+    updateStats();
+    await checkConnection();
+})();
+
+async function logoutStudent(){
+  await supabaseClient.auth.signOut();
+  localStorage.removeItem("studentConnected");
+  alert("Tu es déconnecté.");
+  location.reload();
+}
+async function saveProgress(){
+
+  if(!userIsConnected) return;
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session) return;
+
+  const percent = Math.round(((currentStep + 1) / capsuleData.steps.length) * 100);
+
+  const { data } = await supabaseClient
+    .from("progressions")
+    .select("id")
+    .eq("user_id", sessionData.session.user.id)
+    .eq("capsule", capsuleData.title)
+    .maybeSingle();
+
+  if(data){
+
+    await supabaseClient
+      .from("progressions")
+      .update({
+        current_step: currentStep,
+        percent: percent
+      })
+
+      .eq("id", data.id);
+
+  }else{
+
+    await supabaseClient
+      .from("progressions")
+      .insert({
+        user_id: sessionData.session.user.id,
+        capsule: capsuleData.title,
+        current_step: currentStep,
+        percent: percent
+      });
+
+  }
+
+}
+async function loadProgress(){
+  console.log("LOAD PROGRESS");
+
+  if(!userIsConnected) return;
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session) return;
+
+  const { data, error } = await supabaseClient
+    .from("progressions")
+    .select("current_step, percent, updated_at")
+    .eq("user_id", sessionData.session.user.id)
+    .eq("capsule", capsuleData.title)
+    .order("updated_at", { ascending: false })
+    .limit(1);
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  if(data && data.length > 0){
+    currentStep = data[0].current_step;
+    currentStep = data[0].current_step;
+console.log(currentStep);
+  }
+}
 </script>
 
 </body>

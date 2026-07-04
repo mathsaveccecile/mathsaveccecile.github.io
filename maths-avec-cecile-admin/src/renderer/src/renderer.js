@@ -31,10 +31,22 @@ function renderImage(step, index) {
   return `
     <div class="step">
       ${buttons(index)}
+
       <h4>🖼️ Image</h4>
+
+      <input
+        value="${step.title || ""}"
+        placeholder="Titre de l'image"
+        oninput="updateStepTitle(${index}, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
+      >
+
       <img src="${step.src}" style="max-width:300px;border-radius:10px;margin-top:10px;">
+
       <br>
-      <small>${step.name}</small>
+
+      <small>${step.name || ""}</small>
+
     </div>
   `;
 }
@@ -44,10 +56,26 @@ function renderVideo(step, index) {
     <div class="step">
       ${buttons(index)}
       <h4>🎥 Vidéo YouTube</h4>
+
+      <input
+        value="${step.title || ""}"
+        placeholder="Titre de la vidéo"
+        oninput="updateStepTitle(${index}, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
+      >
+
       <input 
         value="${step.src || ""}"
         placeholder="Colle ici le lien YouTube"
         oninput="updateVideo(${index}, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
+      >
+
+      <input
+        type="number"
+        value="${step.duration || ""}"
+        placeholder="Durée en secondes"
+        oninput="updateStepDuration(${index}, this.value)"
         style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;"
       >
     </div>
@@ -97,6 +125,13 @@ function updateVideo(index, value) {
   capsule.steps[index].src = value;
 }
 
+function updateStepTitle(index, value) {
+  capsule.steps[index].title = value;
+}
+
+function updateStepDuration(index, value) {
+  capsule.steps[index].duration = Number(value);
+}
 document.getElementById("newCapsuleBtn").addEventListener("click", () => {
   capsule = { title: "", level: "", duration: "", steps: [] };
   renderCapsule();
@@ -161,11 +196,12 @@ document.getElementById("addImageBtn").addEventListener("click", async () => {
   const image = await window.api.chooseImage();
   if (!image) return;
 
-  capsule.steps.push({
-    type: "image",
-    name: image.name,
-    src: image.src
-  });
+ capsule.steps.push({
+  type: "image",
+  title: image.name,
+  name: image.name,
+  src: image.src
+});
 
   renderCapsule();
 });
@@ -224,20 +260,21 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
     duration: capsule.duration,
     steps: capsule.steps.map((step) => {
       if (step.type === "image") {
-        return {
-          type: "image",
-          title: step.name || "Image",
-          src: step.src
-        };
-      }
+  return {
+    type: "image",
+    title: step.title || step.name || "Image",
+    src: step.src
+  };
+}
 
       if (step.type === "video") {
-        return {
-          type: "video",
-          title: step.title || "Vidéo",
-          src: step.src || ""
-        };
-      }
+  return {
+    type: "video",
+    title: step.title || "Vidéo",
+    src: step.src || "",
+    duration: Number(step.duration || 0)
+  };
+}
 
       if (step.type === "pdf") {
         return {
