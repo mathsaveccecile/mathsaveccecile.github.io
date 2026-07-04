@@ -72,14 +72,43 @@ async function loadReviews(){
     return;
   }
 
-  list.innerHTML = data.map(review => `
-  <div class="card">
-    <h3>${"⭐".repeat(review.rating)}</h3>
-    <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
-    <p><strong>📚 Capsule :</strong> ${review.capsule || "Non précisée"}</p>
-    <p>${review.message}</p>
-  </div>
-`).join("");
+  list.innerHTML = data.map(review => {
+
+  const date = new Date(review.created_at);
+
+  const dateFr = date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  return `
+    <div class="card">
+
+      <h2 style="font-size:30px;margin-bottom:10px;">
+        ${"⭐".repeat(review.rating)}
+      </h2>
+
+      <p style="margin:6px 0;">
+        <strong>👤 ${review.pseudo || "Élève"}</strong>
+      </p>
+
+      <p style="margin:6px 0;">
+        <strong>📚 ${review.capsule || "Capsule non précisée"}</strong>
+      </p>
+
+      <p style="margin:6px 0;color:#cfcfcf;font-size:14px;">
+        📅 Publié le ${dateFr}
+      </p>
+
+      <p style="margin-top:18px;font-size:18px;line-height:1.6;">
+        ${review.message}
+      </p>
+
+    </div>
+  `;
+
+}).join("");
 }
 
 async function sendReview(){
