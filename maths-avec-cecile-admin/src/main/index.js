@@ -134,9 +134,11 @@ if (existsSync(capsulesFile)) {
   capsules = JSON.parse(readFileSync(capsulesFile, "utf8"))
 }
 const pageName = data.title
-  .replaceAll(" ", "_")
-  .replaceAll("/", "-")
-  .replaceAll("\\", "-") + ".html"
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "") + ".html"
 
 const capsuleInfo = {
   title: data.title,
