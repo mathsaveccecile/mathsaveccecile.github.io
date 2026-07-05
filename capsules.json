@@ -1,2 +1,21 @@
 [
+  {
+    "title": "Angles",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "1.png",
+    "page": "Angles.html"
+  },
+  {
+    "title": "Pythagore. Direct, contraposée et réciproque. ",
+    "levels": [
+      "4e",
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "pythagore.png",
+    "page": "Pythagore._Direct,_contraposée_et_réciproque._.html"
+  }
 ]

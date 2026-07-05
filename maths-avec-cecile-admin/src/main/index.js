@@ -126,6 +126,38 @@ app.whenReady().then(() => {
  ipcMain.handle('export-site', async (_, data) => {
   const siteFolder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io'
 
+  const capsulesFile = `${siteFolder}/capsules.json`
+
+let capsules = []
+
+if (existsSync(capsulesFile)) {
+  capsules = JSON.parse(readFileSync(capsulesFile, "utf8"))
+}
+const pageName = data.title
+  .replaceAll(" ", "_")
+  .replaceAll("/", "-")
+  .replaceAll("\\", "-") + ".html"
+
+const capsuleInfo = {
+  title: data.title,
+  levels: data.levels || [],
+  duration: data.duration || "",
+  thumbnail: data.thumbnailName || "",
+  page: pageName
+}
+
+const existingIndex = capsules.findIndex(c => c.title === capsuleInfo.title)
+
+if (existingIndex >= 0) {
+  capsules[existingIndex] = capsuleInfo
+} else {
+  capsules.push(capsuleInfo)
+}
+
+writeFileSync(
+  capsulesFile,
+  JSON.stringify(capsules, null, 2)
+)
   const output =
 `const capsuleData = ${JSON.stringify(data, null, 2)};
 `
