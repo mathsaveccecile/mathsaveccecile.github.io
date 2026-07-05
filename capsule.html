@@ -163,6 +163,7 @@ document.head.appendChild(script);
 <script src="js/quiz-engine.js"></script>
 
 <script>
+script.onload = () => {
 let currentStep = 0;
 
 let userIsConnected = false;
@@ -629,6 +630,7 @@ async function loadProgress(){
     currentStep = data[0].current_step;
 console.log(currentStep);
   }
+}
 }
 </script>
 
