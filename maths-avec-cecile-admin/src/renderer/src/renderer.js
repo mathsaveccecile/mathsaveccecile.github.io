@@ -286,10 +286,12 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   }
 
   const siteData = {
-    title: capsule.title,
-    levels: capsule.levels,
-    duration: capsule.duration,
-    steps: capsule.steps.map((step) => {
+  title: capsule.title,
+  levels: capsule.levels || [],
+  duration: capsule.duration,
+  thumbnail: capsule.thumbnail || "",
+  thumbnailName: capsule.thumbnailName || "",
+  steps: capsule.steps.map((step) => {
       if (step.type === "image") {
   return {
     type: "image",
