@@ -20,11 +20,13 @@ async function chargerCapsules(niveau) {
                             src="${capsule.thumbnail}"
                             alt="${capsule.title}"
                             style="
-                                width:100%;
-                                border-radius:25px;
-                                transition:.3s;
-                                box-shadow:0 18px 35px rgba(0,0,0,.20);
-                                display:block;
+  width:100%;
+  max-width:340px;
+  border-radius:25px;
+  transition:.3s;
+  box-shadow:0 18px 35px rgba(0,0,0,.20);
+  display:block;
+  margin:0 auto;
                             ">
 
                     </a>
