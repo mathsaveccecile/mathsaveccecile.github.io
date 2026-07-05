@@ -140,12 +140,15 @@ const pageName = data.title
   .replace(/[^a-z0-9]+/g, "-")
   .replace(/^-+|-+$/g, "") + ".html"
 
+const dataFileName = pageName.replace(".html", "-data.js")
+
 const capsuleInfo = {
   title: data.title,
   levels: data.levels || [],
   duration: data.duration || "",
   thumbnail: data.thumbnailName || "",
-  page: pageName
+  page: pageName,
+  dataFile: dataFileName
 }
 
 const existingIndex = capsules.findIndex(c => c.title === capsuleInfo.title)
@@ -164,10 +167,10 @@ writeFileSync(
 `const capsuleData = ${JSON.stringify(data, null, 2)};
 `
 
-  writeFileSync(
-    `${siteFolder}/pythagore-data.js`,
-    output
-  )
+writeFileSync(
+  `${siteFolder}/${dataFileName}`,
+  output
+)
 
   console.log("Capsule exportée :", data.title)
   console.log("Niveaux :", data.levels)

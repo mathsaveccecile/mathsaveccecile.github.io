@@ -1,3 +1,4 @@
+console.log("CAPSULES.JS CHARGÉ");
 async function chargerCapsules(niveau) {
 
     const reponse = await fetch("capsules.json");

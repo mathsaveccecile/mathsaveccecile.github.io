@@ -6,7 +6,8 @@
     ],
     "duration": "",
     "thumbnail": "1.png",
-    "page": "angles.html"
+    "page": "angles.html",
+    "dataFile": "angles-data.js"
   },
   {
     "title": "Pythagore. Direct, contraposée et réciproque. ",
@@ -16,6 +17,7 @@
     ],
     "duration": "",
     "thumbnail": "pythagore.png",
-    "page": "pythagore-direct-contraposee-et-reciproque.html"
+    "page": "pythagore-direct-contraposee-et-reciproque.html",
+    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
   }
 ]
