@@ -1,6 +1,6 @@
 let capsule = {
   title: "",
-  level: "",
+  levels: "",
   duration: "",
   thumbnail: "",
   thumbnailName: "",
@@ -9,7 +9,9 @@ let capsule = {
 
 function renderCapsule() {
   document.getElementById("capsuleTitle").value = capsule.title || "";
-  document.getElementById("capsuleLevel").value = capsule.level || "";
+  document.querySelectorAll(".levelCheck").forEach(check => {
+    check.checked = capsule.levels.includes(check.value);
+});
   document.getElementById("capsuleDuration").value = capsule.duration || "";
 const thumbnailPreview = document.getElementById("thumbnailPreview");
 
@@ -203,6 +205,15 @@ document.getElementById("openCapsuleBtn").addEventListener("click", async () => 
 async function openSavedCapsule(filename) {
   const json = await window.api.openProject(filename);
   capsule = JSON.parse(json);
+
+  // Compatibilité avec les anciennes capsules
+  if (!capsule.levels) {
+    capsule.levels = capsule.level ? [capsule.level] : [];
+  }
+
+  if (!capsule.thumbnail) capsule.thumbnail = "";
+  if (!capsule.thumbnailName) capsule.thumbnailName = "";
+
   renderCapsule();
   alert("✅ Capsule ouverte !");
 }
