@@ -22,13 +22,13 @@ async function chargerCapsules(niveau) {
                             alt="${capsule.title}"
                             style="
   style="
-  width:340px;
-  height:340px;
+  width:260px;
+  height:260px;
   object-fit:cover;
   border-radius:25px;
   box-shadow:0 18px 35px rgba(0,0,0,.20);
   display:block;
-                            ">
+">
 
                     </a>
 

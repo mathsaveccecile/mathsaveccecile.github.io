@@ -151,7 +151,15 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="pythagore-data.js?v=2"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const dataFile = params.get("data") || "pythagore-data.js";
+
+const script = document.createElement("script");
+script.src = dataFile + "?v=" + Date.now();
+
+document.head.appendChild(script);
+</script>
 <script src="js/quiz-engine.js"></script>
 
 <script>
