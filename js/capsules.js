@@ -15,7 +15,7 @@ async function chargerCapsules(niveau) {
             liste.innerHTML += `
                 <div class="card" style="background:none;box-shadow:none;padding:0;max-width:340px;margin:0 auto;">
 
-                    <a href="${capsule.page}">
+                    <a href="Pythagore.html?data=${capsule.dataFile}">
 
                         <img
                             src="${capsule.thumbnail}"
