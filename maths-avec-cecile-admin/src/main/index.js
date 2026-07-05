@@ -1,6 +1,6 @@
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, basename } from 'path'
-import { readFileSync, writeFileSync, readdirSync } from 'fs'
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from 'fs'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
@@ -123,18 +123,24 @@ app.whenReady().then(() => {
     return json
   })
 
-  ipcMain.handle('export-site', async (_, data) => {
-    const output =
+ ipcMain.handle('export-site', async (_, data) => {
+  const siteFolder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io'
+
+  const output =
 `const capsuleData = ${JSON.stringify(data, null, 2)};
 `
 
-    writeFileSync(
-      'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/pythagore-data.js',
-      output
-    )
+  writeFileSync(
+    `${siteFolder}/pythagore-data.js`,
+    output
+  )
 
-    return true
-  })
+  console.log("Capsule exportée :", data.title)
+  console.log("Niveaux :", data.levels)
+  console.log("Vignette :", data.thumbnailName)
+
+  return true
+})
 
     ipcMain.handle('save-project', async (_, data) => {
     const filename = (data.title || 'capsule')

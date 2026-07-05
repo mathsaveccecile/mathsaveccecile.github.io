@@ -142,6 +142,11 @@ function updateStepTitle(index, value) {
 function updateStepDuration(index, value) {
   capsule.steps[index].duration = Number(value);
 }
+
+function getSelectedLevels() {
+  return Array.from(document.querySelectorAll(".levelCheck:checked"))
+    .map(check => check.value);
+}
 document.getElementById("newCapsuleBtn").addEventListener("click", () => {
   capsule = {
   title: "",
@@ -156,7 +161,7 @@ document.getElementById("newCapsuleBtn").addEventListener("click", () => {
 
 document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
   capsule.title = document.getElementById("capsuleTitle").value;
-  capsule.level = document.getElementById("capsuleLevel").value;
+  capsule.levels = getSelectedLevels();
   capsule.duration = document.getElementById("capsuleDuration").value;
 
   if (!capsule.title) {
@@ -171,7 +176,7 @@ document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
 
 document.getElementById("saveProjectBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
-  capsule.level = document.getElementById("capsuleLevel").value;
+  capsule.levels = getSelectedLevels();
   capsule.duration = document.getElementById("capsuleDuration").value;
 
   if (!capsule.title) {
@@ -272,7 +277,7 @@ document.getElementById("previewCapsuleBtn").addEventListener("click", () => {
 
 document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
-  capsule.level = document.getElementById("capsuleLevel").value;
+  capsule.levels = getSelectedLevels();
   capsule.duration = document.getElementById("capsuleDuration").value;
 
   if (!capsule.title) {
@@ -282,7 +287,7 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
 
   const siteData = {
     title: capsule.title,
-    levels: capsule.level,
+    levels: capsule.levels,
     duration: capsule.duration,
     steps: capsule.steps.map((step) => {
       if (step.type === "image") {
