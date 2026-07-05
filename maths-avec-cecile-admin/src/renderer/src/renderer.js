@@ -2,6 +2,8 @@ let capsule = {
   title: "",
   level: "",
   duration: "",
+  thumbnail: "",
+  thumbnailName: "",
   steps: []
 };
 
@@ -9,7 +11,13 @@ function renderCapsule() {
   document.getElementById("capsuleTitle").value = capsule.title || "";
   document.getElementById("capsuleLevel").value = capsule.level || "";
   document.getElementById("capsuleDuration").value = capsule.duration || "";
+const thumbnailPreview = document.getElementById("thumbnailPreview");
 
+if (thumbnailPreview) {
+  thumbnailPreview.innerHTML = capsule.thumbnail
+    ? `<img src="${capsule.thumbnail}" style="max-width:260px;border-radius:14px;margin-top:10px;"><br><small>${capsule.thumbnailName || ""}</small>`
+    : "<p>Aucune vignette choisie.</p>";
+}
   document.getElementById("stepsList").innerHTML = capsule.steps.map((step, index) => {
     if (step.type === "image") return renderImage(step, index);
     if (step.type === "video") return renderVideo(step, index);
@@ -133,7 +141,14 @@ function updateStepDuration(index, value) {
   capsule.steps[index].duration = Number(value);
 }
 document.getElementById("newCapsuleBtn").addEventListener("click", () => {
-  capsule = { title: "", level: "", duration: "", steps: [] };
+  capsule = {
+  title: "",
+  level: "",
+  duration: "",
+  thumbnail: "",
+  thumbnailName: "",
+  steps: []
+};
   renderCapsule();
 });
 
@@ -340,5 +355,14 @@ document.getElementById("importSiteBtn").addEventListener("click", async () => {
     console.error(e);
     alert("❌ Impossible d'importer la capsule.");
   }
+});
+document.getElementById("chooseThumbnailBtn").addEventListener("click", async () => {
+  const image = await window.api.chooseImage();
+  if (!image) return;
+
+  capsule.thumbnail = image.src;
+  capsule.thumbnailName = image.name;
+
+  renderCapsule();
 });
 renderCapsule();
