@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Pythagore - Maths avec Cécile</title>
+<link rel="icon" type="image/png" href="avatar-cecile.png">
 <script>
 window.MathJax = {
   tex: {
@@ -157,6 +158,7 @@ const dataFile = params.get("data") || "pythagore-data.js";
 
 const script = document.createElement("script");
 script.src = dataFile + "?v=" + Date.now();
+script.onload = startCapsule;
 
 document.head.appendChild(script);
 </script>
