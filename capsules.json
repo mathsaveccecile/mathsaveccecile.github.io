@@ -41,5 +41,45 @@
     "thumbnail": "assets/thumbnails/trigonometrie-comprendre-et-utiliser-le-cosinus.png",
     "page": "trigonometrie-comprendre-et-utiliser-le-cosinus.html",
     "dataFile": "trigonometrie-comprendre-et-utiliser-le-cosinus-data.js"
+  },
+  {
+    "title": "Trigonométrie: maitrise tout le chapitre. ",
+    "levels": [
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/trigonometrie-maitrise-tout-le-chapitre.png",
+    "page": "trigonometrie-maitrise-tout-le-chapitre.html",
+    "dataFile": "trigonometrie-maitrise-tout-le-chapitre-data.js"
+  },
+  {
+    "title": "Mesurer et construire des angles, tracer la bissectrice. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/mesurer-et-construire-des-angles-tracer-la-bissectrice.png",
+    "page": "mesurer-et-construire-des-angles-tracer-la-bissectrice.html",
+    "dataFile": "mesurer-et-construire-des-angles-tracer-la-bissectrice-data.js"
+  },
+  {
+    "title": "Droites parallèles et perpendiculaires. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
+    "page": "droites-paralleles-et-perpendiculaires.html",
+    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
+  },
+  {
+    "title": "Reconnaitre, comparer les angles. Raisonner. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/reconnaitre-comparer-les-angles-raisonner.png",
+    "page": "reconnaitre-comparer-les-angles-raisonner.html",
+    "dataFile": "reconnaitre-comparer-les-angles-raisonner-data.js"
   }
 ]
