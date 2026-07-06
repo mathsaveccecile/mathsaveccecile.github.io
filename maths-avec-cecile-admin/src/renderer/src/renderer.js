@@ -1,7 +1,6 @@
 let capsule = {
   title: "",
   levels: [],
-  duration: "",
   thumbnail: "",
   thumbnailName: "",
   thumbnailPath: "",
@@ -19,7 +18,6 @@ function renderCapsule() {
     check.checked = capsule.levels.includes(check.value);
   });
 
-  document.getElementById("capsuleDuration").value = capsule.duration || "";
 
   const thumbnailPreview = document.getElementById("thumbnailPreview");
 
@@ -138,7 +136,6 @@ document.getElementById("newCapsuleBtn").addEventListener("click", () => {
   capsule = {
     title: "",
     levels: [],
-    duration: "",
     thumbnail: "",
     thumbnailName: "",
     thumbnailPath: "",
@@ -162,7 +159,6 @@ document.getElementById("chooseThumbnailBtn").addEventListener("click", async ()
 document.getElementById("saveProjectBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
   capsule.levels = getSelectedLevels();
-  capsule.duration = document.getElementById("capsuleDuration").value;
 
   if (!capsule.title) {
     alert("Il faut donner un nom à la capsule.");
@@ -276,7 +272,7 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   const siteData = {
     title: capsule.title,
     levels: capsule.levels || [],
-    duration: capsule.duration || "",
+    duration: "",
     thumbnail: capsule.thumbnail || "",
     thumbnailName: capsule.thumbnailName || "",
     thumbnailPath: capsule.thumbnailPath || "",
