@@ -1,25 +1,34 @@
 let capsule = {
   title: "",
-  levels: "",
+  levels: [],
   duration: "",
   thumbnail: "",
   thumbnailName: "",
+  thumbnailPath: "",
   steps: []
 };
 
 function renderCapsule() {
   document.getElementById("capsuleTitle").value = capsule.title || "";
+
+  if (!Array.isArray(capsule.levels)) {
+    capsule.levels = [];
+  }
+
   document.querySelectorAll(".levelCheck").forEach(check => {
     check.checked = capsule.levels.includes(check.value);
-});
-  document.getElementById("capsuleDuration").value = capsule.duration || "";
-const thumbnailPreview = document.getElementById("thumbnailPreview");
+  });
 
-if (thumbnailPreview) {
-  thumbnailPreview.innerHTML = capsule.thumbnail
-    ? `<img src="${capsule.thumbnail}" style="max-width:260px;border-radius:14px;margin-top:10px;"><br><small>${capsule.thumbnailName || ""}</small>`
-    : "<p>Aucune vignette choisie.</p>";
-}
+  document.getElementById("capsuleDuration").value = capsule.duration || "";
+
+  const thumbnailPreview = document.getElementById("thumbnailPreview");
+
+  if (thumbnailPreview) {
+    thumbnailPreview.innerHTML = capsule.thumbnail
+      ? `<img src="${capsule.thumbnail}" style="max-width:260px;border-radius:14px;margin-top:10px;"><br><small>${capsule.thumbnailName || ""}</small>`
+      : "<p>Aucune vignette choisie.</p>";
+  }
+
   document.getElementById("stepsList").innerHTML = capsule.steps.map((step, index) => {
     if (step.type === "image") return renderImage(step, index);
     if (step.type === "video") return renderVideo(step, index);
@@ -41,22 +50,12 @@ function renderImage(step, index) {
   return `
     <div class="step">
       ${buttons(index)}
-
       <h4>🖼️ Image</h4>
-
-      <input
-        value="${step.title || ""}"
-        placeholder="Titre de l'image"
+      <input value="${step.title || ""}" placeholder="Titre de l'image"
         oninput="updateStepTitle(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
-      >
-
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
       <img src="${step.src}" style="max-width:300px;border-radius:10px;margin-top:10px;">
-
-      <br>
-
-      <small>${step.name || ""}</small>
-
+      <br><small>${step.name || ""}</small>
     </div>
   `;
 }
@@ -66,28 +65,15 @@ function renderVideo(step, index) {
     <div class="step">
       ${buttons(index)}
       <h4>🎥 Vidéo YouTube</h4>
-
-      <input
-        value="${step.title || ""}"
-        placeholder="Titre de la vidéo"
+      <input value="${step.title || ""}" placeholder="Titre de la vidéo"
         oninput="updateStepTitle(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
-      >
-
-      <input 
-        value="${step.src || ""}"
-        placeholder="Colle ici le lien YouTube"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+      <input value="${step.src || ""}" placeholder="Colle ici le lien YouTube"
         oninput="updateVideo(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;"
-      >
-
-      <input
-        type="number"
-        value="${step.duration || ""}"
-        placeholder="Durée en secondes"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+      <input type="number" value="${step.duration || ""}" placeholder="Durée en secondes"
         oninput="updateStepDuration(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;"
-      >
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;">
     </div>
   `;
 }
@@ -147,31 +133,30 @@ function getSelectedLevels() {
   return Array.from(document.querySelectorAll(".levelCheck:checked"))
     .map(check => check.value);
 }
+
 document.getElementById("newCapsuleBtn").addEventListener("click", () => {
   capsule = {
-  title: "",
-  level: "",
-  duration: "",
-  thumbnail: "",
-  thumbnailName: "",
-  steps: []
-};
+    title: "",
+    levels: [],
+    duration: "",
+    thumbnail: "",
+    thumbnailName: "",
+    thumbnailPath: "",
+    steps: []
+  };
+
   renderCapsule();
 });
 
-document.getElementById("saveCapsuleBtn").addEventListener("click", () => {
-  capsule.title = document.getElementById("capsuleTitle").value;
-  capsule.levels = getSelectedLevels();
-  capsule.duration = document.getElementById("capsuleDuration").value;
+document.getElementById("chooseThumbnailBtn").addEventListener("click", async () => {
+  const image = await window.api.chooseImage();
+  if (!image) return;
 
-  if (!capsule.title) {
-    alert("Il faut donner un nom à la capsule.");
-    return;
-  }
+  capsule.thumbnail = image.src;
+  capsule.thumbnailName = image.name;
+  capsule.thumbnailPath = image.path;
 
-  const json = JSON.stringify(capsule, null, 2);
-  const filename = capsule.title.replaceAll(" ", "_") + ".json";
-  download(filename, json);
+  renderCapsule();
 });
 
 document.getElementById("saveProjectBtn").addEventListener("click", async () => {
@@ -185,9 +170,9 @@ document.getElementById("saveProjectBtn").addEventListener("click", async () => 
   }
 
   await window.api.saveProject(capsule);
-
-  alert("✅ Projet enregistré dans le dossier capsules !");
+  alert("✅ Projet enregistré !");
 });
+
 document.getElementById("openCapsuleBtn").addEventListener("click", async () => {
   const files = await window.api.listCapsules();
 
@@ -207,17 +192,19 @@ document.getElementById("openCapsuleBtn").addEventListener("click", async () => 
     </div>
   `;
 });
+
 async function openSavedCapsule(filename) {
   const json = await window.api.openProject(filename);
   capsule = JSON.parse(json);
 
-  // Compatibilité avec les anciennes capsules
-  if (!capsule.levels) {
+  if (!Array.isArray(capsule.levels)) {
     capsule.levels = capsule.level ? [capsule.level] : [];
   }
 
-  if (!capsule.thumbnail) capsule.thumbnail = "";
-  if (!capsule.thumbnailName) capsule.thumbnailName = "";
+  capsule.thumbnail = capsule.thumbnail || "";
+  capsule.thumbnailName = capsule.thumbnailName || "";
+  capsule.thumbnailPath = capsule.thumbnailPath || "";
+  capsule.steps = capsule.steps || [];
 
   renderCapsule();
   alert("✅ Capsule ouverte !");
@@ -227,12 +214,12 @@ document.getElementById("addImageBtn").addEventListener("click", async () => {
   const image = await window.api.chooseImage();
   if (!image) return;
 
- capsule.steps.push({
-  type: "image",
-  title: image.name,
-  name: image.name,
-  src: image.src
-});
+  capsule.steps.push({
+    type: "image",
+    title: image.name,
+    name: image.name,
+    src: image.src
+  });
 
   renderCapsule();
 });
@@ -241,7 +228,8 @@ document.getElementById("addVideoBtn").addEventListener("click", () => {
   capsule.steps.push({
     type: "video",
     title: "Vidéo YouTube",
-    src: ""
+    src: "",
+    duration: 0
   });
 
   renderCapsule();
@@ -286,29 +274,29 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   }
 
   const siteData = {
-  title: capsule.title,
-  levels: capsule.levels || [],
-  duration: capsule.duration,
-  thumbnail: capsule.thumbnail || "",
-thumbnailName: capsule.thumbnailName || "",
-thumbnailPath: capsule.thumbnailPath || "",
-  steps: capsule.steps.map((step) => {
+    title: capsule.title,
+    levels: capsule.levels || [],
+    duration: capsule.duration || "",
+    thumbnail: capsule.thumbnail || "",
+    thumbnailName: capsule.thumbnailName || "",
+    thumbnailPath: capsule.thumbnailPath || "",
+    steps: capsule.steps.map(step => {
       if (step.type === "image") {
-  return {
-    type: "image",
-    title: step.title || step.name || "Image",
-    src: step.src
-  };
-}
+        return {
+          type: "image",
+          title: step.title || step.name || "Image",
+          src: step.src
+        };
+      }
 
       if (step.type === "video") {
-  return {
-    type: "video",
-    title: step.title || "Vidéo",
-    src: step.src || "",
-    duration: Number(step.duration || 0)
-  };
-}
+        return {
+          type: "video",
+          title: step.title || "Vidéo",
+          src: step.src || "",
+          duration: Number(step.duration || 0)
+        };
+      }
 
       if (step.type === "pdf") {
         return {
@@ -335,27 +323,15 @@ thumbnailPath: capsule.thumbnailPath || "",
   };
 
   try {
-  console.log("EXPORT ENVOYÉ :", siteData);
-
-  console.log(JSON.stringify(siteData, null, 2));
-  await window.api.exportSite(siteData);
-
-  alert("✅ Capsule exportée directement sur le site !");
-} catch (error) {
-  console.error(error);
-  alert("❌ Erreur export : " + error.message);
-}
+    console.log("EXPORT ENVOYÉ :", siteData);
+    await window.api.exportSite(siteData);
+    alert("✅ Capsule exportée directement sur le site !");
+  } catch (error) {
+    console.error(error);
+    alert("❌ Erreur export : " + error.message);
+  }
 });
 
-function download(filename, text) {
-  const element = document.createElement("a");
-  element.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(text));
-  element.setAttribute("download", filename);
-  element.style.display = "none";
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-}
 document.getElementById("importSiteBtn").addEventListener("click", async () => {
   try {
     let text = await window.api.importSite();
@@ -368,12 +344,16 @@ document.getElementById("importSiteBtn").addEventListener("click", async () => {
 
     const data = JSON.parse(text);
 
-    if (data.levels) {
-      data.level = data.levels;
-      delete data.levels;
+    if (!Array.isArray(data.levels)) {
+      data.levels = data.level ? [data.level] : [];
     }
 
     capsule = data;
+
+    capsule.thumbnail = capsule.thumbnail || "";
+    capsule.thumbnailName = capsule.thumbnailName || "";
+    capsule.thumbnailPath = capsule.thumbnailPath || "";
+    capsule.steps = capsule.steps || [];
 
     renderCapsule();
 
@@ -383,14 +363,5 @@ document.getElementById("importSiteBtn").addEventListener("click", async () => {
     alert("❌ Impossible d'importer la capsule.");
   }
 });
-document.getElementById("chooseThumbnailBtn").addEventListener("click", async () => {
-  const image = await window.api.chooseImage();
-  if (!image) return;
 
-  capsule.thumbnail = image.src;
-  capsule.thumbnailName = image.name;
-  capsule.thumbnailPath = image.path;
-
-  renderCapsule();
-});
 renderCapsule();

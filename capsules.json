@@ -30,5 +30,16 @@
     "thumbnail": "assets/thumbnails/modeliser-un-probleme.png",
     "page": "modeliser-un-probleme.html",
     "dataFile": "modeliser-un-probleme-data.js"
+  },
+  {
+    "title": "Trigonométrie. Comprendre et utiliser le cosinus. ",
+    "levels": [
+      "4e",
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/trigonometrie-comprendre-et-utiliser-le-cosinus.png",
+    "page": "trigonometrie-comprendre-et-utiliser-le-cosinus.html",
+    "dataFile": "trigonometrie-comprendre-et-utiliser-le-cosinus-data.js"
   }
 ]
