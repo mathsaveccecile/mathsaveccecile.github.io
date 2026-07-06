@@ -81,5 +81,18 @@
     "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
     "page": "comprendre-la-notion-d-angle.html",
     "dataFile": "comprendre-la-notion-d-angle-data.js"
+  },
+  {
+    "title": "TEST",
+    "levels": [
+      "6e",
+      "5e",
+      "4e",
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/test.png",
+    "page": "test.html",
+    "dataFile": "test-data.js"
   }
 ]
