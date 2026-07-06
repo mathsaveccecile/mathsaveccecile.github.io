@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Pythagore - Maths avec Cécile</title>
+<title>Maths avec Cécile</title>
 <link rel="icon" type="image/png" href="avatar-cecile.png">
+
 <script>
 window.MathJax = {
   tex: {
@@ -13,7 +14,7 @@ window.MathJax = {
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<link rel="stylesheet" href="">
+
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
 header{background:#211933;padding:22px;font-size:28px;font-weight:900}
@@ -26,121 +27,62 @@ header{background:#211933;padding:22px;font-size:28px;font-weight:900}
 .main{padding:45px}
 .card{max-width:900px;margin:auto;background:#261e38;border-radius:28px;padding:35px}
 .content{background:#352d49;border-radius:20px;padding:30px;text-align:center;min-height:320px}
-.content img{
-  width:min(900px, 100%);
-  height:auto;
-  border-radius:20px;
-}
+.content img{width:min(900px,100%);height:auto;border-radius:20px}
 .btns{display:flex;justify-content:space-between;margin-top:30px}
 button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
 .locked{background:#555;cursor:not-allowed}
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
-#menuMobileBtn{
-  display:none;
-  float:right;
-  font-size:26px;
-  padding:8px 16px;
-}
+#menuMobileBtn{display:none;float:right;font-size:26px;padding:8px 16px}
 
-@media (max-width: 800px){
-  header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-  }
-
-  #topTitle{
-    font-size:18px;
-  }
-
-  #menuMobileBtn{
-    display:block;
-    font-size:22px;
-    padding:10px 16px;
-    flex-shrink:0;
-  }
-
-  .page{
-    display:block;
-  }
-
-  .sidebar{
-    display:none;
-    position:fixed;
-    top:80px;
-    left:12px;
-    right:12px;
-    z-index:999;
-    border-radius:20px;
-    max-height:75vh;
-    overflow:auto;
-    box-shadow:0 20px 60px rgba(0,0,0,.6);
-  }
-
-  .sidebar.open{
-    display:block;
-  }
-
-  .main{
-    padding:12px;
-  }
-
-  .card{
-    padding:18px;
-    border-radius:22px;
-  }
-
-  .content{
-    padding:14px;
-  }
-
-  .btns button{
-    font-size:16px;
-    padding:14px 22px;
-  }
+@media (max-width:800px){
+  header{position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  #topTitle{font-size:18px}
+  #menuMobileBtn{display:block;font-size:22px;padding:10px 16px;flex-shrink:0}
+  .page{display:block}
+  .sidebar{display:none;position:fixed;top:80px;left:12px;right:12px;z-index:999;border-radius:20px;max-height:75vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .sidebar.open{display:block}
+  .main{padding:12px}
+  .card{padding:18px;border-radius:22px}
+  .content{padding:14px}
+  .btns button{font-size:16px;padding:14px 22px}
 }
 </style>
-<!-- Google tag (gtag.js) -->
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DPZBQER45B"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-DPZBQER45B');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DPZBQER45B');
 </script>
 </head>
 
 <body>
 
 <header>
-  <span id="topTitle">Pythagore - 4e / 3e</span>
+  <span id="topTitle">Capsule</span>
   <button id="menuMobileBtn" onclick="toggleMenu()">☰</button>
 </header>
 
 <div class="page">
   <aside class="sidebar">
-    <h1 id="title">Pythagore</h1>
+    <h1 id="title">Capsule</h1>
     <div class="badges" id="badges"></div>
+
     <p>
-  <a href="#"
-     onclick="openLoginModal(); return false;"
-     style="color:white;text-decoration:underline;font-weight:bold;cursor:pointer;">
-     🔐 Connecte-toi pour retrouver ta progression plus tard.
-  </a>
-</p>
+      <a href="#" onclick="openLoginModal(); return false;" style="color:white;text-decoration:underline;font-weight:bold;cursor:pointer;">
+        🔐 Connecte-toi pour retrouver ta progression plus tard.
+      </a>
+    </p>
+
     <h3 id="progress">Progression : 0 %</h3>
     <div id="stepsList"></div>
   </aside>
 
   <main class="main">
-    <a href="avis.html?capsule=Pythagore.%20Direct,%20contrapos%C3%A9e%20et%20r%C3%A9ciproque." style="color:white;font-weight:bold;text-decoration:none;">
-⭐ Avis
-</a>
-    <a href="4e.html" style="color:white;font-weight:bold;text-decoration:none">← Retour au niveau</a>
+    <a id="avisLink" style="color:white;font-weight:bold;text-decoration:none;">⭐ Avis</a>
+    <a id="backLink" style="color:white;font-weight:bold;text-decoration:none">← Retour au niveau</a>
+
     <div class="card">
       <h1 id="stepTitle"></h1>
       <div class="content" id="content"></div>
@@ -151,24 +93,54 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
     </div>
   </main>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/quiz-engine.js"></script>
+
 <script>
 const params = new URLSearchParams(location.search);
 const dataFile = params.get("data");
 
-const script = document.createElement("script");
-script.src = dataFile + "?v=" + Date.now();
-script.onload = startCapsule;
+if(!dataFile){
+  document.getElementById("content").innerHTML = "<h2>❌ Aucune capsule indiquée.</h2>";
+}else{
+  const script = document.createElement("script");
+  script.src = dataFile + "?v=" + Date.now();
+  script.onload = startCapsule;
+  document.head.appendChild(script);
+}
 
-document.head.appendChild(script);
-</script>
-<script src="js/quiz-engine.js"></script>
-
-<script>
-script.onload = () => {
 let currentStep = 0;
-
 let userIsConnected = false;
+
+function startCapsule(){
+  if(!window.capsuleData){
+    document.getElementById("content").innerHTML = "<h2>❌ Impossible de charger la capsule.</h2>";
+    return;
+  }
+
+  if(!Array.isArray(capsuleData.levels)){
+    capsuleData.levels = capsuleData.level ? [capsuleData.level] : [];
+  }
+
+  if(!Array.isArray(capsuleData.steps)){
+    capsuleData.steps = [];
+  }
+
+  document.title = capsuleData.title + " - Maths avec Cécile";
+  document.getElementById("title").textContent = capsuleData.title;
+  document.getElementById("topTitle").textContent =
+    capsuleData.title + " - " + capsuleData.levels.join(" / ");
+
+  document.getElementById("avisLink").href =
+    "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
+
+  document.getElementById("backLink").href =
+    (capsuleData.levels[0] || "index") + ".html";
+
+  updateStats();
+  checkConnection();
+}
 
 function icon(type){
   if(type==="video") return "🎥";
@@ -177,6 +149,7 @@ function icon(type){
   if(type==="quiz") return "❓";
   return "⭐";
 }
+
 function youtubeEmbed(url){
   if(!url) return "";
 
@@ -192,6 +165,7 @@ function youtubeEmbed(url){
 
   return url;
 }
+
 function formatDuration(seconds){
   const min = Math.floor(seconds / 60);
   const sec = seconds % 60;
@@ -210,18 +184,20 @@ function getTotalDuration(){
     return total;
   }, 0);
 }
+
 function updateStats(){
   const videos = capsuleData.steps.filter(s=>s.type==="video").length;
   const quiz = capsuleData.steps.filter(s=>s.type==="quiz").length;
   const pdf = capsuleData.steps.filter(s=>s.type==="pdf").length;
 
   document.getElementById("badges").innerHTML = `
-  <span>⏱️ ${formatDuration(getTotalDuration())}</span>
-  <span>🎥 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
-  <span>❓ ${quiz} ${quiz > 1 ? "quiz" : "quiz"}</span>
-  <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
-`;
+    <span>⏱️ ${formatDuration(getTotalDuration())}</span>
+    <span>🎥 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
+    <span>❓ ${quiz} quiz</span>
+    <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
+  `;
 }
+
 function renderSteps(){
   const list = document.getElementById("stepsList");
   list.innerHTML = "";
@@ -229,28 +205,36 @@ function renderSteps(){
   capsuleData.steps.forEach((step,index)=>{
     const div = document.createElement("div");
     div.className = "step" + (index===currentStep ? " active" : "");
+
     div.onclick = async () => {
-  currentStep = index;
-  await saveProgress();
-  render();
-}
+      currentStep = index;
+      await saveProgress();
+      render();
+    };
+
     div.innerHTML = `<div><span class="num">${index+1}</span> ${step.title}</div><div>${icon(step.type)}</div>`;
     list.appendChild(div);
   });
 }
 
 function renderContent(){
+  const content = document.getElementById("content");
+
+  if(!capsuleData.steps.length){
+    document.getElementById("stepTitle").textContent = "";
+    content.innerHTML = "<h2>Cette capsule ne contient pas encore d'élément.</h2>";
+    return;
+  }
+
   const step = capsuleData.steps[currentStep];
   document.getElementById("stepTitle").textContent = step.title;
-  const content = document.getElementById("content");
 
   if(step.type==="image"){
     content.innerHTML = `<img src="${step.src}" alt="${step.title}">`;
   }
 
   if(step.type==="video"){
-  if(step.src){
-    content.innerHTML = `
+    content.innerHTML = step.src ? `
       <div style="display:flex;justify-content:center;">
         <iframe 
           src="${youtubeEmbed(step.src)}"
@@ -261,56 +245,43 @@ function renderContent(){
           style="border-radius:24px;max-width:100%;">
         </iframe>
       </div>
-    `;
-  } else {
-    content.innerHTML = "🎥 Emplacement de la vidéo";
+    ` : "🎥 Emplacement de la vidéo";
   }
-}
 
   if(step.type==="pdf"){
-  if(step.loginRequired && !userIsConnected){
-    content.innerHTML = `
-      <div style="padding:40px;">
-        <h2>🔒 PDF réservé aux élèves connectés</h2>
-        <p>Connecte-toi pour voir et télécharger cette fiche.</p>
-        <button class="locked" onclick="openLoginModal()">🔐 Se connecter</button>
-        <br><br>
-<button class="pdf-btn" onclick="openSignupModal()">
-  ✨ Créer un compte
-</button>
-      </div>
-    `;
-  } else {
-    content.innerHTML = `
-      <div>
-        <iframe
-  src="${youtubeEmbed(step.src)}"
-  frameborder="0"
-  allowfullscreen
-  style="
-    width:min(100%, 430px);
-    aspect-ratio:9/16;
-    border:none;
-    border-radius:24px;
-    display:block;
-    margin:auto;
-  ">
-</iframe>
-
-        <div style="margin-top:25px;">
-          <a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>
+    if(step.loginRequired && !userIsConnected){
+      content.innerHTML = `
+        <div style="padding:40px;">
+          <h2>🔒 PDF réservé aux élèves connectés</h2>
+          <p>Connecte-toi pour voir et télécharger cette fiche.</p>
+          <button class="locked" onclick="openLoginModal()">🔐 Se connecter</button>
+          <br><br>
+          <button class="pdf-btn" onclick="openSignupModal()">✨ Créer un compte</button>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      content.innerHTML = `
+        <div>
+          <iframe src="${step.src}" style="width:100%;height:600px;border:none;border-radius:24px;"></iframe>
+          <div style="margin-top:25px;">
+            <a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  if(step.type==="quiz"){
+    renderQuizStep(step, content);
   }
 }
 
-  if(step.type==="quiz"){
+function renderQuizStep(step, content){
   if(step.quizType==="qcm"){
     content.innerHTML = `
       <div class="quiz">
         <h2>${step.question}</h2>
-        ${step.answers.map(a=>`<button onclick="checkAnswer('${a.replaceAll("'","\\'")}')">${a}</button>`).join("")}
+        ${(step.answers || []).map(a=>`<button onclick="checkAnswer('${a.replaceAll("'","\\'")}')">${a}</button>`).join("")}
         <p id="feedback"></p>
       </div>
     `;
@@ -342,14 +313,13 @@ function renderContent(){
     content.innerHTML = `
       <div class="quiz">
         <h2>${step.question}</h2>
-        ${step.pairs.map(pair=>`<p><strong>${pair[0]}</strong> → ${pair[1]}</p>`).join("")}
+        ${(step.pairs || []).map(pair=>`<p><strong>${pair[0]}</strong> → ${pair[1]}</p>`).join("")}
         <p>🔗 Version interactive à améliorer ensuite.</p>
       </div>
     `;
   }
 }
-}
-  
+
 function checkAnswer(answer){
   const step = capsuleData.steps[currentStep];
   document.getElementById("feedback").textContent =
@@ -373,41 +343,33 @@ function render(){
     MathJax.typesetPromise();
   }
 
-  document.getElementById("progress").textContent =
-    "Progression : " + Math.round(((currentStep+1)/capsuleData.steps.length)*100) + " %";
+  const percent = capsuleData.steps.length
+    ? Math.round(((currentStep+1)/capsuleData.steps.length)*100)
+    : 0;
+
+  document.getElementById("progress").textContent = "Progression : " + percent + " %";
 }
 
 async function nextStep(){
-
   if(currentStep < capsuleData.steps.length-1){
-
     currentStep++;
-
     await saveProgress();
-
     render();
-
   }
-
 }
 
 async function previousStep(){
-
   if(currentStep > 0){
-
     currentStep--;
-
     await saveProgress();
-
     render();
-
   }
-
 }
 
 function toggleMenu(){
   document.querySelector(".sidebar").classList.toggle("open");
 }
+
 const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -423,9 +385,7 @@ function openLoginModal(){
         <input id="loginPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
 
         <button onclick="loginStudent()" style="width:100%;margin-top:15px;">Se connecter</button>
-       <button onclick="resetPassword()" style="width:100%;margin-top:12px;">
-  🔑 Mot de passe oublié
-</button>
+        <button onclick="resetPassword()" style="width:100%;margin-top:12px;">🔑 Mot de passe oublié</button>
         <button onclick="openSignupModal()" style="width:100%;margin-top:12px;">✨ Créer un compte</button>
         <button class="locked" onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
       </div>
@@ -458,52 +418,46 @@ function closeLoginModal(){
 }
 
 async function signupStudent(){
+  const email = document.getElementById("signupEmail").value.trim();
+  const pass = document.getElementById("signupPass").value.trim();
 
-    const email = document.getElementById("signupEmail").value.trim();
-    const pass = document.getElementById("signupPass").value.trim();
+  if(!email || !pass){
+    alert("Il faut entrer une adresse e-mail et un mot de passe.");
+    return;
+  }
 
-    if(!email || !pass){
-        alert("Il faut entrer une adresse e-mail et un mot de passe.");
-        return;
-    }
+  const { error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: pass
+  });
 
-    const { error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: pass
-    });
+  if(error){
+    alert(error.message);
+    return;
+  }
 
-    if(error){
-        alert(error.message);
-        return;
-    }
-
-    alert("🎉 Compte créé ! Vérifie maintenant tes e-mails puis confirme ton adresse.");
-
-    closeLoginModal();
+  alert("🎉 Compte créé ! Vérifie maintenant tes e-mails puis confirme ton adresse.");
+  closeLoginModal();
 }
 
 async function loginStudent(){
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const pass = document.getElementById("loginPass").value.trim();
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: pass
+  });
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: pass
-    });
+  if(error){
+    alert(error.message);
+    return;
+  }
 
-    if(error){
-        alert(error.message);
-        return;
-    }
-
-    localStorage.setItem("studentConnected","true");
-
-    alert("✅ Connexion réussie !");
-
-    closeLoginModal();
-
-    location.reload();
+  localStorage.setItem("studentConnected","true");
+  alert("✅ Connexion réussie !");
+  closeLoginModal();
+  location.reload();
 }
 
 async function resetPassword(){
@@ -525,8 +479,7 @@ async function resetPassword(){
 
   alert("📩 Un e-mail de réinitialisation vient d'être envoyé.");
 }
-document.getElementById("title").textContent = capsuleData.title;
-document.getElementById("topTitle").textContent = capsuleData.title + " - " + capsuleData.levels;
+
 async function checkConnection(){
   const { data } = await supabaseClient.auth.getSession();
 
@@ -538,24 +491,19 @@ async function checkConnection(){
   updateLoginDisplay();
   render();
 }
+
 function updateLoginDisplay(){
   const link = document.querySelector(".sidebar p");
 
   if(userIsConnected){
     link.innerHTML = `
       ✅ Élève connecté<br>
-      <a href="#" onclick="logoutStudent(); return false;"
-         style="color:white;text-decoration:underline;font-weight:bold;">
+      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline;font-weight:bold;">
         🚪 Se déconnecter
       </a>
     `;
   }
 }
-
-(async () => {
-    updateStats();
-    await checkConnection();
-})();
 
 async function logoutStudent(){
   await supabaseClient.auth.signOut();
@@ -563,12 +511,11 @@ async function logoutStudent(){
   alert("Tu es déconnecté.");
   location.reload();
 }
-async function saveProgress(){
 
+async function saveProgress(){
   if(!userIsConnected) return;
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
-
   if(!sessionData.session) return;
 
   const percent = Math.round(((currentStep + 1) / capsuleData.steps.length) * 100);
@@ -581,18 +528,14 @@ async function saveProgress(){
     .maybeSingle();
 
   if(data){
-
     await supabaseClient
       .from("progressions")
       .update({
         current_step: currentStep,
         percent: percent
       })
-
       .eq("id", data.id);
-
   }else{
-
     await supabaseClient
       .from("progressions")
       .insert({
@@ -601,17 +544,13 @@ async function saveProgress(){
         current_step: currentStep,
         percent: percent
       });
-
   }
-
 }
-async function loadProgress(){
-  console.log("LOAD PROGRESS");
 
+async function loadProgress(){
   if(!userIsConnected) return;
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
-
   if(!sessionData.session) return;
 
   const { data, error } = await supabaseClient
@@ -629,10 +568,7 @@ async function loadProgress(){
 
   if(data && data.length > 0){
     currentStep = data[0].current_step;
-    currentStep = data[0].current_step;
-console.log(currentStep);
   }
-}
 }
 </script>
 
