@@ -1,5 +1,5 @@
 [
-    {
+  {
     "title": "Modéliser un problème. ",
     "levels": [
       "4e",
@@ -70,6 +70,16 @@
     "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
     "page": "comprendre-la-notion-d-angle.html",
     "dataFile": "comprendre-la-notion-d-angle-data.js"
+  },
+  {
+    "title": "Pythagore. Direct, contraposée et réciproque. ",
+    "levels": [
+      "4e",
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/pythagore-direct-contraposee-et-reciproque.png",
+    "page": "pythagore-direct-contraposee-et-reciproque.html",
+    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
   }
-  
 ]

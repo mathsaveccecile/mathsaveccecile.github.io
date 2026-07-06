@@ -262,7 +262,7 @@ document.getElementById("previewCapsuleBtn").addEventListener("click", () => {
 document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
   capsule.levels = getSelectedLevels();
-  capsule.duration = document.getElementById("capsuleDuration").value;
+ capsule.duration = "";
 
   if (!capsule.title) {
     alert("Il faut donner un nom à la capsule.");
