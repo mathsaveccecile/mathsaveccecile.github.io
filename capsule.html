@@ -17,7 +17,9 @@ window.MathJax = {
 
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
-header{background:#211933;padding:22px;font-size:28px;font-weight:900}
+header{
+  display:none;
+}
 .page{display:grid;grid-template-columns:330px 1fr;min-height:100vh}
 .sidebar{background:#171124;padding:25px;border-right:1px solid #33284a}
 .badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:bold}
@@ -59,9 +61,8 @@ gtag('config', 'G-DPZBQER45B');
 
 <body>
 
-<header>
-  <span id="topTitle">Capsule</span>
-  <button id="menuMobileBtn" onclick="toggleMenu()">☰</button>
+<header class="mobile-header">
+  <button id="menuMobileBtn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
 <div class="page">
@@ -114,7 +115,7 @@ let currentStep = 0;
 let userIsConnected = false;
 
 function startCapsule(){
-  if(!window.capsuleData){
+  if(typeof capsuleData === "undefined"){
     document.getElementById("content").innerHTML = "<h2>❌ Impossible de charger la capsule.</h2>";
     return;
   }
