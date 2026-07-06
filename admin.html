@@ -35,7 +35,7 @@ textarea{height:260px}
   <button>👁️ Prévisualiser la capsule</button>
 </a>
 <div id="elements"></div>
-    <h3>Code généré à copier dans pythagore-data.js</h3>
+    <h3>Code généré à copier dans le fichier data.js de la capsule</h3>
     <div style="display:flex;gap:10px;margin-bottom:10px;">
     <button onclick="copyCode()">📋 Copier le code</button>
     <button onclick="downloadCode()">💾 Télécharger le fichier</button>
@@ -380,7 +380,12 @@ function downloadCode(){
 
     lien.href = URL.createObjectURL(blob);
 
-    lien.download = "pythagore-data.js";
+    lien.download = capsuleName
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "") + "-data.js";
 
     lien.click();
 

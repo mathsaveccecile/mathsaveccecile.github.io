@@ -154,7 +154,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const params = new URLSearchParams(location.search);
-const dataFile = params.get("data") || "pythagore-data.js";
+const dataFile = params.get("data");
 
 const script = document.createElement("script");
 script.src = dataFile + "?v=" + Date.now();

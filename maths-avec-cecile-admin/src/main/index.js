@@ -213,8 +213,17 @@ app.whenReady().then(() => {
     return json
   })
   ipcMain.handle('import-site', async () => {
-  const file =
-    'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/pythagore-data.js'
+  const result = await dialog.showOpenDialog({
+    title: 'Importer une capsule du site',
+    properties: ['openFile'],
+    filters: [
+      { name: 'Fichiers data', extensions: ['js'] }
+    ]
+  })
+
+  if (result.canceled) return null
+
+  const file = result.filePaths[0]
 
   return readFileSync(file, 'utf8')
 })
