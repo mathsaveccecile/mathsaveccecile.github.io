@@ -34,7 +34,9 @@
   },
   {
     "title": "Trigonométrie: maitrise tout le chapitre. ",
-    "levels": [],
+    "levels": [
+      "3e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/trigonometrie-maitrise-tout-le-chapitre.png",
     "page": "trigonometrie-maitrise-tout-le-chapitre.html",
