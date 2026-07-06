@@ -13,7 +13,7 @@ const capsuleData = {
       "type": "video",
       "title": "Vidéo YouTube",
       "src": "https://youtube.com/shorts/32KUvlKp31Q",
-      "duration": 0
+      "duration": 34
     },
     {
       "type": "image",
@@ -29,13 +29,13 @@ const capsuleData = {
       "type": "video",
       "title": "Vidéo YouTube",
       "src": "https://youtube.com/shorts/dJeWbhFQPGQ",
-      "duration": 0
+      "duration": 18
     },
     {
       "type": "video",
       "title": "Vidéo YouTube",
       "src": "https://youtube.com/shorts/15_nov0Fq7M",
-      "duration": 0
+      "duration": 32
     },
     {
       "type": "quiz",
@@ -52,8 +52,8 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Vidéo YouTube",
-      "src": "https://youtube.com/shorts/G7FPN5piIZE",
-      "duration": 0
+      "src": "https://youtube.com/shorts/zuZnkWaJu8Y",
+      "duration": 18
     },
     {
       "type": "pdf",

@@ -7,26 +7,25 @@
 
 <script>
 window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  }
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
 };
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
-header{
-  display:none;
-}
+header{display:none}
 .page{display:grid;grid-template-columns:330px 1fr;min-height:100vh}
 .sidebar{background:#171124;padding:25px;border-right:1px solid #33284a}
-.badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:bold}
-.step{background:#2b243b;margin:12px 0;padding:18px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between}
+.sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
+.badges{margin:15px 0}
+.badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:900;font-size:15px;color:white}
+.step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
 .step.active{background:#1e5c49}
 .num{color:#ffe45c;font-weight:900;margin-right:12px}
 .main{padding:45px}
+.top-links{display:flex;gap:14px;margin-bottom:18px}
+.top-links a{color:white;font-weight:900;text-decoration:none}
 .card{max-width:900px;margin:auto;background:#261e38;border-radius:28px;padding:35px}
 .content{background:#352d49;border-radius:20px;padding:30px;text-align:center;min-height:320px}
 .content img{width:min(900px,100%);height:auto;border-radius:20px}
@@ -34,14 +33,13 @@ header{
 button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
 .locked{background:#555;cursor:not-allowed}
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
-#menuMobileBtn{display:none;float:right;font-size:26px;padding:8px 16px}
+#menuMobileBtn{display:none}
 
 @media (max-width:800px){
-  header{position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;gap:10px}
-  #topTitle{font-size:18px}
-  #menuMobileBtn{display:block;font-size:22px;padding:10px 16px;flex-shrink:0}
+  header{position:sticky;top:0;z-index:1000;display:flex;justify-content:flex-end;background:#211933;padding:12px}
+  #menuMobileBtn{display:block;font-size:18px;padding:12px 18px}
   .page{display:block}
-  .sidebar{display:none;position:fixed;top:80px;left:12px;right:12px;z-index:999;border-radius:20px;max-height:75vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .sidebar{display:none;position:fixed;top:70px;left:12px;right:12px;z-index:999;border-radius:20px;max-height:75vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
   .sidebar.open{display:block}
   .main{padding:12px}
   .card{padding:18px;border-radius:22px}
@@ -49,25 +47,18 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   .btns button{font-size:16px;padding:14px 22px}
 }
 </style>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DPZBQER45B"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-DPZBQER45B');
-</script>
 </head>
 
 <body>
 
-<header class="mobile-header">
+<header>
   <button id="menuMobileBtn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
 <div class="page">
   <aside class="sidebar">
-    <h1 id="title">Capsule</h1>
+    <h1 id="title">Chargement...</h1>
+
     <div class="badges" id="badges"></div>
 
     <p>
@@ -81,12 +72,14 @@ gtag('config', 'G-DPZBQER45B');
   </aside>
 
   <main class="main">
-    <a id="avisLink" style="color:white;font-weight:bold;text-decoration:none;">⭐ Avis</a>
-    <a id="backLink" style="color:white;font-weight:bold;text-decoration:none">← Retour au niveau</a>
+    <div class="top-links">
+      <a id="avisLink" href="avis.html">⭐ Avis</a>
+      <a id="backLink" href="index.html">← Retour au niveau</a>
+    </div>
 
     <div class="card">
       <h1 id="stepTitle"></h1>
-      <div class="content" id="content"></div>
+      <div class="content" id="content">Chargement de la capsule...</div>
       <div class="btns">
         <button onclick="previousStep()">← Précédent</button>
         <button onclick="nextStep()">Suivant →</button>
@@ -102,17 +95,20 @@ gtag('config', 'G-DPZBQER45B');
 const params = new URLSearchParams(location.search);
 const dataFile = params.get("data");
 
+let currentStep = 0;
+let userIsConnected = false;
+
 if(!dataFile){
   document.getElementById("content").innerHTML = "<h2>❌ Aucune capsule indiquée.</h2>";
 }else{
   const script = document.createElement("script");
   script.src = dataFile + "?v=" + Date.now();
   script.onload = startCapsule;
+  script.onerror = () => {
+    document.getElementById("content").innerHTML = "<h2>❌ Impossible de charger le fichier de la capsule.</h2>";
+  };
   document.head.appendChild(script);
 }
-
-let currentStep = 0;
-let userIsConnected = false;
 
 function startCapsule(){
   if(typeof capsuleData === "undefined"){
@@ -130,14 +126,12 @@ function startCapsule(){
 
   document.title = capsuleData.title + " - Maths avec Cécile";
   document.getElementById("title").textContent = capsuleData.title;
-  document.getElementById("topTitle").textContent =
-    capsuleData.title + " - " + capsuleData.levels.join(" / ");
 
   document.getElementById("avisLink").href =
     "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
 
   document.getElementById("backLink").href =
-    (capsuleData.levels[0] || "index") + ".html";
+    capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
 
   updateStats();
   checkConnection();
@@ -171,6 +165,7 @@ function formatDuration(seconds){
   const min = Math.floor(seconds / 60);
   const sec = seconds % 60;
 
+  if(seconds === 0) return "0 min";
   if(min === 0) return sec + " s";
   if(sec === 0) return min + " min";
   return min + " min " + sec + " s";
@@ -187,13 +182,15 @@ function getTotalDuration(){
 }
 
 function updateStats(){
-  const videos = capsuleData.steps.filter(s=>s.type==="video").length;
-  const quiz = capsuleData.steps.filter(s=>s.type==="quiz").length;
-  const pdf = capsuleData.steps.filter(s=>s.type==="pdf").length;
+  const videos = capsuleData.steps.filter(s => s.type === "video").length;
+  const images = capsuleData.steps.filter(s => s.type === "image").length;
+  const quiz = capsuleData.steps.filter(s => s.type === "quiz").length;
+  const pdf = capsuleData.steps.filter(s => s.type === "pdf").length;
 
   document.getElementById("badges").innerHTML = `
     <span>⏱️ ${formatDuration(getTotalDuration())}</span>
     <span>🎥 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
+    <span>🖼️ ${images} ${images > 1 ? "images" : "image"}</span>
     <span>❓ ${quiz} quiz</span>
     <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
   `;
@@ -205,7 +202,7 @@ function renderSteps(){
 
   capsuleData.steps.forEach((step,index)=>{
     const div = document.createElement("div");
-    div.className = "step" + (index===currentStep ? " active" : "");
+    div.className = "step" + (index === currentStep ? " active" : "");
 
     div.onclick = async () => {
       currentStep = index;
@@ -213,7 +210,11 @@ function renderSteps(){
       render();
     };
 
-    div.innerHTML = `<div><span class="num">${index+1}</span> ${step.title}</div><div>${icon(step.type)}</div>`;
+    div.innerHTML = `
+      <div><span class="num">${index + 1}</span> ${step.title || "Étape"}</div>
+      <div>${icon(step.type)}</div>
+    `;
+
     list.appendChild(div);
   });
 }
@@ -228,13 +229,13 @@ function renderContent(){
   }
 
   const step = capsuleData.steps[currentStep];
-  document.getElementById("stepTitle").textContent = step.title;
+  document.getElementById("stepTitle").textContent = step.title || "Étape";
 
-  if(step.type==="image"){
-    content.innerHTML = `<img src="${step.src}" alt="${step.title}">`;
+  if(step.type === "image"){
+    content.innerHTML = `<img src="${step.src}" alt="${step.title || "Image"}">`;
   }
 
-  if(step.type==="video"){
+  if(step.type === "video"){
     content.innerHTML = step.src ? `
       <div style="display:flex;justify-content:center;">
         <iframe 
@@ -249,7 +250,7 @@ function renderContent(){
     ` : "🎥 Emplacement de la vidéo";
   }
 
-  if(step.type==="pdf"){
+  if(step.type === "pdf"){
     if(step.loginRequired && !userIsConnected){
       content.innerHTML = `
         <div style="padding:40px;">
@@ -272,26 +273,26 @@ function renderContent(){
     }
   }
 
-  if(step.type==="quiz"){
+  if(step.type === "quiz"){
     renderQuizStep(step, content);
   }
 }
 
 function renderQuizStep(step, content){
-  if(step.quizType==="qcm"){
+  if(step.quizType === "qcm"){
     content.innerHTML = `
       <div class="quiz">
-        <h2>${step.question}</h2>
-        ${(step.answers || []).map(a=>`<button onclick="checkAnswer('${a.replaceAll("'","\\'")}')">${a}</button>`).join("")}
+        <h2>${step.question || ""}</h2>
+        ${(step.answers || []).map(a => `<button onclick="checkAnswer('${String(a).replaceAll("'","\\'")}')">${a}</button>`).join("")}
         <p id="feedback"></p>
       </div>
     `;
   }
 
-  if(step.quizType==="vraiFaux"){
+  if(step.quizType === "vraiFaux"){
     content.innerHTML = `
       <div class="quiz">
-        <h2>${step.question}</h2>
+        <h2>${step.question || ""}</h2>
         <button onclick="checkAnswer('Vrai')">Vrai</button>
         <button onclick="checkAnswer('Faux')">Faux</button>
         <p id="feedback"></p>
@@ -299,10 +300,10 @@ function renderQuizStep(step, content){
     `;
   }
 
-  if(step.quizType==="reponseLibre"){
+  if(step.quizType === "reponseLibre"){
     content.innerHTML = `
       <div class="quiz">
-        <h2>${step.question}</h2>
+        <h2>${step.question || ""}</h2>
         <input id="freeAnswer" placeholder="Ta réponse">
         <button onclick="checkFreeAnswer()">Valider</button>
         <p id="feedback"></p>
@@ -310,11 +311,11 @@ function renderQuizStep(step, content){
     `;
   }
 
-  if(step.quizType==="paires"){
+  if(step.quizType === "paires"){
     content.innerHTML = `
       <div class="quiz">
-        <h2>${step.question}</h2>
-        ${(step.pairs || []).map(pair=>`<p><strong>${pair[0]}</strong> → ${pair[1]}</p>`).join("")}
+        <h2>${step.question || ""}</h2>
+        ${(step.pairs || []).map(pair => `<p><strong>${pair[0]}</strong> → ${pair[1]}</p>`).join("")}
         <p>🔗 Version interactive à améliorer ensuite.</p>
       </div>
     `;
@@ -330,7 +331,7 @@ function checkAnswer(answer){
 function checkFreeAnswer(){
   const step = capsuleData.steps[currentStep];
   const answer = document.getElementById("freeAnswer").value.trim().toLowerCase();
-  const correct = step.correctAnswer.trim().toLowerCase();
+  const correct = String(step.correctAnswer || "").trim().toLowerCase();
 
   document.getElementById("feedback").textContent =
     answer === correct ? "✅ Bonne réponse !" : "❌ Essaie encore.";
@@ -345,14 +346,15 @@ function render(){
   }
 
   const percent = capsuleData.steps.length
-    ? Math.round(((currentStep+1)/capsuleData.steps.length)*100)
+    ? Math.round(((currentStep + 1) / capsuleData.steps.length) * 100)
     : 0;
 
-  document.getElementById("progress").textContent = "Progression : " + percent + " %";
+  document.getElementById("progress").textContent =
+    "Progression : " + percent + " %";
 }
 
 async function nextStep(){
-  if(currentStep < capsuleData.steps.length-1){
+  if(currentStep < capsuleData.steps.length - 1){
     currentStep++;
     await saveProgress();
     render();
@@ -514,7 +516,7 @@ async function logoutStudent(){
 }
 
 async function saveProgress(){
-  if(!userIsConnected) return;
+  if(!userIsConnected || !capsuleData.steps.length) return;
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
   if(!sessionData.session) return;
@@ -531,10 +533,7 @@ async function saveProgress(){
   if(data){
     await supabaseClient
       .from("progressions")
-      .update({
-        current_step: currentStep,
-        percent: percent
-      })
+      .update({ current_step: currentStep, percent: percent })
       .eq("id", data.id);
   }else{
     await supabaseClient
@@ -568,7 +567,7 @@ async function loadProgress(){
   }
 
   if(data && data.length > 0){
-    currentStep = data[0].current_step;
+    currentStep = Number(data[0].current_step || 0);
   }
 }
 </script>
