@@ -125,56 +125,62 @@ app.whenReady().then(() => {
 
  ipcMain.handle('export-site', async (_, data) => {
   const siteFolder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io'
-
   const capsulesFile = `${siteFolder}/capsules.json`
+  const thumbnailsFolder = `${siteFolder}/assets/thumbnails`
 
-let capsules = []
+  if (!existsSync(thumbnailsFolder)) {
+    mkdirSync(thumbnailsFolder, { recursive: true })
+  }
 
-if (existsSync(capsulesFile)) {
-  capsules = JSON.parse(readFileSync(capsulesFile, "utf8"))
-}
-const pageName = data.title
-  .toLowerCase()
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "")
-  .replace(/[^a-z0-9]+/g, "-")
-  .replace(/^-+|-+$/g, "") + ".html"
+  let capsules = []
 
-const dataFileName = pageName.replace(".html", "-data.js")
+  if (existsSync(capsulesFile)) {
+    capsules = JSON.parse(readFileSync(capsulesFile, 'utf8'))
+  }
 
-const capsuleInfo = {
-  title: data.title,
-  levels: data.levels || [],
-  duration: data.duration || "",
-  thumbnail: data.thumbnailName || "",
-  page: pageName,
-  dataFile: dataFileName
-}
+  const pageName = data.title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') + '.html'
 
-const existingIndex = capsules.findIndex(c => c.title === capsuleInfo.title)
+  const dataFileName = pageName.replace('.html', '-data.js')
 
-if (existingIndex >= 0) {
-  capsules[existingIndex] = capsuleInfo
-} else {
-  capsules.push(capsuleInfo)
-}
+  let thumbnailPath = data.thumbnail || ''
 
-writeFileSync(
-  capsulesFile,
-  JSON.stringify(capsules, null, 2)
-)
-  const output =
-`const capsuleData = ${JSON.stringify(data, null, 2)};
-`
+  if (data.thumbnailPath) {
+    const thumbnailFileName = pageName.replace('.html', '') + '.png'
+    copyFileSync(data.thumbnailPath, `${thumbnailsFolder}/${thumbnailFileName}`)
+    thumbnailPath = `assets/thumbnails/${thumbnailFileName}`
+  }
 
-writeFileSync(
-  `${siteFolder}/${dataFileName}`,
-  output
-)
+  const capsuleInfo = {
+    title: data.title,
+    levels: data.levels || [],
+    duration: data.duration || '',
+    thumbnail: thumbnailPath,
+    page: pageName,
+    dataFile: dataFileName
+  }
 
-  console.log("Capsule exportée :", data.title)
-  console.log("Niveaux :", data.levels)
-  console.log("Vignette :", data.thumbnailName)
+  const existingIndex = capsules.findIndex(c => c.title === capsuleInfo.title)
+
+  if (existingIndex >= 0) {
+    capsules[existingIndex] = capsuleInfo
+  } else {
+    capsules.push(capsuleInfo)
+  }
+
+  writeFileSync(capsulesFile, JSON.stringify(capsules, null, 2))
+
+  const output = `const capsuleData = ${JSON.stringify(data, null, 2)};`
+
+  writeFileSync(`${siteFolder}/${dataFileName}`, output)
+
+  console.log('Capsule exportée :', data.title)
+  console.log('Niveaux :', data.levels)
+  console.log('Vignette :', thumbnailPath)
 
   return true
 })

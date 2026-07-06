@@ -290,7 +290,8 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   levels: capsule.levels || [],
   duration: capsule.duration,
   thumbnail: capsule.thumbnail || "",
-  thumbnailName: capsule.thumbnailName || "",
+thumbnailName: capsule.thumbnailName || "",
+thumbnailPath: capsule.thumbnailPath || "",
   steps: capsule.steps.map((step) => {
       if (step.type === "image") {
   return {
@@ -333,9 +334,17 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
     })
   };
 
+  try {
+  console.log("EXPORT ENVOYÉ :", siteData);
+
+  console.log(JSON.stringify(siteData, null, 2));
   await window.api.exportSite(siteData);
 
-alert("✅ Capsule exportée directement sur le site !");
+  alert("✅ Capsule exportée directement sur le site !");
+} catch (error) {
+  console.error(error);
+  alert("❌ Erreur export : " + error.message);
+}
 });
 
 function download(filename, text) {
@@ -380,6 +389,7 @@ document.getElementById("chooseThumbnailBtn").addEventListener("click", async ()
 
   capsule.thumbnail = image.src;
   capsule.thumbnailName = image.name;
+  capsule.thumbnailPath = image.path;
 
   renderCapsule();
 });
