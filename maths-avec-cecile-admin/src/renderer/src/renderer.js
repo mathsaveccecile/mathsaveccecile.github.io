@@ -342,11 +342,12 @@ document.getElementById("addImageBtn").addEventListener("click", async () => {
   if (!image) return;
 
   capsule.steps.push({
-    type: "image",
-    title: image.name,
-    name: image.name,
-    src: image.src
-  });
+  type: "image",
+  title: image.name,
+  name: image.name,
+  path: image.path,
+  src: image.src
+});
 
   renderCapsule();
 });

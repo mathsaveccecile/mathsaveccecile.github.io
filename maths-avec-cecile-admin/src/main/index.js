@@ -176,6 +176,16 @@ app.whenReady().then(() => {
   delete step.imageName
 }
 
+if (step.type === 'image' && step.path && existsSync(step.path)) {
+  const ext = step.path.split('.').pop().toLowerCase()
+  const imageFileName = `${slug}-image-${index + 1}.${ext}`
+
+  copyFileSync(step.path, `${quizImagesFolder}/${imageFileName}`)
+
+  step.src = `assets/quiz/${imageFileName}`
+  delete step.path
+}
+
     return step
   })
 
