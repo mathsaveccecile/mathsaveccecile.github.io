@@ -93,7 +93,35 @@ function renderQuiz(step, index) {
   return `
     <div class="step">
       ${buttons(index)}
-      <h4>❓ Quiz</h4>
+      <h4>❓ Quiz QCM</h4>
+
+      <input value="${step.question || ""}" placeholder="Question"
+        oninput="updateQuizField(${index}, 'question', this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+
+      <input value="${step.answers?.[0] || ""}" placeholder="Réponse 1"
+        oninput="updateQuizAnswer(${index}, 0, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+
+      <input value="${step.answers?.[1] || ""}" placeholder="Réponse 2"
+        oninput="updateQuizAnswer(${index}, 1, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+
+      <input value="${step.answers?.[2] || ""}" placeholder="Réponse 3"
+        oninput="updateQuizAnswer(${index}, 2, this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+
+      <label>Bonne réponse :</label>
+      <select onchange="updateQuizField(${index}, 'correct', Number(this.value))"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        <option value="0" ${step.correct === 0 ? "selected" : ""}>Réponse 1</option>
+        <option value="1" ${step.correct === 1 ? "selected" : ""}>Réponse 2</option>
+        <option value="2" ${step.correct === 2 ? "selected" : ""}>Réponse 3</option>
+      </select>
+
+      <textarea placeholder="Explication"
+        oninput="updateQuizField(${index}, 'explanation', this.value)"
+        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;min-height:90px;">${step.explanation || ""}</textarea>
     </div>
   `;
 }
@@ -126,7 +154,17 @@ function updateStepTitle(index, value) {
 function updateStepDuration(index, value) {
   capsule.steps[index].duration = Number(value);
 }
+function updateQuizField(index, field, value) {
+  capsule.steps[index][field] = value;
+}
 
+function updateQuizAnswer(index, answerIndex, value) {
+  if (!Array.isArray(capsule.steps[index].answers)) {
+    capsule.steps[index].answers = ["", "", ""];
+  }
+
+  capsule.steps[index].answers[answerIndex] = value;
+}
 function getSelectedLevels() {
   return Array.from(document.querySelectorAll(".levelCheck:checked"))
     .map(check => check.value);
@@ -359,5 +397,13 @@ document.getElementById("importSiteBtn").addEventListener("click", async () => {
     alert("❌ Impossible d'importer la capsule.");
   }
 });
+document.getElementById("capsuleTitle").addEventListener("input", (e) => {
+  capsule.title = e.target.value;
+});
 
+document.querySelectorAll(".levelCheck").forEach((check) => {
+  check.addEventListener("change", () => {
+    capsule.levels = getSelectedLevels();
+  });
+});
 renderCapsule();
