@@ -9,6 +9,11 @@ const capsuleData = {
   "thumbnailPath": "",
   "steps": [
     {
+      "type": "video",
+      "title": "test",
+      "src": "https://youtube.com/shorts/xkt9xsxBie8"
+    },
+    {
       "type": "quiz",
       "quizType": "qcm",
       "title": "Quiz",
@@ -22,7 +27,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "\\\\( AB^2+AC^2=BC^2 \\\\) bravo etc bla bla test",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-1.png"
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-2.png"
     },
     {
       "type": "quiz",
@@ -34,7 +39,7 @@ const capsuleData = {
       "correction": "L'hypoténuse",
       "pairs": [],
       "explanation": "",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-2.png"
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-3.png"
     },
     {
       "type": "quiz",
@@ -59,7 +64,7 @@ const capsuleData = {
         ]
       ],
       "explanation": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-3.png"
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-4.png"
     },
     {
       "type": "quiz",
@@ -71,17 +76,12 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-4.png"
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-5.png"
     },
     {
       "type": "image",
       "title": "Mode d'emploi.",
-      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-5.jpg"
-    },
-    {
-      "type": "video",
-      "title": "test",
-      "src": "https://youtube.com/shorts/xkt9xsxBie8"
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-6.jpg"
     },
     {
       "type": "image",
