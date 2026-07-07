@@ -389,9 +389,27 @@ function showFeedback(ok, explanation = ""){
   }
 }
 
-function checkAnswer(answerIndex){
+function checkOpenAnswer(){
   const step = capsuleData.steps[currentStep];
-  showFeedback(Number(answerIndex) === Number(step.correct), step.explanation);
+  const answer = document.getElementById("openAnswer").value;
+
+  const userAnswer = normalizeAnswer(answer);
+  const expectedAnswer = normalizeAnswer(step.correction || "");
+
+  const userWithoutAccents = normalizeWithoutAccents(answer);
+  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
+
+  if (userAnswer === expectedAnswer) {
+    showFeedback(true, step.explanation || step.correction);
+    return;
+  }
+
+  if (userWithoutAccents === expectedWithoutAccents) {
+    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
+    return;
+  }
+
+  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
 }
 
 function checkTrueFalse(value){
