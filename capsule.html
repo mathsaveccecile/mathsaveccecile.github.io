@@ -197,13 +197,27 @@ function formatDuration(seconds){
 }
 
 function getTotalDuration(){
-  return capsuleData.steps.reduce((total, step) => {
-    if(step.type === "pdf") return total;
-    if(step.type === "image") return total + 60;
-    if(step.type === "quiz") return total + 60;
-    if(step.type === "video") return total + Number(step.duration || 0);
-    return total;
-  }, 0);
+  let total = 0;
+
+  capsuleData.steps.forEach(step => {
+    if (step.type === "image") {
+      total += 60;
+    }
+
+    if (step.type === "quiz") {
+      total += 60;
+    }
+
+    if (step.type === "video") {
+      total += Number(step.duration || 0);
+    }
+
+    if (step.type === "pdf") {
+      total += 0;
+    }
+  });
+
+  return total;
 }
 
 function updateStats(){
