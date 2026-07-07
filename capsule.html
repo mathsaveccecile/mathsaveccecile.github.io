@@ -422,11 +422,6 @@ function checkOpenAnswer(){
   showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
 }
 
-function showOpenCorrection(){
-  const step = capsuleData.steps[currentStep];
-
-  showFeedback(false, step.correction || step.explanation || "Correction à compléter.");
-}
 
 function checkMatching(){
   const step = capsuleData.steps[currentStep];
@@ -471,12 +466,41 @@ function checkOpenAnswer(){
   const userAnswer = normalizeAnswer(answer);
   const expectedAnswer = normalizeAnswer(step.correction || "");
 
-  const ok = userAnswer === expectedAnswer;
+  const userWithoutAccents = normalizeWithoutAccents(answer);
+  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
 
-  showFeedback(ok, step.explanation || step.correction);
+  if (userAnswer === expectedAnswer) {
+    showFeedback(true, step.explanation || step.correction);
+    return;
+  }
+
+  if (userWithoutAccents === expectedWithoutAccents) {
+    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
+    return;
+  }
+
+  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
 }
 
+function showOpenCorrection(){
+  const step = capsuleData.steps[currentStep];
+  const feedback = document.getElementById("feedback");
 
+  feedback.innerHTML = `
+    <div style="color:#ffe45c;">💡 Correction :</div>
+    <div style="margin-top:15px;color:white;">
+      ${step.correction || step.explanation || "Correction à compléter."}
+    </div>
+  `;
+
+  feedback.style.marginTop = "25px";
+  feedback.style.fontSize = "22px";
+  feedback.style.fontWeight = "900";
+
+  if(window.MathJax){
+    MathJax.typesetPromise();
+  }
+}
 function render(){
   renderSteps();
   renderContent();
