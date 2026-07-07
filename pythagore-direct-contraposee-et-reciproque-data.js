@@ -4,7 +4,6 @@ const capsuleData = {
     "4e",
     "3e"
   ],
-  "duration": "",
   "thumbnail": "assets/thumbnails/pythagore-direct-contraposee-et-reciproque.png",
   "thumbnailName": "pythagore.png",
   "thumbnailPath": "",
@@ -78,6 +77,11 @@ const capsuleData = {
       "type": "image",
       "title": "Mode d'emploi.",
       "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-5.jpg"
+    },
+    {
+      "type": "video",
+      "title": "test",
+      "src": "https://youtube.com/shorts/xkt9xsxBie8"
     }
   ]
 };

@@ -353,7 +353,6 @@ document.getElementById("addVideoBtn").addEventListener("click", () => {
     type: "video",
     title: "Vidéo YouTube",
     src: "",
-    duration: 0
   });
 
   renderCapsule();
@@ -450,7 +449,6 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   const siteData = {
     title: capsule.title,
     levels: capsule.levels || [],
-    duration: "",
     thumbnail: capsule.thumbnail || "",
     thumbnailName: capsule.thumbnailName || "",
     thumbnailPath: capsule.thumbnailPath || "",
@@ -468,7 +466,6 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
           type: "video",
           title: step.title || "Vidéo",
           src: step.src || "",
-          duration: Number(step.duration || 0)
         };
       }
 
