@@ -22,7 +22,7 @@ const capsuleData = {
       "answers": [
         "\\(\\widehat{ABC}\\)",
         "\\(AB^2+AC^2=BC^2\\)",
-        "\\(AB^2+AC^2=BC^2\\)"
+        ""
       ],
       "correct": 1,
       "explanation": "\\(AB^2+AC^2=BC^2\\)"

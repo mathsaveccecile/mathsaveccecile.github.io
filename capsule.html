@@ -301,50 +301,19 @@ function renderQuizStep(step, content){
     content.innerHTML = `
       <div class="quiz">
         <h2>${step.question || ""}</h2>
-        ${(step.answers || []).map(a => `<button onclick="checkAnswer('${String(a).replaceAll("'","\\'")}')">${a}</button>`).join("")}
-        <p id="feedback"></p>
-      </div>
-    `;
-  }
 
-  if(step.quizType === "vraiFaux"){
-    content.innerHTML = `
-      <div class="quiz">
-        <h2>${step.question || ""}</h2>
-        <button onclick="checkAnswer('Vrai')">Vrai</button>
-        <button onclick="checkAnswer('Faux')">Faux</button>
-        <p id="feedback"></p>
-      </div>
-    `;
-  }
+        ${(step.answers || []).map((a, index) => `
+          <button onclick="checkAnswer(${index})">
+            ${a}
+          </button>
+        `).join("")}
 
-  if(step.quizType === "reponseLibre"){
-    content.innerHTML = `
-      <div class="quiz">
-        <h2>${step.question || ""}</h2>
-        <input id="freeAnswer" placeholder="Ta réponse">
-        <button onclick="checkFreeAnswer()">Valider</button>
         <p id="feedback"></p>
-      </div>
-    `;
-  }
-
-  if(step.quizType === "paires"){
-    content.innerHTML = `
-      <div class="quiz">
-        <h2>${step.question || ""}</h2>
-        ${(step.pairs || []).map(pair => `<p><strong>${pair[0]}</strong> → ${pair[1]}</p>`).join("")}
-        <p>🔗 Version interactive à améliorer ensuite.</p>
       </div>
     `;
   }
 }
 
-function checkAnswer(answer){
-  const step = capsuleData.steps[currentStep];
-  document.getElementById("feedback").textContent =
-    answer === step.correctAnswer ? "✅ Bonne réponse !" : "❌ Essaie encore.";
-}
 
 function checkFreeAnswer(){
   const step = capsuleData.steps[currentStep];
