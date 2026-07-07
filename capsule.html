@@ -321,11 +321,23 @@ function checkAnswer(answerIndex){
   const feedback = document.getElementById("feedback");
 
   if (Number(answerIndex) === Number(step.correct)) {
-    feedback.innerHTML = "✅ Bonne réponse !";
-    feedback.style.color = "#5cff8d";
+    feedback.innerHTML = `
+      <div style="color:#5cff8d;">✅ Bonne réponse !</div>
+      ${step.explanation ? `<div style="margin-top:15px;color:white;">${step.explanation}</div>` : ""}
+    `;
   } else {
-    feedback.innerHTML = "❌ Essaie encore.";
-    feedback.style.color = "#ff6b6b";
+    feedback.innerHTML = `
+      <div style="color:#ff6b6b;">❌ Essaie encore.</div>
+      ${step.explanation ? `<div style="margin-top:15px;color:white;">${step.explanation}</div>` : ""}
+    `;
+  }
+
+  feedback.style.marginTop = "25px";
+  feedback.style.fontSize = "22px";
+  feedback.style.fontWeight = "900";
+
+  if(window.MathJax){
+    MathJax.typesetPromise();
   }
 }
 

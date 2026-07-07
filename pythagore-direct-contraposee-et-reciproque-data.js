@@ -20,7 +20,7 @@ const capsuleData = {
         "\\(\\widehat{ABC}\\)"
       ],
       "correct": 0,
-      "explanation": "\\\\( AB^2+AC^2=BC^2 \\\\)"
+      "explanation": "\\\\( AB^2+AC^2=BC^2 \\\\) bravo etc bla bla test"
     },
     {
       "type": "image",
