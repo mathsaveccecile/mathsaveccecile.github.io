@@ -169,25 +169,42 @@ app.whenReady().then(() => {
   const cleanData = JSON.parse(JSON.stringify(data))
 
   cleanData.steps = cleanData.steps.map((step, index) => {
-  if (step.type === 'quiz' && step.imagePath && existsSync(step.imagePath)) {
-    const ext = step.imagePath.split('.').pop().toLowerCase()
-    const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
+  // Images des quiz
+  if (step.type === 'quiz') {
+    const imageFileName = `${slug}-quiz-${index + 1}.png`
 
-    copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
+    if (step.imagePath && existsSync(step.imagePath)) {
+      const ext = step.imagePath.split('.').pop().toLowerCase()
+      const finalName = `${slug}-quiz-${index + 1}.${ext}`
 
-    step.image = `assets/quiz/${imageFileName}`
+      copyFileSync(step.imagePath, `${quizImagesFolder}/${finalName}`)
+      step.image = `assets/quiz/${finalName}`
+    } else if (step.image && step.image.startsWith('data:image')) {
+      const base64 = step.image.split(',')[1]
+      writeFileSync(`${quizImagesFolder}/${imageFileName}`, Buffer.from(base64, 'base64'))
+      step.image = `assets/quiz/${imageFileName}`
+    }
+
     delete step.imagePath
     delete step.imageName
   }
 
-  if (step.type === 'image' && step.path && existsSync(step.path)) {
-    console.log(step)
-    const ext = step.path.split('.').pop().toLowerCase()
-    const imageFileName = `${slug}-image-${index + 1}.${ext}`
+  // Images simples
+  if (step.type === 'image') {
+    const imageFileName = `${slug}-image-${index + 1}.jpg`
 
-    copyFileSync(step.path, `${imagesFolder}/${imageFileName}`)
+    if (step.path && existsSync(step.path)) {
+      const ext = step.path.split('.').pop().toLowerCase()
+      const finalName = `${slug}-image-${index + 1}.${ext}`
 
-    step.src = `assets/images/${imageFileName}`
+      copyFileSync(step.path, `${imagesFolder}/${finalName}`)
+      step.src = `assets/images/${finalName}`
+    } else if (step.src && step.src.startsWith('data:image')) {
+      const base64 = step.src.split(',')[1]
+      writeFileSync(`${imagesFolder}/${imageFileName}`, Buffer.from(base64, 'base64'))
+      step.src = `assets/images/${imageFileName}`
+    }
+
     delete step.path
   }
 
