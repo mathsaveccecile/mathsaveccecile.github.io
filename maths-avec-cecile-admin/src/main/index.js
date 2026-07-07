@@ -181,6 +181,7 @@ app.whenReady().then(() => {
   }
 
   if (step.type === 'image' && step.path && existsSync(step.path)) {
+    console.log(step)
     const ext = step.path.split('.').pop().toLowerCase()
     const imageFileName = `${slug}-image-${index + 1}.${ext}`
 
