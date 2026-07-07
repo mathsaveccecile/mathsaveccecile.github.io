@@ -129,6 +129,7 @@ app.whenReady().then(() => {
   const capsulesFile = `${siteFolder}/capsules.json`
   const thumbnailsFolder = `${siteFolder}/assets/thumbnails`
   const quizImagesFolder = `${siteFolder}/assets/quiz`
+  const imagesFolder = `${siteFolder}/assets/images`
 
   if (!existsSync(thumbnailsFolder)) {
     mkdirSync(thumbnailsFolder, { recursive: true })
@@ -138,6 +139,9 @@ app.whenReady().then(() => {
     mkdirSync(quizImagesFolder, { recursive: true })
   }
 
+  if (!existsSync(imagesFolder)) {
+  mkdirSync(imagesFolder, { recursive: true })
+}
   let capsules = []
 
   if (existsSync(capsulesFile)) {
@@ -165,29 +169,29 @@ app.whenReady().then(() => {
   const cleanData = JSON.parse(JSON.stringify(data))
 
   cleanData.steps = cleanData.steps.map((step, index) => {
-    if (step.type === 'quiz' && step.imagePath && existsSync(step.imagePath)) {
-  const ext = step.imagePath.split('.').pop().toLowerCase()
-  const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
+  if (step.type === 'quiz' && step.imagePath && existsSync(step.imagePath)) {
+    const ext = step.imagePath.split('.').pop().toLowerCase()
+    const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
 
-  copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
+    copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
 
-  step.image = `assets/quiz/${imageFileName}`
-  delete step.imagePath
-  delete step.imageName
-}
+    step.image = `assets/quiz/${imageFileName}`
+    delete step.imagePath
+    delete step.imageName
+  }
 
-if (step.type === 'image' && step.path && existsSync(step.path)) {
-  const ext = step.path.split('.').pop().toLowerCase()
-  const imageFileName = `${slug}-image-${index + 1}.${ext}`
+  if (step.type === 'image' && step.path && existsSync(step.path)) {
+    const ext = step.path.split('.').pop().toLowerCase()
+    const imageFileName = `${slug}-image-${index + 1}.${ext}`
 
-  copyFileSync(step.path, `${quizImagesFolder}/${imageFileName}`)
+    copyFileSync(step.path, `${imagesFolder}/${imageFileName}`)
 
-  step.src = `assets/quiz/${imageFileName}`
-  delete step.path
-}
+    step.src = `assets/images/${imageFileName}`
+    delete step.path
+  }
 
-    return step
-  })
+  return step
+})
 
   const capsuleInfo = {
     title: data.title,
