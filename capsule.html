@@ -252,7 +252,9 @@ function renderContent(){
   if(step.type === "image"){
     content.innerHTML = `<img src="${step.src}" alt="${step.title || "Image"}">`;
   }
-
+if(window.MathJax){
+    MathJax.typesetPromise();
+}
   if(step.type === "video"){
     content.innerHTML = step.src ? `
       <div style="display:flex;justify-content:center;">
@@ -304,7 +306,7 @@ function renderQuizStep(step, content){
 
         ${(step.answers || []).map((a, index) => `
           <button onclick="checkAnswer(${index})">
-            ${a}
+            ${a || ""}
           </button>
         `).join("")}
 
@@ -314,6 +316,18 @@ function renderQuizStep(step, content){
   }
 }
 
+function checkAnswer(answerIndex){
+  const step = capsuleData.steps[currentStep];
+  const feedback = document.getElementById("feedback");
+
+  if (Number(answerIndex) === Number(step.correct)) {
+    feedback.innerHTML = "✅ Bonne réponse !";
+    feedback.style.color = "#5cff8d";
+  } else {
+    feedback.innerHTML = "❌ Essaie encore.";
+    feedback.style.color = "#ff6b6b";
+  }
+}
 
 function checkFreeAnswer(){
   const step = capsuleData.steps[currentStep];
@@ -323,6 +337,7 @@ function checkFreeAnswer(){
   document.getElementById("feedback").textContent =
     answer === correct ? "✅ Bonne réponse !" : "❌ Essaie encore.";
 }
+
 
 function render(){
   renderSteps();
