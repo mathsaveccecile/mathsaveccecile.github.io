@@ -433,9 +433,12 @@ document.getElementById("addMatchingQuizBtn").addEventListener("click", () => {
   renderCapsule();
 });
 
-document.getElementById("previewCapsuleBtn").addEventListener("click", () => {
-  alert("Prévisualisation à faire après. Pour l’instant, l’éditeur est stable.");
-});
+const previewBtn = document.getElementById("previewCapsuleBtn");
+if (previewBtn) {
+  previewBtn.addEventListener("click", () => {
+    alert("Prévisualisation à faire après. Pour l’instant, l’éditeur est stable.");
+  });
+}
 
 document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
@@ -512,37 +515,41 @@ imagePath: step.imagePath || ""
   }
 });
 
-document.getElementById("importSiteBtn").addEventListener("click", async () => {
-  try {
-    let text = await window.api.importSite();
+const importBtn = document.getElementById("importSiteBtn");
 
-    text = text.replace("const capsuleData =", "").trim();
+if (importBtn) {
+  importBtn.addEventListener("click", async () => {
+    try {
+      let text = await window.api.importSite();
 
-    if (text.endsWith(";")) {
-      text = text.slice(0, -1);
+      text = text.replace("const capsuleData =", "").trim();
+
+      if (text.endsWith(";")) {
+        text = text.slice(0, -1);
+      }
+
+      const data = JSON.parse(text);
+
+      if (!Array.isArray(data.levels)) {
+        data.levels = data.level ? [data.level] : [];
+      }
+
+      capsule = data;
+
+      capsule.thumbnail = capsule.thumbnail || "";
+      capsule.thumbnailName = capsule.thumbnailName || "";
+      capsule.thumbnailPath = capsule.thumbnailPath || "";
+      capsule.steps = capsule.steps || [];
+
+      renderCapsule();
+
+      alert("✅ Capsule importée depuis le site !");
+    } catch (e) {
+      console.error(e);
+      alert("❌ Impossible d'importer la capsule.");
     }
-
-    const data = JSON.parse(text);
-
-    if (!Array.isArray(data.levels)) {
-      data.levels = data.level ? [data.level] : [];
-    }
-
-    capsule = data;
-
-    capsule.thumbnail = capsule.thumbnail || "";
-    capsule.thumbnailName = capsule.thumbnailName || "";
-    capsule.thumbnailPath = capsule.thumbnailPath || "";
-    capsule.steps = capsule.steps || [];
-
-    renderCapsule();
-
-    alert("✅ Capsule importée depuis le site !");
-  } catch (e) {
-    console.error(e);
-    alert("❌ Impossible d'importer la capsule.");
-  }
-});
+  });
+}
 
 document.getElementById("capsuleTitle").addEventListener("input", (e) => {
   capsule.title = e.target.value;

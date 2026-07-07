@@ -165,16 +165,16 @@ app.whenReady().then(() => {
   const cleanData = JSON.parse(JSON.stringify(data))
 
   cleanData.steps = cleanData.steps.map((step, index) => {
-    if (step.type === 'quiz' && step.imagePath) {
-      const ext = step.imagePath.split('.').pop().toLowerCase()
-      const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
+    if (step.type === 'quiz' && step.imagePath && existsSync(step.imagePath)) {
+  const ext = step.imagePath.split('.').pop().toLowerCase()
+  const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
 
-      copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
+  copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
 
-      step.image = `assets/quiz/${imageFileName}`
-      delete step.imagePath
-      delete step.imageName
-    }
+  step.image = `assets/quiz/${imageFileName}`
+  delete step.imagePath
+  delete step.imageName
+}
 
     return step
   })
