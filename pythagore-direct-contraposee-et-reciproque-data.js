@@ -11,7 +11,8 @@ const capsuleData = {
     {
       "type": "video",
       "title": "test",
-      "src": "https://youtube.com/shorts/xkt9xsxBie8"
+      "src": "https://youtube.com/shorts/xkt9xsxBie8",
+      "duration": 90
     },
     {
       "type": "quiz",

@@ -477,6 +477,7 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
           type: "video",
           title: step.title || "Vidéo",
           src: step.src || "",
+          duration: Number(step.duration || 0)
         };
       }
 
