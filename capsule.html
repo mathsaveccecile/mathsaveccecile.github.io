@@ -298,10 +298,18 @@ if(window.MathJax){
   }
 }
 
+function quizImage(step){
+  return step.image ? `
+    <img src="${step.image}" alt="Image du quiz"
+      style="max-width:100%;max-height:360px;border-radius:20px;margin-bottom:25px;">
+  ` : "";
+}
+
 function renderQuizStep(step, content){
   if(step.quizType === "qcm"){
     content.innerHTML = `
       <div class="quiz">
+        ${quizImage(step)}
         <h2>${step.question || ""}</h2>
 
         ${(step.answers || []).map((a, index) => `
@@ -316,45 +324,56 @@ function renderQuizStep(step, content){
   if(step.quizType === "trueFalse"){
     content.innerHTML = `
       <div class="quiz">
+        ${quizImage(step)}
         <h2>${step.question || ""}</h2>
+
         <button onclick="checkTrueFalse(true)">Vrai</button>
         <button onclick="checkTrueFalse(false)">Faux</button>
+
         <p id="feedback"></p>
       </div>
     `;
   }
 
   if(step.quizType === "open"){
-  content.innerHTML = `
-    <div class="quiz">
-      <h2>${step.question || ""}</h2>
+    content.innerHTML = `
+      <div class="quiz">
+        ${quizImage(step)}
+        <h2>${step.question || ""}</h2>
 
-      <textarea id="openAnswer" placeholder="Écris ta réponse ici"
-        style="width:80%;min-height:140px;border-radius:18px;padding:18px;font-size:18px;"></textarea>
+        <textarea id="openAnswer" placeholder="Écris ta réponse ici"
+          style="width:80%;min-height:140px;border-radius:18px;padding:18px;font-size:18px;"></textarea>
 
-      <br><br>
-      <button onclick="checkOpenAnswer()">Vérifier</button>
+        <br><br>
 
-      <button onclick="showOpenCorrection()" style="margin-top:10px;background:#46395f;">
-        Afficher la correction
-      </button>
+        <button onclick="checkOpenAnswer()">Vérifier</button>
 
-      <p id="feedback"></p>
-    </div>
-  `;
-}
+        <button onclick="showOpenCorrection()" style="margin-top:10px;background:#46395f;">
+          Afficher la correction
+        </button>
+
+        <p id="feedback"></p>
+      </div>
+    `;
+  }
 
   if(step.quizType === "matching"){
     content.innerHTML = `
       <div class="quiz">
+        ${quizImage(step)}
         <h2>${step.question || "Associe les paires."}</h2>
 
         ${(step.pairs || []).map((pair, index) => `
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px;">
-            <div style="background:#46395f;border-radius:18px;padding:18px;">${pair[0]}</div>
+            <div style="background:#46395f;border-radius:18px;padding:18px;">
+              ${pair[0]}
+            </div>
+
             <select id="match-${index}" style="border-radius:18px;padding:18px;font-size:18px;">
               <option value="">Choisir...</option>
-              ${(step.pairs || []).map(p => `<option value="${p[1]}">${p[1]}</option>`).join("")}
+              ${(step.pairs || []).map((p, optionIndex) => `
+                <option value="${optionIndex}">${p[1]}</option>
+              `).join("")}
             </select>
           </div>
         `).join("")}
@@ -377,7 +396,12 @@ function showFeedback(ok, explanation = ""){
     <div style="color:${ok ? "#5cff8d" : "#ff6b6b"};">
       ${ok ? "✅ Bonne réponse !" : "❌ Essaie encore."}
     </div>
-    ${explanation ? `<div style="margin-top:15px;color:white;">${explanation}</div>` : ""}
+
+    ${ok && explanation ? `
+      <div style="margin-top:15px;color:white;">
+        ${explanation}
+      </div>
+    ` : ""}
   `;
 
   feedback.style.marginTop = "25px";
@@ -389,32 +413,18 @@ function showFeedback(ok, explanation = ""){
   }
 }
 
-function checkOpenAnswer(){
+function checkAnswer(answerIndex){
   const step = capsuleData.steps[currentStep];
-  const answer = document.getElementById("openAnswer").value;
+  const ok = Number(answerIndex) === Number(step.correct);
 
-  const userAnswer = normalizeAnswer(answer);
-  const expectedAnswer = normalizeAnswer(step.correction || "");
-
-  const userWithoutAccents = normalizeWithoutAccents(answer);
-  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
-
-  if (userAnswer === expectedAnswer) {
-    showFeedback(true, step.explanation || step.correction);
-    return;
-  }
-
-  if (userWithoutAccents === expectedWithoutAccents) {
-    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
-    return;
-  }
-
-  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
+  showFeedback(ok, step.explanation || "");
 }
 
 function checkTrueFalse(value){
   const step = capsuleData.steps[currentStep];
-  showFeedback(value === step.correct, step.explanation);
+  const ok = value === step.correct;
+
+  showFeedback(ok, step.explanation || "");
 }
 
 function checkOpenAnswer(){
@@ -427,77 +437,25 @@ function checkOpenAnswer(){
   const userWithoutAccents = normalizeWithoutAccents(answer);
   const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
 
-  if (userAnswer === expectedAnswer) {
-    showFeedback(true, step.explanation || step.correction);
+  if(userAnswer === expectedAnswer){
+    showFeedback(true);
     return;
   }
 
-  if (userWithoutAccents === expectedWithoutAccents) {
-    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
-    return;
-  }
-
-  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
-}
-
-
-function checkMatching(){
-  const step = capsuleData.steps[currentStep];
-
-  const ok = (step.pairs || []).every((pair, index) => {
-    const select = document.getElementById("match-" + index);
-    return select && select.value === pair[1];
-  });
-
-  showFeedback(ok, step.explanation);
-}
-
-function checkAnswer(answerIndex){
-  const step = capsuleData.steps[currentStep];
-  const feedback = document.getElementById("feedback");
-
-  if (Number(answerIndex) === Number(step.correct)) {
+  if(userWithoutAccents === expectedWithoutAccents){
+    const feedback = document.getElementById("feedback");
     feedback.innerHTML = `
-      <div style="color:#5cff8d;">✅ Bonne réponse !</div>
-      ${step.explanation ? `<div style="margin-top:15px;color:white;">${step.explanation}</div>` : ""}
+      <div style="color:#ff6b6b;">
+        ❌ Presque ! Il manque un accent ou un accent n'est pas au bon endroit.
+      </div>
     `;
-  } else {
-    feedback.innerHTML = `
-      <div style="color:#ff6b6b;">❌ Essaie encore.</div>
-      ${step.explanation ? `<div style="margin-top:15px;color:white;">${step.explanation}</div>` : ""}
-    `;
-  }
-
-  feedback.style.marginTop = "25px";
-  feedback.style.fontSize = "22px";
-  feedback.style.fontWeight = "900";
-
-  if(window.MathJax){
-    MathJax.typesetPromise();
-  }
-}
-
-function checkOpenAnswer(){
-  const step = capsuleData.steps[currentStep];
-  const answer = document.getElementById("openAnswer").value;
-
-  const userAnswer = normalizeAnswer(answer);
-  const expectedAnswer = normalizeAnswer(step.correction || "");
-
-  const userWithoutAccents = normalizeWithoutAccents(answer);
-  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
-
-  if (userAnswer === expectedAnswer) {
-    showFeedback(true, step.explanation || step.correction);
+    feedback.style.marginTop = "25px";
+    feedback.style.fontSize = "22px";
+    feedback.style.fontWeight = "900";
     return;
   }
 
-  if (userWithoutAccents === expectedWithoutAccents) {
-    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
-    return;
-  }
-
-  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
+  showFeedback(false);
 }
 
 function showOpenCorrection(){
@@ -507,7 +465,7 @@ function showOpenCorrection(){
   feedback.innerHTML = `
     <div style="color:#ffe45c;">💡 Correction :</div>
     <div style="margin-top:15px;color:white;">
-      ${step.correction || step.explanation || "Correction à compléter."}
+      ${step.correction || "Correction à compléter."}
     </div>
   `;
 
@@ -518,6 +476,17 @@ function showOpenCorrection(){
   if(window.MathJax){
     MathJax.typesetPromise();
   }
+}
+
+function checkMatching(){
+  const step = capsuleData.steps[currentStep];
+
+  const ok = (step.pairs || []).every((pair, index) => {
+    const select = document.getElementById("match-" + index);
+    return select && Number(select.value) === index;
+  });
+
+  showFeedback(ok, step.explanation || "");
 }
 function render(){
   renderSteps();

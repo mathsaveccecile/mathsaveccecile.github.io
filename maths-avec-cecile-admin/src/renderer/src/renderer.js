@@ -10,17 +10,13 @@ let capsule = {
 function renderCapsule() {
   document.getElementById("capsuleTitle").value = capsule.title || "";
 
-  if (!Array.isArray(capsule.levels)) {
-    capsule.levels = [];
-  }
+  if (!Array.isArray(capsule.levels)) capsule.levels = [];
 
   document.querySelectorAll(".levelCheck").forEach(check => {
     check.checked = capsule.levels.includes(check.value);
   });
 
-
   const thumbnailPreview = document.getElementById("thumbnailPreview");
-
   if (thumbnailPreview) {
     thumbnailPreview.innerHTML = capsule.thumbnail
       ? `<img src="${capsule.thumbnail}" style="max-width:260px;border-radius:14px;margin-top:10px;"><br><small>${capsule.thumbnailName || ""}</small>`
@@ -34,8 +30,6 @@ function renderCapsule() {
     if (step.type === "quiz") return renderQuiz(step, index);
     return "";
   }).join("");
-
-    
 }
 
 function buttons(index) {
@@ -52,8 +46,7 @@ function renderImage(step, index) {
       ${buttons(index)}
       <h4>🖼️ Image</h4>
       <input value="${step.title || ""}" placeholder="Titre de l'image"
-        oninput="updateStepTitle(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        oninput="updateStepTitle(${index}, this.value)">
       <img src="${step.src}" style="max-width:300px;border-radius:10px;margin-top:10px;">
       <br><small>${step.name || ""}</small>
     </div>
@@ -66,14 +59,11 @@ function renderVideo(step, index) {
       ${buttons(index)}
       <h4>🎥 Vidéo YouTube</h4>
       <input value="${step.title || ""}" placeholder="Titre de la vidéo"
-        oninput="updateStepTitle(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        oninput="updateStepTitle(${index}, this.value)">
       <input value="${step.src || ""}" placeholder="Colle ici le lien YouTube"
-        oninput="updateVideo(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        oninput="updateVideo(${index}, this.value)">
       <input type="number" value="${step.duration || ""}" placeholder="Durée en secondes"
-        oninput="updateStepDuration(${index}, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;">
+        oninput="updateStepDuration(${index}, this.value)">
     </div>
   `;
 }
@@ -91,6 +81,20 @@ function renderPdf(step, index) {
   `;
 }
 
+function quizImageBlock(step, index) {
+  return `
+    <div style="margin:15px 0;padding:15px;background:#2b243b;border-radius:16px;">
+      <h4>🖼️ Image du quiz facultative</h4>
+      ${step.image ? `
+        <img src="${step.image}" style="max-width:260px;border-radius:14px;display:block;margin:10px 0;">
+        <button onclick="removeQuizImage(${index})">Supprimer l'image</button>
+      ` : `
+        <button onclick="chooseQuizImage(${index})">Choisir une image</button>
+      `}
+    </div>
+  `;
+}
+
 function renderQuiz(step, index) {
   const type = step.quizType || "qcm";
 
@@ -98,7 +102,8 @@ function renderQuiz(step, index) {
     return `
       <div class="step">
         ${buttons(index)}
-        <h4>❓ Quiz QCM</h4>
+        <h4>📝 QCM</h4>
+        ${quizImageBlock(step, index)}
 
         <input value="${step.question || ""}" placeholder="Question"
           oninput="updateQuizField(${index}, 'question', this.value)">
@@ -115,7 +120,7 @@ function renderQuiz(step, index) {
           <option value="2" ${step.correct === 2 ? "selected" : ""}>Réponse 3</option>
         </select>
 
-        <textarea placeholder="Explication"
+        <textarea placeholder="Correction / explication"
           oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
@@ -126,13 +131,13 @@ function renderQuiz(step, index) {
       <div class="step">
         ${buttons(index)}
         <h4>✍️ Question ouverte</h4>
+        ${quizImageBlock(step, index)}
 
         <textarea placeholder="Question"
           oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
 
-        <textarea placeholder="Réponse modèle / correction"
+        <textarea placeholder="Réponse attendue / correction"
           oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
-
       </div>
     `;
   }
@@ -142,6 +147,7 @@ function renderQuiz(step, index) {
       <div class="step">
         ${buttons(index)}
         <h4>✅❌ Vrai / Faux</h4>
+        ${quizImageBlock(step, index)}
 
         <textarea placeholder="Affirmation"
           oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
@@ -152,7 +158,7 @@ function renderQuiz(step, index) {
           <option value="false" ${step.correct === false ? "selected" : ""}>Faux</option>
         </select>
 
-        <textarea placeholder="Explication"
+        <textarea placeholder="Correction / explication"
           oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
@@ -165,6 +171,7 @@ function renderQuiz(step, index) {
       <div class="step">
         ${buttons(index)}
         <h4>🔗 Associer les paires</h4>
+        ${quizImageBlock(step, index)}
 
         <textarea placeholder="Consigne"
           oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
@@ -178,11 +185,31 @@ function renderQuiz(step, index) {
           </div>
         `).join("")}
 
-        <textarea placeholder="Explication"
+        <textarea placeholder="Correction / explication"
           oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
   }
+
+  return "";
+}
+
+async function chooseQuizImage(index) {
+  const image = await window.api.chooseImage();
+  if (!image) return;
+
+  capsule.steps[index].image = image.src;
+  capsule.steps[index].imageName = image.name;
+  capsule.steps[index].imagePath = image.path;
+
+  renderCapsule();
+}
+
+function removeQuizImage(index) {
+  capsule.steps[index].image = "";
+  capsule.steps[index].imageName = "";
+  capsule.steps[index].imagePath = "";
+  renderCapsule();
 }
 
 function moveStepUp(index) {
@@ -213,6 +240,7 @@ function updateStepTitle(index, value) {
 function updateStepDuration(index, value) {
   capsule.steps[index].duration = Number(value);
 }
+
 function updateQuizField(index, field, value) {
   capsule.steps[index][field] = value;
 }
@@ -221,7 +249,6 @@ function updateQuizAnswer(index, answerIndex, value) {
   if (!Array.isArray(capsule.steps[index].answers)) {
     capsule.steps[index].answers = ["", "", ""];
   }
-
   capsule.steps[index].answers[answerIndex] = value;
 }
 
@@ -229,9 +256,9 @@ function updatePair(index, pairIndex, side, value) {
   if (!Array.isArray(capsule.steps[index].pairs)) {
     capsule.steps[index].pairs = [["", ""], ["", ""], ["", ""]];
   }
-
   capsule.steps[index].pairs[pairIndex][side] = value;
 }
+
 function getSelectedLevels() {
   return Array.from(document.querySelectorAll(".levelCheck:checked"))
     .map(check => check.value);
@@ -246,7 +273,6 @@ document.getElementById("newCapsuleBtn").addEventListener("click", () => {
     thumbnailPath: "",
     steps: []
   };
-
   renderCapsule();
 });
 
@@ -355,11 +381,53 @@ document.getElementById("addQuizBtn").addEventListener("click", () => {
   capsule.steps.push({
     type: "quiz",
     quizType: "qcm",
-    title: "Quiz QCM",
+    title: "QCM",
     question: "",
     answers: ["", "", ""],
     correct: 0,
-    explanation: ""
+    explanation: "",
+    image: ""
+  });
+
+  renderCapsule();
+});
+
+document.getElementById("addOpenQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "open",
+    title: "Question ouverte",
+    question: "",
+    correction: "",
+    image: ""
+  });
+
+  renderCapsule();
+});
+
+document.getElementById("addTrueFalseQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "trueFalse",
+    title: "Vrai / Faux",
+    question: "",
+    correct: true,
+    explanation: "",
+    image: ""
+  });
+
+  renderCapsule();
+});
+
+document.getElementById("addMatchingQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "matching",
+    title: "Associer les paires",
+    question: "",
+    pairs: [["", ""], ["", ""], ["", ""]],
+    explanation: "",
+    image: ""
   });
 
   renderCapsule();
@@ -372,7 +440,7 @@ document.getElementById("previewCapsuleBtn").addEventListener("click", () => {
 document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   capsule.title = document.getElementById("capsuleTitle").value;
   capsule.levels = getSelectedLevels();
- capsule.duration = "";
+  capsule.duration = "";
 
   if (!capsule.title) {
     alert("Il faut donner un nom à la capsule.");
@@ -414,18 +482,19 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
       }
 
       if (step.type === "quiz") {
-  return {
-    type: "quiz",
-    quizType: step.quizType || "qcm",
-    title: step.title || "Quiz",
-    question: step.question || "",
-    answers: step.answers || [],
-    correct: step.correct ?? 0,
-    correction: step.correction || "",
-    pairs: step.pairs || [],
-    explanation: step.quizType === "open" ? "" : (step.explanation || "")
-  };
-}
+        return {
+          type: "quiz",
+          quizType: step.quizType || "qcm",
+          title: step.title || "QCM",
+          question: step.question || "",
+          answers: step.answers || [],
+          correct: step.correct ?? 0,
+          correction: step.correction || "",
+          pairs: step.pairs || [],
+          explanation: step.quizType === "open" ? "" : (step.explanation || ""),
+          image: step.image || ""
+        };
+      }
 
       return step;
     })
@@ -472,6 +541,7 @@ document.getElementById("importSiteBtn").addEventListener("click", async () => {
     alert("❌ Impossible d'importer la capsule.");
   }
 });
+
 document.getElementById("capsuleTitle").addEventListener("input", (e) => {
   capsule.title = e.target.value;
 });
@@ -481,6 +551,7 @@ document.querySelectorAll(".levelCheck").forEach((check) => {
     capsule.levels = getSelectedLevels();
   });
 });
+
 document.addEventListener("mousedown", (e) => {
   const champ = e.target.closest("input, textarea, select");
 
@@ -491,41 +562,4 @@ document.addEventListener("mousedown", (e) => {
   }
 }, true);
 
-document.getElementById("addOpenQuizBtn").addEventListener("click", () => {
-  capsule.steps.push({
-    type: "quiz",
-    quizType: "open",
-    title: "Question ouverte",
-    question: "",
-    correction: "",
-  });
-
-  renderCapsule();
-});
-
-document.getElementById("addTrueFalseQuizBtn").addEventListener("click", () => {
-  capsule.steps.push({
-    type: "quiz",
-    quizType: "trueFalse",
-    title: "Vrai / Faux",
-    question: "",
-    correct: true,
-    explanation: ""
-  });
-
-  renderCapsule();
-});
-
-document.getElementById("addMatchingQuizBtn").addEventListener("click", () => {
-  capsule.steps.push({
-    type: "quiz",
-    quizType: "matching",
-    title: "Associer les paires",
-    question: "",
-    pairs: [["", ""], ["", ""], ["", ""]],
-    explanation: ""
-  });
-
-  renderCapsule();
-});
 renderCapsule();
