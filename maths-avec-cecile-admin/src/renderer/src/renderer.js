@@ -72,7 +72,7 @@ function renderVideo(step, index) {
 }
 
 function updateVideoDuration(index, value) {
-  capsule.steps[index].duration = Number(value);
+  capsule.steps[index].duration = Number(value || 0);
 }
 
 function renderPdf(step, index) {
