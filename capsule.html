@@ -325,20 +325,24 @@ function renderQuizStep(step, content){
   }
 
   if(step.quizType === "open"){
-    content.innerHTML = `
-      <div class="quiz">
-        <h2>${step.question || ""}</h2>
+  content.innerHTML = `
+    <div class="quiz">
+      <h2>${step.question || ""}</h2>
 
-        <textarea id="openAnswer" placeholder="Écris ta réponse ici"
-          style="width:80%;min-height:140px;border-radius:18px;padding:18px;font-size:18px;"></textarea>
+      <textarea id="openAnswer" placeholder="Écris ta réponse ici"
+        style="width:80%;min-height:140px;border-radius:18px;padding:18px;font-size:18px;"></textarea>
 
-        <br><br>
-        <button onclick="checkOpenAnswer()">Voir la correction</button>
+      <br><br>
+      <button onclick="checkOpenAnswer()">Vérifier</button>
 
-        <p id="feedback"></p>
-      </div>
-    `;
-  }
+      <button onclick="showOpenCorrection()" style="margin-top:10px;background:#46395f;">
+        Afficher la correction
+      </button>
+
+      <p id="feedback"></p>
+    </div>
+  `;
+}
 
   if(step.quizType === "matching"){
     content.innerHTML = `
@@ -415,7 +419,13 @@ function checkOpenAnswer(){
     return;
   }
 
-  showFeedback(false, step.explanation || "Essaie encore.");
+  showFeedback(false, "Ce n'est pas la bonne réponse. Essaie encore.");
+}
+
+function showOpenCorrection(){
+  const step = capsuleData.steps[currentStep];
+
+  showFeedback(false, step.correction || step.explanation || "Correction à compléter.");
 }
 
 function checkMatching(){
