@@ -20,12 +20,12 @@ const capsuleData = {
       "title": "Quiz",
       "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
       "answers": [
-        "\\widehat{ABC}",
-        "AB^2+AC^2=BC^2",
-        ""
+        "\\(\\widehat{ABC}\\)",
+        "\\(AB^2+AC^2=BC^2\\)",
+        "\\(AB^2+AC^2=BC^2\\)"
       ],
       "correct": 1,
-      "explanation": "AB^2+AC^2=BC^2"
+      "explanation": "\\(AB^2+AC^2=BC^2\\)"
     }
   ]
 };
