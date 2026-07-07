@@ -35,9 +35,7 @@ function renderCapsule() {
     return "";
   }).join("");
 
-    setTimeout(() => {
-    document.body.style.transform = "scale(1)";
-  }, 0);
+    
 }
 
 function buttons(index) {
@@ -135,8 +133,6 @@ function renderQuiz(step, index) {
         <textarea placeholder="Réponse modèle / correction"
           oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
 
-        <textarea placeholder="Explication"
-          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
   }
@@ -427,7 +423,7 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
     correct: step.correct ?? 0,
     correction: step.correction || "",
     pairs: step.pairs || [],
-    explanation: step.explanation || ""
+    explanation: step.quizType === "open" ? "" : (step.explanation || "")
   };
 }
 
@@ -502,7 +498,6 @@ document.getElementById("addOpenQuizBtn").addEventListener("click", () => {
     title: "Question ouverte",
     question: "",
     correction: "",
-    explanation: ""
   });
 
   renderCapsule();
