@@ -62,3 +62,10 @@ input{
   margin:12px 0;
   font-size:20px;
 }
+.step input,
+.step textarea,
+.step select {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
