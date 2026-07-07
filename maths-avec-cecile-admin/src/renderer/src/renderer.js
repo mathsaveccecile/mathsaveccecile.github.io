@@ -62,8 +62,6 @@ function renderVideo(step, index) {
         oninput="updateStepTitle(${index}, this.value)">
       <input value="${step.src || ""}" placeholder="Colle ici le lien YouTube"
         oninput="updateVideo(${index}, this.value)">
-      <input type="number" value="${step.duration || ""}" placeholder="Durée en secondes"
-        oninput="updateStepDuration(${index}, this.value)">
     </div>
   `;
 }
@@ -235,10 +233,6 @@ function updateVideo(index, value) {
 
 function updateStepTitle(index, value) {
   capsule.steps[index].title = value;
-}
-
-function updateStepDuration(index, value) {
-  capsule.steps[index].duration = Number(value);
 }
 
 function updateQuizField(index, field, value) {
