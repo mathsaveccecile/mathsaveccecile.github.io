@@ -82,6 +82,11 @@ const capsuleData = {
       "type": "video",
       "title": "test",
       "src": "https://youtube.com/shorts/xkt9xsxBie8"
+    },
+    {
+      "type": "image",
+      "title": "PLAN DE LA CAPSULE",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-7.jpg"
     }
   ]
 };

@@ -58,12 +58,21 @@ function renderVideo(step, index) {
     <div class="step">
       ${buttons(index)}
       <h4>🎥 Vidéo YouTube</h4>
+
       <input value="${step.title || ""}" placeholder="Titre de la vidéo"
         oninput="updateStepTitle(${index}, this.value)">
+
       <input value="${step.src || ""}" placeholder="Colle ici le lien YouTube"
         oninput="updateVideo(${index}, this.value)">
+
+      <input type="number" value="${step.duration || ""}" placeholder="Durée de la vidéo en secondes"
+        oninput="updateVideoDuration(${index}, this.value)">
     </div>
   `;
+}
+
+function updateVideoDuration(index, value) {
+  capsule.steps[index].duration = Number(value);
 }
 
 function renderPdf(step, index) {
@@ -353,10 +362,12 @@ document.getElementById("addVideoBtn").addEventListener("click", () => {
     type: "video",
     title: "Vidéo YouTube",
     src: "",
+    duration: 0
   });
 
   renderCapsule();
 });
+
 
 document.getElementById("addPdfBtn").addEventListener("click", async () => {
   const pdf = await window.api.choosePdf();
