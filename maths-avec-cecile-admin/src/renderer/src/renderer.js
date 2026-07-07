@@ -342,15 +342,16 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
       }
 
       if (step.type === "quiz") {
-        return {
-          type: "quiz",
-          quizType: "qcm",
-          title: step.title || "Quiz",
-          question: "Question à compléter",
-          answers: ["Réponse 1", "Réponse 2", "Réponse 3"],
-          correctAnswer: "Réponse 1"
-        };
-      }
+  return {
+    type: "quiz",
+    quizType: "qcm",
+    title: step.title || "Quiz",
+    question: step.question || "Question à compléter",
+    answers: step.answers || ["", "", ""],
+    correct: typeof step.correct === "number" ? step.correct : 0,
+    explanation: step.explanation || ""
+  };
+}
 
       return step;
     })

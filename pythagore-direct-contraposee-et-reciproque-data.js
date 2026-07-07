@@ -18,13 +18,14 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "qcm",
       "title": "Quiz",
-      "question": "Question à compléter",
+      "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
       "answers": [
-        "Réponse 1",
-        "Réponse 2",
-        "Réponse 3"
+        "\\widehat{ABC}",
+        "AB^2+AC^2=BC^2",
+        ""
       ],
-      "correctAnswer": "Réponse 1"
+      "correct": 1,
+      "explanation": "AB^2+AC^2=BC^2"
     }
   ]
 };
