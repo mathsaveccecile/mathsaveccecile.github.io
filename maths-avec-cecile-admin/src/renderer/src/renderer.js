@@ -492,7 +492,9 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
           correction: step.correction || "",
           pairs: step.pairs || [],
           explanation: step.quizType === "open" ? "" : (step.explanation || ""),
-          image: step.image || ""
+          image: step.image || "",
+imageName: step.imageName || "",
+imagePath: step.imagePath || ""
         };
       }
 

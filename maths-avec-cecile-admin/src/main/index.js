@@ -128,9 +128,14 @@ app.whenReady().then(() => {
   const siteFolder = 'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io'
   const capsulesFile = `${siteFolder}/capsules.json`
   const thumbnailsFolder = `${siteFolder}/assets/thumbnails`
+  const quizImagesFolder = `${siteFolder}/assets/quiz`
 
   if (!existsSync(thumbnailsFolder)) {
     mkdirSync(thumbnailsFolder, { recursive: true })
+  }
+
+  if (!existsSync(quizImagesFolder)) {
+    mkdirSync(quizImagesFolder, { recursive: true })
   }
 
   let capsules = []
@@ -139,22 +144,40 @@ app.whenReady().then(() => {
     capsules = JSON.parse(readFileSync(capsulesFile, 'utf8'))
   }
 
-  const pageName = data.title
+  const slug = data.title
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '') + '.html'
+    .replace(/^-+|-+$/g, '')
 
-  const dataFileName = pageName.replace('.html', '-data.js')
+  const pageName = slug + '.html'
+  const dataFileName = slug + '-data.js'
 
   let thumbnailPath = data.thumbnail || ''
 
   if (data.thumbnailPath) {
-    const thumbnailFileName = pageName.replace('.html', '') + '.png'
+    const thumbnailFileName = slug + '.png'
     copyFileSync(data.thumbnailPath, `${thumbnailsFolder}/${thumbnailFileName}`)
     thumbnailPath = `assets/thumbnails/${thumbnailFileName}`
   }
+
+  const cleanData = JSON.parse(JSON.stringify(data))
+
+  cleanData.steps = cleanData.steps.map((step, index) => {
+    if (step.type === 'quiz' && step.imagePath) {
+      const ext = step.imagePath.split('.').pop().toLowerCase()
+      const imageFileName = `${slug}-quiz-${index + 1}.${ext}`
+
+      copyFileSync(step.imagePath, `${quizImagesFolder}/${imageFileName}`)
+
+      step.image = `assets/quiz/${imageFileName}`
+      delete step.imagePath
+      delete step.imageName
+    }
+
+    return step
+  })
 
   const capsuleInfo = {
     title: data.title,
@@ -175,7 +198,10 @@ app.whenReady().then(() => {
 
   writeFileSync(capsulesFile, JSON.stringify(capsules, null, 2))
 
-  const output = `const capsuleData = ${JSON.stringify(data, null, 2)};`
+  cleanData.thumbnail = thumbnailPath
+  cleanData.thumbnailPath = ''
+
+  const output = `const capsuleData = ${JSON.stringify(cleanData, null, 2)};`
 
   writeFileSync(`${siteFolder}/${dataFileName}`, output)
 
