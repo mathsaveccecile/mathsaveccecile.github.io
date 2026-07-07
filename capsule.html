@@ -150,11 +150,18 @@ function startCapsule(){
   checkConnection();
 }
 
-function icon(type){
-  if(type==="video") return "🎥";
-  if(type==="image") return "🖼️";
-  if(type==="pdf") return "📄";
-  if(type==="quiz") return "❓";
+function icon(step){
+  if(step.type === "video") return "🎥";
+  if(step.type === "image") return "🖼️";
+  if(step.type === "pdf") return "📄";
+
+  if(step.type === "quiz"){
+    if(step.quizType === "QCM") return "❓";
+    if(step.quizType === "open") return "✍️";
+    if(step.quizType === "matching") return "🔗";
+    if(step.quizType === "trueFalse") return "✅❌";
+  }
+
   return "⭐";
 }
 
@@ -221,27 +228,13 @@ function renderSteps(){
   capsuleData.steps.forEach((step,index)=>{
     const div = document.createElement("div");
     div.className = "step" + (index === currentStep ? " active" : "");
-
-    div.onclick = async () => {
+      div.onclick = async () => {
       currentStep = index;
       await saveProgress();
       render();
     };
 
-    <div>
-  <span class="num">${index + 1}</span>
-  ${
-    step.type === "quiz"
-      ? (
-          step.quizType === "qcm" ? "QCM" :
-          step.quizType === "trueFalse" ? "Vrai / Faux" :
-          step.quizType === "matching" ? "Associer les paires" :
-          step.quizType === "open" ? "Question ouverte" :
-          "Quiz"
-        )
-      : (step.title || "Étape")
-  }
-</div>
+   
 
 <div>${icon(step.type)}</div>
     `;
