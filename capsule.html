@@ -397,22 +397,25 @@ function checkTrueFalse(value){
 
 function checkOpenAnswer(){
   const step = capsuleData.steps[currentStep];
+  const answer = document.getElementById("openAnswer").value;
 
-  const feedback = document.getElementById("feedback");
-  feedback.innerHTML = `
-    <div style="color:#ffe45c;">💡 Correction proposée :</div>
-    <div style="margin-top:15px;color:white;">
-      ${step.correction || step.explanation || "Correction à compléter."}
-    </div>
-  `;
+  const userAnswer = normalizeAnswer(answer);
+  const expectedAnswer = normalizeAnswer(step.correction || "");
 
-  feedback.style.marginTop = "25px";
-  feedback.style.fontSize = "22px";
-  feedback.style.fontWeight = "900";
+  const userWithoutAccents = normalizeWithoutAccents(answer);
+  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
 
-  if(window.MathJax){
-    MathJax.typesetPromise();
+  if (userAnswer === expectedAnswer) {
+    showFeedback(true, step.explanation || step.correction);
+    return;
   }
+
+  if (userWithoutAccents === expectedWithoutAccents) {
+    showFeedback(false, "Presque ! Il manque un accent ou un accent n'est pas au bon endroit.");
+    return;
+  }
+
+  showFeedback(false, step.explanation || "Essaie encore.");
 }
 
 function checkMatching(){
@@ -451,13 +454,16 @@ function checkAnswer(answerIndex){
   }
 }
 
-function checkFreeAnswer(){
+function checkOpenAnswer(){
   const step = capsuleData.steps[currentStep];
-  const answer = document.getElementById("freeAnswer").value.trim().toLowerCase();
-  const correct = String(step.correctAnswer || "").trim().toLowerCase();
+  const answer = document.getElementById("openAnswer").value;
 
-  document.getElementById("feedback").textContent =
-    answer === correct ? "✅ Bonne réponse !" : "❌ Essaie encore.";
+  const userAnswer = normalizeAnswer(answer);
+  const expectedAnswer = normalizeAnswer(step.correction || "");
+
+  const ok = userAnswer === expectedAnswer;
+
+  showFeedback(ok, step.explanation || step.correction);
 }
 
 

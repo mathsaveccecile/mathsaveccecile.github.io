@@ -33,12 +33,12 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "open",
       "title": "Question ouverte",
-      "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
+      "question": "Quel est le nom du plus grand côté d'un tgle rectangle",
       "answers": [],
       "correct": 0,
-      "correction": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
+      "correction": "L'hypoténuse",
       "pairs": [],
-      "explanation": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)"
+      "explanation": "C'est toujours l'hypoténuse! Le côté en face de l'angle droit"
     },
     {
       "type": "quiz",

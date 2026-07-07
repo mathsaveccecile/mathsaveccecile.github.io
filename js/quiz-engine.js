@@ -8,6 +8,7 @@ function isConnected() {
   return user.connected;
 }
 
+
 function openLoginModal() {
   const modal = document.createElement("div");
   modal.innerHTML = `
@@ -106,4 +107,18 @@ function logout() {
   location.reload();
 }
 
+function normalizeAnswer(text) {
+  return String(text)
+    .toLowerCase()
+    .replace(/[’']/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^(le|la|les|l|un|une|des)\s+/i, "");
+}
+
+function normalizeWithoutAccents(text) {
+  return normalizeAnswer(text)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 loadUser();
