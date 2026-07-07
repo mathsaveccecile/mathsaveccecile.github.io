@@ -34,6 +34,10 @@ function renderCapsule() {
     if (step.type === "quiz") return renderQuiz(step, index);
     return "";
   }).join("");
+
+    setTimeout(() => {
+    document.body.style.transform = "scale(1)";
+  }, 0);
 }
 
 function buttons(index) {
@@ -90,40 +94,99 @@ function renderPdf(step, index) {
 }
 
 function renderQuiz(step, index) {
-  return `
-    <div class="step">
-      ${buttons(index)}
-      <h4>❓ Quiz QCM</h4>
+  const type = step.quizType || "qcm";
 
-      <input value="${step.question || ""}" placeholder="Question"
-        oninput="updateQuizField(${index}, 'question', this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+  if (type === "qcm") {
+    return `
+      <div class="step">
+        ${buttons(index)}
+        <h4>❓ Quiz QCM</h4>
 
-      <input value="${step.answers?.[0] || ""}" placeholder="Réponse 1"
-        oninput="updateQuizAnswer(${index}, 0, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        <input value="${step.question || ""}" placeholder="Question"
+          oninput="updateQuizField(${index}, 'question', this.value)">
 
-      <input value="${step.answers?.[1] || ""}" placeholder="Réponse 2"
-        oninput="updateQuizAnswer(${index}, 1, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        ${(step.answers || ["", "", ""]).map((a, i) => `
+          <input value="${a || ""}" placeholder="Réponse ${i + 1}"
+            oninput="updateQuizAnswer(${index}, ${i}, this.value)">
+        `).join("")}
 
-      <input value="${step.answers?.[2] || ""}" placeholder="Réponse 3"
-        oninput="updateQuizAnswer(${index}, 2, this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
+        <label>Bonne réponse :</label>
+        <select onchange="updateQuizField(${index}, 'correct', Number(this.value))">
+          <option value="0" ${step.correct === 0 ? "selected" : ""}>Réponse 1</option>
+          <option value="1" ${step.correct === 1 ? "selected" : ""}>Réponse 2</option>
+          <option value="2" ${step.correct === 2 ? "selected" : ""}>Réponse 3</option>
+        </select>
 
-      <label>Bonne réponse :</label>
-      <select onchange="updateQuizField(${index}, 'correct', Number(this.value))"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;margin-bottom:10px;">
-        <option value="0" ${step.correct === 0 ? "selected" : ""}>Réponse 1</option>
-        <option value="1" ${step.correct === 1 ? "selected" : ""}>Réponse 2</option>
-        <option value="2" ${step.correct === 2 ? "selected" : ""}>Réponse 3</option>
-      </select>
+        <textarea placeholder="Explication"
+          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+      </div>
+    `;
+  }
 
-      <textarea placeholder="Explication"
-        oninput="updateQuizField(${index}, 'explanation', this.value)"
-        style="width:90%;padding:12px;border-radius:10px;border:none;font-size:16px;min-height:90px;">${step.explanation || ""}</textarea>
-    </div>
-  `;
+  if (type === "open") {
+    return `
+      <div class="step">
+        ${buttons(index)}
+        <h4>✍️ Question ouverte</h4>
+
+        <textarea placeholder="Question"
+          oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
+
+        <textarea placeholder="Réponse modèle / correction"
+          oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
+
+        <textarea placeholder="Explication"
+          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+      </div>
+    `;
+  }
+
+  if (type === "trueFalse") {
+    return `
+      <div class="step">
+        ${buttons(index)}
+        <h4>✅❌ Vrai / Faux</h4>
+
+        <textarea placeholder="Affirmation"
+          oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
+
+        <label>Bonne réponse :</label>
+        <select onchange="updateQuizField(${index}, 'correct', this.value === 'true')">
+          <option value="true" ${step.correct === true ? "selected" : ""}>Vrai</option>
+          <option value="false" ${step.correct === false ? "selected" : ""}>Faux</option>
+        </select>
+
+        <textarea placeholder="Explication"
+          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+      </div>
+    `;
+  }
+
+  if (type === "matching") {
+    const pairs = step.pairs || [["", ""], ["", ""], ["", ""]];
+
+    return `
+      <div class="step">
+        ${buttons(index)}
+        <h4>🔗 Associer les paires</h4>
+
+        <textarea placeholder="Consigne"
+          oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
+
+        ${pairs.map((pair, i) => `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <input value="${pair[0] || ""}" placeholder="Élément gauche ${i + 1}"
+              oninput="updatePair(${index}, ${i}, 0, this.value)">
+            <input value="${pair[1] || ""}" placeholder="Élément droite ${i + 1}"
+              oninput="updatePair(${index}, ${i}, 1, this.value)">
+          </div>
+        `).join("")}
+
+        <textarea placeholder="Explication"
+          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+      </div>
+    `;
+  }
 }
 
 function moveStepUp(index) {
@@ -164,6 +227,14 @@ function updateQuizAnswer(index, answerIndex, value) {
   }
 
   capsule.steps[index].answers[answerIndex] = value;
+}
+
+function updatePair(index, pairIndex, side, value) {
+  if (!Array.isArray(capsule.steps[index].pairs)) {
+    capsule.steps[index].pairs = [["", ""], ["", ""], ["", ""]];
+  }
+
+  capsule.steps[index].pairs[pairIndex][side] = value;
 }
 function getSelectedLevels() {
   return Array.from(document.querySelectorAll(".levelCheck:checked"))
@@ -287,7 +358,12 @@ document.getElementById("addPdfBtn").addEventListener("click", async () => {
 document.getElementById("addQuizBtn").addEventListener("click", () => {
   capsule.steps.push({
     type: "quiz",
-    title: "Quiz"
+    quizType: "qcm",
+    title: "Quiz QCM",
+    question: "",
+    answers: ["", "", ""],
+    correct: 0,
+    explanation: ""
   });
 
   renderCapsule();
@@ -344,11 +420,13 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
       if (step.type === "quiz") {
   return {
     type: "quiz",
-    quizType: "qcm",
+    quizType: step.quizType || "qcm",
     title: step.title || "Quiz",
-    question: step.question || "Question à compléter",
-    answers: step.answers || ["", "", ""],
-    correct: typeof step.correct === "number" ? step.correct : 0,
+    question: step.question || "",
+    answers: step.answers || [],
+    correct: step.correct ?? 0,
+    correction: step.correction || "",
+    pairs: step.pairs || [],
     explanation: step.explanation || ""
   };
 }
@@ -406,5 +484,53 @@ document.querySelectorAll(".levelCheck").forEach((check) => {
   check.addEventListener("change", () => {
     capsule.levels = getSelectedLevels();
   });
+});
+document.addEventListener("mousedown", (e) => {
+  const champ = e.target.closest("input, textarea, select");
+
+  if (champ) {
+    setTimeout(() => {
+      champ.focus();
+    }, 0);
+  }
+}, true);
+
+document.getElementById("addOpenQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "open",
+    title: "Question ouverte",
+    question: "",
+    correction: "",
+    explanation: ""
+  });
+
+  renderCapsule();
+});
+
+document.getElementById("addTrueFalseQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "trueFalse",
+    title: "Vrai / Faux",
+    question: "",
+    correct: true,
+    explanation: ""
+  });
+
+  renderCapsule();
+});
+
+document.getElementById("addMatchingQuizBtn").addEventListener("click", () => {
+  capsule.steps.push({
+    type: "quiz",
+    quizType: "matching",
+    title: "Associer les paires",
+    question: "",
+    pairs: [["", ""], ["", ""], ["", ""]],
+    explanation: ""
+  });
+
+  renderCapsule();
 });
 renderCapsule();

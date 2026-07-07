@@ -3,6 +3,7 @@ import { join, basename } from 'path'
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from 'fs'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+app.disableHardwareAcceleration()
 
 
 function createWindow() {
