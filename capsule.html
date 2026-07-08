@@ -508,6 +508,22 @@ function checkTrueFalse(value){
   const step = capsuleData.steps[currentStep];
   const ok = value === step.correct;
 
+  const buttons = document.querySelectorAll(".quiz button");
+  const trueButton = buttons[0];
+  const falseButton = buttons[1];
+
+  if(value === true && trueButton){
+    trueButton.style.background = ok
+      ? "linear-gradient(135deg,#1fa463,#5cff8d)"
+      : "linear-gradient(135deg,#b83232,#ff6b6b)";
+  }
+
+  if(value === false && falseButton){
+    falseButton.style.background = ok
+      ? "linear-gradient(135deg,#1fa463,#5cff8d)"
+      : "linear-gradient(135deg,#b83232,#ff6b6b)";
+  }
+
   showFeedback(ok, step.explanation || "");
 }
 
