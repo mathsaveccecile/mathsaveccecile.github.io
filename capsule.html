@@ -536,21 +536,67 @@ function checkOpenAnswer(){
   const answer = textarea.value;
   const expected = step.correction || "";
 
-  if(openAnswerIsCorrect(answer, expected)){
+  function clean(text){
+    return String(text || "")
+      .replace(/[.,;:!?]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function normal(text){
+    return String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’]/g, "'")
+      .replace(/[.,;:!?]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function sansArticle(text){
+    return normal(text)
+      .replace(/^(le|la|les|un|une|des)\s+/i, "")
+      .replace(/^l'/i, "")
+      .trim();
+  }
+
+  const answerClean = clean(answer);
+  const expectedClean = clean(expected);
+
+  const expectedIsOneLetter = /^[A-Z]$/.test(expectedClean);
+
+  if(expectedIsOneLetter){
+    if(answerClean === expectedClean){
+      textarea.style.border = "3px solid #5cff8d";
+      textarea.style.background = "#effff4";
+      showFeedback(true);
+    } else {
+      textarea.style.border = "3px solid #ff6b6b";
+      textarea.style.background = "#fff2f2";
+      showFeedback(false);
+    }
+    return;
+  }
+
+  if(normal(answer) === normal(expected)){
     textarea.style.border = "3px solid #5cff8d";
     textarea.style.background = "#effff4";
     showFeedback(true);
     return;
   }
 
-  if(openAnswerMissingArticle(answer, expected)){
+  if(sansArticle(answer) === sansArticle(expected)){
     textarea.style.border = "3px solid #ffd85c";
     textarea.style.background = "#fff9df";
 
     const feedback = document.getElementById("feedback");
     if(feedback){
-      feedback.className = "feedback bad";
       feedback.innerHTML = "🟡 Presque ! Il manque l’article dans ta réponse.";
+      feedback.style.marginTop = "25px";
+      feedback.style.fontSize = "22px";
+      feedback.style.fontWeight = "900";
+      feedback.style.color = "#ffd85c";
     }
     return;
   }
