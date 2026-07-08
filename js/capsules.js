@@ -29,7 +29,7 @@ margin:auto;
 </a>
 
 <h3 style="
-margin-top:15px;
+margin-top:18px;
 font-size:22px;
 color:#2738c9;
 ">
@@ -37,28 +37,30 @@ ${capsule.title}
 </h3>
 
 <div style="
-height:14px;
-background:#dddddd;
+margin-top:18px;
+height:18px;
+background:#e6e6e6;
 border-radius:999px;
 overflow:hidden;
-margin-top:12px;
 ">
 
 <div style="
 width:0%;
 height:100%;
 background:linear-gradient(90deg,#ff4fa3,#3058ff);
+border-radius:999px;
 "></div>
 
 </div>
 
-<p style="
-margin-top:8px;
-font-weight:bold;
-color:#444;
+<div style="
+margin-top:10px;
+font-size:18px;
+font-weight:900;
+color:#2738c9;
 ">
-0 %
-</p>
+0 % terminé
+</div>
 
 </div>
 `;
