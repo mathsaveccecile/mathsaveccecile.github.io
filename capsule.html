@@ -20,7 +20,29 @@ header{display:none}
 .sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
 .badges{margin:15px 0}
 .badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:900;font-size:15px;color:white}
-.step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
+..progressBar{
+  width:100%;
+  height:16px;
+  background:#4b435b;
+  border-radius:999px;
+  overflow:hidden;
+  margin:12px 0 6px;
+}
+
+#progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(135deg,#ff4fa3,#3058ff);
+  border-radius:999px;
+  transition:width .35s ease;
+}
+
+#progress{
+  font-weight:900;
+  text-align:center;
+  margin:6px 0 18px;
+}
+step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
 .step.active{background:#1e5c49}
 .num{color:#ffe45c;font-weight:900;margin-right:12px}
 .main{padding:45px}
@@ -80,7 +102,15 @@ window.MathJax = {
       </a>
     </p>
 
-    <h3 id="progress">Progression : 0 %</h3>
+    <h3>Progression</h3>
+
+<div class="progressBar">
+  <div id="progressFill"></div>
+</div>
+
+<p id="progress" style="text-align:center;margin-top:8px;">
+  0 %
+</p>
     <div id="stepsList"></div>
   </aside>
 
@@ -538,12 +568,14 @@ function render(){
     MathJax.typesetPromise();
   }
 
-  const percent = capsuleData.steps.length
-    ? Math.round(((currentStep + 1) / capsuleData.steps.length) * 100)
-    : 0;
+  const percent = getTimeProgressPercent();
 
-  document.getElementById("progress").textContent =
-    "Progression : " + percent + " %";
+document.getElementById("progress").textContent = percent + " %";
+
+const progressFill = document.getElementById("progressFill");
+if(progressFill){
+  progressFill.style.width = percent + "%";
+}
 }
 
 async function nextStep(){
