@@ -817,18 +817,12 @@ async function renderStudentDashboard(){
   const capsulesCommencees = data.length;
 const capsulesTerminees = data.filter(item => Number(item.percent || 0) >= 100).length;
 
-const tempsEtudieSecondes = data.reduce((sum, item) => {
-  return sum + Math.round((Number(item.percent || 0) / 100) * getTotalDuration());
-}, 0);
-
-const tempsEtudie = formatDuration(tempsEtudieSecondes);
 const derniere = data[0];
 
 dashboard.innerHTML = `
   <strong>👋 Bonjour !</strong><br>
   📚 Capsules commencées : <strong>${capsulesCommencees}</strong><br>
   ✅ Capsules terminées : <strong>${capsulesTerminees}</strong><br>
-  ⏱️ Temps étudié : <strong>${tempsEtudie}</strong><br>
   📖 Dernière capsule :<br>
   <strong>${derniere.capsule}</strong>
 `;
@@ -842,13 +836,10 @@ async function restartCapsule(){
   if(!sessionData.session) return;
 
   await supabaseClient
-    .from("progressions")
-    .update({
-      current_step: 0,
-      percent: 0
-    })
-    .eq("user_id", sessionData.session.user.id)
-    .eq("capsule", capsuleData.title);
+  .from("progressions")
+  .delete()
+  .eq("user_id", sessionData.session.user.id)
+  .eq("capsule", capsuleData.title);
 
   currentStep = 0;
   render();
