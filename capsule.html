@@ -580,13 +580,25 @@ function showOpenCorrection(){
 
 function checkMatching(){
   const step = capsuleData.steps[currentStep];
+  let allOk = true;
 
-  const ok = (step.pairs || []).every((pair, index) => {
+  (step.pairs || []).forEach((pair, index) => {
     const select = document.getElementById("match-" + index);
-    return select && Number(select.value) === index;
+    if(!select) return;
+
+    const ok = Number(select.value) === index;
+
+    select.style.color = "white";
+    select.style.fontWeight = "900";
+    select.style.border = ok ? "3px solid #5cff8d" : "3px solid #ff6b6b";
+    select.style.background = ok
+      ? "linear-gradient(135deg,#1fa463,#5cff8d)"
+      : "linear-gradient(135deg,#b83232,#ff6b6b)";
+
+    if(!ok) allOk = false;
   });
 
-  showFeedback(ok, step.explanation || "");
+  showFeedback(allOk, allOk ? (step.explanation || "") : "");
 }
 function render(){
   renderSteps();
