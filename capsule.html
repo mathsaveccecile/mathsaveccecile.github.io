@@ -777,6 +777,9 @@ async function updateLoginDisplay(){
       ✅ Élève connecté<br>
       <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline">
         🚪 Se déconnecter
+        <a href="#" onclick="restartCapsule(); return false;" style="color:white;text-decoration:underline;">
+🔄 Recommencer cette capsule
+</a>
       </a>
       <div id="studentDashboard" style="margin-top:18px;font-size:16px;line-height:1.5;"></div>
     `;
@@ -835,6 +838,29 @@ dashboard.innerHTML = `
   <strong>${derniere.capsule}</strong>
 `;
 }
+async function restartCapsule(){
+  if(!confirm("Veux-tu vraiment recommencer cette capsule depuis le début ?")){
+    return;
+  }
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  if(!sessionData.session) return;
+
+  await supabaseClient
+    .from("progressions")
+    .update({
+      current_step: 0,
+      percent: 0
+    })
+    .eq("user_id", sessionData.session.user.id)
+    .eq("capsule", capsuleData.title);
+
+  currentStep = 0;
+  render();
+
+  alert("La capsule a été remise à zéro !");
+}
+
 async function logoutStudent(){
   await supabaseClient.auth.signOut();
   localStorage.removeItem("studentConnected");
