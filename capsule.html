@@ -540,14 +540,14 @@ function checkOpenAnswer(){
 
   if(userAnswer === expectedAnswer){
     textarea.style.border = "3px solid #5cff8d";
-    textarea.style.background = "#214a35";
+    textarea.style.background = "#effff4";
     showFeedback(true);
     return;
   }
 
   if(userWithoutAccents === expectedWithoutAccents){
     textarea.style.border = "3px solid #ff6b6b";
-    textarea.style.background = "#4a2323";
+    textarea.style.background = "#fff2f2";
 
     const feedback = document.getElementById("feedback");
     feedback.innerHTML = `
