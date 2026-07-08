@@ -112,15 +112,21 @@ function normalizeAnswer(text) {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[’']/g, " ")
+    .replace(/[’]/g, "'")
     .replace(/[.,;:!?]/g, "")
     .replace(/\s+/g, " ")
-    .trim()
-    .replace(/^(le|la|les|l|un|une|des)\s+/i, "");
+    .trim();
 }
 
 function normalizeWithoutAccents(text) {
   return normalizeAnswer(text);
+}
+
+function answerWithoutArticles(text) {
+  return normalizeAnswer(text)
+    .replace(/^(le|la|les|un|une|des)\s+/i, "")
+    .replace(/^l'/i, "")
+    .trim();
 }
 
 loadUser();

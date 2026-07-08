@@ -538,32 +538,27 @@ function checkOpenAnswer(){
   const userWithoutAccents = normalizeWithoutAccents(answer);
   const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
 
-  if(userAnswer === expectedAnswer){
+  if(userAnswer === expectedAnswer || userWithoutAccents === expectedWithoutAccents){
     textarea.style.border = "3px solid #5cff8d";
     textarea.style.background = "#effff4";
     showFeedback(true);
     return;
   }
 
-  if(userWithoutAccents === expectedWithoutAccents){
-    textarea.style.border = "3px solid #ff6b6b";
-    textarea.style.background = "#fff2f2";
+  if(answerWithoutArticles(answer) === answerWithoutArticles(step.correction || "")){
+    textarea.style.border = "3px solid #ffd85c";
+    textarea.style.background = "#fff9df";
 
     const feedback = document.getElementById("feedback");
-    feedback.innerHTML = `
-      <div style="color:#ff6b6b;">
-        ❌ Presque ! Il manque un accent ou un accent n'est pas au bon endroit.
-      </div>
-    `;
-    feedback.style.marginTop = "25px";
-    feedback.style.fontSize = "22px";
-    feedback.style.fontWeight = "900";
+    if(feedback){
+      feedback.className = "feedback bad";
+      feedback.innerHTML = "🟡 Presque ! Il manque sûrement l’article dans ta réponse.";
+    }
     return;
   }
 
   textarea.style.border = "3px solid #ff6b6b";
   textarea.style.background = "#fff2f2";
-
   showFeedback(false);
 }
 
