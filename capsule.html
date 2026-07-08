@@ -534,21 +534,16 @@ function checkOpenAnswer(){
   const step = capsuleData.steps[currentStep];
   const textarea = document.getElementById("openAnswer");
   const answer = textarea.value;
+  const expected = step.correction || "";
 
-  const userAnswer = normalizeAnswer(answer);
-  const expectedAnswer = normalizeAnswer(step.correction || "");
-
-  const userNoArticle = answerWithoutArticles(answer);
-  const expectedNoArticle = answerWithoutArticles(step.correction || "");
-
-  if(userAnswer === expectedAnswer){
+  if(openAnswerIsCorrect(answer, expected)){
     textarea.style.border = "3px solid #5cff8d";
     textarea.style.background = "#effff4";
     showFeedback(true);
     return;
   }
 
-  if(userNoArticle === expectedNoArticle){
+  if(openAnswerMissingArticle(answer, expected)){
     textarea.style.border = "3px solid #ffd85c";
     textarea.style.background = "#fff9df";
 

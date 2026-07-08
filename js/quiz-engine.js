@@ -8,7 +8,6 @@ function isConnected() {
   return user.connected;
 }
 
-
 function openLoginModal() {
   const modal = document.createElement("div");
   modal.innerHTML = `
@@ -107,8 +106,19 @@ function logout() {
   location.reload();
 }
 
+function cleanPunctuation(text) {
+  return String(text || "")
+    .replace(/[.,;:!?]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isSingleLetterAnswer(text) {
+  return /^[A-Z]$/.test(cleanPunctuation(text));
+}
+
 function normalizeAnswer(text) {
-  return String(text)
+  return String(text || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -127,6 +137,28 @@ function answerWithoutArticles(text) {
     .replace(/^(le|la|les|un|une|des)\s+/i, "")
     .replace(/^l'/i, "")
     .trim();
+}
+
+function openAnswerIsCorrect(userText, expectedText) {
+  const userClean = cleanPunctuation(userText);
+  const expectedClean = cleanPunctuation(expectedText);
+
+  if (isSingleLetterAnswer(expectedClean)) {
+    return userClean === expectedClean;
+  }
+
+  return normalizeAnswer(userText) === normalizeAnswer(expectedText);
+}
+
+function openAnswerMissingArticle(userText, expectedText) {
+  const userClean = cleanPunctuation(userText);
+  const expectedClean = cleanPunctuation(expectedText);
+
+  if (isSingleLetterAnswer(expectedClean)) {
+    return false;
+  }
+
+  return answerWithoutArticles(userText) === answerWithoutArticles(expectedText);
 }
 
 loadUser();
