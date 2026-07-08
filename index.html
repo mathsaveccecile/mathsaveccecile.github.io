@@ -389,7 +389,7 @@ nav{
   color:#555;
 }
 
-#searchInput{
+#searchCapsule{
   width:100%;
   padding:18px 22px;
   border-radius:999px;
@@ -398,7 +398,7 @@ nav{
   outline:none;
 }
 
-#searchInput:focus{
+#searchCapsule:focus{
   border-color:#ff4fa3;
 }
 
@@ -529,10 +529,10 @@ nav{
     <p>Tape un mot-clé : Pythagore, angles, cosinus, bissectrice...</p>
 
     <input
-      id="searchInput"
-      type="text"
-      placeholder="Rechercher une capsule..."
-    >
+  id="searchCapsule"
+  type="text"
+  placeholder="Rechercher une capsule..."
+>
 
     <div id="searchResults"></div>
   </div>
@@ -564,6 +564,7 @@ nav{
 <footer>
   <span>© Maths avec Cécile</span>
 </footer>
-<script src="js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/capsules.js?v=3"></script>
 </body>
 </html>
