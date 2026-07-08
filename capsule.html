@@ -535,24 +535,24 @@ function checkOpenAnswer(){
   const userAnswer = normalizeAnswer(answer);
   const expectedAnswer = normalizeAnswer(step.correction || "");
 
-  const userWithoutAccents = normalizeWithoutAccents(answer);
-  const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
+  const userNoArticle = answerWithoutArticles(answer);
+  const expectedNoArticle = answerWithoutArticles(step.correction || "");
 
-  if(userAnswer === expectedAnswer || userWithoutAccents === expectedWithoutAccents){
+  if(userAnswer === expectedAnswer){
     textarea.style.border = "3px solid #5cff8d";
     textarea.style.background = "#effff4";
     showFeedback(true);
     return;
   }
 
-  if(answerWithoutArticles(answer) === answerWithoutArticles(step.correction || "")){
+  if(userNoArticle === expectedNoArticle){
     textarea.style.border = "3px solid #ffd85c";
     textarea.style.background = "#fff9df";
 
     const feedback = document.getElementById("feedback");
     if(feedback){
       feedback.className = "feedback bad";
-      feedback.innerHTML = "🟡 Presque ! Il manque sûrement l’article dans ta réponse.";
+      feedback.innerHTML = "🟡 Presque ! Il manque l’article dans ta réponse.";
     }
     return;
   }
