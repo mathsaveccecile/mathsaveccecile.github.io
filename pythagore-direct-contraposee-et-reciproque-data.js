@@ -10,84 +10,130 @@ const capsuleData = {
   "steps": [
     {
       "type": "video",
-      "title": "test",
-      "src": "https://youtube.com/shorts/xkt9xsxBie8",
-      "duration": 90
+      "title": "Introduction",
+      "src": "https://youtube.com/shorts/32KUvlKp31Q",
+      "duration": 34
+    },
+    {
+      "type": "image",
+      "title": "Mode d'emploi.",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-2.jpg"
+    },
+    {
+      "type": "image",
+      "title": "Plan de la capsule. ",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-3.jpg"
+    },
+    {
+      "type": "video",
+      "title": "Observer avant de calculer. ",
+      "src": "https://youtube.com/shorts/dJeWbhFQPGQ",
+      "duration": 18
+    },
+    {
+      "type": "video",
+      "title": "Mettre des mots sur ce qu'on observe",
+      "src": "https://youtube.com/shorts/15_nov0Fq7M",
+      "duration": 32
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "Quiz",
-      "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
+      "question": "Dans les deux vidéos que tu as regardées, qu'est ce qu'on compare?",
       "answers": [
-        "\\(\\widehat{ABC}\\)",
-        "Calculer \\\\( \\\\frac{3}{4}+\\\\frac{2}{5} \\\\)",
-        "\\(\\widehat{ABC}\\)"
+        "Les longueurs des côtés. ",
+        "Les aires des carrés. ",
+        "Les périmètres des carrés. "
       ],
-      "correct": 0,
+      "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "\\\\( AB^2+AC^2=BC^2 \\\\) bravo etc bla bla test",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-2.png"
+      "explanation": "Bravo on observe dans ces deux vidéos des carrés sue l'on déplace sans en ajouter ni en enlever. Ce qui reste identique quand on déplace un carré c'est son aire. ",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-6.png"
+    },
+    {
+      "type": "video",
+      "title": "Démonstration visuelle. ",
+      "src": "https://youtube.com/shorts/xkt9xsxBie8",
+      "duration": 90
+    },
+    {
+      "type": "video",
+      "title": "L'énoncé du théorème de Pythagore. ",
+      "src": "https://youtube.com/shorts/HsV5m_JREpo",
+      "duration": 69
+    },
+    {
+      "type": "video",
+      "title": "Quiz",
+      "src": "https://youtube.com/shorts/emcrVVdOVXM",
+      "duration": 11
     },
     {
       "type": "quiz",
       "quizType": "open",
       "title": "Question ouverte",
-      "question": "Quel est le nom du plus grand côté d'un tgle rectangle",
+      "question": "si un triangle ABC est rectangle en B alors le côté [AC] est",
       "answers": [],
       "correct": 0,
-      "correction": "L'hypoténuse",
+      "correction": "l'hypoténuse.",
       "pairs": [],
       "explanation": "",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-3.png"
+      "image": ""
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "Quel est le triangle dans lequel on peut appliquer le théorème de Pythagore? ",
+      "answers": [
+        "1",
+        "2",
+        "4"
+      ],
+      "correct": 2,
+      "correction": "",
+      "pairs": [],
+      "explanation": "on applique le théorème de Pythagore toujours dans un triangle rectangle. ",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-11.png"
     },
     {
       "type": "quiz",
       "quizType": "matching",
       "title": "Associer les paires",
-      "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
+      "question": "Sans utiliser de calculatrice, associe les paires: ",
       "answers": [],
       "correct": 0,
       "correction": "",
       "pairs": [
         [
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)"
+          " \\( \\\\sqrt{49} \\)",
+          "7"
         ],
         [
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)"
+          "\\( \\sqrt{144} \\)",
+          "12"
         ],
         [
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-          "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)"
+          "\\( \\sqrt{9}\\\\)",
+          "3"
         ]
       ],
-      "explanation": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-4.png"
+      "explanation": "",
+      "image": ""
     },
     {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
+      "question": "La longueur du côté d'un carré d'aire 144cm^{2} est 12 cm",
       "answers": [],
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "Calculer \\( \\frac{3}{4}+\\frac{2}{5} \\)",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-5.png"
-    },
-    {
-      "type": "image",
-      "title": "Mode d'emploi.",
-      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-6.jpg"
-    },
-    {
-      "type": "image",
-      "title": "PLAN DE LA CAPSULE",
-      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-7.jpg"
+      "explanation": "Je cherceh le nombre positif dont le carré est égal à 144, c'est al racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-13.png"
     }
   ]
 };
