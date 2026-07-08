@@ -12,7 +12,7 @@ async function chargerCapsules(niveau) {
 
   let progressions = [];
 
-  if(sessionData.session){
+  if (sessionData.session) {
     const { data } = await supabaseClient
       .from("progressions")
       .select("capsule, percent")
@@ -38,22 +38,12 @@ async function chargerCapsules(niveau) {
       liste.innerHTML += `
         <div class="card" style="background:none;box-shadow:none;padding:0;max-width:340px;margin:0 auto;">
 
-          <div style="
-            height:18px;
-            background:#e6e6e6;
-            border-radius:999px;
-            overflow:hidden;
-            margin-bottom:18px;
+          <a href="capsule.html?data=${capsule.dataFile}" style="
+            display:block;
+            position:relative;
+            width:260px;
+            margin:auto;
           ">
-            <div style="
-              width:${percent}%;
-              height:100%;
-              background:${fillStyle};
-              border-radius:999px;
-            "></div>
-          </div>
-
-          <a href="capsule.html?data=${capsule.dataFile}">
             <img
               src="${capsule.thumbnail}"
               alt="${capsule.title}"
@@ -64,8 +54,26 @@ async function chargerCapsules(niveau) {
                 border-radius:25px;
                 box-shadow:0 18px 35px rgba(0,0,0,.20);
                 display:block;
-                margin:auto;
               ">
+
+            <div style="
+              position:absolute;
+              left:12px;
+              right:12px;
+              bottom:12px;
+              height:12px;
+              background:rgba(255,255,255,.35);
+              border-radius:999px;
+              overflow:hidden;
+              backdrop-filter:blur(3px);
+            ">
+              <div style="
+                width:${percent}%;
+                height:100%;
+                background:${fillStyle};
+                border-radius:999px;
+              "></div>
+            </div>
           </a>
 
         </div>
