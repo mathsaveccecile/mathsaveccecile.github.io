@@ -529,7 +529,8 @@ function checkTrueFalse(value){
 
 function checkOpenAnswer(){
   const step = capsuleData.steps[currentStep];
-  const answer = document.getElementById("openAnswer").value;
+  const textarea = document.getElementById("openAnswer");
+  const answer = textarea.value;
 
   const userAnswer = normalizeAnswer(answer);
   const expectedAnswer = normalizeAnswer(step.correction || "");
@@ -538,11 +539,16 @@ function checkOpenAnswer(){
   const expectedWithoutAccents = normalizeWithoutAccents(step.correction || "");
 
   if(userAnswer === expectedAnswer){
+    textarea.style.border = "3px solid #5cff8d";
+    textarea.style.background = "#214a35";
     showFeedback(true);
     return;
   }
 
   if(userWithoutAccents === expectedWithoutAccents){
+    textarea.style.border = "3px solid #ff6b6b";
+    textarea.style.background = "#4a2323";
+
     const feedback = document.getElementById("feedback");
     feedback.innerHTML = `
       <div style="color:#ff6b6b;">
@@ -554,6 +560,9 @@ function checkOpenAnswer(){
     feedback.style.fontWeight = "900";
     return;
   }
+
+  textarea.style.border = "3px solid #ff6b6b";
+  textarea.style.background = "#4a2323";
 
   showFeedback(false);
 }
