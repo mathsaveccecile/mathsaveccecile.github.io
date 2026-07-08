@@ -708,13 +708,33 @@ async function logoutStudent(){
   location.reload();
 }
 
+function getStepDuration(step){
+  if(step.type === "image") return 60;
+  if(step.type === "quiz") return 60;
+  if(step.type === "video") return Number(step.duration || 0);
+  if(step.type === "pdf") return 0;
+  return 0;
+}
+
+function getTimeProgressPercent(){
+  const total = capsuleData.steps.reduce((sum, step) => sum + getStepDuration(step), 0);
+  if(total === 0) return 0;
+
+  let done = 0;
+
+  for(let i = 0; i <= currentStep; i++){
+    done += getStepDuration(capsuleData.steps[i]);
+  }
+
+  return Math.min(100, Math.round((done / total) * 100));
+}
 async function saveProgress(){
   if(!userIsConnected || !capsuleData.steps.length) return;
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
   if(!sessionData.session) return;
 
-  const percent = Math.round(((currentStep + 1) / capsuleData.steps.length) * 100);
+  const percent = getTimeProgressPercent();
 
   const { data } = await supabaseClient
     .from("progressions")
