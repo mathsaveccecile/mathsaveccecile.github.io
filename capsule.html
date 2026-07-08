@@ -817,10 +817,6 @@ async function renderStudentDashboard(){
   const capsulesCommencees = data.length;
 const capsulesTerminees = data.filter(item => Number(item.percent || 0) >= 100).length;
 
-const moyenne = Math.round(
-  data.reduce((sum, item) => sum + Number(item.percent || 0), 0) / capsulesCommencees
-);
-
 const tempsEtudieSecondes = data.reduce((sum, item) => {
   return sum + Math.round((Number(item.percent || 0) / 100) * getTotalDuration());
 }, 0);
@@ -832,7 +828,6 @@ dashboard.innerHTML = `
   <strong>👋 Bonjour !</strong><br>
   📚 Capsules commencées : <strong>${capsulesCommencees}</strong><br>
   ✅ Capsules terminées : <strong>${capsulesTerminees}</strong><br>
-  📈 Progression moyenne : <strong>${moyenne} %</strong><br>
   ⏱️ Temps étudié : <strong>${tempsEtudie}</strong><br>
   📖 Dernière capsule :<br>
   <strong>${derniere.capsule}</strong>
