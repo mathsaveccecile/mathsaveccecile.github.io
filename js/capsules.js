@@ -9,7 +9,6 @@ async function chargerCapsules(niveau) {
   const capsules = await reponse.json();
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
-
   let progressions = [];
 
   if (sessionData.session) {
@@ -30,10 +29,9 @@ async function chargerCapsules(niveau) {
       const progression = progressions.find(p => p.capsule === capsule.title);
       const percent = progression ? Number(progression.percent || 0) : 0;
 
-      const fillStyle =
-        percent >= 100
-          ? "linear-gradient(90deg,#ffd700,#fff8b5,#ffe066,#fff8b5,#ffd700)"
-          : "linear-gradient(90deg,#ff4fa3,#3058ff)";
+      const fillStyle = percent >= 100
+        ? "linear-gradient(90deg,#ffd700,#fff8b5,#ffe066,#ffd700)"
+        : "linear-gradient(90deg,#ff4fa3,#3058ff)";
 
       liste.innerHTML += `
         <div class="card" style="background:none;box-shadow:none;padding:0;max-width:340px;margin:0 auto;">
@@ -42,6 +40,7 @@ async function chargerCapsules(niveau) {
             display:block;
             position:relative;
             width:260px;
+            height:260px;
             margin:auto;
           ">
             <img
@@ -58,14 +57,13 @@ async function chargerCapsules(niveau) {
 
             <div style="
               position:absolute;
-              left:12px;
-              right:12px;
-              bottom:12px;
+              left:14px;
+              right:14px;
+              bottom:14px;
               height:12px;
-              background:rgba(255,255,255,.35);
+              background:rgba(230,230,230,.85);
               border-radius:999px;
               overflow:hidden;
-              backdrop-filter:blur(3px);
             ">
               <div style="
                 width:${percent}%;
