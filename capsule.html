@@ -766,7 +766,9 @@ async function checkConnection(){
   }
 
   updateLoginDisplay();
+  await renderStudentDashboard();
   render();
+  
 }
 
 async function updateLoginDisplay(){
@@ -828,7 +830,7 @@ dashboard.innerHTML = `
   font-weight:700;
   line-height:1.3;
 ">
-${derniereCapsule}
+${derniere.capsule}
 </span>
 `;
 }
