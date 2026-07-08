@@ -110,15 +110,17 @@ function logout() {
 function normalizeAnswer(text) {
   return String(text)
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[’']/g, " ")
+    .replace(/[.,;:!?]/g, "")
     .replace(/\s+/g, " ")
     .trim()
     .replace(/^(le|la|les|l|un|une|des)\s+/i, "");
 }
 
 function normalizeWithoutAccents(text) {
-  return normalizeAnswer(text)
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  return normalizeAnswer(text);
 }
+
 loadUser();
