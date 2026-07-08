@@ -108,15 +108,15 @@ const capsuleData = {
       "correction": "",
       "pairs": [
         [
-          " \\( \\\\sqrt{49} \\)",
+          " \\( \\sqrt{49}\\)",
           "7"
         ],
         [
-          "\\( \\sqrt{144} \\)",
+          "\\( \\sqrt{144}\\)",
           "12"
         ],
         [
-          "\\( \\sqrt{9}\\\\)",
+          "\\( \\sqrt{9}\\)",
           "3"
         ]
       ],
@@ -127,12 +127,12 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "La longueur du côté d'un carré d'aire 144cm^{2} est 12 cm",
+      "question": "La longueur du côté d'un carré d'aire 144cm\\(^{2}\\) est 12 cm",
       "answers": [],
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "Je cherceh le nombre positif dont le carré est égal à 144, c'est al racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
+      "explanation": "Je cherche le nombre positif dont le carré est égal à 144, c'est al racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-13.png"
     }
   ]
