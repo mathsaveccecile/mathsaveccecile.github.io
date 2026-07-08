@@ -723,19 +723,63 @@ async function checkConnection(){
   render();
 }
 
-function updateLoginDisplay(){
+async function updateLoginDisplay(){
   const link = document.querySelector(".sidebar p");
 
   if(userIsConnected){
     link.innerHTML = `
       ✅ Élève connecté<br>
-      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline;font-weight:bold;">
+      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline">
         🚪 Se déconnecter
       </a>
+      <div id="studentDashboard" style="margin-top:18px;font-size:16px;line-height:1.5;"></div>
     `;
+
+    await renderStudentDashboard();
   }
 }
 
+async function renderStudentDashboard(){
+  const dashboard = document.getElementById("studentDashboard");
+  if(!dashboard) return;
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  if(!sessionData.session) return;
+
+  const { data, error } = await supabaseClient
+    .from("progressions")
+    .select("capsule, percent, current_step, updated_at")
+    .eq("user_id", sessionData.session.user.id)
+    .order("updated_at", { ascending: false });
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  if(!data || data.length === 0){
+    dashboard.innerHTML = `
+      <strong>👋 Bienvenue !</strong><br>
+      Aucune capsule commencée pour l’instant.
+    `;
+    return;
+  }
+
+  const capsulesCommencees = data.length;
+  const moyenne = Math.round(
+    data.reduce((sum, item) => sum + Number(item.percent || 0), 0) / capsulesCommencees
+  );
+
+  const derniere = data[0];
+
+  dashboard.innerHTML = `
+    <strong>👋 Bonjour !</strong><br>
+    📚 Capsules commencées : <strong>${capsulesCommencees}</strong><br>
+    📈 Progression moyenne : <strong>${moyenne} %</strong><br>
+    📖 Dernière capsule :<br>
+    <strong>${derniere.capsule}</strong>
+  `;
+}
 async function logoutStudent(){
   await supabaseClient.auth.signOut();
   localStorage.removeItem("studentConnected");
@@ -744,7 +788,7 @@ async function logoutStudent(){
 }
 
 function getStepDuration(step){
-  if(step.type === "image") return 60;
+  if(step.type === "image") return 20;
   if(step.type === "quiz") return 60;
   if(step.type === "video") return Number(step.duration || 0);
   if(step.type === "pdf") return 0;
