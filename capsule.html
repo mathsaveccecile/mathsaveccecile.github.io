@@ -492,7 +492,16 @@ function checkAnswer(answerIndex){
   const step = capsuleData.steps[currentStep];
   const ok = Number(answerIndex) === Number(step.correct);
 
-  showFeedback(ok, step.explanation || "");
+  const buttons = document.querySelectorAll(".quiz button");
+  const clickedButton = buttons[answerIndex];
+
+  if(clickedButton){
+    clickedButton.style.background = ok
+      ? "linear-gradient(135deg,#1fa463,#5cff8d)"
+      : "linear-gradient(135deg,#b83232,#ff6b6b)";
+  }
+
+  showFeedback(ok, ok ? (step.explanation || "") : "");
 }
 
 function checkTrueFalse(value){
