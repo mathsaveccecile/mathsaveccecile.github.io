@@ -20,13 +20,14 @@ header{display:none}
 .sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
 .badges{margin:15px 0}
 .badges span{display:inline-block;background:#4b435b;padding:10px 15px;border-radius:20px;margin:5px;font-weight:900;font-size:15px;color:white}
-..progressBar{
+.progressBar{
   width:100%;
-  height:16px;
-  background:#4b435b;
+  height:22px;
+  background:#2b243b;
+  border:2px solid #5b4b78;
   border-radius:999px;
   overflow:hidden;
-  margin:12px 0 6px;
+  margin:14px 0 8px;
 }
 
 #progressFill{
@@ -35,12 +36,14 @@ header{display:none}
   background:linear-gradient(135deg,#ff4fa3,#3058ff);
   border-radius:999px;
   transition:width .35s ease;
+  box-shadow:0 0 12px rgba(255,79,163,.65);
 }
 
 #progress{
   font-weight:900;
   text-align:center;
-  margin:6px 0 18px;
+  margin:8px 0 18px;
+  font-size:22px;
 }
 step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
 .step.active{background:#1e5c49}
