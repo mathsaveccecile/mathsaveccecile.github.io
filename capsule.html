@@ -775,17 +775,15 @@ async function updateLoginDisplay(){
   if(userIsConnected){
     link.innerHTML = `
       ✅ Élève connecté<br>
-      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline">
+      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline;">
         🚪 Se déconnecter
-        <a href="#" onclick="restartCapsule(); return false;" style="color:white;text-decoration:underline;">
-🔄 Recommencer cette capsule
-</a>
-      </a>
-      <div id="studentDashboard" style="margin-top:18px;font-size:16px;line-height:1.5;"></div>
-    `;
+      </a><br>
 
-    await renderStudentDashboard();
-  }
+      <a href="#" onclick="restartCapsule(); return false;" style="color:white;text-decoration:underline;">
+        🔄 Recommencer cette capsule
+      </a>
+    `;
+}
 }
 
 async function renderStudentDashboard(){
