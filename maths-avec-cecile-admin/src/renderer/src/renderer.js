@@ -80,6 +80,10 @@ function renderPdf(step, index) {
     <div class="step">
       ${buttons(index)}
       <h4>📄 PDF</h4>
+
+      <input value="${step.title || ""}" placeholder="Titre du PDF"
+        oninput="updateStepTitle(${index}, this.value)">
+
       <div style="background:white;color:#222;border-radius:14px;padding:18px;margin-top:12px;max-width:420px;">
         <p><strong>📄 ${step.name || "Fichier PDF"}</strong></p>
         <p>👁️ Visible dans la capsule<br>🔒 Téléchargement réservé aux élèves connectés</p>
@@ -106,6 +110,8 @@ function renderQuiz(step, index) {
   const type = step.quizType || "qcm";
 
   if (type === "qcm") {
+    const answers = step.answers || ["", "", "", ""];
+
     return `
       <div class="step">
         ${buttons(index)}
@@ -115,7 +121,7 @@ function renderQuiz(step, index) {
         <input value="${step.question || ""}" placeholder="Question"
           oninput="updateQuizField(${index}, 'question', this.value)">
 
-        ${(step.answers || ["", "", ""]).map((a, i) => `
+        ${answers.map((a, i) => `
           <input value="${a || ""}" placeholder="Réponse ${i + 1}"
             oninput="updateQuizAnswer(${index}, ${i}, this.value)">
         `).join("")}
@@ -125,6 +131,7 @@ function renderQuiz(step, index) {
           <option value="0" ${step.correct === 0 ? "selected" : ""}>Réponse 1</option>
           <option value="1" ${step.correct === 1 ? "selected" : ""}>Réponse 2</option>
           <option value="2" ${step.correct === 2 ? "selected" : ""}>Réponse 3</option>
+          <option value="3" ${step.correct === 3 ? "selected" : ""}>Réponse 4</option>
         </select>
 
         <textarea placeholder="Correction / explication"
@@ -172,7 +179,7 @@ function renderQuiz(step, index) {
   }
 
   if (type === "matching") {
-    const pairs = step.pairs || [["", ""], ["", ""], ["", ""]];
+    const pairs = step.pairs || [["", ""], ["", ""], ["", ""], ["", ""]];
 
     return `
       <div class="step">
@@ -250,15 +257,25 @@ function updateQuizField(index, field, value) {
 
 function updateQuizAnswer(index, answerIndex, value) {
   if (!Array.isArray(capsule.steps[index].answers)) {
-    capsule.steps[index].answers = ["", "", ""];
+    capsule.steps[index].answers = ["", "", "", ""];
   }
+
+  while (capsule.steps[index].answers.length < 4) {
+    capsule.steps[index].answers.push("");
+  }
+
   capsule.steps[index].answers[answerIndex] = value;
 }
 
 function updatePair(index, pairIndex, side, value) {
   if (!Array.isArray(capsule.steps[index].pairs)) {
-    capsule.steps[index].pairs = [["", ""], ["", ""], ["", ""]];
+    capsule.steps[index].pairs = [["", ""], ["", ""], ["", ""], ["", ""]];
   }
+
+  while (capsule.steps[index].pairs.length < 4) {
+    capsule.steps[index].pairs.push(["", ""]);
+  }
+
   capsule.steps[index].pairs[pairIndex][side] = value;
 }
 
@@ -336,6 +353,18 @@ async function openSavedCapsule(filename) {
   capsule.thumbnailPath = capsule.thumbnailPath || "";
   capsule.steps = capsule.steps || [];
 
+  capsule.steps.forEach(step => {
+    if (step.type === "quiz" && step.quizType === "qcm") {
+      if (!Array.isArray(step.answers)) step.answers = ["", "", "", ""];
+      while (step.answers.length < 4) step.answers.push("");
+    }
+
+    if (step.type === "quiz" && step.quizType === "matching") {
+      if (!Array.isArray(step.pairs)) step.pairs = [["", ""], ["", ""], ["", ""], ["", ""]];
+      while (step.pairs.length < 4) step.pairs.push(["", ""]);
+    }
+  });
+
   renderCapsule();
   alert("✅ Capsule ouverte !");
 }
@@ -355,7 +384,7 @@ document.getElementById("addImageBtn").addEventListener("click", async () => {
   renderCapsule();
 });
 
-  renderCapsule();
+renderCapsule();
 
 document.getElementById("addVideoBtn").addEventListener("click", () => {
   capsule.steps.push({
@@ -368,14 +397,13 @@ document.getElementById("addVideoBtn").addEventListener("click", () => {
   renderCapsule();
 });
 
-
 document.getElementById("addPdfBtn").addEventListener("click", async () => {
   const pdf = await window.api.choosePdf();
   if (!pdf) return;
 
   capsule.steps.push({
     type: "pdf",
-    title: "PDF",
+    title: "Fiche PDF",
     name: pdf.name,
     path: pdf.path,
     src: pdf.src
@@ -390,7 +418,7 @@ document.getElementById("addQuizBtn").addEventListener("click", () => {
     quizType: "qcm",
     title: "QCM",
     question: "",
-    answers: ["", "", ""],
+    answers: ["", "", "", ""],
     correct: 0,
     explanation: "",
     image: ""
@@ -432,7 +460,7 @@ document.getElementById("addMatchingQuizBtn").addEventListener("click", () => {
     quizType: "matching",
     title: "Associer les paires",
     question: "",
-    pairs: [["", ""], ["", ""], ["", ""]],
+    pairs: [["", ""], ["", ""], ["", ""], ["", ""]],
     explanation: "",
     image: ""
   });
@@ -484,7 +512,7 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
       if (step.type === "pdf") {
         return {
           type: "pdf",
-          title: step.name || "PDF",
+          title: step.title || step.name || "PDF",
           src: step.src || "",
           loginRequired: true
         };
@@ -502,8 +530,8 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
           pairs: step.pairs || [],
           explanation: step.quizType === "open" ? "" : (step.explanation || ""),
           image: step.image || "",
-imageName: step.imageName || "",
-imagePath: step.imagePath || ""
+          imageName: step.imageName || "",
+          imagePath: step.imagePath || ""
         };
       }
 
@@ -546,6 +574,18 @@ if (importBtn) {
       capsule.thumbnailName = capsule.thumbnailName || "";
       capsule.thumbnailPath = capsule.thumbnailPath || "";
       capsule.steps = capsule.steps || [];
+
+      capsule.steps.forEach(step => {
+        if (step.type === "quiz" && step.quizType === "qcm") {
+          if (!Array.isArray(step.answers)) step.answers = ["", "", "", ""];
+          while (step.answers.length < 4) step.answers.push("");
+        }
+
+        if (step.type === "quiz" && step.quizType === "matching") {
+          if (!Array.isArray(step.pairs)) step.pairs = [["", ""], ["", ""], ["", ""], ["", ""]];
+          while (step.pairs.length < 4) step.pairs.push(["", ""]);
+        }
+      });
 
       renderCapsule();
 
