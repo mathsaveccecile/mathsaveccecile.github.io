@@ -1435,22 +1435,22 @@ async function renderLikeButton(){
   const box = document.createElement("div");
   box.id = "likeBox";
   box.style.marginTop = "0";
-box.style.marginBottom = "80px";
+  box.style.marginBottom = "80px";
   box.style.textAlign = "center";
 
   if(!sessionData.session){
     box.innerHTML = `
-      box.innerHTML = `
-  <p style="font-size:18px;font-weight:900;margin:8px 0;">
-    👍 Cette capsule t'a plu ?<br>
-    Un grand merci de me laisser un petit Like !
-  </p>
-  <button onclick="openLoginModal()" style="font-size:16px;padding:12px 22px;">
-    Connecte-toi pour mettre un like
-  </button>
-`;
+      <p style="font-size:18px;font-weight:900;margin:8px 0;">
+        👍 Cette capsule t'a plu ?<br>
+        Un grand merci de me laisser un petit Like !
+      </p>
+      <button onclick="openLoginModal()" style="font-size:16px;padding:12px 22px;">
+        Connecte-toi pour mettre un like
+      </button>
+    `;
+
     const nav = card.querySelector(".desktopBtns");
-card.insertBefore(box, nav);
+    card.insertBefore(box, nav);
     return;
   }
 
@@ -1471,13 +1471,15 @@ card.insertBefore(box, nav);
     `;
   } else {
     box.innerHTML = `
-      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?</p>
-      <button onclick="likeCapsule()">👍 Je laisse un Like</button>
+      <p style="font-size:18px;font-weight:900;margin:8px 0;">👍 Cette capsule t'a plu ?</p>
+      <button onclick="likeCapsule()" style="font-size:16px;padding:12px 22px;">
+        👍 Je laisse un Like
+      </button>
     `;
   }
 
   const nav = card.querySelector(".desktopBtns");
-card.insertBefore(box, nav);
+  card.insertBefore(box, nav);
 }
 
 async function likeCapsule(){
