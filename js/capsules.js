@@ -145,34 +145,45 @@ function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
           ">
 
         <div style="
-          position:absolute;
-          top:12px;
-          left:12px;
-          right:12px;
-          display:flex;
-          justify-content:space-between;
-          gap:10px;
-        ">
-          <span style="
-            background:rgba(255,255,255,.94);
-            color:#16a34a;
-            padding:8px 12px;
-            border-radius:999px;
-            font-size:18px;
-            font-weight:900;
-            box-shadow:0 8px 18px rgba(0,0,0,.18);
-          ">👍 ${stats.likes}</span>
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:34px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  z-index:2;
+">
+  <span style="
+    background:#ffffff;
+    color:#111111;
+    padding:8px 15px;
+    border-radius:999px;
+    font-size:17px;
+    font-weight:900;
+    box-shadow:0 6px 14px rgba(0,0,0,.22);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  ">
+    👍 <span>${stats.likes}</span>
+  </span>
 
-          <span style="
-            background:rgba(255,255,255,.94);
-            color:#3058ff;
-            padding:8px 12px;
-            border-radius:999px;
-            font-size:18px;
-            font-weight:900;
-            box-shadow:0 8px 18px rgba(0,0,0,.18);
-          ">💬 ${stats.commentaires}</span>
-        </div>
+  <span style="
+    background:#ffffff;
+    color:#111111;
+    padding:8px 15px;
+    border-radius:999px;
+    font-size:17px;
+    font-weight:900;
+    box-shadow:0 6px 14px rgba(0,0,0,.22);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  ">
+    💬 <span>${stats.commentaires}</span>
+  </span>
+</div>
 
         <div style="
           position:absolute;
