@@ -21,10 +21,10 @@ header{display:none}
 .sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
 .badges{margin:15px 0}
 #badges span{
-    background:#ffffff;
+    background:#e9f8ee;
     color:#111;
     border-radius:999px;
-    padding:12px 22px;
+    padding:7px 12px;
     font-weight:800;
     box-shadow:0 5px 15px rgba(0,0,0,.18);
 }
@@ -51,7 +51,7 @@ header{display:none}
   font-weight:900;
   text-align:center;
   margin:8px 0 18px;
-  font-size:22px;
+  font-size:15px;
 }
 .step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
 .step.active{background:#1e5c49}
@@ -440,19 +440,19 @@ function updateStats(){
       ⏱️ ${formatDuration(getTotalDuration())}
     </span>
 
-    <span style="background:#ffffff;color:#111;">
+    <span style="background:#e9f8ee;color:#111;">
       📹 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}
     </span>
 
-    <span style="background:#ffffff;color:#111;">
+    <span style="background:#e9f8ee;color:#111;">
       🖼️ ${images} ${images > 1 ? "images" : "image"}
     </span>
 
-    <span style="background:#ffffff;color:#111;">
+    <span style="background:#e9f8ee;color:#111;">
       ❓ ${quiz} QUIZ
     </span>
 
-    <span style="background:#ffffff;color:#111;">
+    <span style="background:#e9f8ee;color:#111;">
       📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}
     </span>
   `;
