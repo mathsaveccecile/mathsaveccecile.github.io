@@ -353,18 +353,18 @@ function startCapsule(){
   checkConnection();
 }
 function icon(step){
-  if(step.type === "video") return "🎥";
-  if(step.type === "image") return "🖼️";
-  if(step.type === "pdf") return "📄";
+    if(step.type === "video") return "▶️";
+    if(step.type === "image") return "🖼️";
+    if(step.type === "pdf") return "📄";
 
-  if(step.type === "quiz"){
-    if(step.quizType === "QCM") return "❓";
-    if(step.quizType === "open") return "✍️";
-    if(step.quizType === "matching") return "🔗";
-    if(step.quizType === "trueFalse") return "✅❌";
-  }
+    if(step.type === "quiz"){
+        if(step.quizType === "qcm") return "📝";
+        if(step.quizType === "open") return "✍️";
+        if(step.quizType === "matching") return "🔗";
+        if(step.quizType === "trueFalse") return "✅❌";
+    }
 
-  return "⭐";
+    return "📌";
 }
 
 function youtubeEmbed(url){
