@@ -143,7 +143,7 @@ const capsuleData = {
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "Je cherche le nombre positif dont le carré est égal à 144, c'est al racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
+      "explanation": "Je cherche le nombre positif dont le carré est égal à 144, c'est la racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-15.png"
     },
     {
@@ -174,6 +174,136 @@ const capsuleData = {
       ],
       "explanation": "",
       "image": ""
+    },
+    {
+      "type": "video",
+      "title": "Trouver la longueur de l'hypoténuse",
+      "src": "https://youtube.com/shorts/ams7hnI1Zw4",
+      "duration": 98
+    },
+    {
+      "type": "video",
+      "title": "Trouver un des côtés de l'angle droit. ",
+      "src": "https://youtube.com/shorts/pUSQo8DjIjU",
+      "duration": 104
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "La longueur KM vaut",
+      "answers": [
+        "\\( \\sqrt{74,74}\\)",
+        "\\( \\sqrt{9,76}\\)",
+        "",
+        ""
+      ],
+      "correct": 1,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Le triangle KML est rectangle en M; On peut donc appliquer le théorème de Pythagore et on trouve: \nKL\\(^{2}\\) = KM\\(^{2}\\) + ML\\(^{2}\\)\n6,5\\(^{2}\\) = KM\\(^{2}\\) + 5,7\\(^{2}\\)\nKM\\(^{2}\\) = 42,25 - 32,49 = 9,76",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-19.png"
+    },
+    {
+      "type": "image",
+      "title": "Exercice type brevet direct",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-20.jpg"
+    },
+    {
+      "type": "video",
+      "title": "Correction détaillée de l'exercice type",
+      "src": "https://youtube.com/shorts/2DjvtDnFnOM",
+      "duration": 95
+    },
+    {
+      "type": "video",
+      "title": "\"Contraposée\": inverser et nier",
+      "src": "https://youtube.com/shorts/STXIch6Rfk4",
+      "duration": 121
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "La contraposée de l'implication \"Si un triangle est rectangle alors il a un angle droit\" est:",
+      "answers": [
+        "S'il n'a pas d'angle droit, il n'est pas rectangle.",
+        "S'il est rectangle, il a un angle droit.",
+        "S'il a un angle droit, il est rectangle. ",
+        "S'il n'est pas rectangle, il n'a pas d'angle droit. "
+      ],
+      "correct": 1,
+      "correction": "",
+      "pairs": [],
+      "explanation": "La contraposée s'obtient en inversant les deux parties et en ajoutant la négation dans chacune. ",
+      "image": ""
+    },
+    {
+      "type": "video",
+      "title": "La contraposée du théorème",
+      "src": "https://youtube.com/shorts/STXIch6Rfk4",
+      "duration": 121
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "Dans quel cas utilise-t-on la contraposée du théorème de Pythagore?",
+      "answers": [
+        "Pour prouver qu'un triangle n'est pas rectangle",
+        "Pour calculer une longueur",
+        "Pour prouver qu'un triangle est rectangle",
+        "Pour calculer une aire"
+      ],
+      "correct": 0,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": ""
+    },
+    {
+      "type": "image",
+      "title": "Exercice type brevet CONTRAPOSEE",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-26.jpg"
+    },
+    {
+      "type": "image",
+      "title": "Correction détaillée de l'exercice type brevet CONTRAPOSEE",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-27.jpg"
+    },
+    {
+      "type": "video",
+      "title": "La réciproque",
+      "src": "https://youtube.com/shorts/rDGiMCb2d3w",
+      "duration": 129
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "L'élève a bien rédigé",
+      "answers": [],
+      "correct": false,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Attention il faut effectuer les calculs séparément! En citant les longueurs avec les lettres au départ du calcul.",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-29.png"
+    },
+    {
+      "type": "image",
+      "title": "Exercice type brevet RECIPROQUE",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-30.jpg"
+    },
+    {
+      "type": "image",
+      "title": "Correction exercice type brevet RECIPROQUE ",
+      "src": "assets/images/pythagore-direct-contraposee-et-reciproque-image-31.jpg"
+    },
+    {
+      "type": "video",
+      "title": "Bravo!",
+      "src": "https://youtube.com/shorts/zuZnkWaJu8Y",
+      "duration": 18
     },
     {
       "type": "pdf",

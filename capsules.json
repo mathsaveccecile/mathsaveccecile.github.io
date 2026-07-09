@@ -1,108 +1,197 @@
 [
   {
     "title": "Modéliser un problème. ",
-    "levels": ["4e", "3e"],
+    "levels": [
+      "4e",
+      "3e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/modeliser-un-probleme.png",
     "page": "modeliser-un-probleme.html",
     "dataFile": "modeliser-un-probleme-data.js",
     "keywords": [
-      "modéliser", "modeliser", "problème", "probleme", "énoncé", "enonce",
-      "mise en équation", "equation", "calcul", "raisonnement", "situation"
+      "modéliser",
+      "modeliser",
+      "problème",
+      "probleme",
+      "énoncé",
+      "enonce",
+      "mise en équation",
+      "equation",
+      "calcul",
+      "raisonnement",
+      "situation"
     ]
   },
   {
     "title": "Trigonométrie. Comprendre et utiliser le cosinus. ",
-    "levels": ["4e", "3e"],
+    "levels": [
+      "4e",
+      "3e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/trigonometrie-comprendre-et-utiliser-le-cosinus.png",
     "page": "trigonometrie-comprendre-et-utiliser-le-cosinus.html",
     "dataFile": "trigonometrie-comprendre-et-utiliser-le-cosinus-data.js",
     "keywords": [
-      "trigonométrie", "trigonometrie", "trigo", "cosinus", "cos",
-      "sinus", "sin", "tangente", "tan", "triangle rectangle",
-      "hypoténuse", "hypotenuse", "angle", "côté", "cote",
-      "calculer une longueur", "calculer un angle"
+      "trigonométrie",
+      "trigonometrie",
+      "trigo",
+      "cosinus",
+      "cos",
+      "sinus",
+      "sin",
+      "tangente",
+      "tan",
+      "triangle rectangle",
+      "hypoténuse",
+      "hypotenuse",
+      "angle",
+      "côté",
+      "cote",
+      "calculer une longueur",
+      "calculer un angle"
     ]
   },
   {
     "title": "Trigonométrie: maitrise tout le chapitre. ",
-    "levels": ["3e"],
+    "levels": [
+      "3e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/trigonometrie-maitrise-tout-le-chapitre.png",
     "page": "trigonometrie-maitrise-tout-le-chapitre.html",
     "dataFile": "trigonometrie-maitrise-tout-le-chapitre-data.js",
     "keywords": [
-      "trigonométrie", "trigonometrie", "trigo", "cosinus", "cos",
-      "sinus", "sin", "tangente", "tan", "sohcahtoa",
-      "triangle rectangle", "hypoténuse", "hypotenuse", "angle",
-      "côté adjacent", "cote adjacent", "côté opposé", "cote oppose",
-      "calculer une longueur", "calculer un angle"
+      "trigonométrie",
+      "trigonometrie",
+      "trigo",
+      "cosinus",
+      "cos",
+      "sinus",
+      "sin",
+      "tangente",
+      "tan",
+      "sohcahtoa",
+      "triangle rectangle",
+      "hypoténuse",
+      "hypotenuse",
+      "angle",
+      "côté adjacent",
+      "cote adjacent",
+      "côté opposé",
+      "cote oppose",
+      "calculer une longueur",
+      "calculer un angle"
     ]
   },
   {
     "title": "Mesurer et construire des angles, tracer la bissectrice. ",
-    "levels": ["6e"],
+    "levels": [
+      "6e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/mesurer-et-construire-des-angles-tracer-la-bissectrice.png",
     "page": "mesurer-et-construire-des-angles-tracer-la-bissectrice.html",
     "dataFile": "mesurer-et-construire-des-angles-tracer-la-bissectrice-data.js",
     "keywords": [
-      "angle", "angles", "mesurer", "construire", "bissectrice",
-      "rapporteur", "degré", "degre", "sommet", "côtés", "cotes",
-      "tracer", "géométrie", "geometrie"
+      "angle",
+      "angles",
+      "mesurer",
+      "construire",
+      "bissectrice",
+      "rapporteur",
+      "degré",
+      "degre",
+      "sommet",
+      "côtés",
+      "cotes",
+      "tracer",
+      "géométrie",
+      "geometrie"
     ]
   },
   {
     "title": "Droites parallèles et perpendiculaires. ",
-    "levels": ["6e"],
+    "levels": [
+      "6e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
     "page": "droites-paralleles-et-perpendiculaires.html",
     "dataFile": "droites-paralleles-et-perpendiculaires-data.js",
     "keywords": [
-      "droites", "parallèles", "paralleles", "perpendiculaires",
-      "perpendiculaire", "parallèle", "parallele", "angle droit",
-      "équerre", "equerre", "géométrie", "geometrie"
+      "droites",
+      "parallèles",
+      "paralleles",
+      "perpendiculaires",
+      "perpendiculaire",
+      "parallèle",
+      "parallele",
+      "angle droit",
+      "équerre",
+      "equerre",
+      "géométrie",
+      "geometrie"
     ]
   },
   {
     "title": "Reconnaitre, comparer les angles. Raisonner. ",
-    "levels": ["6e"],
+    "levels": [
+      "6e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/reconnaitre-comparer-les-angles-raisonner.png",
     "page": "reconnaitre-comparer-les-angles-raisonner.html",
     "dataFile": "reconnaitre-comparer-les-angles-raisonner-data.js",
     "keywords": [
-      "angle", "angles", "reconnaitre", "reconnaître", "comparer",
-      "raisonner", "plus grand", "plus petit", "aigu", "obtus",
-      "droit", "sommet", "côtés", "cotes"
+      "angle",
+      "angles",
+      "reconnaitre",
+      "reconnaître",
+      "comparer",
+      "raisonner",
+      "plus grand",
+      "plus petit",
+      "aigu",
+      "obtus",
+      "droit",
+      "sommet",
+      "côtés",
+      "cotes"
     ]
   },
   {
     "title": "Comprendre la notion d'angle",
-    "levels": ["6e"],
+    "levels": [
+      "6e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
     "page": "comprendre-la-notion-d-angle.html",
     "dataFile": "comprendre-la-notion-d-angle-data.js",
     "keywords": [
-      "angle", "angles", "notion", "comprendre", "sommet",
-      "côté", "cote", "ouverture", "géométrie", "geometrie"
+      "angle",
+      "angles",
+      "notion",
+      "comprendre",
+      "sommet",
+      "côté",
+      "cote",
+      "ouverture",
+      "géométrie",
+      "geometrie"
     ]
   },
   {
     "title": "Pythagore. Direct, contraposée et réciproque. ",
-    "levels": ["4e", "3e"],
+    "levels": [
+      "4e",
+      "3e"
+    ],
     "duration": "",
     "thumbnail": "assets/thumbnails/pythagore-direct-contraposee-et-reciproque.png",
     "page": "pythagore-direct-contraposee-et-reciproque.html",
-    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js",
-    "keywords": [
-      "pythagore", "pytagore", "triangle rectangle", "hypoténuse",
-      "hypotenuse", "carré", "carre", "racine", "racine carrée",
-      "racine carree", "réciproque", "reciproque", "contraposée",
-      "contraposee", "direct", "théorème", "theoreme"
-    ]
+    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
   }
 ]
