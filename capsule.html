@@ -174,6 +174,37 @@ button,.pdf-btn{
 .mobileTopTitle{display:none}
 .mobileOverlay{display:none}
 
+.pdfMobileBox{
+  padding:10px !important;
+  text-align:center;
+}
+
+.pdfMobileBox h2{
+  font-size:28px !important;
+  margin:10px 0 18px !important;
+}
+
+.pdfMobileBox p{
+  font-size:20px !important;
+  line-height:1.35 !important;
+  margin:10px 0 18px !important;
+}
+
+.pdfMobileBox .pdf-btn{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  width:80% !important;
+  max-width:420px !important;
+  min-height:58px !important;
+  margin:14px auto !important;
+  padding:14px 20px !important;
+  font-size:22px !important;
+  line-height:1.2 !important;
+  text-align:center !important;
+  white-space:normal !important;
+}
+
 @media (max-width:800px){
   body{background:#120d22;}
 
@@ -1367,7 +1398,7 @@ async function renderLikeButton(){
 
   const box = document.createElement("div");
   box.id = "likeBox";
-  box.style.marginTop = "25px";
+  box.style.marginTop = "10px";
   box.style.textAlign = "center";
 
   if(!sessionData.session){
@@ -1392,7 +1423,7 @@ Un grand merci de me laisser un petit Like !</p>
 
   if(data){
     box.innerHTML = `
-      <p style="font-size:22px;font-weight:900;color:#5cff8d;">
+      <p style="font-size:24px;font-weight:900;color:#5cff8d;margin:10px 0;">
         💚 Merci beaucoup pour ton like !
       </p>
     `;
