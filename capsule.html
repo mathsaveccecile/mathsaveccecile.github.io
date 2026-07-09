@@ -429,11 +429,25 @@ function updateStats(){
   const pdf = capsuleData.steps.filter(s => s.type === "pdf").length;
 
   document.getElementById("badges").innerHTML = `
-    <span>⏱️ ${formatDuration(getTotalDuration())}</span>
-    <span>🎬 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}</span>
-    <span>🌄  ${images} ${images > 1 ? "images" : "image"}</span>
-    <span>❓ ${quiz} QUIZ</span>
-    <span>📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}</span>
+    <span style="background:#ffffff;color:#111;">
+      ⏱️ ${formatDuration(getTotalDuration())}
+    </span>
+
+    <span style="background:#ffffff;color:#111;">
+      📹 ${videos} ${videos > 1 ? "vidéos" : "vidéo"}
+    </span>
+
+    <span style="background:#ffffff;color:#111;">
+      🖼️ ${images} ${images > 1 ? "images" : "image"}
+    </span>
+
+    <span style="background:#ffffff;color:#111;">
+      ❓ ${quiz} QUIZ
+    </span>
+
+    <span style="background:#ffffff;color:#111;">
+      📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}
+    </span>
   `;
 }
 
