@@ -1444,7 +1444,8 @@ async function renderLikeButton(){
 Un grand merci de me laisser un petit Like !</p>
       <button onclick="openLoginModal()">Connecte-toi pour mettre un like</button>
     `;
-    card.appendChild(box);
+    const nav = card.querySelector(".desktopBtns");
+card.insertBefore(box, nav);
     return;
   }
 
@@ -1470,7 +1471,8 @@ Un grand merci de me laisser un petit Like !</p>
     `;
   }
 
-  card.appendChild(box);
+  const nav = card.querySelector(".desktopBtns");
+card.insertBefore(box, nav);
 }
 
 async function likeCapsule(){
