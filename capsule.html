@@ -140,7 +140,11 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 .commentBtn{
   display:none;
 }
-
+/* ----- Ordinateur uniquement ----- */
+#avisMobile,
+.navBtn{
+    display:none;
+}
 @media (max-width:800px){
   body{background:#120d22;}
 
@@ -302,7 +306,11 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
     box-shadow:0 -10px 25px rgba(0,0,0,.35);
     margin-top:0;
   }
-
+/* ----- Téléphone uniquement ----- */
+#avisMobile,
+.navBtn{
+    display:flex;
+}
   .navBtn{
     width:70px !important;
     height:70px !important;
