@@ -607,12 +607,12 @@ function renderSteps(){
     div.className = "step" + (index === currentStep ? " active" : "");
 
     div.onclick = async () => {
-      currentStep = index;
-      await saveProgress();
-      closeMenu();
-      render();
-      ;
-    };
+  currentStep = index;
+  await saveProgress();
+  closeMenu();
+  render();
+  scrollToContentTop();
+};
 
     const titre =
       step.type === "quiz"
