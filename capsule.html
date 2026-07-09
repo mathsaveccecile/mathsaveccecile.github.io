@@ -79,12 +79,8 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 
 .mobileTopTitle{display:none}
 .mobileOverlay{display:none}
-.mobileClosePlan{display:none}
 
-.pdfFrame{
-    width:100% !important;
-    height:72vh !important;
-}
+
 @media (max-width:800px){
   body{background:#120d22;}
 .pdfFrame{
@@ -172,14 +168,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 
   .sidebar.open{transform:translateX(0);}
 
-  .mobileClosePlan{
-    display:block;
-    width:100%;
-    margin:0 0 18px;
-    padding:14px 18px;
-    font-size:18px;
-    background:#46395f;
-  }
+
 
   .sidebar h1{font-size:24px;}
   .badges span{font-size:13px;padding:8px 12px;}
@@ -294,7 +283,6 @@ window.MathJax = {
 
 <div class="page">
   <aside class="sidebar">
-    <button class="mobileClosePlan" onclick="closeMenu()">Fermer le plan</button>
     <h1 id="title">Chargement...</h1>
 
     <div class="badges" id="badges"></div>
@@ -568,16 +556,22 @@ function renderContent(){
     `;
   } else {
     content.innerHTML = `
-      <div>
+      <div class="pdfMobileBox">
         <h2>📄 ${pdfTitle}</h2>
-       <iframe
-    class="pdfFrame"
-    src="${step.src}#view=FitH"
-    style="border:none;border-radius:24px;">
-</iframe>
-        <div style="margin-top:25px;">
-          <a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>
-        </div>
+
+        <p style="font-size:18px;line-height:1.5;">
+          Pour lire la fiche confortablement sur téléphone, ouvre-la en plein écran.
+        </p>
+
+        <a class="pdf-btn" href="${step.src}" target="_blank" rel="noopener">
+          📖 Ouvrir la fiche en plein écran
+        </a>
+
+        <br><br><br>
+
+        <a class="pdf-btn" href="${step.src}" download>
+          📄 Télécharger le PDF
+        </a>
       </div>
     `;
   }
