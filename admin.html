@@ -332,13 +332,53 @@ function editStep(index){
   }
 
   if(step.type === "quiz"){
-    const newQuestion = prompt("Nouvelle question :", step.question);
-    if(newQuestion !== null) step.question = newQuestion;
+  const newQuestion = prompt("Nouvelle question :", step.question);
+  if(newQuestion !== null) step.question = newQuestion;
 
-    const newCorrect = prompt("Bonne réponse :", step.correctAnswer);
-    if(newCorrect !== null) step.correctAnswer = newCorrect;
-  }
+  openCorrectionEditor(index);
+  return;
+}
 
+  render();
+}
+
+function openCorrectionEditor(index){
+  const step = steps[index];
+
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.style.display = "flex";
+
+  modal.innerHTML = `
+    <div class="modal-content" style="width:700px;max-width:92vw;">
+      <h2>Correction détaillée</h2>
+
+      <p style="line-height:1.5;">
+        Tu peux écrire une correction longue.<br>
+        Pour aller à la ligne sur le site, utilise <strong>&lt;br&gt;</strong>.
+      </p>
+
+      <textarea id="correctionEditor"
+        style="height:360px;font-size:18px;line-height:1.5;"
+        placeholder="Écris ici la correction détaillée...">${step.correctAnswer || ""}</textarea>
+
+      <div class="row">
+        <button class="cancel" onclick="this.closest('.modal').remove()">Annuler</button>
+        <button onclick="saveCorrectionEditor(${index}, this)">Enregistrer</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+function saveCorrectionEditor(index, button){
+  const modal = button.closest(".modal");
+  const textarea = modal.querySelector("#correctionEditor");
+
+  steps[index].correctAnswer = textarea.value;
+
+  modal.remove();
   render();
 }
 function newCapsule(){
