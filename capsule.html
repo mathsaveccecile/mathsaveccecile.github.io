@@ -999,7 +999,7 @@ function openLoginModal(){
     <div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;">
       <div style="background:#261e38;padding:35px;border-radius:25px;width:360px;max-width:90%;">
         <h2>Connexion élève</h2>
-        <p>Connecte-toi pour garder ta progression et télécharger les fiches.</p>
+        <p>Connecte-toi pour garder ta progression, télécharger les fiches, ou mettre un petit like!</p>
 
         <input id="loginEmail" placeholder="Adresse e-mail" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
         <input id="loginPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
@@ -1259,7 +1259,7 @@ Un grand merci de me laisser un petit Like !</p>
   if(data){
     box.innerHTML = `
       <p style="font-size:22px;font-weight:900;color:#5cff8d;">
-        👍 Merci pour ton pouce vert !
+        👍 Merci pour ton like !
       </p>
     `;
   } else {
@@ -1290,11 +1290,11 @@ async function likeCapsule(){
     });
 
   if(error){
-    alert("Tu as peut-être déjà mis un pouce vert.");
+    alert("Tu as peut-être déjà mis un like.");
     return;
   }
 
-  alert("Merci beaucoup pour ton pouce vert 💚");
+  alert("Merci beaucoup pour ton like 💚");
   renderLikeButton();
 }
 async function saveProgress(){
