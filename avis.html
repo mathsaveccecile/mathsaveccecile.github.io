@@ -8,7 +8,7 @@
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
 main{max-width:900px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
-input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px}
+input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px;box-sizing:border-box}
 button{border:none;border-radius:999px;padding:16px 30px;font-size:18px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
 .card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
 .reply{background:#241d36;border-left:5px solid #ff4fa3;border-radius:16px;padding:16px;margin-top:18px}
@@ -21,7 +21,8 @@ a{color:white;font-weight:bold}
 <main>
 <a href="index.html">← Retour à l'accueil</a>
 
-<h1>Commentaires et questions publiés sur cette capsule</h1>
+<h1 id="reviewsTitle">💬 0 commentaire ou question</h1>
+
 <div id="reviewsList">Chargement...</div>
 
 <h2>Laisse un commentaire ou pose une question</h2>
@@ -44,26 +45,54 @@ const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const params = new URLSearchParams(window.location.search);
+const capsuleParam = params.get("capsule");
+
+if(capsuleParam){
+  document.getElementById("capsule").value = decodeURIComponent(capsuleParam);
+}
+
+function updateReviewsTitle(count){
+  const title = document.getElementById("reviewsTitle");
+
+  if(count === 0){
+    title.textContent = "💬 0 commentaire ou question sur cette capsule";
+  } else if(count === 1){
+    title.textContent = "💬 1 commentaire ou question sur cette capsule";
+  } else {
+    title.textContent = `💬 ${count} commentaires ou questions sur cette capsule`;
+  }
+}
+
 async function loadReviews(){
-  const { data, error } = await supabaseClient
+  let query = supabaseClient
     .from("reviews")
     .select("rating, message, pseudo, capsule, created_at, admin_reply")
     .eq("published", true)
     .order("created_at", { ascending: false });
 
+  if(capsuleParam){
+    query = query.eq("capsule", decodeURIComponent(capsuleParam));
+  }
+
+  const { data, error } = await query;
   const list = document.getElementById("reviewsList");
 
   if(error){
     list.innerHTML = "Impossible de charger les commentaires.";
+    updateReviewsTitle(0);
     return;
   }
 
-  if(!data || data.length === 0){
+  const reviews = data || [];
+  updateReviewsTitle(reviews.length);
+
+  if(reviews.length === 0){
     list.innerHTML = "<p>Aucun commentaire ou aucune question pour le moment.</p>";
     return;
   }
 
-  list.innerHTML = data.map(review => {
+  list.innerHTML = reviews.map(review => {
     const date = new Date(review.created_at);
     const dateFr = date.toLocaleDateString("fr-FR", {
       day: "numeric",
@@ -73,10 +102,6 @@ async function loadReviews(){
 
     return `
       <div class="card">
-        <h2 style="font-size:30px;margin-bottom:10px;">
-          ${"⭐".repeat(review.rating)}
-        </h2>
-
         <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
         <p><strong>📚 ${review.capsule || "Capsule non précisée"}</strong></p>
 
@@ -104,18 +129,17 @@ async function loadReviews(){
 async function sendReview(){
   const pseudo = document.getElementById("pseudo").value.trim();
   const capsule = document.getElementById("capsule").value.trim();
-  const rating = Number(document.getElementById("rating").value);
   const message = document.getElementById("message").value.trim();
 
   if(!message){
-    alert("Écris un commentaire avant d'envoyer.");
+    alert("Écris un commentaire ou une question avant d'envoyer.");
     return;
   }
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
 
   if(!sessionData.session){
-    alert("Tu dois être connecté pour laisser un commentaire.");
+    alert("Tu dois être connecté pour laisser un commentaire ou une question.");
     return;
   }
 
@@ -128,7 +152,7 @@ async function sendReview(){
       email: user.email,
       pseudo: pseudo,
       capsule: capsule,
-      rating: rating,
+      rating: 0,
       message: message,
       published: false,
       admin_reply: ""
@@ -139,18 +163,11 @@ async function sendReview(){
     return;
   }
 
-  alert("✅ Merci ! Ton commentaire est envoyé et sera publié après validation.");
+  alert("✅ Merci ! Ton commentaire ou ta question est envoyé(e) et sera publié(e) après validation.");
   document.getElementById("message").value = "";
 }
 
 loadReviews();
-
-const params = new URLSearchParams(window.location.search);
-const capsule = params.get("capsule");
-
-if(capsule){
-  document.getElementById("capsule").value = decodeURIComponent(capsule);
-}
 </script>
 
 </body>
