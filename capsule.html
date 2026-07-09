@@ -81,9 +81,16 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 .mobileOverlay{display:none}
 .mobileClosePlan{display:none}
 
+.pdfFrame{
+    width:100% !important;
+    height:72vh !important;
+}
 @media (max-width:800px){
   body{background:#120d22;}
-
+.pdfFrame{
+    width:100% !important;
+    height:72vh !important;
+}
   header{
     position:sticky;
     top:0;
@@ -563,7 +570,11 @@ function renderContent(){
     content.innerHTML = `
       <div>
         <h2>📄 ${pdfTitle}</h2>
-        <iframe src="${step.src}" style="width:100%;height:600px;border:none;border-radius:24px;"></iframe>
+       <iframe
+    class="pdfFrame"
+    src="${step.src}#view=FitH"
+    style="border:none;border-radius:24px;">
+</iframe>
         <div style="margin-top:25px;">
           <a class="pdf-btn" href="${step.src}" download>📄 Télécharger le PDF</a>
         </div>
@@ -1259,7 +1270,7 @@ Un grand merci de me laisser un petit Like !</p>
   if(data){
     box.innerHTML = `
       <p style="font-size:22px;font-weight:900;color:#5cff8d;">
-        👍 Merci pour ton like !
+        💚 Merci beaucoup pour ton like !
       </p>
     `;
   } else {
