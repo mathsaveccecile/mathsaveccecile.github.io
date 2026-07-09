@@ -145,45 +145,45 @@ function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
           ">
 
         <div style="
-  position:absolute;
-  left:14px;
-  right:14px;
-  bottom:34px;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  z-index:2;
-">
-  <span style="
-    background:#ffffff;
-    color:#111111;
-    padding:8px 15px;
-    border-radius:999px;
-    font-size:17px;
-    font-weight:900;
-    box-shadow:0 6px 14px rgba(0,0,0,.22);
-    display:flex;
-    align-items:center;
-    gap:6px;
-  ">
-    👍 <span>${stats.likes}</span>
-  </span>
+          position:absolute;
+          left:16px;
+          right:16px;
+          bottom:34px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          z-index:2;
+        ">
+          <span style="
+            background:#ffffff;
+            color:#111111;
+            padding:8px 15px;
+            border-radius:999px;
+            font-size:17px;
+            font-weight:900;
+            box-shadow:0 6px 14px rgba(0,0,0,.22);
+            display:flex;
+            align-items:center;
+            gap:6px;
+          ">
+            👍 <span>${stats.likes}</span>
+          </span>
 
-  <span style="
-    background:#ffffff;
-    color:#111111;
-    padding:8px 15px;
-    border-radius:999px;
-    font-size:17px;
-    font-weight:900;
-    box-shadow:0 6px 14px rgba(0,0,0,.22);
-    display:flex;
-    align-items:center;
-    gap:6px;
-  ">
-    💬 <span>${stats.commentaires}</span>
-  </span>
-</div>
+          <span style="
+            background:#ffffff;
+            color:#111111;
+            padding:8px 15px;
+            border-radius:999px;
+            font-size:17px;
+            font-weight:900;
+            box-shadow:0 6px 14px rgba(0,0,0,.22);
+            display:flex;
+            align-items:center;
+            gap:6px;
+          ">
+            💬 <span>${stats.commentaires}</span>
+          </span>
+        </div>
 
         <div style="
           position:absolute;
@@ -205,22 +205,6 @@ function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
       </a>
     </div>
   `;
-}
-
-async function chargerProgressions() {
-  const { data: sessionData } = await supabaseClient.auth.getSession();
-  let progressions = [];
-
-  if (sessionData.session) {
-    const { data } = await supabaseClient
-      .from("progressions")
-      .select("capsule, percent")
-      .eq("user_id", sessionData.session.user.id);
-
-    progressions = data || [];
-  }
-
-  return progressions;
 }
 
 async function chargerCapsules(niveau) {
