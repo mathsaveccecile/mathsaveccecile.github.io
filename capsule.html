@@ -19,14 +19,22 @@ header{display:none}
 .page{display:grid;grid-template-columns:330px 1fr;min-height:100vh}
 .sidebar{background:#171124;padding:25px;border-right:1px solid #33284a}
 .sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
-.badges{margin:15px 0}
-#badges span{
-    background:#e9f8ee;
-    color:#111;
-    border-radius:999px;
-    padding:7px 12px;
-    font-weight:800;
-    box-shadow:0 5px 15px rgba(0,0,0,.18);
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:18px 0;
+}
+
+.badges span{
+  background:#e9f8ee;
+  color:#111;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:18px;
+  font-weight:900;
+  white-space:nowrap;
+  box-shadow:0 5px 14px rgba(0,0,0,.18);
 }
 .progressBar{
   width:100%;
