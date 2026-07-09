@@ -74,10 +74,10 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "open",
       "title": "Question ouverte",
-      "question": "si un triangle ABC est rectangle en B alors le côté [AC] est",
+      "question": "Si un triangle ABC est rectangle en B alors le côté [AC] est",
       "answers": [],
       "correct": 0,
-      "correction": "l'hypoténuse.",
+      "correction": "L'hypoténuse.",
       "pairs": [],
       "explanation": "",
       "image": ""
@@ -201,7 +201,7 @@ const capsuleData = {
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "Le triangle KML est rectangle en M; On peut donc appliquer le théorème de Pythagore et on trouve: \nKL\\(^{2}\\) = KM\\(^{2}\\) + ML\\(^{2}\\)\n6,5\\(^{2}\\) = KM\\(^{2}\\) + 5,7\\(^{2}\\)\nKM\\(^{2}\\) = 42,25 - 32,49 = 9,76",
+      "explanation": "Le triangle KML est rectangle en M.<br><br>\n\nOn peut donc appliquer le théorème de Pythagore :<br><br>\n\n\\(KL^{2}=KM^{2}+ML^{2}\\)<br>\n\n\\(6,5^{2}=KM^{2}+5,7^{2}\\)<br>\n\n\\(KM^{2}=42,25-32,49\\)<br>\n\n\\(KM^{2}=9,76\\)<br><br>\n\nDonc :<br>\n\n\\(KM=\\sqrt{9,76}\\)",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-19.png"
     },
     {
