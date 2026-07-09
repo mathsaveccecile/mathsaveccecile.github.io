@@ -434,6 +434,41 @@ button,.pdf-btn{
 .pdfMobileBox .pdf-btn{
   margin:10px auto !important;
 }
+
+#likeAnimation{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  animation:fadeLike 2.2s ease forwards;
+}
+
+.heart{
+  position:absolute;
+  font-size:34px;
+  animation:floatHeart 1.7s ease-out forwards;
+}
+
+.heart1{left:10px;top:-20px;}
+.heart2{left:55px;top:-35px;animation-delay:.15s;}
+.heart3{right:10px;top:-25px;animation-delay:.3s;}
+
+@keyframes floatHeart{
+  0%{transform:translateY(20px) scale(.7);opacity:0;}
+  30%{opacity:1;}
+  100%{transform:translateY(-90px) scale(1.4);opacity:0;}
+}
+
+@keyframes fadeLike{
+  0%{opacity:0;}
+  15%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0;}
+}
 </style>
 <script>
 window.MathJax = {
@@ -1439,15 +1474,28 @@ async function renderLikeButton(){
   box.style.marginBottom = "20px";
   box.style.textAlign = "center";
 
+  const avisHref = "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
+
   if(!sessionData.session){
     box.innerHTML = `
-      <p style="font-size:18px;font-weight:900;margin:8px 0;">
-        👍 Cette capsule t'a plu ?<br>
-        Un grand merci de me laisser un petit Like !
-      </p>
-      <button onclick="openLoginModal()" style="font-size:16px;padding:12px 22px;">
-        Connecte-toi pour mettre un like
-      </button>
+      <div style="background:#2f2744;border-radius:24px;padding:18px;margin-top:14px;">
+        <h2 style="margin:0 0 10px;">🎉 Bravo, tu as terminé cette capsule !</h2>
+
+        <p style="font-size:18px;font-weight:900;margin:8px 0;">
+          👍 Cette capsule t'a aidé(e) ?<br>
+          Un petit Like m'encourage beaucoup à créer encore plus de capsules gratuites.
+        </p>
+
+        <button onclick="openLoginModal()" style="font-size:16px;padding:12px 22px;">
+          🔐 Connecte-toi pour mettre un Like
+        </button>
+
+        <br><br>
+
+        <a href="${avisHref}" class="pdf-btn" style="font-size:16px;padding:12px 22px;display:inline-block;">
+          💬 Je laisse un commentaire ou une question
+        </a>
+      </div>
     `;
 
     const nav = card.querySelector(".desktopBtns");
@@ -1466,16 +1514,40 @@ async function renderLikeButton(){
 
   if(data){
     box.innerHTML = `
-      <p style="font-size:24px;font-weight:900;color:#5cff8d;margin:10px 0;">
-        💚 Merci beaucoup pour ton like !
-      </p>
+      <div style="background:#2f2744;border-radius:24px;padding:18px;margin-top:14px;">
+        <h2 style="color:#5cff8d;margin:0 0 10px;">
+          💚 Merci beaucoup pour ton Like !
+        </h2>
+
+        <p style="font-size:18px;font-weight:900;margin:8px 0;">
+          Ton soutien m'encourage à continuer les capsules gratuites.
+        </p>
+
+        <a href="${avisHref}" class="pdf-btn" style="font-size:16px;padding:12px 22px;display:inline-block;">
+          💬 Je laisse un commentaire ou une question
+        </a>
+      </div>
     `;
   } else {
     box.innerHTML = `
-      <p style="font-size:18px;font-weight:900;margin:8px 0;">👍 Cette capsule t'a plu ?</p>
-      <button onclick="likeCapsule()" style="font-size:16px;padding:12px 22px;">
-        👍 Je laisse un Like
-      </button>
+      <div style="background:#2f2744;border-radius:24px;padding:18px;margin-top:14px;">
+        <h2 style="margin:0 0 10px;">🎉 Bravo, tu as terminé cette capsule !</h2>
+
+        <p style="font-size:18px;font-weight:900;margin:8px 0;">
+          👍 Cette capsule t'a aidé(e) ?<br>
+          Un petit Like m'encourage beaucoup à créer encore plus de capsules gratuites.
+        </p>
+
+        <button onclick="likeCapsule()" style="font-size:16px;padding:12px 22px;">
+          👍 Je laisse un Like
+        </button>
+
+        <br><br>
+
+        <a href="${avisHref}" class="pdf-btn" style="font-size:16px;padding:12px 22px;display:inline-block;">
+          💬 Je laisse un commentaire ou une question
+        </a>
+      </div>
     `;
   }
 
@@ -1505,8 +1577,29 @@ async function likeCapsule(){
     return;
   }
 
-  alert("Merci beaucoup pour ton like 💚");
+  showLikeAnimation();
   renderLikeButton();
+}
+
+function showLikeAnimation(){
+  const anim = document.createElement("div");
+  anim.id = "likeAnimation";
+
+  anim.innerHTML = `
+    <div style="position:relative;text-align:center;">
+      <div class="heart heart1">💚</div>
+      <div class="heart heart2">💜</div>
+      <div class="heart heart3">💖</div>
+      <img src="avatar-cecile.png" style="width:95px;height:95px;border-radius:50%;box-shadow:0 0 25px rgba(255,255,255,.5);">
+      <div style="font-size:26px;font-weight:900;margin-top:12px;">Merci beaucoup !</div>
+    </div>
+  `;
+
+  document.body.appendChild(anim);
+
+  setTimeout(() => {
+    anim.remove();
+  }, 2200);
 }
 async function saveProgress(){
   if(!userIsConnected || !capsuleData.steps.length) return;
