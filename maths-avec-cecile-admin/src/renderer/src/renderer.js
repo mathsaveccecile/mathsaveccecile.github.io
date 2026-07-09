@@ -150,8 +150,8 @@ function renderQuiz(step, index) {
         <textarea placeholder="Question"
           oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
 
-        <textarea placeholder="Réponse attendue / correction"
-          oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
+        <textarea class="correctionTextarea" placeholder="Réponse attendue / correction"
+  oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
       </div>
     `;
   }
@@ -172,8 +172,8 @@ function renderQuiz(step, index) {
           <option value="false" ${step.correct === false ? "selected" : ""}>Faux</option>
         </select>
 
-        <textarea placeholder="Correction / explication"
-          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+    <textarea class="correctionTextarea" placeholder="Correction / explication"
+  oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
   }
