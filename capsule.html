@@ -443,8 +443,64 @@ button,.pdf-btn{
   display:flex;
   align-items:center;
   justify-content:center;
+  overflow:hidden;
   color:white;
-  animation:fadeLike 2.2s ease forwards;
+  animation:fadeLike 3.2s ease forwards;
+}
+
+.likePop{
+  background:#261e38;
+  border-radius:28px;
+  padding:28px;
+  text-align:center;
+  max-width:360px;
+  box-shadow:0 0 45px rgba(255,255,255,.25);
+  animation:popCecile .7s ease-out;
+}
+
+.likePop img{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  box-shadow:0 0 25px rgba(255,255,255,.55);
+}
+
+.likePop h2{
+  margin:14px 0 8px;
+  color:#5cff8d;
+}
+
+.likePop p{
+  font-size:18px;
+  font-weight:900;
+  line-height:1.35;
+  margin:0;
+}
+
+.rainHeart{
+  position:absolute;
+  top:-60px;
+  animation:heartRain 2.8s linear forwards;
+  opacity:.95;
+}
+
+@keyframes heartRain{
+  0%{transform:translateY(-80px) rotate(0deg);opacity:0;}
+  10%{opacity:1;}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+
+@keyframes popCecile{
+  0%{transform:translateY(80px) scale(.4);opacity:0;}
+  60%{transform:translateY(-10px) scale(1.08);opacity:1;}
+  100%{transform:translateY(0) scale(1);opacity:1;}
+}
+
+@keyframes fadeLike{
+  0%{opacity:0;}
+  10%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0;}
 }
 
 .heart{
@@ -1585,13 +1641,27 @@ function showLikeAnimation(){
   const anim = document.createElement("div");
   anim.id = "likeAnimation";
 
+  let hearts = "";
+  for(let i = 0; i < 28; i++){
+    const left = Math.floor(Math.random() * 100);
+    const delay = (Math.random() * 0.9).toFixed(2);
+    const size = 22 + Math.floor(Math.random() * 20);
+    const heart = ["💚","💜","💖","💕","💗"][Math.floor(Math.random() * 5)];
+
+    hearts += `
+      <div class="rainHeart"
+        style="left:${left}%;animation-delay:${delay}s;font-size:${size}px;">
+        ${heart}
+      </div>
+    `;
+  }
+
   anim.innerHTML = `
-    <div style="position:relative;text-align:center;">
-      <div class="heart heart1">💚</div>
-      <div class="heart heart2">💜</div>
-      <div class="heart heart3">💖</div>
-      <img src="avatar-cecile.png" style="width:95px;height:95px;border-radius:50%;box-shadow:0 0 25px rgba(255,255,255,.5);">
-      <div style="font-size:26px;font-weight:900;margin-top:12px;">Merci beaucoup !</div>
+    ${hearts}
+    <div class="likePop">
+      <img src="avatar-cecile.png">
+      <h2>Merci beaucoup !</h2>
+      <p>Grâce à ton Like, tu m'encourages à créer encore plus de capsules gratuites.</p>
     </div>
   `;
 
@@ -1599,7 +1669,7 @@ function showLikeAnimation(){
 
   setTimeout(() => {
     anim.remove();
-  }, 2200);
+  }, 3200);
 }
 async function saveProgress(){
   if(!userIsConnected || !capsuleData.steps.length) return;
