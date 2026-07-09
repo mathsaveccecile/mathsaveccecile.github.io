@@ -409,6 +409,30 @@ button,.pdf-btn{
     box-shadow:0 8px 22px rgba(0,0,0,.25);
   }
 }
+/* Compactage spécial fiche PDF */
+.content:has(.pdfMobileBox){
+  min-height:0 !important;
+  height:auto !important;
+  padding:18px !important;
+  display:block !important;
+}
+
+.pdfMobileBox{
+  margin:0 !important;
+  padding:0 !important;
+}
+
+.pdfMobileBox h2{
+  margin:0 0 10px !important;
+}
+
+.pdfMobileBox p{
+  margin:0 0 12px !important;
+}
+
+.pdfMobileBox .pdf-btn{
+  margin:10px auto !important;
+}
 </style>
 <script>
 window.MathJax = {
