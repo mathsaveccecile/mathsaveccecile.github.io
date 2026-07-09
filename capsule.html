@@ -127,6 +127,7 @@ header{display:none}
 
     font-weight:bold;
 }
+
 button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
 .locked{background:#555;cursor:not-allowed}
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
@@ -136,6 +137,9 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 .mobileTopTitle{display:none}
 .mobileOverlay{display:none}
 
+.commentBtn{
+  display:none;
+}
 
 @media (max-width:800px){
   body{background:#120d22;}
@@ -232,28 +236,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   }
 
   .top-links{
-    display:block;
-    position:fixed;
-    right:14px;
-    bottom:92px;
-    z-index:1001;
-  }
-
-  #backLink{
     display:none;
-  }
-
-  #avisLink{
-    display:inline-block;
-    margin:0;
-    padding:12px 16px;
-    border-radius:999px;
-    background:#e9f8ee;
-    color:#111;
-    font-size:14px;
-    font-weight:900;
-    text-decoration:none;
-    box-shadow:0 8px 22px rgba(0,0,0,.35);
   }
 
   .card{
@@ -307,19 +290,56 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
     right:0;
     bottom:0;
     z-index:1000;
+
     display:flex;
-    gap:10px;
     justify-content:space-between;
-    padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    align-items:center;
+    gap:10px;
+
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+
     background:rgba(18,13,34,.96);
     box-shadow:0 -10px 25px rgba(0,0,0,.35);
     margin-top:0;
   }
 
+  .navBtn{
+    width:70px !important;
+    height:70px !important;
+    padding:0 !important;
+    border-radius:50% !important;
+    font-size:36px !important;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex:none !important;
+  }
+
+  .commentBtn{
+    display:flex;
+    flex:1;
+    max-width:140px;
+    margin:0 18px;
+    height:70px;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:999px;
+    background:#eef8ed;
+    color:#111;
+    text-decoration:none;
+    font-size:34px;
+    font-weight:bold;
+  }
+
   .btns button{
     flex:none;
+  }
 }
-}
+
 
 .commentaireMobile{
   display:inline-block;
