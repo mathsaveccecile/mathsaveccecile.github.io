@@ -195,7 +195,14 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   }
 
   .content > div{width:100%;}
-  .content img{max-width:100%;border-radius:18px;}
+  .content img{
+    max-width:94% !important;
+    max-height:calc(100vh - 250px);
+    width:auto !important;
+    height:auto !important;
+    object-fit:contain;
+    border-radius:18px;
+  }
 
   .content iframe{
     width:min(92vw,360px) !important;
@@ -538,9 +545,9 @@ function quizImage(step){
     <img src="${step.image}" alt="Image du quiz"
       style="
         width:auto !important;
-        max-width:100%;
+        max-width:94%;
         height:auto !important;
-        max-height:360px;
+        max-height:320px;
         object-fit:contain;
         border-radius:20px;
         margin-bottom:25px;
@@ -632,6 +639,18 @@ function renderQuizStep(step, content){
   }
 }
 
+function scrollToFeedback(){
+  const feedback = document.getElementById("feedback");
+  if(!feedback) return;
+
+  setTimeout(() => {
+    feedback.scrollIntoView({
+      behavior: "auto",
+      block: "center"
+    });
+  }, 80);
+}
+
 function showFeedback(ok, explanation = ""){
   const feedback = document.getElementById("feedback");
 
@@ -652,7 +671,9 @@ function showFeedback(ok, explanation = ""){
   feedback.style.fontWeight = "900";
 
   if(window.MathJax){
-    MathJax.typesetPromise();
+    MathJax.typesetPromise().then(() => scrollToFeedback());
+  } else {
+    scrollToFeedback();
   }
 }
 
@@ -763,6 +784,7 @@ function checkOpenAnswer(){
       feedback.style.fontWeight = "900";
       feedback.style.color = "#ffd85c";
     }
+    scrollToFeedback();
     return;
   }
 
@@ -787,7 +809,9 @@ function showOpenCorrection(){
   feedback.style.fontWeight = "900";
 
   if(window.MathJax){
-    MathJax.typesetPromise();
+    MathJax.typesetPromise().then(() => scrollToFeedback());
+  } else {
+    scrollToFeedback();
   }
 }
 
