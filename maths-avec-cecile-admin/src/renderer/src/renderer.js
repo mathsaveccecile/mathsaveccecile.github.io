@@ -134,7 +134,7 @@ function renderQuiz(step, index) {
           <option value="3" ${step.correct === 3 ? "selected" : ""}>Réponse 4</option>
         </select>
 
-        <textarea placeholder="Correction / explication"
+        <textarea class="correctionTextarea" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" placeholder="Correction / explication"
           oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
@@ -150,7 +150,7 @@ function renderQuiz(step, index) {
         <textarea placeholder="Question"
           oninput="updateQuizField(${index}, 'question', this.value)">${step.question || ""}</textarea>
 
-        <textarea class="correctionTextarea" placeholder="Réponse attendue / correction"
+        <textarea class="correctionTextarea" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" placeholder="Réponse attendue / correction"
   oninput="updateQuizField(${index}, 'correction', this.value)">${step.correction || ""}</textarea>
       </div>
     `;
@@ -172,7 +172,7 @@ function renderQuiz(step, index) {
           <option value="false" ${step.correct === false ? "selected" : ""}>Faux</option>
         </select>
 
-    <textarea class="correctionTextarea" placeholder="Correction / explication"
+    <textarea class="correctionTextarea" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" placeholder="Correction / explication"
   oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
@@ -199,8 +199,8 @@ function renderQuiz(step, index) {
           </div>
         `).join("")}
 
-        <textarea placeholder="Correction / explication"
-          oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
+        <textarea class="correctionTextarea" style="display:block;width:100%;min-height:220px;height:220px;resize:vertical;box-sizing:border-box;margin:12px 0;font-size:18px;line-height:1.5;" placeholder="Correction / explication"
+  oninput="updateQuizField(${index}, 'explanation', this.value)">${step.explanation || ""}</textarea>
       </div>
     `;
   }
