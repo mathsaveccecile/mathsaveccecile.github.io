@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Avis - Maths avec Cécile</title>
+<title>Commentaires - Maths avec Cécile</title>
 <link rel="icon" type="image/png" href="avatar-cecile.png">
 
 <style>
@@ -12,48 +12,40 @@ main{max-width:900px;margin:40px auto;background:#261e38;border-radius:28px;padd
 input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px}
 button{border:none;border-radius:999px;padding:16px 30px;font-size:18px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
 .card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
+.reply{background:#241d36;border-left:5px solid #ff4fa3;border-radius:16px;padding:16px;margin-top:18px}
 a{color:white;font-weight:bold}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DPZBQER45B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-DPZBQER45B');
-</script>
 </head>
 
 <body>
 
-<header>⭐ Avis - Maths avec Cécile</header>
+<header>💬 Commentaires - Maths avec Cécile</header>
 
 <main>
-  <a href="index.html">← Retour à l'accueil</a>
+<a href="index.html">← Retour à l'accueil</a>
 
- <h1>Avis publiés</h1>
-  <div id="reviewsList">Chargement...</div>
-  
-  <h2>Donne ton avis</h2>
-  <p>Ton avis sera publié seulement après validation.</p>
+<h1>Commentaires publiés</h1>
+<div id="reviewsList">Chargement...</div>
 
-  <div id="formAvis">
-    <input id="pseudo" placeholder="Ton pseudo" maxlength="30">
-<input id="capsule" placeholder="Nom de la capsule concernée" readonly>
-    <select id="rating">
-      <option value="5">⭐⭐⭐⭐⭐ 5 étoiles</option>
-      <option value="4">⭐⭐⭐⭐ 4 étoiles</option>
-      <option value="3">⭐⭐⭐ 3 étoiles</option>
-      <option value="2">⭐⭐ 2 étoiles</option>
-      <option value="1">⭐ 1 étoile</option>
-    </select>
+<h2>Laisse un commentaire</h2>
+<p>Ton commentaire sera publié seulement après validation.</p>
 
-    <textarea id="message" rows="5" placeholder="Écris ton avis ici..."></textarea>
+<div id="formAvis">
+  <input id="pseudo" placeholder="Ton pseudo" maxlength="30">
+  <input id="capsule" placeholder="Nom de la capsule concernée" readonly>
 
-    <button onclick="sendReview()">Envoyer mon avis</button>
-  </div>
+  <select id="rating">
+    <option value="5">⭐⭐⭐⭐⭐ 5 étoiles</option>
+    <option value="4">⭐⭐⭐⭐ 4 étoiles</option>
+    <option value="3">⭐⭐⭐ 3 étoiles</option>
+    <option value="2">⭐⭐ 2 étoiles</option>
+    <option value="1">⭐ 1 étoile</option>
+  </select>
 
-  
+  <textarea id="message" rows="5" placeholder="Écris ton commentaire ici..."></textarea>
+
+  <button onclick="sendReview()">Envoyer mon commentaire</button>
+</div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -61,82 +53,80 @@ a{color:white;font-weight:bold}
 <script>
 const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
-
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function loadReviews(){
   const { data, error } = await supabaseClient
     .from("reviews")
-    .select("rating, message, pseudo, capsule, created_at")
+    .select("rating, message, pseudo, capsule, created_at, admin_reply")
     .eq("published", true)
     .order("created_at", { ascending: false });
 
   const list = document.getElementById("reviewsList");
 
   if(error){
-    list.innerHTML = "Impossible de charger les avis.";
+    list.innerHTML = "Impossible de charger les commentaires.";
     return;
   }
 
   if(!data || data.length === 0){
-    list.innerHTML = "<p>Aucun avis publié pour le moment.</p>";
+    list.innerHTML = "<p>Aucun commentaire publié pour le moment.</p>";
     return;
   }
 
   list.innerHTML = data.map(review => {
+    const date = new Date(review.created_at);
+    const dateFr = date.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
 
-  const date = new Date(review.created_at);
+    return `
+      <div class="card">
+        <h2 style="font-size:30px;margin-bottom:10px;">
+          ${"⭐".repeat(review.rating)}
+        </h2>
 
-  const dateFr = date.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
+        <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
+        <p><strong>📚 ${review.capsule || "Capsule non précisée"}</strong></p>
 
-  return `
-    <div class="card">
+        <p style="color:#cfcfcf;font-size:14px;">
+          📅 Publié le ${dateFr}
+        </p>
 
-      <h2 style="font-size:30px;margin-bottom:10px;">
-        ${"⭐".repeat(review.rating)}
-      </h2>
+        <p style="margin-top:18px;font-size:18px;line-height:1.6;">
+          ${review.message}
+        </p>
 
-      <p style="margin:6px 0;">
-        <strong>👤 ${review.pseudo || "Élève"}</strong>
-      </p>
-
-      <p style="margin:6px 0;">
-        <strong>📚 ${review.capsule || "Capsule non précisée"}</strong>
-      </p>
-
-      <p style="margin:6px 0;color:#cfcfcf;font-size:14px;">
-        📅 Publié le ${dateFr}
-      </p>
-
-      <p style="margin-top:18px;font-size:18px;line-height:1.6;">
-        ${review.message}
-      </p>
-
-    </div>
-  `;
-
-}).join("");
+        ${review.admin_reply ? `
+          <div class="reply">
+            <strong>👩‍🏫 Réponse de Cécile :</strong>
+            <p style="font-size:17px;line-height:1.6;margin-bottom:0;">
+              ${review.admin_reply}
+            </p>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  }).join("");
 }
 
 async function sendReview(){
   const pseudo = document.getElementById("pseudo").value.trim();
-const capsule = document.getElementById("capsule").value.trim();
-const rating = Number(document.getElementById("rating").value);
-const message = document.getElementById("message").value.trim();
+  const capsule = document.getElementById("capsule").value.trim();
+  const rating = Number(document.getElementById("rating").value);
+  const message = document.getElementById("message").value.trim();
 
   if(!message){
-    alert("Écris un avis avant d'envoyer.");
+    alert("Écris un commentaire avant d'envoyer.");
     return;
   }
 
   const { data: sessionData } = await supabaseClient.auth.getSession();
 
   if(!sessionData.session){
-    alert("Tu dois être connecté pour laisser un avis.");
+    alert("Tu dois être connecté pour laisser un commentaire.");
     return;
   }
 
@@ -148,10 +138,11 @@ const message = document.getElementById("message").value.trim();
       user_id: user.id,
       email: user.email,
       pseudo: pseudo,
-capsule: capsule,
+      capsule: capsule,
       rating: rating,
       message: message,
-      published: false
+      published: false,
+      admin_reply: ""
     });
 
   if(error){
@@ -159,19 +150,19 @@ capsule: capsule,
     return;
   }
 
-  alert("✅ Merci ! Ton avis est envoyé et sera publié après validation.");
+  alert("✅ Merci ! Ton commentaire est envoyé et sera publié après validation.");
   document.getElementById("message").value = "";
 }
 
 loadReviews();
-</script>
-<script>
+
 const params = new URLSearchParams(window.location.search);
 const capsule = params.get("capsule");
 
-if (capsule) {
-    document.getElementById("capsule").value = decodeURIComponent(capsule);
+if(capsule){
+  document.getElementById("capsule").value = decodeURIComponent(capsule);
 }
 </script>
+
 </body>
 </html>

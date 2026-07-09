@@ -2,25 +2,29 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Admin avis - Maths avec Cécile</title>
+<title>Admin commentaires - Maths avec Cécile</title>
 <link rel="icon" type="image/png" href="avatar-cecile.png">
+
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
 header{background:#211933;padding:22px;font-size:28px;font-weight:900}
 main{max-width:1000px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
 .card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
+textarea{width:100%;padding:14px;border-radius:14px;border:none;font-size:16px;margin-top:10px;box-sizing:border-box}
 button{border:none;border-radius:999px;padding:12px 22px;margin:6px;font-size:16px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
 .danger{background:#666}
 a{color:white;font-weight:bold}
+.replyBox{background:#241d36;border-left:5px solid #ff4fa3;border-radius:16px;padding:16px;margin-top:18px}
 </style>
 </head>
 
 <body>
-<header>🛠️ Administration des avis</header>
+
+<header>🛠️ Administration des commentaires</header>
 
 <main>
-<a href="avis.html">← Voir la page avis</a>
-<h1>Avis reçus</h1>
+<a href="avis.html">← Voir la page commentaires</a>
+<h1>Commentaires reçus</h1>
 <div id="reviewsList">Chargement...</div>
 </main>
 
@@ -45,21 +49,51 @@ async function loadReviews(){
   }
 
   if(!data || data.length === 0){
-    list.innerHTML = "<p>Aucun avis pour le moment.</p>";
+    list.innerHTML = "<p>Aucun commentaire pour le moment.</p>";
     return;
   }
 
   list.innerHTML = data.map(r => `
     <div class="card">
       <h2>${"⭐".repeat(r.rating)} ${r.published ? "✅ Publié" : "⏳ En attente"}</h2>
+
+      <p><strong>Pseudo :</strong> ${r.pseudo || "Élève"}</p>
       <p><strong>Email :</strong> ${r.email || "inconnu"}</p>
-      <p>${r.message}</p>
+      <p><strong>Capsule :</strong> ${r.capsule || "Non précisée"}</p>
+
+      <p style="font-size:18px;line-height:1.6;">
+        ${r.message}
+      </p>
+
+      <div class="replyBox">
+        <strong>👩‍🏫 Réponse de Cécile :</strong>
+        <textarea id="reply-${r.id}" rows="4" placeholder="Écrire une réponse...">${r.admin_reply || ""}</textarea>
+        <br>
+        <button onclick="saveReply(${r.id})">💾 Enregistrer la réponse</button>
+      </div>
 
       ${!r.published ? `<button onclick="publishReview(${r.id})">✅ Publier</button>` : ""}
       ${r.published ? `<button onclick="unpublishReview(${r.id})">🙈 Masquer</button>` : ""}
       <button class="danger" onclick="deleteReview(${r.id})">🗑️ Supprimer</button>
     </div>
   `).join("");
+}
+
+async function saveReply(id){
+  const reply = document.getElementById("reply-" + id).value.trim();
+
+  const { error } = await supabaseClient
+    .from("reviews")
+    .update({ admin_reply: reply })
+    .eq("id", id);
+
+  if(error){
+    alert("Erreur : " + error.message);
+    return;
+  }
+
+  alert("✅ Réponse enregistrée.");
+  loadReviews();
 }
 
 async function publishReview(id){
@@ -73,12 +107,13 @@ async function unpublishReview(id){
 }
 
 async function deleteReview(id){
-  if(!confirm("Supprimer cet avis ?")) return;
+  if(!confirm("Supprimer ce commentaire ?")) return;
   await supabaseClient.from("reviews").delete().eq("id", id);
   loadReviews();
 }
 
 loadReviews();
 </script>
+
 </body>
 </html>
