@@ -192,19 +192,26 @@ button,.pdf-btn{
 
 .pdfMobileBox .pdf-btn{
   display:flex !important;
-  align-items:flex-start;
+  align-items:center;
   justify-content:center;
-  width:80% !important;
-  max-width:420px !important;
-  min-height:58px !important;
-  margin:14px auto !important;
-  padding:14px 20px !important;
-  font-size:22px !important;
-  line-height:1.2 !important;
+  width:60% !important;
+  max-width:340px !important;
+  min-height:42px !important;
+  margin:8px auto !important;
+  padding:10px 18px !important;
+  font-size:18px !important;
+  line-height:1.1 !important;
   text-align:center !important;
   white-space:normal !important;
 }
+.content:has(.pdfMobileBox){
+  padding:14px !important;
+}
 
+.pdfMobileBox{
+  transform:scale(.88);
+  transform-origin:center;
+}
 .content:has(.pdfMobileBox){
   min-height:auto !important;
   padding-bottom:20px !important;
@@ -1434,16 +1441,21 @@ async function renderLikeButton(){
 
   const box = document.createElement("div");
   box.id = "likeBox";
-  box.style.marginTop = "10px";
+  box.style.marginTop = "0";
+box.style.marginBottom = "80px";
   box.style.textAlign = "center";
 
   if(!sessionData.session){
     box.innerHTML = `
-      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?
-<br><br>
-Un grand merci de me laisser un petit Like !</p>
-      <button onclick="openLoginModal()">Connecte-toi pour mettre un like</button>
-    `;
+      box.innerHTML = `
+  <p style="font-size:18px;font-weight:900;margin:8px 0;">
+    👍 Cette capsule t'a plu ?<br>
+    Un grand merci de me laisser un petit Like !
+  </p>
+  <button onclick="openLoginModal()" style="font-size:16px;padding:12px 22px;">
+    Connecte-toi pour mettre un like
+  </button>
+`;
     const nav = card.querySelector(".desktopBtns");
 card.insertBefore(box, nav);
     return;
