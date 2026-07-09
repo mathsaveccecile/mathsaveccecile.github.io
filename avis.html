@@ -7,7 +7,6 @@
 
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
-header{background:#211933;padding:22px;font-size:28px;font-weight:900}
 main{max-width:900px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
 input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px}
 button{border:none;border-radius:999px;padding:16px 30px;font-size:18px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
@@ -19,24 +18,22 @@ a{color:white;font-weight:bold}
 
 <body>
 
-<header>💬 Commentaires - Maths avec Cécile</header>
-
 <main>
 <a href="index.html">← Retour à l'accueil</a>
 
-<h1>💬Commentaires publiés</h1>
+<h1>Commentaires et questions publiés sur cette capsule</h1>
 <div id="reviewsList">Chargement...</div>
 
-<h2>Laisse un commentaire</h2>
-<p>Ton commentaire sera publié seulement après validation.</p>
+<h2>Laisse un commentaire ou pose une question</h2>
+<p>Ton commentaire ou ta question sera publié(e) seulement après validation par Cécile.</p>
 
 <div id="formAvis">
   <input id="pseudo" placeholder="Ton pseudo" maxlength="30">
   <input id="capsule" placeholder="Nom de la capsule concernée" readonly>
 
-  <textarea id="message" rows="5" placeholder="Écris ton commentaire ici..."></textarea>
+  <textarea id="message" rows="5" placeholder="Écris ton commentaire ou ta question ici..."></textarea>
 
-  <button onclick="sendReview()">Envoyer mon commentaire</button>
+  <button onclick="sendReview()">📨 Envoyer mon commentaire ou ma question</button>
 </div>
 </main>
 
@@ -62,7 +59,7 @@ async function loadReviews(){
   }
 
   if(!data || data.length === 0){
-    list.innerHTML = "<p>Aucun commentaire publié pour le moment.</p>";
+    list.innerHTML = "<p>Aucun commentaire ou aucune question pour le moment.</p>";
     return;
   }
 
