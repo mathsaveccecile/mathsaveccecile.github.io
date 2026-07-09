@@ -287,7 +287,7 @@ window.MathJax = {
 
   <main class="main">
     <div class="top-links">
-      <a id="avisLink" href="avis.html">💬 Commentaires</a>
+      <a id="avisLink" href="avis.html">💬 Un commentaire ou une question ?</a>
       <a id="backLink" href="index.html">← Retour au niveau</a>
     </div>
 
@@ -839,6 +839,7 @@ function checkMatching(){
 function render(){
   renderSteps();
   renderContent();
+  renderLikeButton();
   updateMobileTopTitle();
 
   if(window.MathJax){
@@ -1174,6 +1175,84 @@ function getTimeProgressPercent(){
   }
 
   return Math.min(100, Math.round((done / total) * 100));
+}
+async function renderLikeButton(){
+  let oldBox = document.getElementById("likeBox");
+  if(oldBox) oldBox.remove();
+
+  if(!capsuleData || !capsuleData.steps.length) return;
+
+  const percent = getTimeProgressPercent();
+  if(percent < 100) return;
+
+  const card = document.querySelector(".card");
+  if(!card) return;
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  const box = document.createElement("div");
+  box.id = "likeBox";
+  box.style.marginTop = "25px";
+  box.style.textAlign = "center";
+
+  if(!sessionData.session){
+    box.innerHTML = `
+      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?</p>
+      <button onclick="openLoginModal()">Connecte-toi pour mettre un pouce vert</button>
+    `;
+    card.appendChild(box);
+    return;
+  }
+
+  const user = sessionData.session.user;
+
+  const { data } = await supabaseClient
+    .from("likes")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("capsule", capsuleData.title)
+    .maybeSingle();
+
+  if(data){
+    box.innerHTML = `
+      <p style="font-size:22px;font-weight:900;color:#5cff8d;">
+        👍 Merci pour ton pouce vert !
+      </p>
+    `;
+  } else {
+    box.innerHTML = `
+      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?</p>
+      <button onclick="likeCapsule()">👍 Mettre un pouce vert</button>
+    `;
+  }
+
+  card.appendChild(box);
+}
+
+async function likeCapsule(){
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session){
+    openLoginModal();
+    return;
+  }
+
+  const user = sessionData.session.user;
+
+  const { error } = await supabaseClient
+    .from("likes")
+    .insert({
+      user_id: user.id,
+      capsule: capsuleData.title
+    });
+
+  if(error){
+    alert("Tu as peut-être déjà mis un pouce vert.");
+    return;
+  }
+
+  alert("Merci beaucoup pour ton pouce vert 💚");
+  renderLikeButton();
 }
 async function saveProgress(){
   if(!userIsConnected || !capsuleData.steps.length) return;

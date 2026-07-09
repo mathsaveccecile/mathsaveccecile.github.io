@@ -89,9 +89,35 @@ function scoreCapsule(capsule, recherche) {
   return score;
 }
 
-function creerCarteCapsule(capsule, progressions = []) {
+async function chargerStatsCapsules() {
+  const { data: likes } = await supabaseClient
+    .from("likes")
+    .select("capsule");
+
+  const { data: commentaires } = await supabaseClient
+    .from("reviews")
+    .select("capsule")
+    .eq("published", true);
+
+  const stats = {};
+
+  (likes || []).forEach(like => {
+    if (!stats[like.capsule]) stats[like.capsule] = { likes: 0, commentaires: 0 };
+    stats[like.capsule].likes++;
+  });
+
+  (commentaires || []).forEach(commentaire => {
+    if (!stats[commentaire.capsule]) stats[commentaire.capsule] = { likes: 0, commentaires: 0 };
+    stats[commentaire.capsule].commentaires++;
+  });
+
+  return stats;
+}
+
+function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
   const progression = progressions.find(p => p.capsule === capsule.title);
   const percent = progression ? Number(progression.percent || 0) : 0;
+  const stats = statsCapsules[capsule.title] || { likes: 0, commentaires: 0 };
 
   const fillStyle = percent >= 100
     ? "linear-gradient(90deg,#ffd700,#fff8b5,#ffe066,#ffd700)"
@@ -117,6 +143,36 @@ function creerCarteCapsule(capsule, progressions = []) {
             box-shadow:0 18px 35px rgba(0,0,0,.20);
             display:block;
           ">
+
+        <div style="
+          position:absolute;
+          top:12px;
+          left:12px;
+          right:12px;
+          display:flex;
+          justify-content:space-between;
+          gap:10px;
+        ">
+          <span style="
+            background:rgba(255,255,255,.94);
+            color:#16a34a;
+            padding:8px 12px;
+            border-radius:999px;
+            font-size:18px;
+            font-weight:900;
+            box-shadow:0 8px 18px rgba(0,0,0,.18);
+          ">👍 ${stats.likes}</span>
+
+          <span style="
+            background:rgba(255,255,255,.94);
+            color:#3058ff;
+            padding:8px 12px;
+            border-radius:999px;
+            font-size:18px;
+            font-weight:900;
+            box-shadow:0 8px 18px rgba(0,0,0,.18);
+          ">💬 ${stats.commentaires}</span>
+        </div>
 
         <div style="
           position:absolute;
@@ -160,6 +216,7 @@ async function chargerCapsules(niveau) {
   const reponse = await fetch("capsules.json?v=" + Date.now());
   const capsules = await reponse.json();
   const progressions = await chargerProgressions();
+  const statsCapsules = await chargerStatsCapsules();
 
   const liste = document.getElementById("listeCapsules");
   liste.innerHTML = "";
@@ -167,7 +224,7 @@ async function chargerCapsules(niveau) {
   capsules
     .filter(c => Array.isArray(c.levels) && c.levels.includes(niveau))
     .forEach(capsule => {
-      liste.innerHTML += creerCarteCapsule(capsule, progressions);
+      liste.innerHTML += creerCarteCapsule(capsule, progressions, statsCapsules);
     });
 }
 
@@ -180,6 +237,7 @@ async function activerRechercheCapsules() {
   const reponse = await fetch("capsules.json?v=" + Date.now());
   const capsules = await reponse.json();
   const progressions = await chargerProgressions();
+  const statsCapsules = await chargerStatsCapsules();
 
   function afficherResultats() {
     const recherche = input.value.trim();
@@ -209,6 +267,8 @@ async function activerRechercheCapsules() {
 
     results.innerHTML = resultats.map(item => {
       const capsule = item.capsule;
+      const stats = statsCapsules[capsule.title] || { likes: 0, commentaires: 0 };
+
       return `
         <a href="capsule.html?data=${capsule.dataFile}" style="
           display:flex;
@@ -230,12 +290,18 @@ async function activerRechercheCapsules() {
             border-radius:22px;
             flex-shrink:0;
           ">
+
           <div style="text-align:left;">
             <div style="font-size:28px;font-weight:900;line-height:1.2;">
               ${capsule.title}
             </div>
+
             <div style="font-size:20px;color:#666;margin-top:8px;">
               ${(capsule.levels || []).join(" • ")}
+            </div>
+
+            <div style="font-size:20px;font-weight:900;margin-top:10px;color:#333;">
+              👍 ${stats.likes} &nbsp;&nbsp; 💬 ${stats.commentaires}
             </div>
           </div>
         </a>
