@@ -70,7 +70,63 @@ header{display:none}
 .card{max-width:900px;margin:auto;background:#261e38;border-radius:28px;padding:35px}
 .content{background:#352d49;border-radius:20px;padding:30px;text-align:center;min-height:320px}
 .content img{width:min(900px,100%);height:auto;border-radius:20px}
-.btns{display:flex;justify-content:space-between;margin-top:30px}
+.btns{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+
+    background:rgba(18,13,34,.96);
+    box-shadow:0 -10px 25px rgba(0,0,0,.35);
+}
+.navBtn{
+
+    width:70px !important;
+    height:70px !important;
+
+    padding:0 !important;
+
+    border-radius:50% !important;
+
+    font-size:36px !important;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex:none !important;
+}
+.commentBtn{
+
+    flex:1;
+
+    margin:0 18px;
+
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:999px;
+
+    background:#eef8ed;
+
+    color:#111;
+
+    text-decoration:none;
+
+    font-size:34px;
+
+    font-weight:bold;
+}
 button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
 .locked{background:#555;cursor:not-allowed}
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
@@ -261,10 +317,8 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   }
 
   .btns button{
-    flex:1;
-    font-size:16px;
-    padding:15px 12px;
-  }
+    flex:none;
+}
 }
 
 .commentaireMobile{
@@ -346,7 +400,7 @@ window.MathJax = {
   <main class="main">
     <div class="top-links">
       <a id="avisLink" class="commentaireMobile" href="avis.html">
-  💬 Un commentaire ou une question ?
+  💬❓ Un commentaire ou une question ?
 </a>
       <a id="backLink" href="index.html">← Retour au niveau</a>
     </div>
@@ -355,9 +409,20 @@ window.MathJax = {
       <h1 id="stepTitle"></h1>
       <div class="content" id="content">Chargement de la capsule...</div>
       <div class="btns">
-        <button onclick="previousStep()">← Précédent</button>
-        <button onclick="nextStep()">Suivant →</button>
-      </div>
+
+    <button class="navBtn" onclick="previousStep()">
+        ←
+    </button>
+
+    <a id="avisMobile" href="avis.html" class="commentBtn">
+        💬 ?
+    </a>
+
+    <button class="navBtn" onclick="nextStep()">
+        →
+    </button>
+
+</div>
     </div>
   </main>
 </div>
@@ -403,6 +468,11 @@ function startCapsule(){
 
   document.getElementById("avisLink").href =
     "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
+    const avisMobile = document.getElementById("avisMobile");
+if (avisMobile) {
+  avisMobile.href =
+    "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
+}
 
   const backHref = capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
   document.getElementById("backLink").href = backHref;
