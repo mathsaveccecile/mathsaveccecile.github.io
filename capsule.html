@@ -1238,8 +1238,10 @@ async function renderLikeButton(){
 
   if(!sessionData.session){
     box.innerHTML = `
-      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?</p>
-      <button onclick="openLoginModal()">Connecte-toi pour mettre un pouce vert</button>
+      <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?
+<br><br>
+Un grand merci de me laisser un petit Like !</p>
+      <button onclick="openLoginModal()">Connecte-toi pour mettre un like</button>
     `;
     card.appendChild(box);
     return;
@@ -1263,7 +1265,7 @@ async function renderLikeButton(){
   } else {
     box.innerHTML = `
       <p style="font-size:20px;font-weight:900;">👍 Cette capsule t'a plu ?</p>
-      <button onclick="likeCapsule()">👍 Mettre un pouce vert</button>
+      <button onclick="likeCapsule()">👍 Je laisse un Like</button>
     `;
   }
 
