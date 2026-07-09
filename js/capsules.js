@@ -207,6 +207,21 @@ function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
   `;
 }
 
+async function chargerProgressions() {
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  let progressions = [];
+
+  if (sessionData.session) {
+    const { data } = await supabaseClient
+      .from("progressions")
+      .select("capsule, percent")
+      .eq("user_id", sessionData.session.user.id);
+
+    progressions = data || [];
+  }
+
+  return progressions;
+}
 async function chargerCapsules(niveau) {
   const reponse = await fetch("capsules.json?v=" + Date.now());
   const capsules = await reponse.json();
