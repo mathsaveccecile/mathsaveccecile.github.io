@@ -192,7 +192,7 @@ button,.pdf-btn{
 
 .pdfMobileBox .pdf-btn{
   display:flex !important;
-  align-items:center;
+  align-items:flex-start;
   justify-content:center;
   width:80% !important;
   max-width:420px !important;
@@ -203,6 +203,11 @@ button,.pdf-btn{
   line-height:1.2 !important;
   text-align:center !important;
   white-space:normal !important;
+}
+
+.content:has(.pdfMobileBox){
+  min-height:auto !important;
+  padding-bottom:20px !important;
 }
 
 @media (max-width:800px){
@@ -327,7 +332,14 @@ button,.pdf-btn{
   align-items:center;
   justify-content:center;
 }
+.content:has(.pdfMobileBox){
+  min-height:auto !important;
+  padding-bottom:8px !important;
+}
 
+.content:has(.pdfMobileBox) .pdfMobileBox{
+  margin-top:0 !important;
+}
   .content > div{width:100%;}
 
   .content img{
