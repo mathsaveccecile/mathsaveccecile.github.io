@@ -1554,8 +1554,8 @@ async function renderLikeButton(){
       </div>
     `;
 
-    const content = card.querySelector("#content");
-card.insertBefore(box, content);
+    const title = card.querySelector("#stepTitle");
+title.insertAdjacentElement("afterend", box);
     return;
   }
 
@@ -1607,8 +1607,8 @@ card.insertBefore(box, content);
     `;
   }
 
-  const content = card.querySelector("#content");
-card.insertBefore(box, content);
+  const title = card.querySelector("#stepTitle");
+title.insertAdjacentElement("afterend", box);
 }
 
 async function likeCapsule(){
