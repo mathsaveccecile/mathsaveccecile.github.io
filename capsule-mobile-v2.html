@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maths avec Cécile</title>
 <link rel="icon" type="image/png" href="avatar-cecile.png">
 
@@ -45,7 +46,7 @@ header{display:none}
   margin:8px 0 18px;
   font-size:22px;
 }
-step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
+.step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
 .step.active{background:#1e5c49}
 .num{color:#ffe45c;font-weight:900;margin-right:12px}
 .main{padding:45px}
@@ -60,16 +61,172 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
 #menuMobileBtn{display:none}
 
+
+.mobileTopTitle{display:none}
+.mobileOverlay{display:none}
+.mobileClosePlan{display:none}
+
 @media (max-width:800px){
-  header{position:sticky;top:0;z-index:1000;display:flex;justify-content:flex-end;background:#211933;padding:12px}
-  #menuMobileBtn{display:block;font-size:18px;padding:12px 18px}
-  .page{display:block}
-  .sidebar{display:none;position:fixed;top:70px;left:12px;right:12px;z-index:999;border-radius:20px;max-height:75vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-  .sidebar.open{display:block}
-  .main{padding:12px}
-  .card{padding:18px;border-radius:22px}
-  .content{padding:14px}
-  .btns button{font-size:16px;padding:14px 22px}
+  body{background:#120d22;}
+
+  header{
+    position:sticky;
+    top:0;
+    z-index:1200;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    background:#211933;
+    padding:10px 12px;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+
+  #menuMobileBtn{
+    display:block;
+    width:48px;
+    height:48px;
+    padding:0;
+    font-size:30px;
+    line-height:1;
+    border-radius:50%;
+  }
+
+  .mobileTopTitle{
+    display:block;
+    flex:1;
+    text-align:center;
+    font-size:15px;
+    font-weight:900;
+    color:white;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .mobileBackBtn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    color:white;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:900;
+    background:#352d49;
+  }
+
+  .page{display:block;min-height:100vh;}
+
+  .mobileOverlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1090;
+  }
+
+  .mobileOverlay.open{display:block;}
+
+  .sidebar{
+    display:block;
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:auto;
+    width:min(88vw,360px);
+    max-height:none;
+    overflow:auto;
+    z-index:1100;
+    border-left:1px solid #33284a;
+    border-right:none;
+    border-radius:0;
+    box-shadow:-18px 0 45px rgba(0,0,0,.55);
+    transform:translateX(100%);
+  }
+
+  .sidebar.open{transform:translateX(0);}
+
+  .mobileClosePlan{
+    display:block;
+    width:100%;
+    margin:0 0 18px;
+    padding:14px 18px;
+    font-size:18px;
+    background:#46395f;
+  }
+
+  .sidebar h1{font-size:24px;}
+  .badges span{font-size:13px;padding:8px 12px;}
+  #progress{font-size:18px;}
+  .step{font-size:15px;padding:14px;}
+
+  .main{
+    padding:12px 10px 105px;
+  }
+
+  .top-links{display:none;}
+
+  .card{
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:14px;
+    border-radius:22px;
+    background:#261e38;
+  }
+
+  #stepTitle{
+    text-align:center;
+    font-size:22px;
+    line-height:1.2;
+    margin:6px 0 12px;
+  }
+
+  .content{
+    padding:12px;
+    min-height:calc(100vh - 210px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .content > div{width:100%;}
+  .content img{max-width:100%;border-radius:18px;}
+
+  .content iframe{
+    width:min(92vw,360px) !important;
+    max-width:100% !important;
+    height:min(68vh,640px) !important;
+  }
+
+  .quiz h2{font-size:20px;line-height:1.25;}
+  .quiz button{width:100%;font-size:18px;padding:16px 18px;}
+  .quiz textarea{width:100% !important;}
+
+  .btns{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:1000;
+    display:flex;
+    gap:10px;
+    justify-content:space-between;
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(18,13,34,.96);
+    box-shadow:0 -10px 25px rgba(0,0,0,.35);
+    margin-top:0;
+  }
+
+  .btns button{
+    flex:1;
+    font-size:16px;
+    padding:15px 12px;
+  }
 }
 </style>
 <script>
@@ -90,11 +247,15 @@ window.MathJax = {
 <body>
 
 <header>
-  <button id="menuMobileBtn" onclick="toggleMenu()">☰ Menu</button>
+  <a id="mobileBackLink" class="mobileBackBtn" href="index.html">←</a>
+  <div id="mobileTopTitle" class="mobileTopTitle">Capsule</div>
+  <button id="menuMobileBtn" onclick="toggleMenu()" aria-label="Ouvrir le plan">⋮</button>
 </header>
+<div id="mobileOverlay" class="mobileOverlay" onclick="closeMenu()"></div>
 
 <div class="page">
   <aside class="sidebar">
+    <button class="mobileClosePlan" onclick="closeMenu()">Fermer le plan</button>
     <h1 id="title">Chargement...</h1>
 
     <div class="badges" id="badges"></div>
@@ -135,7 +296,7 @@ window.MathJax = {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/quiz-engine.js"></script>
+<script src="js/quiz-engine.js?v=4"></script>
 
 <script>
 const params = new URLSearchParams(location.search);
@@ -176,8 +337,10 @@ function startCapsule(){
   document.getElementById("avisLink").href =
     "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
 
-  document.getElementById("backLink").href =
-    capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
+  const backHref = capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
+  document.getElementById("backLink").href = backHref;
+  const mobileBackLink = document.getElementById("mobileBackLink");
+  if(mobileBackLink) mobileBackLink.href = backHref;
 
   updateStats();
   checkConnection();
@@ -279,7 +442,9 @@ function renderSteps(){
     div.onclick = async () => {
       currentStep = index;
       await saveProgress();
+      closeMenu();
       render();
+      scrollToContentTop();
     };
 
     const titre =
@@ -651,6 +816,7 @@ function checkMatching(){
 function render(){
   renderSteps();
   renderContent();
+  updateMobileTopTitle();
 
   if(window.MathJax){
     MathJax.typesetPromise();
@@ -671,6 +837,7 @@ async function nextStep(){
     currentStep++;
     await saveProgress();
     render();
+    scrollToContentTop();
   }
 }
 
@@ -679,12 +846,84 @@ async function previousStep(){
     currentStep--;
     await saveProgress();
     render();
+    scrollToContentTop();
   }
 }
 
 function toggleMenu(){
-  document.querySelector(".sidebar").classList.toggle("open");
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.getElementById("mobileOverlay");
+  if(sidebar) sidebar.classList.toggle("open");
+  if(overlay) overlay.classList.toggle("open");
 }
+
+function closeMenu(){
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.getElementById("mobileOverlay");
+  if(sidebar) sidebar.classList.remove("open");
+  if(overlay) overlay.classList.remove("open");
+}
+
+function scrollToContentTop(){
+  if(window.innerWidth <= 800){
+    window.scrollTo({ top:0, left:0, behavior:"auto" });
+  }
+}
+
+function updateMobileTopTitle(){
+  const mobileTitle = document.getElementById("mobileTopTitle");
+  if(!mobileTitle || !capsuleData || !capsuleData.steps || !capsuleData.steps.length) return;
+  const step = capsuleData.steps[currentStep];
+  const titre = step.type === "quiz"
+    ? (
+        step.quizType === "qcm" ? "QCM" :
+        step.quizType === "trueFalse" ? "Vrai / Faux" :
+        step.quizType === "matching" ? "Paires" :
+        step.quizType === "open" ? "Question ouverte" :
+        "Quiz"
+      )
+    : (step.title || "Étape");
+
+  mobileTitle.textContent = (currentStep + 1) + " / " + capsuleData.steps.length + " · " + titre;
+}
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+function initSwipeNavigation(){
+  const zone = document.getElementById("content");
+  if(!zone) return;
+
+  zone.addEventListener("touchstart", (e) => {
+    const target = e.target.closest("button, a, input, textarea, select, iframe");
+    if(target) return;
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, {passive:true});
+
+  zone.addEventListener("touchend", async (e) => {
+    if(!touchStartX) return;
+
+    const target = e.target.closest("button, a, input, textarea, select, iframe");
+    if(target) return;
+
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+
+    touchStartX = 0;
+    touchStartY = 0;
+
+    if(Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy)) return;
+
+    if(dx < 0){
+      await nextStep();
+    }else{
+      await previousStep();
+    }
+  }, {passive:true});
+}
+
+initSwipeNavigation();
 
 const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
