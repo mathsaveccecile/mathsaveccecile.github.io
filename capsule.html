@@ -16,9 +16,25 @@ window.MathJax = {
 <style>
 body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
 header{display:none}
-.page{display:grid;grid-template-columns:330px 1fr;min-height:100vh}
-.sidebar{background:#171124;padding:25px;border-right:1px solid #33284a}
-.sidebar h1{font-size:32px;line-height:1.15;margin:0 0 20px}
+
+.page{
+  display:grid;
+  grid-template-columns:330px 1fr;
+  min-height:100vh;
+}
+
+.sidebar{
+  background:#171124;
+  padding:25px;
+  border-right:1px solid #33284a;
+}
+
+.sidebar h1{
+  font-size:32px;
+  line-height:1.15;
+  margin:0 0 20px;
+}
+
 .badges{
   display:flex;
   flex-wrap:wrap;
@@ -35,7 +51,8 @@ header{display:none}
   font-weight:900;
   white-space:nowrap;
   box-shadow:0 5px 14px rgba(0,0,0,.18);
-}F
+}
+
 .progressBar{
   width:100%;
   height:22px;
@@ -61,90 +78,102 @@ header{display:none}
   margin:8px 0 18px;
   font-size:15px;
 }
-.step{background:#2b243b;margin:12px 0;padding:16px;border-radius:15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:800}
+
+.step{
+  background:#2b243b;
+  margin:12px 0;
+  padding:16px;
+  border-radius:15px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:800;
+}
+
 .step.active{background:#1e5c49}
 .num{color:#ffe45c;font-weight:900;margin-right:12px}
+
 .main{padding:45px}
-.top-links{display:flex;gap:14px;margin-bottom:18px}
-.top-links a{color:white;font-weight:900;text-decoration:none}
-.card{max-width:900px;margin:auto;background:#261e38;border-radius:28px;padding:35px}
-.content{background:#352d49;border-radius:20px;padding:30px;text-align:center;min-height:320px}
-.content img{width:min(900px,100%);height:auto;border-radius:20px}
-.btns{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:1000;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-
-    background:rgba(18,13,34,.96);
-    box-shadow:0 -10px 25px rgba(0,0,0,.35);
-}
-.navBtn{
-
-    width:70px !important;
-    height:70px !important;
-
-    padding:0 !important;
-
-    border-radius:50% !important;
-
-    font-size:36px !important;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    flex:none !important;
-}
-.commentBtn{
-
-    flex:1;
-
-    margin:0 18px;
-
-    height:70px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:999px;
-
-    background:#eef8ed;
-
-    color:#111;
-
-    text-decoration:none;
-
-    font-size:34px;
-
-    font-weight:bold;
+.top-links{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:25px;
+  margin-bottom:28px;
 }
 
-button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer;text-decoration:none}
+.top-links a{
+  color:white;
+  font-weight:900;
+  text-decoration:none;
+}
+
+.commentaireMobile{
+  display:inline-block;
+  margin-bottom:0;
+  padding:12px 22px;
+  border-radius:999px;
+  background:#e9f8ee;
+  color:#111 !important;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+}
+
+.card{
+  max-width:900px;
+  margin:auto;
+  background:#261e38;
+  border-radius:28px;
+  padding:35px;
+}
+
+.content{
+  background:#352d49;
+  border-radius:20px;
+  padding:30px;
+  text-align:center;
+  min-height:320px;
+}
+
+.content img{
+  width:min(900px,100%);
+  height:auto;
+  border-radius:20px;
+}
+
+/* Navigation ordinateur */
+.desktopBtns{
+  display:flex;
+  justify-content:space-between;
+  margin-top:30px;
+}
+
+.mobileNav{
+  display:none;
+}
+
+button,.pdf-btn{
+  border:none;
+  border-radius:999px;
+  padding:18px 35px;
+  font-size:20px;
+  font-weight:900;
+  color:white;
+  background:linear-gradient(135deg,#ff4fa3,#3058ff);
+  cursor:pointer;
+  text-decoration:none;
+}
+
 .locked{background:#555;cursor:not-allowed}
 .quiz button{display:block;margin:12px auto;background:#46395f;width:80%}
+
 #menuMobileBtn{display:none}
-
-
 .mobileTopTitle{display:none}
 .mobileOverlay{display:none}
 
-.commentBtn{
-  display:none;
-}
-/* ----- Ordinateur uniquement ----- */
-#avisMobile,
-.navBtn{
-    display:none;
-}
 @media (max-width:800px){
   body{background:#120d22;}
 
@@ -236,7 +265,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   .step{font-size:15px;padding:14px;}
 
   .main{
-    padding:12px 10px 105px;
+    padding:12px 10px 115px;
   }
 
   .top-links{
@@ -250,6 +279,7 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
     padding:14px;
     border-radius:22px;
     background:#261e38;
+    box-sizing:border-box;
   }
 
   #stepTitle{
@@ -288,92 +318,52 @@ button,.pdf-btn{border:none;border-radius:999px;padding:18px 35px;font-size:20px
   .quiz button{width:100%;font-size:18px;padding:16px 18px;}
   .quiz textarea{width:100% !important;}
 
-  .btns{
+  .desktopBtns{
+    display:none;
+  }
+
+  .mobileNav{
     position:fixed;
     left:0;
     right:0;
     bottom:0;
     z-index:1000;
-
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:10px;
-
     padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-
     background:rgba(18,13,34,.96);
     box-shadow:0 -10px 25px rgba(0,0,0,.35);
-    margin-top:0;
   }
-/* ----- Téléphone uniquement ----- */
-#avisMobile,
-.navBtn{
-    display:flex;
-}
-  .navBtn{
+
+  .mobileNavBtn{
     width:70px !important;
     height:70px !important;
     padding:0 !important;
     border-radius:50% !important;
     font-size:36px !important;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     flex:none !important;
   }
 
-  .commentBtn{
+  .mobileCommentBtn{
     display:flex;
     flex:1;
-    max-width:140px;
+    max-width:150px;
     margin:0 18px;
     height:70px;
-
     align-items:center;
     justify-content:center;
-
     border-radius:999px;
     background:#eef8ed;
     color:#111;
     text-decoration:none;
     font-size:34px;
     font-weight:bold;
-  }
-
-  .btns button{
-    flex:none;
-  }
-}
-
-
-.commentaireMobile{
-  display:inline-block;
-  margin-bottom:18px;
-  padding:12px 18px;
-  border-radius:999px;
-  background:#e9f8ee;
-  color:#111;
-  font-weight:900;
-  text-decoration:none;
-}
-@media (min-width:801px){
-  .top-links{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:25px;
-  }
-
-  #avisLink{
-    color:#111 !important;
-    background:#e9f8ee;
-  }
-
-  #backLink{
-    color:white;
+    box-shadow:0 8px 22px rgba(0,0,0,.25);
   }
 }
 </style>
@@ -436,21 +426,20 @@ window.MathJax = {
     <div class="card">
       <h1 id="stepTitle"></h1>
       <div class="content" id="content">Chargement de la capsule...</div>
-      <div class="btns">
+      <div class="desktopBtns">
+        <button onclick="previousStep()">← Précédent</button>
+        <button onclick="nextStep()">Suivant →</button>
+      </div>
 
-    <button class="navBtn" onclick="previousStep()">
-        ←
-    </button>
+      <div class="mobileNav">
+        <button class="mobileNavBtn" onclick="previousStep()">←</button>
 
-    <a id="avisMobile" href="avis.html" class="commentBtn">
-        💬 ?
-    </a>
+        <a id="avisMobile" href="avis.html" class="mobileCommentBtn">
+          💬 ?
+        </a>
 
-    <button class="navBtn" onclick="nextStep()">
-        →
-    </button>
-
-</div>
+        <button class="mobileNavBtn" onclick="nextStep()">→</button>
+      </div>
     </div>
   </main>
 </div>
