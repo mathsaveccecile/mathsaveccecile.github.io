@@ -145,8 +145,8 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Un problème d'âges",
-      "src": "",
-      "duration": 0
+      "src": "https://youtube.com/shorts/7gE8Je1WW6U",
+      "duration": 24
     },
     {
       "type": "image",
@@ -157,7 +157,7 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "On note $$x$$ l'âge d'une personne. Comment écrire l'âge de cette personne dans 5 ans?",
+      "question": "On note $x$ l'âge d'une personne. Comment écrire l'âge de cette personne dans 5 ans?",
       "answers": [
         "$$x-5$$",
         "$$5x$$",
@@ -174,17 +174,17 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "Tom a 4 ans de plus que sa soeur. On appelle $$x$$ l'âge de sa soeur. Dans 6 ans, quels seront leurs âges?",
+      "question": "Tom a 4 ans de plus que sa soeur. On appelle $x$ l'âge de sa soeur. Dans 6 ans, quels seront leurs âges?",
       "answers": [
-        "Tom: $$x+4$$ et sa soeur: $$x$$",
-        "Tom: $$x+6$$ et sa soeur: $$x+4$$",
-        "Tom: $$x+10$$ et sa soeur: $$x+6$$",
+        "Tom: $x+4$ et sa soeur: $x$",
+        "Tom: $x+6$ et sa soeur: $x+4$",
+        "Tom: $x+10$ et sa soeur: $x+6$",
         ""
       ],
       "correct": 2,
       "correction": "",
       "pairs": [],
-      "explanation": "Aujourd'hui, la seour a $$x$$ ans, donc Tom a $$x+4$$ ans. \nDans 6 ans, on ajoute 6 aux deux âges: la soeur aura $$x+6$$ ans et Tom aura $$(x+4)+6 = x+10$$ ans",
+      "explanation": "Aujourd'hui, la seour a $x$ ans, donc Tom a $x+4$ ans. \nDans 6 ans, on ajoute 6 aux deux âges: la soeur aura $x+6$ ans et Tom aura $(x+4)+6 = x+10$ ans",
       "image": ""
     },
     {
@@ -201,7 +201,7 @@ const capsuleData = {
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "On appelle $$x$$ l'âge actuel de la fille.\nComme le père a le triple de son âge, son âge actuel est $$3x$$\nDans 10 ans, la fille aura $$x+10$$\nDans 10 ans, le père aura $$3x+10$$\nLe double de l'âge de la fille dans 10 ans est $$2(x+10)$$\nOn obtient donc l'équation: $$3x+10=2(x+10)$$",
+      "explanation": "On appelle $x$ l'âge actuel de la fille.\nComme le père a le triple de son âge, son âge actuel est $3x$\nDans 10 ans, la fille aura $x+10$\nDans 10 ans, le père aura $3x+10$\nLe double de l'âge de la fille dans 10 ans est $2(x+10)$\nOn obtient donc l'équation: $$3x+10=2(x+10)$$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-17.png"
     },
     {
@@ -230,7 +230,7 @@ const capsuleData = {
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "mère: $$m$$\ngrand-mère: $$2m$$\nMarie: $$\\frac{m}{3$$\nOn additionne tout",
+      "explanation": "mère: $m$\ngrand-mère: $2m$\nMarie: $\\frac{m}{3$\nOn additionne tout",
       "image": "assets/quiz/modeliser-un-probleme-quiz-20.png"
     },
     {
@@ -247,7 +247,7 @@ const capsuleData = {
       "correct": 3,
       "correction": "",
       "pairs": [],
-      "explanation": "On appelle $$x$$ la somme d'argent de Pierre.\nLa somme d'argent de Juliette est donc $$x+15$$\nSacha a donc $$2(x+15)$$\nComme à eux trois ils possèdent 225€, on obtient l'équation: \n$$x+(x-15)+2(x+15)=225$$",
+      "explanation": "On appelle $x$ la somme d'argent de Pierre.\nLa somme d'argent de Juliette est donc $x+15$\nSacha a donc $2(x+15)$\nComme à eux trois ils possèdent 225€, on obtient l'équation: \n$x+(x-15)+2(x+15)=225$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-21.png"
     },
     {
