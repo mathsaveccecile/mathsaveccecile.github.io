@@ -402,12 +402,13 @@ document.getElementById("addPdfBtn").addEventListener("click", async () => {
   if (!pdf) return;
 
   capsule.steps.push({
-    type: "pdf",
-    title: "Fiche PDF",
-    name: pdf.name,
-    path: pdf.path,
-    src: pdf.src
-  });
+  type: "pdf",
+  title: "Fiche PDF",
+  name: pdf.name,
+  path: pdf.path,
+  src: pdf.src,
+  pages: pdf.pages || 1
+});
 
   renderCapsule();
 });
