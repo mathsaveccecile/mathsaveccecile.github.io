@@ -1,5 +1,5 @@
 {
-  "title": "Comprendre la notion d'angle. ",
+  "title": "Comprendre_la_notion_d_angle",
   "levels": [
     "6e"
   ],
@@ -9,15 +9,15 @@
   "steps": [
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Bienvenue",
+      "src": "https://youtube.com/shorts/fNdGV_d3jV0",
+      "duration": 9
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Donner du sens. Les angles sont partout. ",
+      "src": "https://youtube.com/shorts/RVhctP988y8",
+      "duration": 35
     },
     {
       "type": "quiz",

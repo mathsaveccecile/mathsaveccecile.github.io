@@ -332,10 +332,10 @@ document.getElementById("openCapsuleBtn").addEventListener("click", async () => 
     <div class="step">
       <h4>📂 Capsules enregistrées</h4>
       ${files.map(file => `
-        <button onclick="openSavedCapsule('${file}')">
-          📘 ${file.replace(".json", "")}
-        </button>
-      `).join("<br><br>")}
+  <button onclick="openSavedCapsule(decodeURIComponent('${encodeURIComponent(file)}'))">
+    📘 ${file.replace(".json", "")}
+  </button>
+`).join("<br><br>")}
     </div>
   `;
 });
