@@ -8,20 +8,7 @@
     "duration": "",
     "thumbnail": "assets/thumbnails/modeliser-un-probleme.png",
     "page": "modeliser-un-probleme.html",
-    "dataFile": "modeliser-un-probleme-data.js",
-    "keywords": [
-      "modéliser",
-      "modeliser",
-      "problème",
-      "probleme",
-      "énoncé",
-      "enonce",
-      "mise en équation",
-      "equation",
-      "calcul",
-      "raisonnement",
-      "situation"
-    ]
+    "dataFile": "modeliser-un-probleme-data.js"
   },
   {
     "title": "Trigonométrie. Comprendre et utiliser le cosinus. ",
