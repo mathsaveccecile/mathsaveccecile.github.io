@@ -576,7 +576,10 @@ window.MathJax = {
 
   <main class="main">
     <div class="top-links">
-      <a id="avisLink" class="commentaireMobile" href="avis.html">
+      <a id="avisLink"
+   class="commentaireMobile"
+   href="#"
+   onclick="openComments(event)">
   💬❓ Un commentaire ou une question ?
 </a>
       <a id="backLink" href="index.html">← Retour au niveau</a>
@@ -593,9 +596,12 @@ window.MathJax = {
       <div class="mobileNav">
         <button class="mobileNavBtn" onclick="previousStep()">←</button>
 
-        <a id="avisMobile" href="avis.html" class="mobileCommentBtn">
-          💬 ?
-        </a>
+        <a id="avisMobile"
+   href="#"
+   class="mobileCommentBtn"
+   onclick="openComments(event)">
+  💬 ?
+</a>
 
         <button class="mobileNavBtn" onclick="nextStep()">→</button>
       </div>
@@ -625,6 +631,23 @@ if(!dataFile){
   document.head.appendChild(script);
 }
 
+function openComments(event){
+  event.preventDefault();
+
+  if(!userIsConnected){
+    alert("🔐 Tu dois être connecté pour laisser un commentaire ou poser une question.");
+    openLoginModal();
+    return;
+  }
+
+  const url =
+    "avis.html?capsule=" +
+    encodeURIComponent(capsuleData.title);
+
+  location.href = url;
+}
+
+function startCapsule(){
 function startCapsule(){
   if(typeof capsuleData === "undefined"){
     document.getElementById("content").innerHTML = "<h2>❌ Impossible de charger la capsule.</h2>";
@@ -642,13 +665,6 @@ function startCapsule(){
   document.title = capsuleData.title + " - Maths avec Cécile";
   document.getElementById("title").textContent = capsuleData.title;
 
-  document.getElementById("avisLink").href =
-    "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
-    const avisMobile = document.getElementById("avisMobile");
-if (avisMobile) {
-  avisMobile.href =
-    "avis.html?capsule=" + encodeURIComponent(capsuleData.title);
-}
 
   const backHref = capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
   document.getElementById("backLink").href = backHref;
@@ -1422,35 +1438,61 @@ async function resetPassword(){
   alert("📩 Un e-mail de réinitialisation vient d'être envoyé.");
 }
 
-async function checkConnection(){
-  const { data } = await supabaseClient.auth.getSession();
+async function applySession(session){
+  userIsConnected = Boolean(session);
 
-  if(data.session){
-    userIsConnected = true;
+  if(userIsConnected){
     await loadProgress();
   }
 
   updateLoginDisplay();
-  await renderStudentDashboard();
   render();
-  
+  await renderStudentDashboard();
 }
 
-async function updateLoginDisplay(){
-  const link = document.querySelector(".sidebar p");
+async function checkConnection(){
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if(error){
+    console.error("Erreur de connexion :", error);
+  }
+
+  await applySession(data?.session || null);
+}
+
+supabaseClient.auth.onAuthStateChange((_event, session) => {
+  setTimeout(() => {
+    applySession(session);
+  }, 0);
+});
+
+function updateLoginDisplay(){
+  const zone = document.querySelector(".sidebar p");
+  if(!zone) return;
 
   if(userIsConnected){
-    link.innerHTML = `
-      ✅ Élève connecté<br>
-      <a href="#" onclick="logoutStudent(); return false;" style="color:white;text-decoration:underline;">
-        🚪 Se déconnecter
-      </a><br>
+    zone.innerHTML = `
+      ✅ Élève connecté<br><br>
 
-      <a href="#" onclick="restartCapsule(); return false;" style="color:white;text-decoration:underline;">
+      <a href="#" onclick="logoutStudent(); return false;"
+         style="color:white;text-decoration:underline;font-weight:bold;">
+        🚪 Se déconnecter
+      </a><br><br>
+
+      <a href="#" onclick="restartCapsule(); return false;"
+         style="color:white;text-decoration:underline;font-weight:bold;">
         🔄 Recommencer cette capsule
       </a>
 
-      <div id="studentDashboard" style="margin-top:18px;font-size:16px;line-height:1.5;"></div>
+      <div id="studentDashboard"
+           style="margin-top:18px;font-size:16px;line-height:1.5;"></div>
+    `;
+  } else {
+    zone.innerHTML = `
+      <a href="#" onclick="openLoginModal(); return false;"
+         style="color:white;text-decoration:underline;font-weight:bold;cursor:pointer;">
+        🔐 Connecte-toi pour retrouver ta progression plus tard.
+      </a>
     `;
   }
 }
