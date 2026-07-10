@@ -73,6 +73,16 @@
     ]
   },
   {
+    "title": "Droites parallèles et perpendiculaires. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
+    "page": "droites-paralleles-et-perpendiculaires.html",
+    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
+  },
+  {
     "title": "Comprendre la notion d'angle. ",
     "levels": [
       "6e"
@@ -93,16 +103,6 @@
       "géométrie",
       "geometrie"
       ]
-  },
-  {
-    "title": "Droites parallèles et perpendiculaires. ",
-    "levels": [
-      "6e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
-    "page": "droites-paralleles-et-perpendiculaires.html",
-    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
   },
   {
     "title": "Mesurer et construire des angles, tracer la bissectrice. ",
