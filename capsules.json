@@ -1,5 +1,16 @@
 [
   {
+    "title": "Pythagore. Direct, contraposée et réciproque. ",
+    "levels": [
+      "4e",
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/pythagore-direct-contraposee-et-reciproque.png",
+    "page": "pythagore-direct-contraposee-et-reciproque.html",
+    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
+  },
+  {
     "title": "Modéliser un problème. ",
     "levels": [
       "4e",
@@ -156,17 +167,7 @@
       "géométrie",
       "geometrie"
     ]
-  },
-  {
-    "title": "Pythagore. Direct, contraposée et réciproque. ",
-    "levels": [
-      "4e",
-      "3e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/pythagore-direct-contraposee-et-reciproque.png",
-    "page": "pythagore-direct-contraposee-et-reciproque.html",
-    "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
   }
+  
   
 ]
