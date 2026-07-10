@@ -171,6 +171,7 @@ function openForm(type){
     <input id="a" placeholder="Réponse A">
     <input id="b" placeholder="Réponse B">
     <input id="c" placeholder="Réponse C">
+    <input id="d" placeholder="Réponse D">
     <input id="correct" placeholder="Bonne réponse exacte">
   `;
 }
@@ -245,7 +246,8 @@ function saveElement(){
         answers:[
             document.getElementById("a").value,
             document.getElementById("b").value,
-            document.getElementById("c").value
+            document.getElementById("c").value,
+            document.getElementById("d").value
         ],
         correctAnswer:document.getElementById("correct").value
     });
