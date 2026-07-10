@@ -109,6 +109,8 @@ app.whenReady().then(() => {
   } catch (error) {
     console.error('Impossible de compter les pages du PDF :', error)
   }
+  
+console.log("Nombre de pages détecté :", pages);
 
   return {
     name: basename(filePath),

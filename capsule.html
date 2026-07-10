@@ -732,7 +732,9 @@ function updateStats(){
   const videos = capsuleData.steps.filter(s => s.type === "video").length;
   const images = capsuleData.steps.filter(s => s.type === "image").length;
   const quiz = capsuleData.steps.filter(s => s.type === "quiz").length;
-  const pdf = capsuleData.steps.filter(s => s.type === "pdf").length;
+  const pdfPages = capsuleData.steps
+  .filter(step => step.type === "pdf")
+  .reduce((total, step) => total + Number(step.pages || 1), 0);
 
   document.getElementById("badges").innerHTML = `
     <span style="background:#e9f8ee;color:#111;">
@@ -752,8 +754,8 @@ function updateStats(){
     </span>
 
     <span style="background:#e9f8ee;color:#111;">
-      📄 ${pdf} ${pdf > 1 ? "fiches" : "fiche"}
-    </span>
+  📄 Résumé de cours (${pdfPages} ${pdfPages > 1 ? "fiches" : "fiche"})
+</span>
   `;
 }
 

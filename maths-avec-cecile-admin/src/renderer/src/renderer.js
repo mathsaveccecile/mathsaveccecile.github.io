@@ -511,13 +511,14 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
       }
 
       if (step.type === "pdf") {
-        return {
-          type: "pdf",
-          title: step.title || step.name || "PDF",
-          src: step.src || "",
-          loginRequired: true
-        };
-      }
+  return {
+    type: "pdf",
+    title: step.title || step.name || "PDF",
+    src: step.src || "",
+    pages: Number(step.pages || 1),
+    loginRequired: true
+  };
+}
 
       if (step.type === "quiz") {
         return {
