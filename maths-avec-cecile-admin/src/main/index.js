@@ -1,3 +1,4 @@
+import { PDFDocument } from 'pdf-lib'
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, basename } from 'path'
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from 'fs'
@@ -87,25 +88,35 @@ app.whenReady().then(() => {
   })
 
   ipcMain.handle('choose-pdf', async () => {
-    const result = await dialog.showOpenDialog({
-      title: 'Choisir un PDF',
-      properties: ['openFile'],
-      filters: [
-        { name: 'PDF', extensions: ['pdf'] }
-      ]
-    })
-
-    if (result.canceled) return null
-
-    const filePath = result.filePaths[0]
-    const data = readFileSync(filePath).toString('base64')
-
-    return {
-      name: basename(filePath),
-      path: filePath,
-      src: `data:application/pdf;base64,${data}`
-    }
+  const result = await dialog.showOpenDialog({
+    title: 'Choisir un PDF',
+    properties: ['openFile'],
+    filters: [
+      { name: 'PDF', extensions: ['pdf'] }
+    ]
   })
+
+  if (result.canceled) return null
+
+  const filePath = result.filePaths[0]
+  const pdfBuffer = readFileSync(filePath)
+
+  let pages = 1
+
+  try {
+    const pdfDocument = await PDFDocument.load(pdfBuffer)
+    pages = pdfDocument.getPageCount()
+  } catch (error) {
+    console.error('Impossible de compter les pages du PDF :', error)
+  }
+
+  return {
+    name: basename(filePath),
+    path: filePath,
+    src: `data:application/pdf;base64,${pdfBuffer.toString('base64')}`,
+    pages: pages
+  }
+})
 
   ipcMain.handle('open-capsule', async () => {
     const result = await dialog.showOpenDialog({
