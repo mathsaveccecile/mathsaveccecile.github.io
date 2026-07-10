@@ -919,13 +919,23 @@ function quizImage(step){
 
 function renderQuizStep(step, content){
   if(step.quizType === "qcm"){
+    const answers = (step.answers || [])
+      .map((answer, originalIndex) => ({
+        text: String(answer || "").trim(),
+        originalIndex: originalIndex
+      }))
+      .filter(answer => answer.text !== "");
+
     content.innerHTML = `
       <div class="quiz">
         ${quizImage(step)}
+
         <h2>${step.question || ""}</h2>
 
-        ${(step.answers || []).map((a, index) => `
-          <button onclick="checkAnswer(${index})">${a || ""}</button>
+        ${answers.map(answer => `
+          <button onclick="checkAnswer(${answer.originalIndex})">
+            ${answer.text}
+          </button>
         `).join("")}
 
         <p id="feedback"></p>
