@@ -576,14 +576,21 @@ window.MathJax = {
 
   <main class="main">
     <div class="top-links">
-      <a id="avisLink"
-   class="commentaireMobile"
-   href="#"
-   onclick="openComments(event)">
-  💬❓ Un commentaire ou une question ?
-</a>
-      <a id="backLink" href="index.html">← Retour au niveau</a>
-    </div>
+  <a id="avisLink"
+     class="commentaireMobile"
+     href="#"
+     onclick="openComments(event)">
+    💬❓ Un commentaire ou une question ?
+  </a>
+
+  <a href="#"
+     class="commentaireMobile"
+     onclick="openBugReport(event)">
+    🐞 Signaler un bug
+  </a>
+
+  <a id="backLink" href="index.html">← Retour au niveau</a>
+</div>
 
     <div class="card">
       <h1 id="stepTitle"></h1>
@@ -1359,6 +1366,174 @@ initSwipeNavigation();
 const SUPABASE_URL = "https://cxzxbvjtkuzfubnsnfhs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_eVNeYcTQgFYZ_8t2pHyQ4Q_93ZCmoU1";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function openBugReport(event){
+  event.preventDefault();
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session){
+    alert("🔐 Tu dois être connecté pour signaler un bug ou une erreur.");
+    openLoginModal();
+    return;
+  }
+
+  const ancienneFenetre = document.getElementById("bugReportModal");
+  if(ancienneFenetre){
+    ancienneFenetre.remove();
+  }
+
+  const step = capsuleData.steps[currentStep];
+  const stepTitle = step
+    ? (step.title || (step.type === "quiz" ? "Quiz" : "Étape"))
+    : "Étape inconnue";
+
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="bugReportModal"
+         style="
+           position:fixed;
+           inset:0;
+           background:rgba(0,0,0,.75);
+           z-index:99999;
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           padding:15px;
+         ">
+
+      <div style="
+        background:#261e38;
+        color:white;
+        width:440px;
+        max-width:92%;
+        padding:28px;
+        border-radius:25px;
+        box-shadow:0 20px 60px rgba(0,0,0,.55);
+      ">
+
+        <h2 style="margin-top:0;">
+          🐞 Signaler un bug ou une erreur
+        </h2>
+
+        <p style="line-height:1.5;">
+          <strong>Capsule :</strong><br>
+          ${capsuleData.title}
+        </p>
+
+        <p style="line-height:1.5;">
+          <strong>Étape ${currentStep + 1} :</strong><br>
+          ${stepTitle}
+        </p>
+
+        <textarea
+          id="bugMessage"
+          placeholder="Décris précisément le bug, l'erreur ou la faute que tu as remarqué(e)..."
+          style="
+            width:100%;
+            min-height:150px;
+            box-sizing:border-box;
+            padding:15px;
+            border:none;
+            border-radius:15px;
+            font-size:17px;
+            font-family:Arial,sans-serif;
+            resize:vertical;
+          "></textarea>
+
+        <button
+          id="sendBugButton"
+          onclick="sendBugReport()"
+          style="width:100%;margin-top:18px;">
+          📤 Envoyer le signalement
+        </button>
+
+        <button
+          class="locked"
+          onclick="closeBugReport()"
+          style="width:100%;margin-top:12px;">
+          Annuler
+        </button>
+
+      </div>
+    </div>
+  `);
+}
+
+function closeBugReport(){
+  const modal = document.getElementById("bugReportModal");
+
+  if(modal){
+    modal.remove();
+  }
+}
+
+async function sendBugReport(){
+  const messageField = document.getElementById("bugMessage");
+  const sendButton = document.getElementById("sendBugButton");
+
+  if(!messageField) return;
+
+  const message = messageField.value.trim();
+
+  if(!message){
+    alert("Décris le problème avant d'envoyer le signalement.");
+    return;
+  }
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  if(!sessionData.session){
+    alert("Ta connexion a expiré. Reconnecte-toi.");
+    closeBugReport();
+    openLoginModal();
+    return;
+  }
+
+  const step = capsuleData.steps[currentStep];
+  const stepTitle = step
+    ? (step.title || (step.type === "quiz" ? "Quiz" : "Étape"))
+    : "Étape inconnue";
+
+  if(sendButton){
+    sendButton.disabled = true;
+    sendButton.textContent = "Envoi en cours...";
+  }
+
+  const { error } = await supabaseClient
+    .from("bug_reports")
+    .insert({
+      user_id: sessionData.session.user.id,
+      email: sessionData.session.user.email,
+      capsule: capsuleData.title,
+      step: currentStep + 1,
+      url: location.href,
+      message:
+        "Étape : " + stepTitle + "\n\n" +
+        message
+    });
+
+  if(error){
+    console.error("Erreur signalement :", error);
+
+    alert(
+      "Le signalement n'a pas pu être envoyé.\n\n" +
+      error.message
+    );
+
+    if(sendButton){
+      sendButton.disabled = false;
+      sendButton.textContent = "📤 Envoyer le signalement";
+    }
+
+    return;
+  }
+
+  closeBugReport();
+
+  alert(
+    "✅ Merci ! Ton signalement a bien été envoyé à Cécile."
+  );
+}
 
 function openLoginModal(){
   document.body.insertAdjacentHTML("beforeend", `
