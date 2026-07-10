@@ -571,7 +571,27 @@ window.MathJax = {
 <p id="progress" style="text-align:center;margin-top:8px;">
   0 %
 </p>
-    <div id="stepsList"></div>
+    <hr style="margin:25px 0;border:0;border-top:1px solid #45385f;">
+
+<div style="text-align:center;">
+
+  <a href="#"
+     onclick="openBugReport(event);closeMenu();"
+     style="
+       display:block;
+       color:white;
+       text-decoration:none;
+       font-weight:bold;
+       padding:14px;
+       border-radius:14px;
+       background:#352d49;
+       margin-bottom:12px;
+     ">
+     🐞 Signaler un bug ou une erreur
+  </a>
+
+</div>
+<div id="stepsList"></div>
   </aside>
 
   <main class="main">
@@ -581,12 +601,6 @@ window.MathJax = {
      href="#"
      onclick="openComments(event)">
     💬❓ Un commentaire ou une question ?
-  </a>
-
-  <a href="#"
-     class="commentaireMobile"
-     onclick="openBugReport(event)">
-    🐞 Signaler un bug
   </a>
 
   <a id="backLink" href="index.html">← Retour au niveau</a>
