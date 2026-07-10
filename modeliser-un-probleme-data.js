@@ -29,7 +29,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Il est inconnu; Donc on va utiliser une lettre pour le nommer. Par exemple la lettre $$x$$",
+      "explanation": "Il est inconnu; Donc on va utiliser une lettre pour le nommer. Par exemple la lettre $x$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-3.png"
     },
     {
@@ -86,14 +86,14 @@ const capsuleData = {
       "question": "Parmi les 4 expressions suivantes, laquelle correspond au résultat obtenu par le programme?",
       "answers": [
         "25",
-        "$$(2x+3)^{2}$$",
-        "$$2x+3^{2}$$",
-        "$$2x^{2}+3^{2}$$"
+        "$(2x+3)^{2}$",
+        "$2x+3^{2}$",
+        "$2x^{2}+3^{2}$"
       ],
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "On fait les étapes dans l'ordre. \nSoit $$x$$ le nombre de départ.\nOn le multiplie par 2 donc on obtient $$2x$$\npuis on ajoute 3 donc on obtient $$2x+3$$\nEt enfin on élève le tout au carré donc il ne faut pas oublier les parenthèses et on obtient $$(2x+3)^{2}$$",
+      "explanation": "On fait les étapes dans l'ordre. \nSoit $x$ le nombre de départ.\nOn le multiplie par 2 donc on obtient $2x$\npuis on ajoute 3 donc on obtient $2x+3$\nEt enfin on élève le tout au carré donc il ne faut pas oublier les parenthèses et on obtient $(2x+3)^{2}$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-8.png"
     },
     {
@@ -112,11 +112,11 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "Si le premier nombre est $$x$$, comment s'écrivent les deux suivants?",
+      "question": "Si le premier nombre est $x$, comment s'écrivent les deux suivants?",
       "answers": [
-        "$$x+1$$ et $$x+2$$",
-        "$$2x$$ et $$3x$$",
-        "$$x-1$$ et $$x-2$$",
+        "$x+1$ et $x+2$",
+        "$2x$ et $3x$",
+        "$x-1$ et $x-2$",
         ""
       ],
       "correct": 0,
@@ -131,15 +131,15 @@ const capsuleData = {
       "title": "QCM",
       "question": "La somme de 2 nombres consécutifs vaut 13. Quelle équation écrire?",
       "answers": [
-        "$$x+(x+2)=13$$",
-        "$$x+(x+1)=13$$",
-        "$$x+1=13$$",
-        "$$x+x=13$$"
+        "$x+(x+2)=13$",
+        "$x+(x+1)=13$",
+        "$x+1=13$",
+        "$x+x=13$"
       ],
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "Deux nombres consécutifs se suivent. \nSi le premier nombre est $$x$$, alors le suivant est $$x+1$$\nOn obtient alors l'équation: $$x+(x+1)=13$$",
+      "explanation": "Deux nombres consécutifs se suivent. \nSi le premier nombre est $x$, alors le suivant est $x+1$\nOn obtient alors l'équation: $x+(x+1)=13$",
       "image": ""
     },
     {
@@ -159,9 +159,9 @@ const capsuleData = {
       "title": "QCM",
       "question": "On note $x$ l'âge d'une personne. Comment écrire l'âge de cette personne dans 5 ans?",
       "answers": [
-        "$$x-5$$",
-        "$$5x$$",
-        "$$x+5$$",
+        "$x-5$",
+        "$5x$",
+        "$x+5$",
         ""
       ],
       "correct": 2,
@@ -193,10 +193,10 @@ const capsuleData = {
       "title": "QCM",
       "question": "Quelle équation permet de traduire ce problème?",
       "answers": [
-        "$$3x+10=2(x+10)$$",
-        "$$3(x+10)=2x$$",
-        "$$3x+10=2x+10$$",
-        "$$x+10=2(3x+10)$$"
+        "$3x+10=2(x+10)$",
+        "$3(x+10)=2x$",
+        "$3x+10=2x+10$",
+        "$x+10=2(3x+10)$"
       ],
       "correct": 0,
       "correction": "",
@@ -222,9 +222,9 @@ const capsuleData = {
       "title": "QCM",
       "question": "Quelle équation modélise ce problème?",
       "answers": [
-        "$$m+2m+3m=90$$",
-        "$$m+2m+\\frac{m}{3}=90$$",
-        "$$m+m+\\frac{m}{3}=90$$",
+        "$m+2m+3m=90$",
+        "$m+2m+\\frac{m}{3}=90$",
+        "$m+m+\\frac{m}{3}=90$",
         ""
       ],
       "correct": 1,
@@ -239,10 +239,10 @@ const capsuleData = {
       "title": "QCM",
       "question": "Quelle équation modélise ce problème?",
       "answers": [
-        "$$x+(x-15)+2(x-15)=225$$",
-        "$$x+(x-15)+2x=225$$",
-        "$$x+(x+15)+2x=225$$",
-        "$$x+(x-15)+2(x+15)=225$$"
+        "$x+(x-15)+2(x-15)=225$",
+        "$x+(x-15)+2x=225$",
+        "$x+(x+15)+2x=225$",
+        "$x+(x-15)+2(x+15)=225$"
       ],
       "correct": 3,
       "correction": "",
