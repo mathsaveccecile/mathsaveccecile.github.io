@@ -43,7 +43,7 @@
     {
       "type": "video",
       "title": "Etapes 3, 4 et 5: Résolution, vérification et conclusion.",
-      "src": "https://youtube.com/shorts/OQHbuSrB4AY",
+      "src": "https://youtube.com/shorts/Mj-VNmhDxKA",
       "duration": 96
     },
     {
@@ -91,51 +91,63 @@
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Problème de nombres consécutifs",
+      "src": "https://youtube.com/shorts/gRm_JNgcGNQ",
+      "duration": 23
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Correction détaillée",
+      "src": "https://youtube.com/shorts/QY7DwhYs1Jc",
+      "duration": 89
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Si le premier nombre est $$x$$, comment s'écrivent les deux suivants?",
       "answers": [
-        "",
-        "",
-        "",
+        "$$x+1$$ et $$x+2$$",
+        "$$2x$$ et $$3x$$",
+        "$$x-1$$ et $$x-2$$",
         ""
       ],
       "correct": 0,
-      "explanation": "",
+      "explanation": "Les nombres consécutifs se suivent avec un écart de 1",
       "image": ""
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "La somme de 2 nombres consécutifs vaut 13. Quelle équation écrire?",
       "answers": [
-        "",
-        "",
-        "",
-        ""
+        "$$x+(x+2)=13$$",
+        "$$x+(x+1)=13$$",
+        "$$x+1=13$$",
+        "$$x+x=13$$"
       ],
-      "correct": 0,
-      "explanation": "",
+      "correct": 1,
+      "explanation": "Deux nombres consécutifs se suivent. \nSi le premier nombre est $$x$$, alors el suivant est $$x+1$$\nOn obtient alors l'équation: $$x+(x+1)=13$$",
       "image": ""
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
+      "title": "Un problème d'âges",
       "src": "",
       "duration": 0
+    },
+    {
+      "type": "video",
+      "title": "Résoudre un problème complexe",
+      "src": "https://youtube.com/shorts/LHdi6y-OIWA",
+      "duration": 24
+    },
+    {
+      "type": "video",
+      "title": "Correction détaillée",
+      "src": "https://youtube.com/shorts/wVK6ccer71w",
+      "duration": 153
     }
   ],
   "thumbnailPath": "C:\\Users\\tetil\\Dropbox\\revyze\\vignettes capsules\\modéliser_un_pb.png",
