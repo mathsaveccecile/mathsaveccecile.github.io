@@ -230,7 +230,7 @@ const capsuleData = {
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "mère: $m$\ngrand-mère: $2m$\nMarie: $\\frac{m}{3$\nOn additionne tout",
+      "explanation": "mère: $m$\ngrand-mère: $2m$\nMarie: $\\frac{m}{3}$\nOn additionne tout",
       "image": "assets/quiz/modeliser-un-probleme-quiz-20.png"
     },
     {
