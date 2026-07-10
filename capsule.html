@@ -933,7 +933,7 @@ function renderQuizStep(step, content){
         <h2>${step.question || ""}</h2>
 
         ${answers.map(answer => `
-          <button onclick="checkAnswer(${answer.originalIndex})">
+          <button onclick="checkAnswer(${answer.originalIndex}, this)">
             ${answer.text}
           </button>
         `).join("")}
@@ -1076,12 +1076,11 @@ function showFeedback(ok, explanation = ""){
   }
 }
 
-function checkAnswer(answerIndex){
+function checkAnswer(answerIndex, clickedButton){
   const step = capsuleData.steps[currentStep];
-  const ok = Number(answerIndex) === Number(step.correct);
 
-  const buttons = document.querySelectorAll(".quiz button");
-  const clickedButton = buttons[answerIndex];
+  const ok =
+    Number(answerIndex) === Number(step.correct);
 
   if(clickedButton){
     clickedButton.style.background = ok
@@ -1089,7 +1088,10 @@ function checkAnswer(answerIndex){
       : "linear-gradient(135deg,#b83232,#ff6b6b)";
   }
 
-  showFeedback(ok, ok ? (step.explanation || "") : "");
+  showFeedback(
+    ok,
+    ok ? (step.explanation || "") : ""
+  );
 }
 
 function checkTrueFalse(value){
