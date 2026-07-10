@@ -73,6 +73,38 @@
     ]
   },
   {
+    "title": "Comprendre la notion d'angle. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
+    "page": "comprendre-la-notion-d-angle.html",
+    "dataFile": "comprendre-la-notion-d-angle-data.js",
+    "keywords": [
+      "angle",
+      "angles",
+      "notion",
+      "comprendre",
+      "sommet",
+      "côté",
+      "cote",
+      "ouverture",
+      "géométrie",
+      "geometrie"
+      ]
+  },
+  {
+    "title": "Droites parallèles et perpendiculaires. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
+    "page": "droites-paralleles-et-perpendiculaires.html",
+    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
+  },
+  {
     "title": "Mesurer et construire des angles, tracer la bissectrice. ",
     "levels": [
       "6e"
@@ -97,16 +129,6 @@
       "géométrie",
       "geometrie"
     ]
-  },
-  {
-    "title": "Droites parallèles et perpendiculaires. ",
-    "levels": [
-      "6e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
-    "page": "droites-paralleles-et-perpendiculaires.html",
-    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
   },
   {
     "title": "Reconnaitre, comparer les angles. Raisonner. ",
@@ -135,28 +157,6 @@
     ]
   },
   {
-    "title": "Comprendre la notion d'angle",
-    "levels": [
-      "6e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
-    "page": "comprendre-la-notion-d-angle.html",
-    "dataFile": "comprendre-la-notion-d-angle-data.js",
-    "keywords": [
-      "angle",
-      "angles",
-      "notion",
-      "comprendre",
-      "sommet",
-      "côté",
-      "cote",
-      "ouverture",
-      "géométrie",
-      "geometrie"
-    ]
-  },
-  {
     "title": "Pythagore. Direct, contraposée et réciproque. ",
     "levels": [
       "4e",
@@ -167,14 +167,5 @@
     "page": "pythagore-direct-contraposee-et-reciproque.html",
     "dataFile": "pythagore-direct-contraposee-et-reciproque-data.js"
   },
-  {
-    "title": "Comprendre la notion d'angle. ",
-    "levels": [
-      "6e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
-    "page": "comprendre-la-notion-d-angle.html",
-    "dataFile": "comprendre-la-notion-d-angle-data.js"
-  }
+  
 ]
