@@ -104,32 +104,7 @@
       "geometrie"
       ]
   },
-  {
-    "title": "Mesurer et construire des angles, tracer la bissectrice. ",
-    "levels": [
-      "6e"
-    ],
-    "duration": "",
-    "thumbnail": "assets/thumbnails/mesurer-et-construire-des-angles-tracer-la-bissectrice.png",
-    "page": "mesurer-et-construire-des-angles-tracer-la-bissectrice.html",
-    "dataFile": "mesurer-et-construire-des-angles-tracer-la-bissectrice-data.js",
-    "keywords": [
-      "angle",
-      "angles",
-      "mesurer",
-      "construire",
-      "bissectrice",
-      "rapporteur",
-      "degré",
-      "degre",
-      "sommet",
-      "côtés",
-      "cotes",
-      "tracer",
-      "géométrie",
-      "geometrie"
-    ]
-  },
+  
   {
     "title": "Reconnaitre, comparer les angles. Raisonner. ",
     "levels": [
@@ -154,6 +129,32 @@
       "sommet",
       "côtés",
       "cotes"
+    ]
+  },
+  {
+    "title": "Mesurer et construire des angles, tracer la bissectrice. ",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/mesurer-et-construire-des-angles-tracer-la-bissectrice.png",
+    "page": "mesurer-et-construire-des-angles-tracer-la-bissectrice.html",
+    "dataFile": "mesurer-et-construire-des-angles-tracer-la-bissectrice-data.js",
+    "keywords": [
+      "angle",
+      "angles",
+      "mesurer",
+      "construire",
+      "bissectrice",
+      "rapporteur",
+      "degré",
+      "degre",
+      "sommet",
+      "côtés",
+      "cotes",
+      "tracer",
+      "géométrie",
+      "geometrie"
     ]
   },
   {
