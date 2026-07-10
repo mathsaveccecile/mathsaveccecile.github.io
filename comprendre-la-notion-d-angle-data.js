@@ -10,7 +10,7 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Bienvenue",
-      "src": "https://youtube.com/shorts/fNdGV_d3jV0",
+      "src": "https://www.youtube.com/watch?v=fNdGV_d3jV0",
       "duration": 9
     },
     {
