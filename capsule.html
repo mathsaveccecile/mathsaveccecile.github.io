@@ -937,31 +937,58 @@ function renderQuizStep(step, content){
   }
 
   if(step.quizType === "matching"){
-    content.innerHTML = `
-      <div class="quiz">
-        ${quizImage(step)}
-        <h2>${step.question || "Associe les paires."}</h2>
+  const pairs = step.pairs || [];
 
-        ${(step.pairs || []).map((pair, index) => `
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px;">
-            <div style="background:#46395f;border-radius:18px;padding:18px;">
-              ${pair[0]}
-            </div>
+  // On conserve l'indice d'origine de chaque bonne réponse.
+  let shuffledOptions = pairs.map((pair, originalIndex) => ({
+    text: pair[1],
+    originalIndex: originalIndex
+  }));
 
-            <select id="match-${index}" style="border-radius:18px;padding:18px;font-size:18px;">
-              <option value="">Choisir...</option>
-              ${(step.pairs || []).map((p, optionIndex) => `
-                <option value="${optionIndex}">${p[1]}</option>
-              `).join("")}
-            </select>
-          </div>
-        `).join("")}
-
-        <button onclick="checkMatching()">Vérifier</button>
-        <p id="feedback"></p>
-      </div>
-    `;
+  // Mélange fiable des propositions.
+  for(let i = shuffledOptions.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledOptions[i], shuffledOptions[j]] =
+      [shuffledOptions[j], shuffledOptions[i]];
   }
+
+  // Évite exceptionnellement de conserver exactement l'ordre initial.
+  if(
+    shuffledOptions.length > 1 &&
+    shuffledOptions.every((option, index) => option.originalIndex === index)
+  ){
+    [shuffledOptions[0], shuffledOptions[1]] =
+      [shuffledOptions[1], shuffledOptions[0]];
+  }
+
+  content.innerHTML = `
+    <div class="quiz">
+      ${quizImage(step)}
+      <h2>${step.question || "Associe les paires."}</h2>
+
+      ${pairs.map((pair, index) => `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px;">
+          <div style="background:#46395f;border-radius:18px;padding:18px;">
+            ${pair[0]}
+          </div>
+
+          <select id="match-${index}" style="border-radius:18px;padding:18px;font-size:18px;">
+            <option value="">Choisir...</option>
+
+            ${shuffledOptions.map(option => `
+              <option value="${option.originalIndex}">
+                ${option.text}
+              </option>
+            `).join("")}
+          </select>
+        </div>
+      `).join("")}
+
+      <button onclick="checkMatching()">Vérifier</button>
+      <p id="feedback"></p>
+    </div>
+  `;
+}
 
   if(window.MathJax){
     MathJax.typesetPromise();
@@ -1608,7 +1635,7 @@ title.insertAdjacentElement("afterend", box);
   }
 
   const title = card.querySelector("#stepTitle");
-title.insertAdjacentElement("afterend", box);
+title.insertAdjacentElement("afterend", box);F
 }
 
 async function likeCapsule(){
