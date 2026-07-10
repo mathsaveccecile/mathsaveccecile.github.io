@@ -119,21 +119,7 @@
     "duration": "",
     "thumbnail": "assets/thumbnails/droites-paralleles-et-perpendiculaires.png",
     "page": "droites-paralleles-et-perpendiculaires.html",
-    "dataFile": "droites-paralleles-et-perpendiculaires-data.js",
-    "keywords": [
-      "droites",
-      "parallèles",
-      "paralleles",
-      "perpendiculaires",
-      "perpendiculaire",
-      "parallèle",
-      "parallele",
-      "angle droit",
-      "équerre",
-      "equerre",
-      "géométrie",
-      "geometrie"
-    ]
+    "dataFile": "droites-paralleles-et-perpendiculaires-data.js"
   },
   {
     "title": "Reconnaitre, comparer les angles. Raisonner. ",
