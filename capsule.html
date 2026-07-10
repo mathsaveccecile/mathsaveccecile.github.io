@@ -642,7 +642,9 @@ function openComments(event){
 
   const url =
     "avis.html?capsule=" +
-    encodeURIComponent(capsuleData.title);
+    encodeURIComponent(capsuleData.title) +
+    "&retour=" +
+    encodeURIComponent(location.href);
 
   location.href = url;
 }
@@ -663,7 +665,21 @@ function startCapsule(){
 
   document.title = capsuleData.title + " - Maths avec Cécile";
   document.getElementById("title").textContent = capsuleData.title;
+const avisUrl =
+  "avis.html?capsule=" +
+  encodeURIComponent(capsuleData.title) +
+  "&retour=" +
+  encodeURIComponent(location.href);
 
+const avisLink = document.getElementById("avisLink");
+if(avisLink){
+  avisLink.href = avisUrl;
+}
+
+const avisMobile = document.getElementById("avisMobile");
+if(avisMobile){
+  avisMobile.href = avisUrl;
+}
 
   const backHref = capsuleData.levels.length ? capsuleData.levels[0] + ".html" : "index.html";
   document.getElementById("backLink").href = backHref;
