@@ -217,7 +217,7 @@ const capsuleData = {
           ""
         ]
       ],
-      "explanation": "Pour trouver les angles à partir des valeurs, on utilise la calculatrice.\nAvant de commencer, il faut vérifier que la calculatrice est bien en mode degrés.\nPour retrouver un angle à partir d'un cosinus : appuie sur la touche SHIFT puis cos, tape la valeur, puis appuie sur $=$.\nPar exemple :\n\\[\n\\cos^{-1}\\left(\\frac{1}{2}\\right)=60^\\circ\n\\]\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{2}}{2}\\right)=45^\\circ\n\\]\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right)=30^\\circ\n\\]\nPour retrouver un angle à partir d'une tangente : appuie sur la touche $\\tan^{-1}$ (ou SHIFT puis tan), tape la valeur, puis appuie sur $=$.\nPar exemple :\n\\[\n\\tan^{-1}(1)=45^\\circ\n\\]",
+      "explanation": "Pour trouver les angles à partir des valeurs, on utilise la calculatrice.\nAvant de commencer, il faut vérifier que la calculatrice est bien en mode degrés.\nPour retrouver un angle à partir d'un cosinus : appuie sur la touche SHIFT puis cos, tape la valeur, puis appuie sur $=$.\nPar exemple :\n$cos^{-1}\\left(\\frac{1}{2}\\right)=60^\\circ$\n$cos^{-1}\\left(\\frac{\\sqrt{2}}{2}\\right)=45^\\circ$\n$cos^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right)=30^\\circ$\nPour retrouver un angle à partir d'une tangente : appuie sur la touche $\\tan^{-1}$ (ou SHIFT puis tan), tape la valeur, puis appuie sur $=$.\nPar exemple :\n$tan^{-1}(1)=45^\\circ$",
       "image": ""
     },
     {
