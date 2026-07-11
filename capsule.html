@@ -1242,16 +1242,7 @@ function selectMatchingOption(pairIndex, optionPosition){
     MathJax.typesetPromise([selectedBox]);
   }
 }
-    });
-
-  selectedMenu.style.display =
-    selectedMenu.style.display === "block"
-      ? "none"
-      : "block";
-}
-
-
-
+    
 function scrollToFeedback(){
   const feedback = document.getElementById("feedback");
   if(!feedback) return;
