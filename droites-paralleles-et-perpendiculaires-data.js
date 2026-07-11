@@ -15,7 +15,7 @@ const capsuleData = {
     },
     {
       "type": "image",
-      "title": "Mode d'emploi",
+      "title": "Mode d'emploi. ",
       "src": "assets/images/droites-paralleles-et-perpendiculaires-image-2.jpg"
     },
     {

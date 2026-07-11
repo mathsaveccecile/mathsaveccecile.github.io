@@ -10,18 +10,18 @@ const capsuleData = {
   "steps": [
     {
       "type": "video",
-      "title": "Bienvenue",
+      "title": "Bienvenue!",
       "src": "https://youtube.com/shorts/bdaaWnNfO44",
       "duration": 27
     },
     {
       "type": "image",
-      "title": "Mode d'emploi",
+      "title": "Mode d'emploi.",
       "src": "assets/images/trigonometrie-comprendre-et-utiliser-le-cosinus-image-2.jpg"
     },
     {
       "type": "image",
-      "title": "Plan de la capsule",
+      "title": "Plan de la capsule.",
       "src": "assets/images/trigonometrie-comprendre-et-utiliser-le-cosinus-image-3.jpg"
     },
     {
@@ -86,7 +86,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Attention à bien regarder dans quel triangle on travaille. Ici le triangle ABH est rectangle en H et le côté opposé à l'angle droit est [BA]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-9.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-9.png"
     },
     {
       "type": "quiz",
@@ -103,7 +103,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Dans le triangle ABC rectangle en A, l'hypoténuse est le côté [BC] et le côté adjacent à l'angle $\\widehat{CBA}$ est [BA]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-10.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-10.png"
     },
     {
       "type": "quiz",
@@ -120,7 +120,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Dans le triangle BHA rectangle en H, l'hypoténuse est le côté [AB] et le côté adjacent à l'angle $\\widehat{HBA}$ est [BH]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-11.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-11.png"
     },
     {
       "type": "video",
@@ -143,7 +143,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Le côté adjacent à l'angle $\\widehat{ABC}$ est [BA]\n et l'hypoténuse est [BC]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-13.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-13.png"
     },
     {
       "type": "quiz",
@@ -160,7 +160,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Dans ce triangle rectangle en T, l'hypoténuse est le côté en face de l'angle droit: c'est [HR]. \nPour cos($\\widehat{TRH}$)\nOn se place à l'angle $\\widehat{TRH}$: le côté adjacent est [RT]\nPour cos($\\widehat{THR}$)\nOn se place à l'angle $\\widehat{TRH}$: le côté adjacent est [HT]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-14.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-14.png"
     },
     {
       "type": "quiz",
@@ -177,7 +177,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Dans le triangle BAH rectangle en H, l'hypoténuse est [BA] et le côté adjacent à l'angle $\\widehat{HBA}$ est [BH]",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-15.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-15.png"
     },
     {
       "type": "video",
@@ -195,7 +195,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "Tu connais le cosinus et tu cherches l'angle. \n$cos^{-1}$ permet de trouver un angle à partir d'un nombre. ",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-17.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-17.png"
     },
     {
       "type": "quiz",
@@ -248,7 +248,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "On connait $\\widehat{STR}$, la longueur de son côté adjacent RS et la longueur de l'hypoténuse TR, donc \n$cos(\\widehat{STR})=\\frac{RS}{TR}$",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-21.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-21.png"
     },
     {
       "type": "quiz",
@@ -265,7 +265,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "On écrit: \n$cos30=\\frac{AB}{5}$\nd'où: \n$\\frac{cos30}{1}=\\frac{AB}{5}$\nOn fait un produit en croix: \n$AB \\times 1=cos30 \\times 5$\nDonc:\n$AB=5cos30$",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-22.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-22.png"
     },
     {
       "type": "quiz",
@@ -282,7 +282,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "On écrit: \n$cos45=\\frac{3}{CD}$\nd'où: \n$\\frac{cos45}{1}=\\frac{3}{CD}$\nOn fait un produit en croix: \n$3=CD \\times cos45$\nOn isole CD: \n$CD=\\frac{3}{cos45}$",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-23.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-23.png"
     },
     {
       "type": "video",
@@ -305,7 +305,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "On cherche un angle dont le cosinus vaut $\\frac{3}{5}$\nDonc à la calculatrice il faut taper: \n$cos^{-1}(\\frac{3}{5})$\net non pas $cos(\\frac{3}{5})$ qui donnerait un nombre et pas un angle. ",
-      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-25.jpg"
+      "image": "assets/quiz/trigonometrie-comprendre-et-utiliser-le-cosinus-quiz-25.png"
     },
     {
       "type": "image",
