@@ -125,5 +125,15 @@
       "géométrie",
       "geometrie"
     ]
+  },
+  {
+    "title": "Trigonométrie: comprendre tout le chapitre. ",
+    "levels": [
+      "3e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/trigonometrie-comprendre-tout-le-chapitre.png",
+    "page": "trigonometrie-comprendre-tout-le-chapitre.html",
+    "dataFile": "trigonometrie-comprendre-tout-le-chapitre-data.js"
   }
 ]
