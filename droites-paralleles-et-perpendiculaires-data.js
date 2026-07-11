@@ -62,12 +62,12 @@ const capsuleData = {
         "Une ligne droite qui garde la même direction.",
         "Une ligne en zigzag.",
         "Une ligne courbe.",
-        "Une ligne sui tourne."
+        "Une ligne qui tourne."
       ],
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "une droite est une ligne parfaitement droite. Elle peut être horizontale, verticale, ou oblique tant qu'elle garde toujours la même direction. ",
+      "explanation": "Une droite est une ligne parfaitement droite. \nElle peut être horizontale, verticale, ou oblique tant qu'elle garde toujours la même direction. ",
       "image": ""
     },
     {
@@ -131,7 +131,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Ici le coin droit ne correspond pas exactement à l'angle formé par les deux droites. L'équerre n'est pas bien alignée sur les deux droites en même temps.",
+      "explanation": "Ici le coin droit ne correspond pas exactement à l'angle formé par les deux droites. \nL'équerre n'est pas bien alignée sur les deux droites en même temps.",
       "image": "assets/quiz/droites-paralleles-et-perpendiculaires-quiz-10.png"
     },
     {
@@ -154,7 +154,7 @@ const capsuleData = {
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "Deux droites sont parallèles si elles ont la même direction et ne se rencontrent jamais. On refait le même déplacement que sur la première droite en partant d'un nœud et en arrivant à un autre nœud.",
+      "explanation": "Deux droites sont parallèles si elles ont la même direction et ne se rencontrent jamais. \nOn refait le même déplacement que sur la première droite en partant d'un nœud et en arrivant à un autre nœud.",
       "image": "assets/quiz/droites-paralleles-et-perpendiculaires-quiz-12.png"
     },
     {
@@ -172,7 +172,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Ici la distance entre elles n'est pas constante, à un endroit elle vaut 5,64 cm et à un autre elle vaut 6,6 cm. La distance entre les deux varie. ",
+      "explanation": "Ici la distance entre elles n'est pas constante, à un endroit elle vaut 5,64 cm et à un autre elle vaut 6,6 cm. \nLa distance entre les deux varie. ",
       "image": "assets/quiz/droites-paralleles-et-perpendiculaires-quiz-14.png"
     },
     {
