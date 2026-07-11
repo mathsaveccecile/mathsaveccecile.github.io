@@ -1004,150 +1004,65 @@ function renderQuizStep(step, content){
     `;
   }
 
-  if(step.quizType === "matching"){
-  const pairs = (step.pairs || []).filter(pair =>
-    pair &&
-    pair[0] &&
-    pair[1] &&
-    String(pair[0]).trim() !== "" &&
-    String(pair[1]).trim() !== ""
-  );
+  function toggleMatchingMenu(index){
+  const selectedMenu =
+    document.getElementById(`match-menu-${index}`);
 
-  // On conserve l'indice d'origine de chaque bonne réponse.
-  let shuffledOptions = pairs.map((pair, originalIndex) => ({
-    text: String(pair[1]),
-    originalIndex: originalIndex
-  }));
-
-  // Mélange des propositions.
-  for(let i = shuffledOptions.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-
-    [shuffledOptions[i], shuffledOptions[j]] =
-      [shuffledOptions[j], shuffledOptions[i]];
+  if(!selectedMenu){
+    return;
   }
 
-  // Évite de conserver exactement l'ordre initial.
+  document
+    .querySelectorAll('[id^="match-menu-"]')
+    .forEach(menu => {
+      if(menu !== selectedMenu){
+        menu.style.display = "none";
+      }
+    });
+
+  selectedMenu.style.display =
+    selectedMenu.style.display === "block"
+      ? "none"
+      : "block";
+
   if(
-    shuffledOptions.length > 1 &&
-    shuffledOptions.every(
-      (option, index) => option.originalIndex === index
-    )
+    selectedMenu.style.display === "block" &&
+    window.MathJax
   ){
-    [shuffledOptions[0], shuffledOptions[1]] =
-      [shuffledOptions[1], shuffledOptions[0]];
+    MathJax.typesetPromise([selectedMenu]);
+  }
+}
+
+
+function selectMatchingOption(pairIndex, optionPosition){
+  const option =
+    window.currentMatchingOptions?.[optionPosition];
+
+  if(!option){
+    return;
   }
 
-  // On garde les propositions pour les menus personnalisés.
-  window.currentMatchingOptions = shuffledOptions;
+  const hiddenInput =
+    document.getElementById(`match-${pairIndex}`);
 
-  content.innerHTML = `
-    <div class="quiz">
-      ${quizImage(step)}
+  const selectedBox =
+    document.getElementById(`match-button-${pairIndex}`);
 
-      <h2>${step.question || "Associe les paires."}</h2>
+  const menu =
+    document.getElementById(`match-menu-${pairIndex}`);
 
-      ${pairs.map((pair, index) => `
-        <div style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:15px;
-          margin:15px;
-          align-items:stretch;
-        ">
+  if(!hiddenInput || !selectedBox || !menu){
+    return;
+  }
 
-          <div style="
-            background:#46395f;
-            border-radius:18px;
-            padding:18px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-          ">
-            ${pair[0]}
-          </div>
+  hiddenInput.value = String(option.originalIndex);
+  selectedBox.innerHTML = option.text;
+  selectedBox.style.borderColor = "#7257ff";
+  menu.style.display = "none";
 
-          <div class="matching-dropdown" style="
-            position:relative;
-            width:100%;
-          ">
-
-            <input
-              type="hidden"
-              id="match-${index}"
-              value=""
-            >
-
-            <button
-              type="button"
-              id="match-button-${index}"
-              onclick="toggleMatchingMenu(${index})"
-              style="
-                width:100%;
-                height:100%;
-                min-height:60px;
-                border:none;
-                border-radius:18px;
-                padding:18px;
-                background:white;
-                color:#111;
-                font-size:18px;
-                text-align:left;
-                cursor:pointer;
-              "
-            >
-              Choisir...
-            </button>
-
-            <div
-              id="match-menu-${index}"
-              style="
-                display:none;
-                position:absolute;
-                top:calc(100% + 5px);
-                left:0;
-                right:0;
-                z-index:1000;
-                background:white;
-                border-radius:18px;
-                overflow:hidden;
-                box-shadow:0 10px 30px rgba(0,0,0,0.35);
-              "
-            >
-              ${shuffledOptions.map((option, optionPosition) => `
-                <button
-                  type="button"
-                  onclick="selectMatchingOption(
-                    ${index},
-                    ${optionPosition}
-                  )"
-                  style="
-                    display:block;
-                    width:100%;
-                    border:none;
-                    border-bottom:1px solid #ddd;
-                    padding:16px 18px;
-                    background:white;
-                    color:#111;
-                    font-size:18px;
-                    text-align:left;
-                    cursor:pointer;
-                  "
-                >
-                  ${option.text}
-                </button>
-              `).join("")}
-            </div>
-
-          </div>
-        </div>
-      `).join("")}
-
-      <button onclick="checkMatching()">Vérifier</button>
-
-      <p id="feedback"></p>
-    </div>
-  `;
+  if(window.MathJax){
+    MathJax.typesetPromise([selectedBox]);
+  }
 }
 
   if(window.MathJax){
