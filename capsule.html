@@ -1006,59 +1006,145 @@ function renderQuizStep(step, content){
 
   if(step.quizType === "matching"){
   const pairs = (step.pairs || []).filter(pair =>
-  pair &&
-  pair[0] &&
-  pair[1] &&
-  String(pair[0]).trim() !== "" &&
-  String(pair[1]).trim() !== ""
-);
+    pair &&
+    pair[0] &&
+    pair[1] &&
+    String(pair[0]).trim() !== "" &&
+    String(pair[1]).trim() !== ""
+  );
 
   // On conserve l'indice d'origine de chaque bonne réponse.
   let shuffledOptions = pairs.map((pair, originalIndex) => ({
-    text: pair[1],
+    text: String(pair[1]),
     originalIndex: originalIndex
   }));
 
-  // Mélange fiable des propositions.
+  // Mélange des propositions.
   for(let i = shuffledOptions.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
+
     [shuffledOptions[i], shuffledOptions[j]] =
       [shuffledOptions[j], shuffledOptions[i]];
   }
 
-  // Évite exceptionnellement de conserver exactement l'ordre initial.
+  // Évite de conserver exactement l'ordre initial.
   if(
     shuffledOptions.length > 1 &&
-    shuffledOptions.every((option, index) => option.originalIndex === index)
+    shuffledOptions.every(
+      (option, index) => option.originalIndex === index
+    )
   ){
     [shuffledOptions[0], shuffledOptions[1]] =
       [shuffledOptions[1], shuffledOptions[0]];
   }
 
+  // On garde les propositions pour les menus personnalisés.
+  window.currentMatchingOptions = shuffledOptions;
+
   content.innerHTML = `
     <div class="quiz">
       ${quizImage(step)}
+
       <h2>${step.question || "Associe les paires."}</h2>
 
       ${pairs.map((pair, index) => `
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px;">
-          <div style="background:#46395f;border-radius:18px;padding:18px;">
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:15px;
+          margin:15px;
+          align-items:stretch;
+        ">
+
+          <div style="
+            background:#46395f;
+            border-radius:18px;
+            padding:18px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+          ">
             ${pair[0]}
           </div>
 
-          <select id="match-${index}" style="border-radius:18px;padding:18px;font-size:18px;">
-            <option value="">Choisir...</option>
+          <div class="matching-dropdown" style="
+            position:relative;
+            width:100%;
+          ">
 
-            ${shuffledOptions.map(option => `
-              <option value="${option.originalIndex}">
-                ${option.text}
-              </option>
-            `).join("")}
-          </select>
+            <input
+              type="hidden"
+              id="match-${index}"
+              value=""
+            >
+
+            <button
+              type="button"
+              id="match-button-${index}"
+              onclick="toggleMatchingMenu(${index})"
+              style="
+                width:100%;
+                height:100%;
+                min-height:60px;
+                border:none;
+                border-radius:18px;
+                padding:18px;
+                background:white;
+                color:#111;
+                font-size:18px;
+                text-align:left;
+                cursor:pointer;
+              "
+            >
+              Choisir...
+            </button>
+
+            <div
+              id="match-menu-${index}"
+              style="
+                display:none;
+                position:absolute;
+                top:calc(100% + 5px);
+                left:0;
+                right:0;
+                z-index:1000;
+                background:white;
+                border-radius:18px;
+                overflow:hidden;
+                box-shadow:0 10px 30px rgba(0,0,0,0.35);
+              "
+            >
+              ${shuffledOptions.map((option, optionPosition) => `
+                <button
+                  type="button"
+                  onclick="selectMatchingOption(
+                    ${index},
+                    ${optionPosition}
+                  )"
+                  style="
+                    display:block;
+                    width:100%;
+                    border:none;
+                    border-bottom:1px solid #ddd;
+                    padding:16px 18px;
+                    background:white;
+                    color:#111;
+                    font-size:18px;
+                    text-align:left;
+                    cursor:pointer;
+                  "
+                >
+                  ${option.text}
+                </button>
+              `).join("")}
+            </div>
+
+          </div>
         </div>
       `).join("")}
 
       <button onclick="checkMatching()">Vérifier</button>
+
       <p id="feedback"></p>
     </div>
   `;
@@ -1069,6 +1155,44 @@ function renderQuizStep(step, content){
   }
 }
 
+function toggleMatchingMenu(index){
+  const selectedMenu = document.getElementById(`match-menu-${index}`);
+
+  document
+    .querySelectorAll('[id^="match-menu-"]')
+    .forEach(menu => {
+      if(menu !== selectedMenu){
+        menu.style.display = "none";
+      }
+    });
+
+  selectedMenu.style.display =
+    selectedMenu.style.display === "block"
+      ? "none"
+      : "block";
+}
+
+
+function selectMatchingOption(pairIndex, optionPosition){
+  const option = window.currentMatchingOptions[optionPosition];
+
+  const hiddenInput =
+    document.getElementById(`match-${pairIndex}`);
+
+  const selectedButton =
+    document.getElementById(`match-button-${pairIndex}`);
+
+  const menu =
+    document.getElementById(`match-menu-${pairIndex}`);
+
+  hiddenInput.value = option.originalIndex;
+  selectedButton.innerHTML = option.text;
+  menu.style.display = "none";
+
+  if(window.MathJax){
+    MathJax.typesetPromise([selectedButton]);
+  }
+}
 function scrollToFeedback(){
   const feedback = document.getElementById("feedback");
   if(!feedback) return;
