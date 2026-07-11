@@ -166,6 +166,15 @@
       "géométrie",
       "geometrie"
     ]
+  },
+  {
+    "title": "Comprendre_la_notion_d_angle",
+    "levels": [
+      "6e"
+    ],
+    "duration": "",
+    "thumbnail": "assets/thumbnails/comprendre-la-notion-d-angle.png",
+    "page": "comprendre-la-notion-d-angle.html",
+    "dataFile": "comprendre-la-notion-d-angle-data.js"
   }
-  
 ]
