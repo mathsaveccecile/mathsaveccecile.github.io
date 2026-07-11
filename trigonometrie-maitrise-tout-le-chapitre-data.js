@@ -114,7 +114,7 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "Dans le triangle ABC rectangle en A, on noteH le pied de la hauteur issue de A. (On dit aussi relative à [BC]). $tan(\\widehat{ABC})=$",
+      "question": "Dans le triangle ABC rectangle en A, on note H le pied de la hauteur issue de A. (On dit aussi relative à [BC]). $tan(\\widehat{ABC})=$",
       "answers": [
         "$\\frac{AH}{AB}$",
         "$\\frac{AH}{BH}$",
@@ -124,7 +124,7 @@ const capsuleData = {
       "correct": 2,
       "correction": "",
       "pairs": [],
-      "explanation": "Dans le triangle $ABC$ rectangle en $A$, le côté $[BC]$ est l'hypoténuse car il est opposé à l'angle droit.\n\nOn s'intéresse à l'angle $\\widehat{ABC}$.\n\n\\begin{itemize}\n\\item Le côté opposé à cet angle est le segment $[AC]$.\n\\item Le côté adjacent à cet angle est le segment $[AB]$.\n\\end{itemize}\n\nPar définition, la tangente d'un angle aigu est égale au quotient :\n\n\\[\n\\frac{\\text{longueur du côté opposé}}{\\text{longueur du côté adjacent}}.\n\\]\n\nDonc :\n\n\\[\n\\tan\\left(\\widehat{ABC}\\right)=\\frac{AC}{AB}\n\\]\n\nLes segments contenant $H$ (comme $[AH]$) n'interviennent pas ici car ils ne sont ni opposés ni adjacents à l'angle $\\widehat{ABC}$ dans le triangle $ABC$.",
+      "explanation": "Dans le triangle $ABC$ rectangle en $A$, le côté $[BC]$ est l'hypoténuse car il est opposé à l'angle droit.\n\nOn s'intéresse à l'angle $\\widehat{ABC}$.\nPar définition, la tangente d'un angle aigu est égale au quotient :\n\\[\n\\frac{\\text{longueur du côté opposé}}{\\text{longueur du côté adjacent}}.\n\\]\n\nDonc :\n\\[\n\\tan\\left(\\widehat{ABC}\\right)=\\frac{AC}{AB}\n\\]\n\nLes segments contenant $H$ (comme $[AH]$) n'interviennent pas ici car ils ne sont ni opposés ni adjacents à l'angle $\\widehat{ABC}$ dans le triangle $ABC$.",
       "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-11.jpg"
     },
     {
@@ -141,7 +141,7 @@ const capsuleData = {
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "Regardons d'abord l'angle $\\widehat{ABC}$.\n\nPour l'angle $\\widehat{ABC}$ :\n\n\\begin{itemize}\n\\item Le côté adjacent est le segment $[AB]$.\n\\item L'hypoténuse est le segment $[BC]$.\n\\end{itemize}\n\nDonc :\n\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AB}{BC}\n=\n\\frac{3}{5}.\n\\]\n\nAinsi,\n\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n\\]\n\nest bien égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nVérifions maintenant les autres propositions.\n\n\\[\n\\sin\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\n\\[\n\\tan\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{adjacent}}\n=\n\\frac{AC}{AB}\n=\n\\frac{4}{3}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nPour l'angle $\\widehat{BCA}$ :\n\n\\begin{itemize}\n\\item Le côté adjacent est le segment $[AC]$.\n\\item L'hypoténuse est le segment $[BC]$.\n\\end{itemize}\n\nDonc :\n\n\\[\n\\cos\\left(\\widehat{BCA}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nConclusion :\n\n\\[\n\\dfrac{3}{5}\n=\n\\cos\\left(\\widehat{ABC}\\right).\n\\]\n\nLa seule bonne réponse est donc :\n\n\\[\n\\boxed{\\cos\\left(\\widehat{ABC}\\right)}\n\\]",
+      "explanation": "Regardons d'abord l'angle $\\widehat{ABC}$.\n\nPour l'angle $\\widehat{ABC}$ :\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AB}{BC}\n=\n\\frac{3}{5}.\n\\]\n\nAinsi,\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n\\]\nest bien égal à\n\\[\n\\dfrac{3}{5}.\n\\]\n\nVérifions maintenant les autres propositions.\n\\[\n\\sin\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\\[\n\\dfrac{3}{5}.\n\\]\n\n\\[\n\\tan\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{adjacent}}\n=\n\\frac{AC}{AB}\n=\n\\frac{4}{3}.\n\\]\n\nCe n'est pas égal à\n\\[\n\\dfrac{3}{5}.\n\\]\n\nPour l'angle $\\widehat{BCA}$ :\n\\[\n\\cos\\left(\\widehat{BCA}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\\[\n\\dfrac{3}{5}.\n\\]\n\nConclusion :\n\\[\n\\dfrac{3}{5}\n=\n\\cos\\left(\\widehat{ABC}\\right).\n\\]\n\nLa seule bonne réponse est donc :\n\\[\n\\boxed{\\cos\\left(\\widehat{ABC}\\right)}\n\\]",
       "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-12.jpg"
     },
     {
@@ -173,7 +173,7 @@ const capsuleData = {
       "pairs": [
         [
           "sin(0°)",
-          "$\\frac{1}{2}$"
+          "0"
         ],
         [
           "tan(45°)",
@@ -181,7 +181,7 @@ const capsuleData = {
         ],
         [
           "cos(60°)",
-          "0"
+          "$\\frac{1}{2}$"
         ],
         [
           "",
@@ -202,11 +202,11 @@ const capsuleData = {
       "pairs": [
         [
           "$tanx=1$",
-          "45°"
+          "60°"
         ],
         [
-          "$cosx=\\frac{\\sqrt{3}{2}$",
-          "60°"
+          "$cosx=\\frac{\\sqrt{3}}{2}$",
+          "45°"
         ],
         [
           "$cosx=\\frac{1}{2}$",
@@ -217,7 +217,7 @@ const capsuleData = {
           ""
         ]
       ],
-      "explanation": "Pour trouver les angles à partir des valeurs, on utilise la calculatrice.\n\nAvant de commencer, il faut vérifier que la calculatrice est bien en mode degrés.\n\nPour retrouver un angle à partir d'un cosinus : appuie sur la touche SHIFT puis cos, tape la valeur, puis appuie sur $=$.\n\nPar exemple :\n\n\\[\n\\cos^{-1}\\left(\\frac{1}{2}\\right)=60^\\circ\n\\]\n\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{2}}{2}\\right)=45^\\circ\n\\]\n\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right)=30^\\circ\n\\]\n\nPour retrouver un angle à partir d'une tangente : appuie sur la touche $\\tan^{-1}$ (ou SHIFT puis tan), tape la valeur, puis appuie sur $=$.\n\nPar exemple :\n\n\\[\n\\tan^{-1}(1)=45^\\circ\n\\]",
+      "explanation": "Pour trouver les angles à partir des valeurs, on utilise la calculatrice.\nAvant de commencer, il faut vérifier que la calculatrice est bien en mode degrés.\nPour retrouver un angle à partir d'un cosinus : appuie sur la touche SHIFT puis cos, tape la valeur, puis appuie sur $=$.\nPar exemple :\n\\[\n\\cos^{-1}\\left(\\frac{1}{2}\\right)=60^\\circ\n\\]\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{2}}{2}\\right)=45^\\circ\n\\]\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right)=30^\\circ\n\\]\nPour retrouver un angle à partir d'une tangente : appuie sur la touche $\\tan^{-1}$ (ou SHIFT puis tan), tape la valeur, puis appuie sur $=$.\nPar exemple :\n\\[\n\\tan^{-1}(1)=45^\\circ\n\\]",
       "image": ""
     },
     {
