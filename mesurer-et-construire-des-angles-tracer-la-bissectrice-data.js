@@ -15,7 +15,7 @@ const capsuleData = {
     },
     {
       "type": "image",
-      "title": "9.jpg",
+      "title": "Mode d'emploi. ",
       "src": "assets/images/mesurer-et-construire-des-angles-tracer-la-bissectrice-image-2.jpg"
     },
     {
