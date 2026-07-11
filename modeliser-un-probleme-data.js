@@ -29,7 +29,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Il est inconnu; Donc on va utiliser une lettre pour le nommer. Par exemple la lettre $x$",
+      "explanation": "Il est inconnu; Donc on va utiliser une lettre pour le nommer. \nPar exemple la lettre $x$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-3.png"
     },
     {
@@ -93,7 +93,7 @@ const capsuleData = {
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "On fait les étapes dans l'ordre. \nSoit $x$ le nombre de départ.\nOn le multiplie par 2 donc on obtient $2x$\npuis on ajoute 3 donc on obtient $2x+3$\nEt enfin on élève le tout au carré donc il ne faut pas oublier les parenthèses et on obtient $(2x+3)^{2}$",
+      "explanation": "On fait les étapes dans l'ordre. \nSoit $x$ le nombre de départ.\nOn le multiplie par 2 donc on obtient $2x$\nPuis on ajoute 3 donc on obtient $2x+3$\nEt enfin on élève le tout au carré donc il ne faut pas oublier les parenthèses et on obtient $(2x+3)^{2}$",
       "image": "assets/quiz/modeliser-un-probleme-quiz-8.png"
     },
     {
@@ -184,7 +184,7 @@ const capsuleData = {
       "correct": 2,
       "correction": "",
       "pairs": [],
-      "explanation": "Aujourd'hui, la seour a $x$ ans, donc Tom a $x+4$ ans. \nDans 6 ans, on ajoute 6 aux deux âges: la soeur aura $x+6$ ans et Tom aura $(x+4)+6 = x+10$ ans",
+      "explanation": "Aujourd'hui, la seour a $x$ ans, donc Tom a $x+4$ ans. \nDans 6 ans, on ajoute 6 aux deux âges: \nLa soeur aura $x+6$ ans \net Tom aura $(x+4)+6 = x+10$ ans",
       "image": ""
     },
     {
