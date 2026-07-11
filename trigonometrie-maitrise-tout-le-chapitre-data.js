@@ -25,142 +25,142 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Noms des côtés en fonction de l'angle. ",
+      "src": "https://youtube.com/shorts/yVmgl0OJdGo",
+      "duration": 88
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Dans le triangle ABC rectangle en A, le côté adjacent à l'angle $\\widehat{BCA}$ est: ",
       "answers": [
-        "",
-        "",
-        "",
+        "[AB]",
+        "[AC]",
+        "[BC]",
         ""
       ],
-      "correct": 0,
+      "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "le côté adjacent à l'angle $\\widehat{BCA}$ est celui qui touche l'angle sans être l'hypoténuse, c'est donc [AC] ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-5.jpg"
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Dans le triangle ABC rectangle en A, le côté opposé à l'angle $\\widehat{BCA}$ est: ",
       "answers": [
-        "",
-        "",
-        "",
+        "[AH]",
+        "[AB]",
+        "[AC]",
         ""
       ],
-      "correct": 0,
+      "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Le côté opposé à l'angle $\\widehat{BCA}$ est celui qui est en face de l'angle, donc [AB]. ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-6.jpg"
     },
     {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "",
+      "question": "Un même côté peut être à la fois opposé ou adjacent selon l'angle. ",
       "answers": [],
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Tout dépend de l'angle choisi! ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-7.jpg"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Définitions et moyen mnémotechnique. ",
+      "src": "https://youtube.com/shorts/x1m-5SHF-fE",
+      "duration": 162
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Associer chaque expression à sa bonne écriture. ",
       "answers": [
-        "",
-        "",
-        "",
-        ""
+        "1c  2a  3b",
+        "1a  2b  3c",
+        "1b  2c  3a",
+        "1c  2b  3a"
       ],
       "correct": 0,
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-9.jpg"
     },
     {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "",
+      "question": "Est ce que $cos(\\widehat{STR})=sin(\\widehat{SRT})$? ",
       "answers": [],
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Excellent! \nLe côté opposé à $\\widehat{SRT}$ est le côté adjacent à $\\widehat{STR}$. ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-10.jpg"
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Dans le triangle ABC rectangle en A, on noteH le pied de la hauteur issue de A. (On dit aussi relative à [BC]). $tan(\\widehat{ABC})=$",
       "answers": [
-        "",
-        "",
-        "",
+        "$\\frac{AH}{AB}$",
+        "$\\frac{AH}{BH}$",
+        "$\\frac{AC}{AB}$",
         ""
       ],
-      "correct": 0,
+      "correct": 2,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Dans le triangle $ABC$ rectangle en $A$, le côté $[BC]$ est l'hypoténuse car il est opposé à l'angle droit.\n\nOn s'intéresse à l'angle $\\widehat{ABC}$.\n\n\\begin{itemize}\n\\item Le côté opposé à cet angle est le segment $[AC]$.\n\\item Le côté adjacent à cet angle est le segment $[AB]$.\n\\end{itemize}\n\nPar définition, la tangente d'un angle aigu est égale au quotient :\n\n\\[\n\\frac{\\text{longueur du côté opposé}}{\\text{longueur du côté adjacent}}.\n\\]\n\nDonc :\n\n\\[\n\\tan\\left(\\widehat{ABC}\\right)=\\frac{AC}{AB}\n\\]\n\nLes segments contenant $H$ (comme $[AH]$) n'interviennent pas ici car ils ne sont ni opposés ni adjacents à l'angle $\\widehat{ABC}$ dans le triangle $ABC$.",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-11.jpg"
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "D'après cette figure, le quotient $\\frac{3}{5}$ est égal à: ",
       "answers": [
-        "",
-        "",
-        "",
-        ""
+        "$cos(\\widehat{ABC})$",
+        "$sin(\\widehat{ABC})$",
+        "$cos(\\widehat{BCA})$",
+        "$tan(\\widehat{ABC})$"
       ],
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Regardons d'abord l'angle $\\widehat{ABC}$.\n\nPour l'angle $\\widehat{ABC}$ :\n\n\\begin{itemize}\n\\item Le côté adjacent est le segment $[AB]$.\n\\item L'hypoténuse est le segment $[BC]$.\n\\end{itemize}\n\nDonc :\n\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AB}{BC}\n=\n\\frac{3}{5}.\n\\]\n\nAinsi,\n\n\\[\n\\cos\\left(\\widehat{ABC}\\right)\n\\]\n\nest bien égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nVérifions maintenant les autres propositions.\n\n\\[\n\\sin\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\n\\[\n\\tan\\left(\\widehat{ABC}\\right)\n=\n\\frac{\\text{opposé}}{\\text{adjacent}}\n=\n\\frac{AC}{AB}\n=\n\\frac{4}{3}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nPour l'angle $\\widehat{BCA}$ :\n\n\\begin{itemize}\n\\item Le côté adjacent est le segment $[AC]$.\n\\item L'hypoténuse est le segment $[BC]$.\n\\end{itemize}\n\nDonc :\n\n\\[\n\\cos\\left(\\widehat{BCA}\\right)\n=\n\\frac{\\text{adjacent}}{\\text{hypoténuse}}\n=\n\\frac{AC}{BC}\n=\n\\frac{4}{5}.\n\\]\n\nCe n'est pas égal à\n\n\\[\n\\dfrac{3}{5}.\n\\]\n\nConclusion :\n\n\\[\n\\dfrac{3}{5}\n=\n\\cos\\left(\\widehat{ABC}\\right).\n\\]\n\nLa seule bonne réponse est donc :\n\n\\[\n\\boxed{\\cos\\left(\\widehat{ABC}\\right)}\n\\]",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-12.jpg"
     },
     {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "",
+      "question": "$cos(\\widehat{ABC})=\\frac{AB}{BC}=\\frac{BH}{BA}$",
       "answers": [],
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Dans ABC, $cos(\\widehat{ABC})=\\frac{AB}{BC}$ \nDans ABH, $cos(\\widehat{ABC})=\\frac{BH}{BA}$",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-13.jpg"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Savoir utiliser sa calculatrice. ",
+      "src": "https://youtube.com/shorts/tAjQAWQ8kMs",
+      "duration": 116
     },
     {
       "type": "quiz",
@@ -172,16 +172,16 @@ const capsuleData = {
       "correction": "",
       "pairs": [
         [
-          "",
-          ""
+          "sin(0°)",
+          "$\\frac{1}{2}$"
         ],
         [
-          "",
-          ""
+          "tan(45°)",
+          "1"
         ],
         [
-          "",
-          ""
+          "cos(60°)",
+          "0"
         ],
         [
           "",
@@ -201,99 +201,99 @@ const capsuleData = {
       "correction": "",
       "pairs": [
         [
-          "",
-          ""
+          "$tanx=1$",
+          "45°"
         ],
         [
-          "",
-          ""
+          "$cosx=\\frac{\\sqrt{3}{2}$",
+          "60°"
         ],
         [
-          "",
-          ""
+          "$cosx=\\frac{1}{2}$",
+          "30°"
         ],
         [
           "",
           ""
         ]
       ],
-      "explanation": "",
+      "explanation": "Pour trouver les angles à partir des valeurs, on utilise la calculatrice.\n\nAvant de commencer, il faut vérifier que la calculatrice est bien en mode degrés.\n\nPour retrouver un angle à partir d'un cosinus : appuie sur la touche SHIFT puis cos, tape la valeur, puis appuie sur $=$.\n\nPar exemple :\n\n\\[\n\\cos^{-1}\\left(\\frac{1}{2}\\right)=60^\\circ\n\\]\n\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{2}}{2}\\right)=45^\\circ\n\\]\n\n\\[\n\\cos^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right)=30^\\circ\n\\]\n\nPour retrouver un angle à partir d'une tangente : appuie sur la touche $\\tan^{-1}$ (ou SHIFT puis tan), tape la valeur, puis appuie sur $=$.\n\nPar exemple :\n\n\\[\n\\tan^{-1}(1)=45^\\circ\n\\]",
       "image": ""
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Savoir faire: calculer une longueur. ",
+      "src": "https://youtube.com/shorts/9C6KKt08b1c",
+      "duration": 110
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "On veut calculer la longueur du côté rouge, qu'est il préférable d'utiliser? ",
       "answers": [
-        "",
-        "",
-        "",
+        "Le cosinus de l'angle donné. ",
+        "Le sinus de l'angle donné. ",
+        "La tangente de l'angle donné. ",
         ""
       ],
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "On est dans un triangle rectangle, donc on peut utiliser la trigonométrie. \nL'angle connu est 50°. \nLe côté de 7,2 cm est le côté opposé à l'angle droit, donc c'est l'hypoténuse. \nLe segment rouge que l'on cherche est le côté adjacent à l'angle de 50°. \nIci, on connait l'hypoténuse et on cherche l'adjacent. \nC'est donc le cosinus qu'il faut utiliser. ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-18.jpg"
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Quelle relation trigonométrique faut-il utiliser pour calculer la longueur du côté rouge? ",
       "answers": [
-        "",
-        "",
-        "",
+        "Le cosinus de l'angle donné. ",
+        "Le sinus de l'angle donné. ",
+        "La tangente de l'angle donné. ",
         ""
       ],
-      "correct": 0,
+      "correct": 2,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "On est dans un triangle rectangle, donc on peut utiliser la trigonométrie. \nOn regarde l'angle connu: 31°. \nLe côté vert de 4,7 cm est le côté opposé.\n\nLe segment rouge que l'on cherche est le côté adjacent à l'angle de 31°. \n\nL'hypoténuse est le côté en face de l'angle droit, donc ce n'est ni le côté rouge ni le côté vert. \n \nC'est donc la tangente qu'il faut utiliser puisque c'est la seule formule qui relie le côté opposé et le côté adjacent.  ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-19.jpg"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Savoir faire: calculer un angle. ",
+      "src": "https://youtube.com/shorts/JPcDibossUw",
+      "duration": 60
     },
     {
       "type": "quiz",
       "quizType": "qcm",
       "title": "QCM",
-      "question": "",
+      "question": "Pour calculer l'angle $\\widehat{IKJ}$ il faut utiliser:",
       "answers": [
-        "",
-        "",
-        "",
+        "$cos(\\widehat{IKJ})$",
+        "$sin(\\widehat{IKJ})$",
+        "$tan(\\widehat{IKJ})$",
         ""
       ],
-      "correct": 0,
+      "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "Pourquoi le sinus? \nParce que, par rapport à l'angle $\\widehat{IKJ}$, on connait le côté opposé [JI] et l'hypoténuse [JK]. \nLa relation à utiliser est donc: \n$sin(\\widehat{IKJ})=\\frac{IJ}{JK}=\\frac{3,2}{5,3}$",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-21.jpg"
     },
     {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "",
+      "question": "pour calculer l'angle $\\widehat{BCA}$, il faut utiliser le sinus. ",
       "answers": [],
-      "correct": true,
+      "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "",
-      "image": ""
+      "explanation": "On connait adjacent et hypoténuse pour $\\widehat{BCA}$ donc on utilise le cosinus et pas le sinus. ",
+      "image": "assets/quiz/trigonometrie-maitrise-tout-le-chapitre-quiz-22.jpg"
     },
     {
       "type": "image",
