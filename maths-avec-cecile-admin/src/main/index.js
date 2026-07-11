@@ -233,7 +233,10 @@ console.log("Nombre de pages détecté :", pages);
     dataFile: dataFileName
   }
 
-  const existingIndex = capsules.findIndex(c => c.title === capsuleInfo.title)
+  const existingIndex = capsules.findIndex(c =>
+  c.dataFile === capsuleInfo.dataFile ||
+  c.page === capsuleInfo.page
+)
 
   if (existingIndex >= 0) {
     capsules[existingIndex] = capsuleInfo
