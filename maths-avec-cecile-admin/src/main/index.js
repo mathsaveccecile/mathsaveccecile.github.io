@@ -252,7 +252,19 @@ console.log("Nombre de pages détecté :", pages);
   const output = `const capsuleData = ${JSON.stringify(cleanData, null, 2)};`
 
   writeFileSync(`${siteFolder}/${dataFileName}`, output)
+  // Enregistrer également le projet dans l'Admin
+  const projectFileName = (data.title || 'capsule')
+    .replaceAll(' ', '_')
+    .replaceAll('/', '-')
+    .replaceAll('\\', '-')
 
+  const projectsFolder =
+    'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/maths-avec-cecile-admin/capsules'
+
+  writeFileSync(
+    `${projectsFolder}/${projectFileName}.json`,
+    JSON.stringify(data, null, 2)
+  )
   console.log('Capsule exportée :', data.title)
   console.log('Niveaux :', data.levels)
   console.log('Vignette :', thumbnailPath)
