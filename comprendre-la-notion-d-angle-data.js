@@ -28,7 +28,7 @@ const capsuleData = {
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "Quand le compas s'ouvre, ses deux branches s'écartent. Cela crée une ouverture. En mathématiques, cette ouverture est un angle. ",
+      "explanation": "Quand le compas s'ouvre, ses deux branches s'écartent. Cela crée une ouverture.\\\\ En mathématiques, cette ouverture est un angle. ",
       "image": "assets/quiz/comprendre-la-notion-d-angle-quiz-3.jpg"
     },
     {
@@ -86,13 +86,13 @@ const capsuleData = {
       "answers": [
         "Un trait qui part d'un point et continue toujours. ",
         "Un trait qui a un début et une fin.",
-        "un trait illimité. ",
+        "Un trait illimité. ",
         ""
       ],
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "Une demi-droite part d'un point d'origine et s'étend sans jamais s'arrêter. Sur l'image c'est la rose. ",
+      "explanation": "Une demi-droite part d'un point d'origine et s'étend sans jamais s'arrêter.\\\\ Sur l'image c'est la rose. ",
       "image": ""
     },
     {
@@ -127,7 +127,7 @@ const capsuleData = {
       "correct": 0,
       "correction": "",
       "pairs": [],
-      "explanation": "un angle est définit par deux demi-droites de même origine, qu'on appelle côtés de l'angle. ",
+      "explanation": "Un angle est définit par deux demi-droites de même origine, qu'on appelle côtés de l'angle. ",
       "image": ""
     },
     {
@@ -279,7 +279,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Ils n'ont pas le même sommet. \n$\\widehat{CAB}$ a pour sommet A\n$\\widehat{ABC}$ a pour sommet B",
+      "explanation": "Ils n'ont pas le même sommet.\\\\ \n$\\widehat{CAB}$ a pour sommet A\\\\\n$\\widehat{ABC}$ a pour sommet B",
       "image": "assets/quiz/comprendre-la-notion-d-angle-quiz-19.jpg"
     },
     {
@@ -303,8 +303,8 @@ const capsuleData = {
       "correct": true,
       "correction": "",
       "pairs": [],
-      "explanation": "Le sommet est bien A. \nS et H sont situés chacun sur un côté de l'angle. ",
-      "image": ""
+      "explanation": "Le sommet est bien A\\\\\nS et H sont situés chacun sur un côté de l'angle. ",
+      "image": "assets/quiz/comprendre-la-notion-d-angle-quiz-21.jpg"
     },
     {
       "type": "quiz",
@@ -315,8 +315,8 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Attention seuls trois points sont requis. \nDonc les noms possibles de cet angle sont $\\widehat{CAR}$; $\\widehat{RAC}$; $\\widehat{HAR}$; $\\widehat{RAH}$",
-      "image": ""
+      "explanation": "Attention seuls trois points sont requis.\\\\ \nDonc les noms possibles de cet angle sont\\\\ $\\widehat{CAR}$\\\\ $\\widehat{RAC}$\\\\ $\\widehat{HAR}$\\\\ $\\widehat{RAH}$",
+      "image": "assets/quiz/comprendre-la-notion-d-angle-quiz-22.jpg"
     },
     {
       "type": "quiz",
