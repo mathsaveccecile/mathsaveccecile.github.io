@@ -336,6 +336,7 @@ document.getElementById("openCapsuleBtn").addEventListener("click", async () => 
     📘 ${file.replace(".json", "")}
   </button>
 `).join("<br><br>")}
+
     </div>
   `;
 });

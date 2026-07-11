@@ -1003,7 +1003,13 @@ function renderQuizStep(step, content){
   }
 
   if(step.quizType === "matching"){
-  const pairs = step.pairs || [];
+  const pairs = (step.pairs || []).filter(pair =>
+  pair &&
+  pair[0] &&
+  pair[1] &&
+  String(pair[0]).trim() !== "" &&
+  String(pair[1]).trim() !== ""
+);
 
   // On conserve l'indice d'origine de chaque bonne réponse.
   let shuffledOptions = pairs.map((pair, originalIndex) => ({
