@@ -1,5 +1,5 @@
 const capsuleData = {
-  "title": "Trigonométrie: comprendre tout le chapitre. ",
+  "title": "Trigonométrie: maitrise tout le chapitre! ",
   "levels": [
     "3e"
   ],
