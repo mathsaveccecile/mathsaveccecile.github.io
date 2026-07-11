@@ -49,7 +49,7 @@ const capsuleData = {
       "correct": 1,
       "correction": "",
       "pairs": [],
-      "explanation": "Bravo on observe dans ces deux vidéos des carrés sue l'on déplace sans en ajouter ni en enlever. Ce qui reste identique quand on déplace un carré c'est son aire. ",
+      "explanation": "Bravo!\nOn observe dans ces deux vidéos des carrés que l'on déplace sans en ajouter ni en enlever.\nCe qui reste identique quand on déplace un carré c'est son aire. ",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-6.png"
     },
     {
@@ -96,7 +96,7 @@ const capsuleData = {
       "correct": 3,
       "correction": "",
       "pairs": [],
-      "explanation": "on applique le théorème de Pythagore toujours dans un triangle rectangle. ",
+      "explanation": "On applique le théorème de Pythagore toujours dans un triangle rectangle. ",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-11.png"
     },
     {
@@ -136,18 +136,6 @@ const capsuleData = {
     },
     {
       "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "La longueur du côté d'un carré d'aire 144cm\\(^{2}\\) est 12 cm",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "Je cherche le nombre positif dont le carré est égal à 144, c'est la racine carrée de 144, qui est le carré parfait de 12. Donc c'est 12. ",
-      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-15.png"
-    },
-    {
-      "type": "quiz",
       "quizType": "matching",
       "title": "Associer les paires",
       "question": "Sans utiliser de calculatrice, associe les paires: ",
@@ -174,6 +162,18 @@ const capsuleData = {
       ],
       "explanation": "",
       "image": ""
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "La longueur du côté d'un carré d'aire 144cm\\(^{2}\\) est 12 cm",
+      "answers": [],
+      "correct": true,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Je cherche le nombre positif dont le carré est égal à 144, c'est la racine carrée de 144, qui est le carré parfait de 12.\nDonc c'est 12. ",
+      "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-16.png"
     },
     {
       "type": "video",
@@ -232,7 +232,7 @@ const capsuleData = {
         "S'il a un angle droit, il est rectangle. ",
         "S'il n'est pas rectangle, il n'a pas d'angle droit. "
       ],
-      "correct": 1,
+      "correct": 0,
       "correction": "",
       "pairs": [],
       "explanation": "La contraposée s'obtient en inversant les deux parties et en ajoutant la négation dans chacune. ",
@@ -286,7 +286,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Attention il faut effectuer les calculs séparément! En citant les longueurs avec les lettres au départ du calcul.",
+      "explanation": "Attention, il faut effectuer les calculs séparément!\nEn citant les longueurs avec les lettres au départ du calcul.",
       "image": "assets/quiz/pythagore-direct-contraposee-et-reciproque-quiz-29.png"
     },
     {
