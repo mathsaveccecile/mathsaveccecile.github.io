@@ -33,36 +33,14 @@
     "dataFile": "trigonometrie-comprendre-et-utiliser-le-cosinus-data.js"
   },
   {
-    "title": "Trigonométrie: maitrise tout le chapitre. ",
+    "title": "Trigonométrie: maitrise tout le chapitre!",
     "levels": [
       "3e"
     ],
     "duration": "",
     "thumbnail": "assets/thumbnails/trigonometrie-maitrise-tout-le-chapitre.png",
     "page": "trigonometrie-maitrise-tout-le-chapitre.html",
-    "dataFile": "trigonometrie-maitrise-tout-le-chapitre-data.js",
-    "keywords": [
-      "trigonométrie",
-      "trigonometrie",
-      "trigo",
-      "cosinus",
-      "cos",
-      "sinus",
-      "sin",
-      "tangente",
-      "tan",
-      "sohcahtoa",
-      "triangle rectangle",
-      "hypoténuse",
-      "hypotenuse",
-      "angle",
-      "côté adjacent",
-      "cote adjacent",
-      "côté opposé",
-      "cote oppose",
-      "calculer une longueur",
-      "calculer un angle"
-    ]
+    "dataFile": "trigonometrie-maitrise-tout-le-chapitre-data.js"
   },
   {
     "title": "Droites parallèles et perpendiculaires. ",
