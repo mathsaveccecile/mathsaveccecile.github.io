@@ -254,9 +254,9 @@ console.log("Nombre de pages détecté :", pages);
   writeFileSync(`${siteFolder}/${dataFileName}`, output)
   // Enregistrer également le projet dans l'Admin
   const projectFileName = (data.title || 'capsule')
-    .replaceAll(' ', '_')
-    .replaceAll('/', '-')
-    .replaceAll('\\', '-')
+  .replace(/[<>:"/\\|?*\x00-\x1F]/g, '-')
+  .replace(/\s+/g, '_')
+  .replace(/[. ]+$/g, '')
 
   const projectsFolder =
     'C:/Users/tetil/Documents/GitHub/mathsaveccecile.github.io/maths-avec-cecile-admin/capsules'
@@ -274,9 +274,9 @@ console.log("Nombre de pages détecté :", pages);
 
     ipcMain.handle('save-project', async (_, data) => {
     const filename = (data.title || 'capsule')
-      .replaceAll(' ', '_')
-      .replaceAll('/', '-')
-      .replaceAll('\\', '-')
+  .replace(/[<>:"/\\|?*\x00-\x1F]/g, '-')
+  .replace(/\s+/g, '_')
+  .replace(/[. ]+$/g, '')
 
     const output = JSON.stringify(data, null, 2)
 
