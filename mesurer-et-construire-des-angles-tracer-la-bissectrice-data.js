@@ -20,9 +20,156 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Mesurer un angle quezako?",
+      "src": "https://youtube.com/shorts/cjlvXm0wfgY",
+      "duration": 90
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "Mesurer un angle c'est...",
+      "answers": [
+        "Mesurer son ouverture en degrés.",
+        "Mesurer la longueur de ses côtés. ",
+        "",
+        ""
+      ],
+      "correct": 0,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Mesurer un angle c'est mesurer une partie d'un tour, son ouverture, en degrés. ",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-4.jpg"
+    },
+    {
+      "type": "quiz",
+      "quizType": "matching",
+      "title": "Associer les paires",
+      "question": "Associe chaque situation à la bonne mesure.",
+      "answers": [],
+      "correct": 0,
+      "correction": "",
+      "pairs": [
+        [
+          "Tour complet.",
+          "360 degrés."
+        ],
+        [
+          "Quart de tour. ",
+          "90 degrés."
+        ],
+        [
+          "Demi-tour.",
+          "180 degrés."
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "explanation": "",
+      "image": ""
+    },
+    {
+      "type": "video",
+      "title": "Le rapporteur",
+      "src": "https://youtube.com/shorts/UarFtmG-_CA",
+      "duration": 55
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "Ces deux rapporteurs circulaires ont chacun deux graduations. ",
+      "answers": [],
+      "correct": false,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Ils n'ont qu'une seule graduation, une seule ligne de nombres. Chaque trait n'a qu'un seul nombre. ",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-7.png"
+    },
+    {
+      "type": "quiz",
+      "quizType": "matching",
+      "title": "Associer les paires",
+      "question": "",
+      "answers": [],
+      "correct": 0,
+      "correction": "",
+      "pairs": [
+        [
+          "Les rapporteurs semi-circulaires",
+          "mesurent des angles de 0° à 180°. "
+        ],
+        [
+          "Le zéro",
+          "n'est pas toujours écrit. "
+        ],
+        [
+          "Sur beaucoup de rapporteurs",
+          "il y a deux graduations."
+        ],
+        [
+          "",
+          ""
+        ]
+      ],
+      "explanation": "",
+      "image": ""
+    },
+    {
+      "type": "video",
+      "title": "Bien placer le centre du rapporteur sur le sommet de l'angle. ",
+      "src": "https://youtube.com/shorts/O68v6nBFv4k",
+      "duration": 43
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "",
+      "answers": [],
+      "correct": true,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-10.png"
+    },
+    {
+      "type": "video",
+      "title": "aligner un zéro du rapporteur avec un des côtés de l'angle. ",
+      "src": "https://youtube.com/shorts/P7OBWCtnS7Y",
+      "duration": 91
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "Le rapporteur circulaire est bien placé. ",
+      "answers": [],
+      "correct": true,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": ""
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "Le rapporteur semi circulaire est bien placé. ",
+      "answers": [],
+      "correct": true,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": ""
+    },
+    {
+      "type": "video",
+      "title": "Lire la graduation correctement. ",
+      "src": "https://youtube.com/shorts/jpZ3wEoeYEM",
+      "duration": 70
     },
     {
       "type": "quiz",
@@ -39,7 +186,94 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-15.jpg"
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "",
+      "answers": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "correct": 0,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-16.jpg"
+    },
+    {
+      "type": "video",
+      "title": "Construire un angle de mesure donnée. ",
+      "src": "https://youtube.com/shorts/pMqbNXNts6E",
+      "duration": 119
+    },
+    {
+      "type": "quiz",
+      "quizType": "matching",
+      "title": "Associer les paires",
+      "question": "associe chaque étape à la bonne action pour construire un angle de mesure donnée. ",
+      "answers": [],
+      "correct": 0,
+      "correction": "",
+      "pairs": [
+        [
+          "Etape 4",
+          "Tracer la seconde demi-droite."
+        ],
+        [
+          "Etape 3",
+          " Repérer la mesure demandée. "
+        ],
+        [
+          "Etape 1",
+          "Tracer une demi-droite. "
+        ],
+        [
+          "Etape 2",
+          "Placer le rapporteur correctement. "
+        ]
+      ],
+      "explanation": "",
       "image": ""
+    },
+    {
+      "type": "quiz",
+      "quizType": "qcm",
+      "title": "QCM",
+      "question": "Je suis en train de construire un angle de mesure:",
+      "answers": [
+        "50°",
+        "130°",
+        "",
+        ""
+      ],
+      "correct": 0,
+      "correction": "",
+      "pairs": [],
+      "explanation": "Le centre du rapporteur est bien placé sur le sommet de l'angle. \nIci c'est le zéro intérieur qui est aligné avec la demi-droite déjà tracée donc on lit la graduation intérieure. \nJ'ai fait un petit trait dans le prolongement de la graduation 50 degrés. ",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-19.jpg"
+    },
+    {
+      "type": "video",
+      "title": "La bissectrice d'un angle. ",
+      "src": "https://youtube.com/shorts/oc9NgbvqvR8",
+      "duration": 106
+    },
+    {
+      "type": "quiz",
+      "quizType": "trueFalse",
+      "title": "Vrai / Faux",
+      "question": "",
+      "answers": [],
+      "correct": true,
+      "correction": "",
+      "pairs": [],
+      "explanation": "",
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-21.png"
     },
     {
       "type": "quiz",
@@ -71,12 +305,6 @@ const capsuleData = {
       "image": ""
     },
     {
-      "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
-    },
-    {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
@@ -86,229 +314,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "matching",
-      "title": "Associer les paires",
-      "question": "",
-      "answers": [],
-      "correct": 0,
-      "correction": "",
-      "pairs": [
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ]
-      ],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
-    },
-    {
-      "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
-    },
-    {
-      "type": "quiz",
-      "quizType": "qcm",
-      "title": "QCM",
-      "question": "",
-      "answers": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "correct": 0,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "qcm",
-      "title": "QCM",
-      "question": "",
-      "answers": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "correct": 0,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
-    },
-    {
-      "type": "quiz",
-      "quizType": "matching",
-      "title": "Associer les paires",
-      "question": "",
-      "answers": [],
-      "correct": 0,
-      "correction": "",
-      "pairs": [
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ]
-      ],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "qcm",
-      "title": "QCM",
-      "question": "",
-      "answers": [
-        "",
-        "",
-        "",
-        ""
-      ],
-      "correct": 0,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
-    },
-    {
-      "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "matching",
-      "title": "Associer les paires",
-      "question": "",
-      "answers": [],
-      "correct": 0,
-      "correction": "",
-      "pairs": [
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ]
-      ],
-      "explanation": "",
-      "image": ""
-    },
-    {
-      "type": "quiz",
-      "quizType": "trueFalse",
-      "title": "Vrai / Faux",
-      "question": "",
-      "answers": [],
-      "correct": true,
-      "correction": "",
-      "pairs": [],
-      "explanation": "",
-      "image": ""
+      "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-23.jpg"
     },
     {
       "type": "video",
