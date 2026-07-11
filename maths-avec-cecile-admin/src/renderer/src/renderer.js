@@ -552,54 +552,6 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
   }
 });
 
-const importBtn = document.getElementById("importSiteBtn");
-
-if (importBtn) {
-  importBtn.addEventListener("click", async () => {
-    try {
-      let text = await window.api.importSite();
-
-      text = text.replace("const capsuleData =", "").trim();
-
-      if (text.endsWith(";")) {
-        text = text.slice(0, -1);
-      }
-
-      const data = JSON.parse(text);
-
-      if (!Array.isArray(data.levels)) {
-        data.levels = data.level ? [data.level] : [];
-      }
-
-      capsule = data;
-
-      capsule.thumbnail = capsule.thumbnail || "";
-      capsule.thumbnailName = capsule.thumbnailName || "";
-      capsule.thumbnailPath = capsule.thumbnailPath || "";
-      capsule.steps = capsule.steps || [];
-
-      capsule.steps.forEach(step => {
-        if (step.type === "quiz" && step.quizType === "qcm") {
-          if (!Array.isArray(step.answers)) step.answers = ["", "", "", ""];
-          while (step.answers.length < 4) step.answers.push("");
-        }
-
-        if (step.type === "quiz" && step.quizType === "matching") {
-          if (!Array.isArray(step.pairs)) step.pairs = [["", ""], ["", ""], ["", ""], ["", ""]];
-          while (step.pairs.length < 4) step.pairs.push(["", ""]);
-        }
-      });
-
-      renderCapsule();
-
-      alert("✅ Capsule importée depuis le site !");
-    } catch (e) {
-      console.error(e);
-      alert("❌ Impossible d'importer la capsule.");
-    }
-  });
-}
-
 document.getElementById("capsuleTitle").addEventListener("input", (e) => {
   capsule.title = e.target.value;
 });

@@ -10,8 +10,7 @@ const api = {
   exportSite: (data) => ipcRenderer.invoke('export-site', data),
   saveProject: (data) => ipcRenderer.invoke('save-project', data),
   listCapsules: () => ipcRenderer.invoke('list-capsules'),
-openProject: (filename) => ipcRenderer.invoke('open-project', filename),
-importSite: () => ipcRenderer.invoke('import-site')
+openProject: (filename) => ipcRenderer.invoke('open-project', filename)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

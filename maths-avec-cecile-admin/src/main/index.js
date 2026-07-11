@@ -299,21 +299,7 @@ console.log("Nombre de pages détecté :", pages);
 
     return json
   })
-  ipcMain.handle('import-site', async () => {
-  const result = await dialog.showOpenDialog({
-    title: 'Importer une capsule du site',
-    properties: ['openFile'],
-    filters: [
-      { name: 'Fichiers data', extensions: ['js'] }
-    ]
-  })
-
-  if (result.canceled) return null
-
-  const file = result.filePaths[0]
-
-  return readFileSync(file, 'utf8')
-})
+  
   createWindow()
 
   app.on('activate', function () {
