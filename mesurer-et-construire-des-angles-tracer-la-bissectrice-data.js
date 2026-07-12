@@ -150,7 +150,7 @@ const capsuleData = {
       "correct": false,
       "correction": "",
       "pairs": [],
-      "explanation": "Attention! \nA l'intérieur de l'angle je ne vois pas les graduations \"10; 20; 30...\" donc je dosi tourner encore le rapporteur pour placer le zéro sur l'autre côté. ",
+      "explanation": "Attention! \nA l'intérieur de l'angle je ne vois pas les graduations \"10; 20; 30...\" donc je dois tourner encore le rapporteur pour placer le zéro sur l'autre côté. ",
       "image": "assets/quiz/mesurer-et-construire-des-angles-tracer-la-bissectrice-quiz-12.jpg"
     },
     {
@@ -308,7 +308,7 @@ const capsuleData = {
       "type": "quiz",
       "quizType": "trueFalse",
       "title": "Vrai / Faux",
-      "question": "[AT) est la bissectrice de $\\widehat{CAB}$, que ej connais, donc je peux trouver la valeur de l'angle $\\widehat{TAB}$",
+      "question": "[AT) est la bissectrice de $\\widehat{CAB}$, que je connais, donc je peux trouver la valeur de l'angle $\\widehat{TAB}$",
       "answers": [],
       "correct": true,
       "correction": "",
