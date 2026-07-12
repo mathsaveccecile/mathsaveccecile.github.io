@@ -408,13 +408,37 @@ nav{
 }
 </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DPZBQER45B"></script>
+<!-- Google Analytics -->
 <script>
+(function () {
+
+  // 👉 Ouvre une seule fois :
+  // https://mathsaveccecile.fr/?cecile=oui
+  if (window.location.search.includes("cecile=oui")) {
+    localStorage.setItem("cecileDevice", "true");
+    alert("✅ Cet appareil ne sera plus comptabilisé dans Google Analytics.");
+  }
+
+  // Si c'est ton appareil, on ne charge pas Google Analytics.
+  if (localStorage.getItem("cecileDevice") === "true") {
+    console.log("Appareil de Cécile détecté : Analytics désactivé.");
+    return;
+  }
+
+  // Sinon on charge normalement Analytics
+  var script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=G-DPZBQER45B";
+  document.head.appendChild(script);
+
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+
   gtag('js', new Date());
   gtag('config', 'G-DPZBQER45B');
+
+})();
 </script>
 </head>
 
