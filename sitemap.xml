@@ -57,4 +57,59 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://mathsaveccecile.github.io/comprendre-la-notion-d-angle.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/droites-paralleles-et-perpendiculaires.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/mesurer-et-construire-des-angles-tracer-la-bissectrice.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/modeliser-un-probleme.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/pythagore-direct-contraposee-et-reciproque.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/reconnaitre-comparer-les-angles-raisonner.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/trigonometrie-comprendre-et-utiliser-le-cosinus.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mathsaveccecile.github.io/trigonometrie-comprendre-tout-le-chapitre.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

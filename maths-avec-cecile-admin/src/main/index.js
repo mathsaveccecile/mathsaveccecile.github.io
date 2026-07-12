@@ -25,9 +25,13 @@ const ADMIN_FOLDER = `${SITE_FOLDER}/maths-avec-cecile-admin`
 const PROJECTS_FOLDER = `${ADMIN_FOLDER}/capsules`
 
 const CAPSULES_FILE = `${SITE_FOLDER}/capsules.json`
+const SITEMAP_FILE = `${SITE_FOLDER}/sitemap.xml`
+
 const THUMBNAILS_FOLDER = `${SITE_FOLDER}/assets/thumbnails`
 const QUIZ_IMAGES_FOLDER = `${SITE_FOLDER}/assets/quiz`
 const IMAGES_FOLDER = `${SITE_FOLDER}/assets/images`
+
+const SITE_URL = 'https://mathsaveccecile.github.io'
 
 // ======================================================
 // FONCTIONS UTILITAIRES
@@ -83,6 +87,121 @@ function readCapsulesFile() {
       'Le fichier capsules.json contient probablement une erreur de syntaxe.'
     )
   }
+}
+
+function getTodayDate() {
+  const today = new Date()
+
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+function escapeXml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
+function generateSitemap(capsules) {
+  const today = getTodayDate()
+
+  const fixedPages = [
+    {
+      url: `${SITE_URL}/`,
+      changefreq: 'weekly',
+      priority: '1.0'
+    },
+    {
+      url: `${SITE_URL}/6e.html`,
+      changefreq: 'weekly',
+      priority: '0.9'
+    },
+    {
+      url: `${SITE_URL}/5e.html`,
+      changefreq: 'weekly',
+      priority: '0.9'
+    },
+    {
+      url: `${SITE_URL}/4e.html`,
+      changefreq: 'weekly',
+      priority: '0.9'
+    },
+    {
+      url: `${SITE_URL}/3e.html`,
+      changefreq: 'weekly',
+      priority: '0.9'
+    },
+    {
+      url: `${SITE_URL}/quisuisje.html`,
+      changefreq: 'monthly',
+      priority: '0.7'
+    },
+    {
+      url: `${SITE_URL}/avis.html`,
+      changefreq: 'weekly',
+      priority: '0.8'
+    }
+  ]
+
+  const capsulePages = Array.from(
+    new Set(
+      (Array.isArray(capsules) ? capsules : [])
+        .map((capsule) =>
+          capsule && typeof capsule.page === 'string'
+            ? capsule.page.trim()
+            : ''
+        )
+        .filter(Boolean)
+        .filter((page) => page !== 'index.html')
+    )
+  )
+    .sort((a, b) =>
+      a.localeCompare(b, 'fr', {
+        sensitivity: 'base'
+      })
+    )
+    .map((page) => ({
+      url: `${SITE_URL}/${page}`,
+      changefreq: 'monthly',
+      priority: '0.9'
+    }))
+
+  const allPages = [...fixedPages, ...capsulePages]
+
+  const urlsXml = allPages
+    .map(
+      (page) => `  <url>
+    <loc>${escapeXml(page.url)}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`
+    )
+    .join('\n\n')
+
+  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+${urlsXml}
+
+</urlset>
+`
+
+  writeFileSync(
+    SITEMAP_FILE,
+    sitemapContent,
+    'utf8'
+  )
+
+  console.log(
+    `Sitemap généré automatiquement : ${allPages.length} URL(s)`
+  )
 }
 
 function saveProject(data) {
@@ -476,7 +595,7 @@ app.whenReady().then(() => {
         JSON.stringify(capsules, null, 2),
         'utf8'
       )
-
+generateSitemap(capsules)
       const output =
         `const capsuleData = ${JSON.stringify(cleanData, null, 2)};`
 
