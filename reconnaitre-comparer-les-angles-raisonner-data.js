@@ -9,20 +9,20 @@ const capsuleData = {
   "steps": [
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Bienvenue!",
+      "src": "https://youtube.com/shorts/E1sAVHyFin4",
+      "duration": 11
     },
     {
       "type": "image",
-      "title": "9.jpg",
+      "title": "Mode d'emploi.",
       "src": "assets/images/reconnaitre-comparer-les-angles-raisonner-image-2.jpg"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Construire l'angle droit: le repère. ",
+      "src": "https://youtube.com/shorts/R1d-jVNioUs",
+      "duration": 48
     },
     {
       "type": "quiz",
@@ -34,13 +34,13 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-4.png"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Angles aigus et obtus.",
+      "src": "https://youtube.com/shorts/tusMHG_x-IQ",
+      "duration": 51
     },
     {
       "type": "quiz",
@@ -52,7 +52,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-6.jpg"
     },
     {
       "type": "quiz",
@@ -85,9 +85,9 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Angles particuliers. ",
+      "src": "https://youtube.com/shorts/vdaKeRuSuZE",
+      "duration": 56
     },
     {
       "type": "quiz",
@@ -99,7 +99,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-9.png"
     },
     {
       "type": "quiz",
@@ -132,7 +132,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
+      "title": "Comparer des angles: calque et gabarit",
       "src": "",
       "duration": 0
     },
@@ -146,13 +146,13 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-12.png"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Relation entre les angles: raisonner. ",
+      "src": "https://youtube.com/shorts/9J7dmm9KLrU",
+      "duration": 97
     },
     {
       "type": "quiz",
@@ -164,7 +164,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-14.png"
     },
     {
       "type": "quiz",
@@ -176,7 +176,7 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-15.png"
     },
     {
       "type": "quiz",
@@ -188,13 +188,13 @@ const capsuleData = {
       "correction": "",
       "pairs": [],
       "explanation": "",
-      "image": ""
+      "image": "assets/quiz/reconnaitre-comparer-les-angles-raisonner-quiz-16.png"
     },
     {
       "type": "video",
-      "title": "Vidéo YouTube",
-      "src": "",
-      "duration": 0
+      "title": "Bravo! ",
+      "src": "https://youtube.com/shorts/y627tOWYuFw",
+      "duration": 11
     },
     {
       "type": "pdf",
