@@ -132,7 +132,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Comparer des angles: calque et gabarit.",
+      "title": "Comparer des angles: avec un calque ou un gabarit.",
       "src": "https://youtube.com/shorts/oLKsaRHG6go",
       "duration": 143
     },
