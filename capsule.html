@@ -729,10 +729,11 @@ function startCapsule(){
   document.title = capsuleData.title + " - Maths avec Cécile";
   if(typeof gtag === "function"){
   gtag("event", "page_view", {
-    page_title: capsuleData.title,
-    page_location: window.location.href,
-    page_path: window.location.pathname + window.location.search
-  });
+  page_title: capsuleData.title,
+  page_location: window.location.href,
+  page_path: window.location.pathname + window.location.search,
+  capsule: capsuleData.title
+});
 }
   document.getElementById("title").textContent = capsuleData.title;
 const avisUrl =
