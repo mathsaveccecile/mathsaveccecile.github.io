@@ -460,6 +460,69 @@ button,.pdf-btn{
   margin:10px auto !important;
 }
 
+.pdfLockedPreview{
+  width:100%;
+  min-height:640px;
+  box-sizing:border-box;
+  border-radius:20px;
+  padding:28px 18px;
+  background-position:top center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.pdfLockedPanel{
+  width:min(520px,92%);
+  box-sizing:border-box;
+  padding:28px 22px;
+  border-radius:26px;
+  text-align:center;
+  background:rgba(38,30,56,.82);
+  backdrop-filter:blur(2px);
+  box-shadow:0 15px 40px rgba(0,0,0,.45);
+}
+
+.pdfLockedPanel h2{
+  margin:0 0 18px;
+  font-size:38px;
+  line-height:1.2;
+  color:white;
+}
+
+.pdfLockedPanel p{
+  margin:0 0 20px;
+  font-size:23px;
+  line-height:1.4;
+  color:white;
+}
+
+.pdfLockedPanel .pdf-btn{
+  width:min(440px,100%) !important;
+  margin:10px auto !important;
+}
+
+@media(max-width:800px){
+  .pdfLockedPreview{
+    min-height:650px;
+    padding:22px 12px;
+  }
+
+  .pdfLockedPanel{
+    padding:24px 16px;
+  }
+
+  .pdfLockedPanel h2{
+    font-size:34px;
+  }
+
+  .pdfLockedPanel p{
+    font-size:21px;
+  }
+}
 #likeAnimation{
   position:fixed;
   inset:0;
@@ -934,16 +997,40 @@ function renderContent(){
   const pdfTitle = step.title || "Fiche PDF";
 
   if(step.loginRequired && !userIsConnected){
-    content.innerHTML = `
-      <div style="padding:40px;">
+  const previewStyle = step.preview
+    ? `background-image:url("${step.preview}");`
+    : `background:#352d49;`;
+
+  content.innerHTML = `
+    <div
+      class="pdfLockedPreview"
+      style="${previewStyle}"
+    >
+      <div class="pdfLockedPanel">
         <h2>🔒 ${pdfTitle}</h2>
-        <p>Connecte-toi pour voir et télécharger ce PDF.</p>
-        <button class="pdf-btn" onclick="openLoginModal()">🔐 Se connecter</button>
-        <br><br>
-        <button class="pdf-btn" onclick="openSignupModal()">✨ Créer un compte</button>
+
+        <p>
+          Connecte-toi pour voir et télécharger ce PDF.
+        </p>
+
+        <button
+          class="pdf-btn"
+          onclick="openLoginModal()"
+        >
+          🔐 Se connecter
+        </button>
+
+        <button
+          class="pdf-btn"
+          onclick="openSignupModal()"
+        >
+          ✨ Créer un compte
+        </button>
       </div>
-    `;
-  } else {
+    </div>
+  `;
+}
+  else {
     content.innerHTML = `
       <div class="pdfMobileBox">
         <h2>📄 ${pdfTitle}</h2>
