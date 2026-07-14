@@ -998,7 +998,7 @@ function renderContent(){
 
   if(step.loginRequired && !userIsConnected){
   const previewStyle = step.preview
-    ? `background-image:url("${step.preview}");`
+    ? `background-image:url('${step.preview}');`
     : `background:#352d49;`;
 
   content.innerHTML = `
