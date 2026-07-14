@@ -510,6 +510,7 @@ button,.pdf-btn{
 
   .pdfLockedPreview{
     position:relative;
+    display:block;
     width:100%;
     min-height:0;
     aspect-ratio:794 / 1123;
@@ -517,39 +518,41 @@ button,.pdf-btn{
     background-size:contain;
     background-position:top center;
     background-repeat:no-repeat;
-    align-items:initial;
-    justify-content:initial;
+    overflow:hidden;
+    margin-bottom:20px;
   }
 
   .pdfLockedPanel{
     position:absolute;
-    top:50%;
     left:50%;
-    transform:translate(-50%,-50%);
+    bottom:18px;
+    transform:translateX(-50%);
 
-    width:82%;
-    padding:16px 12px;
-    border-radius:22px;
+    width:84%;
+    box-sizing:border-box;
+    padding:12px 10px;
+    border-radius:20px;
   }
 
   .pdfLockedPanel h2{
-    margin:0 0 10px;
-    font-size:27px;
+    margin:0 0 7px;
+    font-size:21px;
     line-height:1.15;
   }
 
   .pdfLockedPanel p{
-    margin:0 0 12px;
-    font-size:17px;
-    line-height:1.3;
+    margin:0 0 8px;
+    font-size:14px;
+    line-height:1.25;
   }
 
   .pdfLockedPanel .pdf-btn{
     width:100% !important;
-    margin:7px auto !important;
-    padding:13px 10px !important;
-    font-size:16px !important;
-    line-height:1.15 !important;
+    min-height:0 !important;
+    margin:5px auto !important;
+    padding:10px 8px !important;
+    font-size:14px !important;
+    line-height:1.1 !important;
   }
 }
 
