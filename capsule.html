@@ -459,7 +459,9 @@ button,.pdf-btn{
 .pdfMobileBox .pdf-btn{
   margin:10px auto !important;
 }
-
+.pdfLockedPanel .pdf-btn + .pdf-btn{
+  display:block;
+}
 .pdfLockedPreview{
   width:100%;
   min-height:640px;
@@ -1064,27 +1066,42 @@ function renderContent(){
   `;
 }
   else {
-    content.innerHTML = `
-      <div class="pdfMobileBox">
+
+  const previewStyle = step.preview
+    ? `background-image:url('${step.preview}');`
+    : `background:#352d49;`;
+
+  content.innerHTML = `
+    <div
+      class="pdfLockedPreview"
+      style="${previewStyle}"
+    >
+      <div class="pdfLockedPanel">
+
         <h2>📄 ${pdfTitle}</h2>
 
-        <p style="font-size:18px;line-height:1.5;">
-          Pour lire le PDF confortablement sur téléphone, ouvre-le en plein écran.
+        <p>
+          Ta fiche est disponible.
         </p>
 
-        
-        <button class="pdf-btn" onclick="openPdfFullscreen('${step.src.replace(/'/g, "\\'")}')">
-  📖 Ouvrir le PDF en plein écran
-</button>
+        <button
+          class="pdf-btn"
+          onclick="openPdfFullscreen('${step.src.replace(/'/g, "\\'")}')"
+        >
+          📖 Ouvrir le PDF en plein écran
+        </button>
 
-        <br><br><br>
-
-        <a class="pdf-btn" href="${step.src}" download>
+        <button
+          class="pdf-btn"
+          onclick="location.href='${step.src}'"
+        >
           📄 Télécharger le PDF
-        </a>
+        </button>
+
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 }
 
   if(step.type === "quiz"){
