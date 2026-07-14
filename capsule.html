@@ -467,8 +467,9 @@ button,.pdf-btn{
   border-radius:20px;
   padding:28px 18px;
   background-position:top center;
-  background-size:cover;
+  background-size:contain;
   background-repeat:no-repeat;
+  background-color:#352d49;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -507,8 +508,10 @@ button,.pdf-btn{
 
 @media(max-width:800px){
   .pdfLockedPreview{
-    min-height:650px;
+    min-height:1050px;
     padding:22px 12px;
+    background-size:contain;
+    background-position:top center;
   }
 
   .pdfLockedPanel{
@@ -523,7 +526,8 @@ button,.pdf-btn{
     font-size:21px;
   }
 }
-#likeAnimation{
+
+  #likeAnimation{
   position:fixed;
   inset:0;
   z-index:99999;
