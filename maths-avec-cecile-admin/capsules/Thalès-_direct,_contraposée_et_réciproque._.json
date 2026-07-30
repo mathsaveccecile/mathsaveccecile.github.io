@@ -69,7 +69,7 @@
         "\\[ \\frac{\\text{grand côté bleu}}{\\text{petit côté bleu}} = \\frac{\\text{petit côté vert}}{\\text{grand côté vert}} = \\frac{\\text{petit côté rose}}{\\text{grand côté rose}} \\]",
         "Les trois rapports ne sont pas égaux."
       ],
-      "correct": 2,
+      "correct": 1,
       "correction": "",
       "pairs": [],
       "explanation": "Dans chaque quotient, on doit comparer deux côtés homologues et faire attention à garder le même ordre : ici, petit côté sur grand côté.",
