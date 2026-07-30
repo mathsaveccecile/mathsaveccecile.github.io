@@ -403,13 +403,16 @@ document.getElementById("addPdfBtn").addEventListener("click", async () => {
   if (!pdf) return;
 
   capsule.steps.push({
-  type: "pdf",
-  title: "Fiche PDF",
-  name: pdf.name,
-  path: pdf.path,
-  src: pdf.src,
-  pages: pdf.pages || 1
-});
+    type: "pdf",
+    title: "Fiche PDF",
+    name: pdf.name,
+    path: pdf.path,
+    src: pdf.src,
+    pages: pdf.pages || 1,
+    preview: pdf.preview || "",
+    previewName: pdf.previewName || "",
+    previewPath: pdf.previewPath || ""
+  });
 
   renderCapsule();
 });
@@ -517,7 +520,10 @@ document.getElementById("exportSiteBtn").addEventListener("click", async () => {
     title: step.title || step.name || "PDF",
     src: step.src || "",
     pages: Number(step.pages || 1),
-    loginRequired: true
+    loginRequired: true,
+    preview: step.preview || "",
+    previewName: step.previewName || "",
+    previewPath: step.previewPath || ""
   };
 }
 
