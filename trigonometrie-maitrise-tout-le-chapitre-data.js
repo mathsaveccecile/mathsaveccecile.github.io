@@ -20,7 +20,7 @@ const capsuleData = {
     },
     {
       "type": "image",
-      "title": "Plan de la capsule. ",
+      "title": "Plan de la capsule.",
       "src": "assets/images/trigonometrie-maitrise-tout-le-chapitre-image-3.jpg"
     },
     {

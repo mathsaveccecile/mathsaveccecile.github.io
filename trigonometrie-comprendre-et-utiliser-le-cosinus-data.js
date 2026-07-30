@@ -21,7 +21,7 @@ const capsuleData = {
     },
     {
       "type": "image",
-      "title": "Plan de la capsule. ",
+      "title": "Plan de la capsule.",
       "src": "assets/images/trigonometrie-comprendre-et-utiliser-le-cosinus-image-3.jpg"
     },
     {
