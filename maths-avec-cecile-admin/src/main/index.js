@@ -1,4 +1,6 @@
 import { PDFDocument } from 'pdf-lib'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
+import { createCanvas } from '@napi-rs/canvas'
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, basename, extname } from 'path'
 import {
@@ -30,6 +32,7 @@ const SITEMAP_FILE = `${SITE_FOLDER}/sitemap.xml`
 const THUMBNAILS_FOLDER = `${SITE_FOLDER}/assets/thumbnails`
 const QUIZ_IMAGES_FOLDER = `${SITE_FOLDER}/assets/quiz`
 const IMAGES_FOLDER = `${SITE_FOLDER}/assets/images`
+const PREVIEWS_FOLDER = `${SITE_FOLDER}/assets/previews`
 
 const SITE_URL = 'https://mathsaveccecile.github.io'
 
@@ -48,6 +51,7 @@ function ensureAllFolders() {
   ensureFolder(THUMBNAILS_FOLDER)
   ensureFolder(QUIZ_IMAGES_FOLDER)
   ensureFolder(IMAGES_FOLDER)
+  ensureFolder(PREVIEWS_FOLDER)
 }
 
 function createSlug(title = 'capsule') {
@@ -230,6 +234,41 @@ function writeBase64Image(dataUrl, destinationPath) {
   writeFileSync(destinationPath, Buffer.from(base64, 'base64'))
 }
 
+async function createPdfPreview(pdfBuffer) {
+  const loadingTask = pdfjsLib.getDocument({
+    data: new Uint8Array(pdfBuffer),
+    disableWorker: true
+  })
+
+  const pdfDocument = await loadingTask.promise
+  const page = await pdfDocument.getPage(1)
+
+  const viewport = page.getViewport({
+    scale: 1.5
+  })
+
+  const canvas = createCanvas(
+    Math.ceil(viewport.width),
+    Math.ceil(viewport.height)
+  )
+
+  const context = canvas.getContext('2d')
+
+  context.fillStyle = '#ffffff'
+  context.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  )
+
+  await page.render({
+    canvasContext: context,
+    viewport
+  }).promise
+
+  return canvas.toBuffer('image/jpeg', 85)
+}
 function prepareQuizImage(step, index, slug) {
   const defaultFileName = `${slug}-quiz-${index + 1}.png`
 
@@ -290,7 +329,39 @@ function prepareSimpleImage(step, index, slug) {
 
   return step
 }
+function preparePdfPreview(step, index, slug) {
+  const previewFileName =
+    `${slug}-pdf-${index + 1}-preview.jpg`
 
+  if (
+    step.previewPath &&
+    existsSync(step.previewPath)
+  ) {
+    copyFileSync(
+      step.previewPath,
+      `${PREVIEWS_FOLDER}/${previewFileName}`
+    )
+
+    step.preview =
+      `assets/previews/${previewFileName}`
+  } else if (
+    typeof step.preview === 'string' &&
+    step.preview.startsWith('data:image')
+  ) {
+    writeBase64Image(
+      step.preview,
+      `${PREVIEWS_FOLDER}/${previewFileName}`
+    )
+
+    step.preview =
+      `assets/previews/${previewFileName}`
+  }
+
+  delete step.previewPath
+  delete step.previewName
+
+  return step
+}
 function prepareSteps(steps, slug) {
   if (!Array.isArray(steps)) {
     return []
@@ -303,6 +374,10 @@ function prepareSteps(steps, slug) {
 
     if (step.type === 'image') {
       return prepareSimpleImage(step, index, slug)
+    }
+
+    if (step.type === 'pdf') {
+      return preparePdfPreview(step, index, slug)
     }
 
     return step
@@ -432,45 +507,75 @@ app.whenReady().then(() => {
   // ====================================================
 
   ipcMain.handle('choose-pdf', async () => {
-    const result = await dialog.showOpenDialog({
-      title: 'Choisir un PDF',
-      properties: ['openFile'],
-      filters: [
-        {
-          name: 'PDF',
-          extensions: ['pdf']
-        }
-      ]
-    })
-
-    if (result.canceled) {
-      return null
-    }
-
-    const filePath = result.filePaths[0]
-    const pdfBuffer = readFileSync(filePath)
-
-    let pages = 1
-
-    try {
-      const pdfDocument = await PDFDocument.load(pdfBuffer)
-      pages = pdfDocument.getPageCount()
-    } catch (error) {
-      console.error(
-        'Impossible de compter les pages du PDF :',
-        error
-      )
-    }
-
-    console.log('Nombre de pages détecté :', pages)
-
-    return {
-      name: basename(filePath),
-      path: filePath,
-      src: `data:application/pdf;base64,${pdfBuffer.toString('base64')}`,
-      pages
-    }
+  const result = await dialog.showOpenDialog({
+    title: 'Choisir un PDF',
+    properties: ['openFile'],
+    filters: [
+      {
+        name: 'PDF',
+        extensions: ['pdf']
+      }
+    ]
   })
+
+  if (result.canceled) {
+    return null
+  }
+
+  const filePath = result.filePaths[0]
+  const pdfBuffer = readFileSync(filePath)
+
+  let pages = 1
+  let preview = ''
+  let previewName = ''
+  let previewPath = ''
+
+  try {
+    const pdfDocument = await PDFDocument.load(pdfBuffer)
+    pages = pdfDocument.getPageCount()
+  } catch (error) {
+    console.error(
+      'Impossible de compter les pages du PDF :',
+      error
+    )
+  }
+
+  try {
+    const previewBuffer = await createPdfPreview(pdfBuffer)
+
+    previewName =
+      `${basename(filePath, extname(filePath))}-preview.jpg`
+
+    previewPath = join(
+      app.getPath('temp'),
+      previewName
+    )
+
+    writeFileSync(previewPath, previewBuffer)
+
+    preview =
+      `data:image/jpeg;base64,${previewBuffer.toString('base64')}`
+
+    console.log('Aperçu PDF généré :', previewPath)
+  } catch (error) {
+    console.error(
+      'Impossible de générer l’aperçu du PDF :',
+      error
+    )
+  }
+
+  console.log('Nombre de pages détecté :', pages)
+
+  return {
+    name: basename(filePath),
+    path: filePath,
+    src: `data:application/pdf;base64,${pdfBuffer.toString('base64')}`,
+    pages,
+    preview,
+    previewName,
+    previewPath
+  }
+})
 
   // ====================================================
   // OUVRIR MANUELLEMENT UN PROJET
