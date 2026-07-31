@@ -218,9 +218,9 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "\"Contraposée\": inverser et nier",
-      "src": "https://youtube.com/shorts/STXIch6Rfk4",
-      "duration": 121
+      "title": "Un nouveau mot: “contraposée”",
+      "src": "https://youtube.com/shorts/D-ufvnTnQJ8",
+      "duration": 48
     },
     {
       "type": "quiz",
