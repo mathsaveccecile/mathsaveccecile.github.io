@@ -333,23 +333,25 @@ function preparePdfPreview(step, index, slug) {
   const previewFileName =
     `${slug}-pdf-${index + 1}-preview.jpg`
 
+  // Priorité à l'aperçu réellement enregistré dans la capsule
   if (
-    step.previewPath &&
-    existsSync(step.previewPath)
-  ) {
-    copyFileSync(
-      step.previewPath,
-      `${PREVIEWS_FOLDER}/${previewFileName}`
-    )
-
-    step.preview =
-      `assets/previews/${previewFileName}`
-  } else if (
     typeof step.preview === 'string' &&
     step.preview.startsWith('data:image')
   ) {
     writeBase64Image(
       step.preview,
+      `${PREVIEWS_FOLDER}/${previewFileName}`
+    )
+
+    step.preview =
+      `assets/previews/${previewFileName}`
+
+  } else if (
+    step.previewPath &&
+    existsSync(step.previewPath)
+  ) {
+    copyFileSync(
+      step.previewPath,
       `${PREVIEWS_FOLDER}/${previewFileName}`
     )
 
@@ -544,7 +546,7 @@ app.whenReady().then(() => {
     const previewBuffer = await createPdfPreview(pdfBuffer)
 
     previewName =
-      `${basename(filePath, extname(filePath))}-preview.jpg`
+  `${basename(filePath, extname(filePath))}-${Date.now()}-preview.jpg`
 
     previewPath = join(
       app.getPath('temp'),
