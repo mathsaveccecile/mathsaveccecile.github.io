@@ -90,14 +90,17 @@ function scoreCapsule(capsule, recherche) {
 }
 
 async function chargerStatsCapsules() {
-  const { data: likes } = await supabaseClient
-    .from("likes")
-    .select("capsule");
+  const { data: likes, error: likesError } = await supabaseClient
+  .from("likes")
+  .select("capsule");
 
-  const { data: commentaires } = await supabaseClient
-    .from("reviews")
-    .select("capsule")
-    .eq("published", true);
+  const { data: commentaires, error: commentairesError } = await supabaseClient
+  .from("reviews")
+  .select("capsule")
+  .eq("published", true);
+
+console.log("LIKES :", likes, likesError);
+console.log("COMMENTAIRES :", commentaires, commentairesError);
 
   const stats = {};
 
