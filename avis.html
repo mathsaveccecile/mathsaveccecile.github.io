@@ -10,8 +10,23 @@ body{margin:0;background:#120d22;color:white;font-family:Arial,sans-serif}
 main{max-width:900px;margin:40px auto;background:#261e38;border-radius:28px;padding:35px}
 input,textarea,select{width:100%;padding:15px;margin:10px 0;border-radius:12px;border:none;font-size:16px;box-sizing:border-box}
 button{border:none;border-radius:999px;padding:16px 30px;font-size:18px;font-weight:900;color:white;background:linear-gradient(135deg,#ff4fa3,#3058ff);cursor:pointer}
-.card{background:#352d49;border-radius:20px;padding:20px;margin:18px 0}
-.reply{background:#241d36;border-left:5px solid #ff4fa3;border-radius:16px;padding:16px;margin-top:18px}
+.card{
+  background:#ffffff;
+  color:#222;
+  border-radius:20px;
+  padding:22px;
+  margin:18px 0;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+}
+
+.reply{
+  background:#fff0f7;
+  color:#222;
+  border-left:5px solid #ff4fa3;
+  border-radius:16px;
+  padding:18px;
+  margin-top:18px;
+}
 a{color:white;font-weight:bold}
 </style>
 </head>
@@ -130,7 +145,7 @@ if(reviews.length === 0){
         <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
         <p><strong>📚 ${review.capsule || "Capsule non précisée"}</strong></p>
 
-        <p style="color:#cfcfcf;font-size:14px;">
+        <p style="color:#666;font-size:14px;">
           📅 Publié le ${dateFr}
         </p>
 
