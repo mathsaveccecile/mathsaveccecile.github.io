@@ -220,8 +220,173 @@ async function sendReview(){
   alert("✅ Merci ! Ton commentaire ou ta question est envoyé(e) et sera publié(e) après validation.");
   document.getElementById("message").value = "";
 }
+async function gererFormulaireSelonConnexion() {
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  const formAvis = document.getElementById("formAvis");
 
+  if (!sessionData.session) {
+    formAvis.innerHTML = `
+      <div style="
+        background:#fff0f7;
+        color:#222;
+        padding:22px;
+        border-radius:18px;
+        border-left:5px solid #ff4fa3;
+        font-size:17px;
+        line-height:1.5;
+        text-align:center;
+      ">
+        🔐 Tu dois être connecté pour laisser un commentaire ou poser une question.
+        <br><br>
+        <button onclick="retourConnexion()">
+          Se connecter
+        </button>
+      </div>
+    `;
+  }
+}
+
+function retourConnexion() {
+  if (retourCapsule) {
+    location.href = retourCapsule;
+  } else {
+    location.href = "index.html";
+  }
+}
+async function gererFormulaireSelonConnexion() {
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  const formAvis = document.getElementById("formAvis");
+
+  if (!sessionData.session) {
+    formAvis.innerHTML = `
+      <div style="
+        background:#fff0f7;
+        color:#222;
+        padding:22px;
+        border-radius:18px;
+        border-left:5px solid #ff4fa3;
+        font-size:17px;
+        line-height:1.5;
+        text-align:center;
+      ">
+        🔐 Tu dois être connecté pour laisser un commentaire ou poser une question.
+        <br><br>
+        <button onclick="openLoginModal()">
+          Se connecter
+        </button>
+      </div>
+    `;
+  }
+}
+
+function openLoginModal(){
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;">
+      <div style="background:#261e38;padding:22px;border-radius:25px;width:360px;max-width:90%;">
+        <h2>Connexion élève</h2>
+        <p>Connecte-toi pour garder ta progression, télécharger les fiches, signaler une erreur ou mettre un petit like !</p>
+
+        <input id="loginEmail" placeholder="Adresse e-mail" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+        <input id="loginPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+
+        <button onclick="loginStudent()" style="width:100%;margin-top:15px;">Se connecter</button>
+        <button onclick="resetPassword()" style="width:100%;margin-top:12px;">🔑 Mot de passe oublié</button>
+        <button onclick="openSignupModal()" style="width:100%;margin-top:12px;">✨ Créer un compte</button>
+        <button onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
+      </div>
+    </div>
+  `);
+}
+
+async function loginStudent(){
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: pass
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  localStorage.setItem("studentConnected","true");
+
+  alert("✅ Connexion réussie !");
+  closeLoginModal();
+  location.reload();
+}
+
+function closeLoginModal(){
+  const modal = document.getElementById("loginModal");
+  if(modal) modal.remove();
+}
+
+function openSignupModal(){
+  closeLoginModal();
+
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;">
+      <div style="background:#261e38;padding:35px;border-radius:25px;width:360px;max-width:90%;">
+        <h2>Créer un compte élève</h2>
+        <p>Crée ton compte pour retrouver ta progression plus tard.</p>
+
+        <input id="signupEmail" placeholder="Adresse e-mail" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+        <input id="signupPass" type="password" placeholder="Mot de passe" style="width:100%;padding:15px;margin:8px 0;border-radius:12px;border:none;">
+
+        <button onclick="signupStudent()" style="width:100%;margin-top:15px;">Créer mon compte</button>
+        <button onclick="closeLoginModal()" style="width:100%;margin-top:12px;">Annuler</button>
+      </div>
+    </div>
+  `);
+}
+
+async function signupStudent(){
+  const email = document.getElementById("signupEmail").value.trim();
+  const pass = document.getElementById("signupPass").value.trim();
+
+  if(!email || !pass){
+    alert("Il faut entrer une adresse e-mail et un mot de passe.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: pass
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("🎉 Compte créé ! Vérifie maintenant tes e-mails puis confirme ton adresse.");
+  closeLoginModal();
+}
+
+async function resetPassword(){
+  const email = document.getElementById("loginEmail").value.trim();
+
+  if(!email){
+    alert("Écris d'abord ton adresse e-mail.");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://mathsaveccecile.github.io"
+  });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  alert("📩 Un e-mail de réinitialisation vient d'être envoyé.");
+}
 loadReviews();
+gererFormulaireSelonConnexion();
 </script>
 
 </body>

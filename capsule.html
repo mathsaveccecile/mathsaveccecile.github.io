@@ -1778,10 +1778,14 @@ async function openBugReport(event){
   const { data: sessionData } = await supabaseClient.auth.getSession();
 
   if(!sessionData.session){
-    alert("🔐 Tu dois être connecté pour signaler un bug ou une erreur.");
+  alert("🔐 Tu dois être connecté pour laisser un commentaire ou poser une question.");
+
+  if (typeof openLoginModal === "function") {
     openLoginModal();
-    return;
   }
+
+  return;
+}
 
   const ancienneFenetre = document.getElementById("bugReportModal");
   if(ancienneFenetre){
