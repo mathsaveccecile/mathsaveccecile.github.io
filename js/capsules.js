@@ -102,13 +102,23 @@ async function chargerStatsCapsules() {
   const stats = {};
 
   (likes || []).forEach(like => {
-    if (!stats[like.capsule]) stats[like.capsule] = { likes: 0, commentaires: 0 };
-    stats[like.capsule].likes++;
+    const cle = normaliserTexte(like.capsule);
+
+    if (!stats[cle]) {
+      stats[cle] = { likes: 0, commentaires: 0 };
+    }
+
+    stats[cle].likes++;
   });
 
   (commentaires || []).forEach(commentaire => {
-    if (!stats[commentaire.capsule]) stats[commentaire.capsule] = { likes: 0, commentaires: 0 };
-    stats[commentaire.capsule].commentaires++;
+    const cle = normaliserTexte(commentaire.capsule);
+
+    if (!stats[cle]) {
+      stats[cle] = { likes: 0, commentaires: 0 };
+    }
+
+    stats[cle].commentaires++;
   });
 
   return stats;
@@ -117,7 +127,10 @@ async function chargerStatsCapsules() {
 function creerCarteCapsule(capsule, progressions = [], statsCapsules = {}) {
   const progression = progressions.find(p => p.capsule === capsule.title);
   const percent = progression ? Number(progression.percent || 0) : 0;
-  const stats = statsCapsules[capsule.title] || { likes: 0, commentaires: 0 };
+  const stats = statsCapsules[normaliserTexte(capsule.title)] || {
+  likes: 0,
+  commentaires: 0
+};
 
   const fillStyle = percent >= 100
     ? "linear-gradient(90deg,#ffd700,#fff8b5,#ffe066,#ffd700)"
@@ -277,7 +290,10 @@ async function activerRechercheCapsules() {
 
     results.innerHTML = resultats.map(item => {
       const capsule = item.capsule;
-      const stats = statsCapsules[capsule.title] || { likes: 0, commentaires: 0 };
+      const stats = statsCapsules[normaliserTexte(capsule.title)] || {
+  likes: 0,
+  commentaires: 0
+};
 
       return `
         <a href="capsule.html?data=${capsule.dataFile}" style="
