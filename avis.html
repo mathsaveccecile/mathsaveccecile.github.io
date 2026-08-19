@@ -143,11 +143,24 @@ if(reviews.length === 0){
     return `
       <div class="card">
         <p><strong>👤 ${review.pseudo || "Élève"}</strong></p>
-        <p><strong>📚 ${review.capsule || "Capsule non précisée"}</strong></p>
+        <div style="
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin:16px 0;
+">
+  <strong>📚 ${review.capsule || "Capsule non précisée"}</strong>
 
-        <p style="color:#666;font-size:14px;">
-          📅 Publié le ${dateFr}
-        </p>
+  <span style="
+    color:#666;
+    font-size:14px;
+    white-space:nowrap;
+  ">
+    📅 ${dateFr}
+  </span>
+</div>
 
         <p style="margin-top:18px;font-size:18px;line-height:1.6;">
           ${review.message}
