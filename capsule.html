@@ -793,13 +793,8 @@ if(!dataFile){
 }
 
 function openComments(event){
-  event.preventDefault();
 
-  if(!userIsConnected){
-    alert("🔐 Tu dois être connecté pour laisser un commentaire ou poser une question.");
-    openLoginModal();
-    return;
-  }
+  event.preventDefault();
 
   const url =
     "avis.html?capsule=" +
