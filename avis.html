@@ -53,6 +53,16 @@ const capsuleParam = params.get("capsule");
 const retourCapsule = params.get("retour");
 
 const backToCapsule = document.getElementById("backToCapsule");
+function normaliserTexte(texte) {
+  return String(texte || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 if(retourCapsule){
   backToCapsule.href = retourCapsule;
@@ -83,10 +93,6 @@ async function loadReviews(){
     .eq("published", true)
     .order("created_at", { ascending: false });
 
-  if(capsuleParam){
-    query = query.eq("capsule", decodeURIComponent(capsuleParam));
-  }
-
   const { data, error } = await query;
   const list = document.getElementById("reviewsList");
 
@@ -96,14 +102,21 @@ async function loadReviews(){
     return;
   }
 
-  const reviews = data || [];
-  updateReviewsTitle(reviews.length);
+  let reviews = data || [];
 
-  if(reviews.length === 0){
-    list.innerHTML = "<p>Aucun commentaire ou aucune question pour le moment.</p>";
-    return;
-  }
+if(capsuleParam){
+  const capsuleRecherchee = normaliserTexte(capsuleParam);
 
+  reviews = reviews.filter(review =>
+    normaliserTexte(review.capsule) === capsuleRecherchee
+  );
+}
+updateReviewsTitle(reviews.length);
+
+if(reviews.length === 0){
+  list.innerHTML = "<p>Aucun commentaire ou aucune question pour le moment.</p>";
+  return;
+}
   list.innerHTML = reviews.map(review => {
     const date = new Date(review.created_at);
     const dateFr = date.toLocaleDateString("fr-FR", {
@@ -164,7 +177,6 @@ async function sendReview(){
       email: user.email,
       pseudo: pseudo,
       capsule: capsule,
-      rating: 0,
       message: message,
       published: false,
       admin_reply: ""
