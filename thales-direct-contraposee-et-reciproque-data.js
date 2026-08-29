@@ -188,7 +188,7 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Démonstration de la configuration papillon. ",
-      "src": "https://youtube.com/shorts/riQnuq07sUY?feature=share",
+      "src": "https://youtube.com/shorts/a6cAdwKHLTc?feature=share",
       "duration": 120
     },
     {
