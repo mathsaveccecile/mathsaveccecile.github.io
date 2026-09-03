@@ -31,7 +31,7 @@
     },
     {
       "type": "video",
-      "title": "Comprendre l’idée du théorème de Thalès.",
+      "title": "Vidéo 1: Comprendre l’idée du théorème de Thalès.",
       "src": "https://youtube.com/shorts/5M_Xc043qgE",
       "duration": 151
     },
@@ -94,7 +94,13 @@
     },
     {
       "type": "video",
-      "title": "La démonstration d'Euclide partie 1",
+      "title": "Vidéo 2: reconnaitre une configuration et énoncer le théorème de Thalès",
+      "src": "https://youtube.com/shorts/ZVJ1mAzcckg?feature=share",
+      "duration": 149
+    },
+    {
+      "type": "video",
+      "title": "Vidéo 3: La démonstration d'Euclide partie 1",
       "src": "https://youtube.com/shorts/dTDHNqD28tY",
       "duration": 127
     },
@@ -147,7 +153,7 @@
     },
     {
       "type": "video",
-      "title": "La démonstration d'Euclide partie 2",
+      "title": "Vidéo 4: La démonstration d'Euclide partie 2",
       "src": "https://youtu.be/hjApFJlA6Y0",
       "duration": 199
     },
@@ -205,7 +211,7 @@
     },
     {
       "type": "video",
-      "title": "Démonstration de la configuration papillon. ",
+      "title": "Vidéo 5: Démonstration de la configuration papillon. ",
       "src": "https://youtube.com/shorts/a6cAdwKHLTc?feature=share",
       "duration": 120
     },
@@ -245,7 +251,7 @@
     },
     {
       "type": "video",
-      "title": "Un nouveau mot: “contraposée”",
+      "title": "Vidéo 11: Un nouveau mot: “contraposée”",
       "src": "https://youtube.com/shorts/D-ufvnTnQJ8?feature=share",
       "duration": 48
     },
