@@ -302,8 +302,8 @@ const capsuleData = {
     {
       "type": "video",
       "title": "Vidéo 6. Correction détaillée exercice type brevet. ",
-      "src": "https://youtube.com/shorts/IVCsX1mx4ac",
-      "duration": 138
+      "src": "https://youtube.com/shorts/9iTDHaYFUrA",
+      "duration": 134
     },
     {
       "type": "image",
