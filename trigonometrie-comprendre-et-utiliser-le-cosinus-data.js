@@ -26,7 +26,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Pourquoi le trigonométrie existe?",
+      "title": "Vidéo 1: Pourquoi le trigonométrie existe?",
       "src": "https://youtube.com/shorts/NDfHV-1xsx4",
       "duration": 29
     },
@@ -49,7 +49,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Des rapports qui restent constants.",
+      "title": "Vidéo 2: Des rapports qui restent constants.",
       "src": "https://youtube.com/shorts/zfXt3NJYwS0",
       "duration": 93
     },
@@ -72,7 +72,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Savoir identifier les noms des côtés en fonction de l'angle. ",
+      "title": "Vidéo 3: Savoir identifier les noms des côtés en fonction de l'angle. ",
       "src": "https://youtube.com/shorts/N0J9l5q1Eu4",
       "duration": 98
     },
@@ -124,7 +124,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Définition du cosinus.",
+      "title": "Vidéo 4: Définition du cosinus.",
       "src": "https://youtube.com/shorts/lRfLaHdJ2wI",
       "duration": 94
     },
@@ -181,7 +181,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Savoir utiliser la calculatrice.",
+      "title": "Vidéo 5: Savoir utiliser la calculatrice.",
       "src": "https://youtube.com/shorts/sT1VRTeM3mk",
       "duration": 116
     },
@@ -228,13 +228,13 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Calculer un côté adjacent",
+      "title": "Vidéo 6: Calculer un côté adjacent",
       "src": "https://youtube.com/shorts/agwZ2KpqiGI",
       "duration": 118
     },
     {
       "type": "video",
-      "title": "Calculer l'hypoténuse. ",
+      "title": "Vidéo 7: Calculer l'hypoténuse. ",
       "src": "https://youtube.com/shorts/KR8lV5LVWqA",
       "duration": 86
     },
@@ -286,7 +286,7 @@ const capsuleData = {
     },
     {
       "type": "video",
-      "title": "Calculer un angle.",
+      "title": "Vidéo 8: Calculer un angle.",
       "src": "https://youtube.com/shorts/Tw6u5SODSkE",
       "duration": 95
     },
