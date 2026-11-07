@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Chercher le menu du haut
   const menu = document.querySelector("header nav");
 
-  if (!menu || menu.querySelector(".bouton-soutien")) return;
+  if (document.querySelector(".bouton-soutien")) return;
 
   // Créer le bouton
   const bouton = document.createElement("a");
@@ -18,7 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
   bouton.textContent = "💙 Soutenir";
   bouton.title = "Contribution libre et facultative";
 
+  if (menu) {
   menu.appendChild(bouton);
+} else {
+  document.body.prepend(bouton);
+
+  bouton.style.cssText = `
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #e8efff;
+    border: 1px solid #bacbff;
+    color: #284bc2;
+    font: 800 15px Arial, sans-serif;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(40,75,194,.15);
+  `;
+}
 
   // Apparence du bouton
   const style = document.createElement("style");
