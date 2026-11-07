@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
     style.id = "soutien-style";
     style.textContent = `
       .soutien-topbar{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding: 12px 6% 0 6%;
-      }
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 110px 0 16px;
+}
 
       .soutien-link{
         display: inline-flex;
